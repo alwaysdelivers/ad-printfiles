@@ -1,9 +1,12 @@
 CREATURE LANE on-model recipe (LOCKED 2026-06-11) — caveman / yeti / sasquatch / snowman
-Bases (shared): onmodel/CREATURES/yeti_33_light.png (man, white tee), yeti_33_dark.png (man, black tee)
-LIGHTS (from light base): White(no recolor), Sand(216,200,168), Athletic Heather(196,198,201)
-  ink = navy SPLIT  (design _light.png as-is)
-  place: width=0.50*chest_w, center_x=chest center, center_y=bbox_top+0.32*bbox_h
-DARKS (from dark base): Black(no recolor), Dark Heather(58,60,64), Maroon(95,32,42), Navy(28,36,66), Steel(96,112,132)
-  ink = MONO light-charcoal (156,162,170) — fill design _dark.png alpha with this one color (drop ice-blue/red)
-  place: width=0.47*chest_w, center_x=chest center, center_y=bbox_top+0.44*bbox_h
-Recolor: relight within feathered largest-shirt-component mask (torso band), preserve folds. Never light->dark.
+ONE seed-33 man across all. Bases in onmodel/CREATURES/:
+  TEE   : yeti_33_light.png (white tee), yeti_33_dark.png (black tee)
+  HOODIE: yeti_hoodie_33_white_base.png, yeti_hoodie_33_black_base.png  (FASHN tryon-v1.6, Gildan 18500)
+LIGHTS (recolor light/white base): White(no recolor), Sand(216,200,168), Athletic Heather(196,198,201) -> ink = navy SPLIT (_light.png)
+DARKS  (recolor dark/black base): Black(no recolor), Dark Heather(58,60,64), Maroon(95,32,42), Navy(28,36,66), Steel(96,112,132) -> ink = MONO light-charcoal (156,162,170); fill _dark.png alpha one color
+Placement (fraction of detected garment bbox; center_x = bbox center):
+  TEE   : w=0.50*chest cy=top+0.32h (lights); w=0.47*chest cy=top+0.44h (darks)
+  HOODIE: w=0.40*chest cy=top+0.30h (lights); w=0.40*chest cy=top+0.40h (darks)
+Recolor = relight within feathered largest-shirt-component mask; never light->dark.
+Designs: yeti=yti-01, caveman=cav-08, sasquatch=sqt-01, snowman=snw-01.
+64 finished images committed in onmodel/{YETI,CAVEMAN,SASQUATCH,SNOWMAN}/ (TEE + HOODIE x 8 colorways).
