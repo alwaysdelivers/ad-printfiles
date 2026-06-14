@@ -155,3 +155,38 @@ def main():
             if st.get(oid, {}).get("status") in TERMINAL:
                 skipped += 1
                 continue
+            items, errs = build_items(node)
+            if errs:
+                print(f"ERROR  {name} ({oid}) UNFULFILLABLE: " + "; ".join(errs))
+                st[oid] = {"status": "unfulfillable", "detail": errs, "name": name, "ts": int(time.time())}
+                errored += 1
+                continue
+            if not items:
+                print(f"SKIP   {name} ({oid}) no recognizable design lines")
+                skipped += 1
+                continue
+            try:
+                status, pf_id = create_printful(oid, recipient(node), items)
+            except Exception as ex:
+                # transient -> do NOT record, so it retries next run
+                print(f"RETRY  {name} ({oid}) Printful error, will retry next run: {ex}")
+                continue
+            mode = "CONFIRMED/production" if CONFIRM else "DRAFT"
+            print(f"OK     {name} ({oid}) -> Printful {status} id={pf_id} [{mode}] items={len(items)}")
+            st[oid] = {"status": status, "printful_id": pf_id, "confirmed": CONFIRM,
+                       "name": name, "ts": int(time.time())}
+            created += 1
+        if conn["pageInfo"]["hasNextPage"]:
+            cursor = conn["pageInfo"]["endCursor"]
+            continue
+        break
+
+    save_state(st)
+    print(f"\nSUMMARY  created/duplicate={created}  unfulfillable={errored}  "
+          f"skipped(already done / unrecognized)={skipped}  confirm_mode={CONFIRM}")
+    if errored:
+        print("::warning::Some orders were UNFULFILLABLE - see ERROR lines above.")
+
+
+if __name__ == "__main__":
+    main()
