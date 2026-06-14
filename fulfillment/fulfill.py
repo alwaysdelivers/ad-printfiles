@@ -4,6 +4,14 @@ catalog=json.load(open('/home/claude/_catalog.json'))   # {'71':{'col|size':id},
 norm=lambda s: re.sub(r'[^a-z0-9]','',(s or '').lower())
 COLOR_ALIAS={'athheather':'athleticheather'}            # shopify token -> printful (normalized)
 LIGHT={'white','sand','ash','tan','athleticheather','natural','sportgrey','silver','babyblue','softcream','carolinablue','lightblue','heathercarolinablue'}  # use light(whitegarments) file
+SLATEC={'silver','ash','softcream','sand'}
+WARM={'maroon','oxbloodblack','olive','militarygreen','forestgreen','heatheremerald'}
+def _mono_ink(ckey):
+    if ckey=='red': return 'charcoal'
+    if ckey in SLATEC: return 'slate'
+    if ckey in LIGHT: return 'navy'
+    if ckey in WARM: return 'gold'
+    return 'cream'
 AREA={'tee':(1800,2400),'hoodie':(2100,2100)}
 MOCKUP_MODEL={'tee':"Men's 4",'hoodie':"Men's 4"}  # canonical Printful option_group for ALL listing mockups
 DESIGNS={
@@ -27,7 +35,7 @@ def design_of(title):
     if 'snowman' in t or 'abominable' in t: return 'snowman'
     if 'america' in t and '250' in t: return 'usa250'
     return None
-def line_to_item(title,color,size,qty=1,retail=None):
+def line_to_item(title,color,size,qty=1,retail=None,print_style=None):
     garment='hoodie' if 'hoodie' in title.lower() else 'tee'
     pid=146 if garment=='hoodie' else 71
     dk=design_of(title); d=DESIGNS[dk]
@@ -36,6 +44,7 @@ def line_to_item(title,color,size,qty=1,retail=None):
     if not cv: return {'error':'UNFULFILLABLE (no Printful blank)','title':title,'color':color,'size':size}
     fp=d['light'] if (ckey in LIGHT and d['light']) else d['dark']
     if d.get('special') and ckey in d['special']: fp=d['special'][ckey]
+    if dk=='usa250' and (print_style or '').strip().lower()=='mono': fp='printfiles/AMERICA250_usa-250_MONO_%s.png'%_mono_ink(ckey)
     aw,ah=AREA[garment]; w,top=d[garment]; h=int(w*d['ar']); left=(aw-w)//2
     flags=[]
     if garment=='tee' and dk in UNVERIFIED_TEE: flags.append('TEE_PLACEMENT_UNVERIFIED')
