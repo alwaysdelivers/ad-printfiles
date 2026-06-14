@@ -2,21 +2,26 @@
 """
 AlwaysDelivers fulfillment poller.
 
-Runs on a 5-minute schedule via GitHub Actions. Each run:
-  1. Mints a fresh Shopify Admin API token (client_credentials grant).
-  2. Pulls PAID + UNFULFILLED Shopify orders.
-  3. Skips any order already recorded in _processed.json.
-  4. Translates each line via fulfill.line_to_item -> Printful order items.
-  5. Creates ONE Printful order per Shopify order
-     (DRAFT unless CONFIRM_ORDERS=true, in which case it is submitted for production).
-  6. Records the outcome in _processed.json (the workflow commits it back to the repo).
+Runs on a 5-minute schedule via GitHub Actions. Each run does TWO passes:
 
-Idempotency = two independent guards:
-  - the committed state file _processed.json (primary), and
-  - Printful external_id = Shopify order id (backstop, survives a lost state file).
+  PASS A - INTAKE (Shopify order -> Printful order)
+    1. Mints a fresh Shopify Admin API token (client_credentials grant).
+    2. Pulls PAID + UNFULFILLED Shopify orders.
+    3. Skips any order already recorded in _processed.json.
+    4. Translates each line via fulfill.line_to_item -> Printful order items.
+    5. Creates ONE Printful order per Shopify order
+       (DRAFT unless CONFIRM_ORDERS=true, then submitted for production).
 
-This build does INTAKE only (Shopify order -> Printful order).
-It does NOT yet write shipping/tracking back to Shopify -- that's a separate later step.
+  PASS B - SHIPMENT SYNC (Printful ship -> Shopify tracking)
+    For each order we created that isn't marked fulfilled yet, check Printful
+    for a shipment. Once Printful has shipped it, create a Shopify fulfillment
+    with the tracking number/url/carrier and notify the customer (this is what
+    triggers Shopify's shipping-confirmation email).
+
+Idempotency = the committed state file _processed.json (primary) + Printful
+external_id = Shopify order id (backstop). Pass B is wrapped per-order so a
+tracking hiccup can never block intake.
+
 fulfill.py is imported and used as-is; nothing in it is modified.
 """
 import os, sys, json, time, pathlib, requests
@@ -34,29 +39,13 @@ PF_STORE_ID    = os.environ["PRINTFUL_STORE_ID"]
 CONFIRM        = os.environ.get("CONFIRM_ORDERS", "false").strip().lower() == "true"
 API_VER        = os.environ.get("SHOPIFY_API_VERSION", "2025-01")
 GQL_URL        = f"https://{SHOP}/admin/api/{API_VER}/graphql.json"
+PF_HEADERS     = {"Authorization": f"Bearer {PF_TOKEN}", "X-PF-Store-Id": str(PF_STORE_ID)}
 
 import fulfill  # noqa: E402  (after env so a missing catalog fails loudly in the CI seed step)
 
-TERMINAL = {"created", "duplicate", "unfulfillable"}  # never reprocess these
+TERMINAL = {"created", "duplicate", "unfulfillable"}  # never re-intake these
 
-ORDERS_Q = """
-query($cursor:String){
-  orders(first:25, after:$cursor, sortKey:CREATED_AT,
-         query:"financial_status:paid AND fulfillment_status:unfulfilled"){
-    pageInfo{ hasNextPage endCursor }
-    edges{ node{
-      id legacyResourceId name email createdAt
-      shippingAddress{ name address1 address2 city provinceCode countryCodeV2 zip phone }
-      lineItems(first:50){ edges{ node{
-        title quantity
-        originalUnitPriceSet{ shopMoney{ amount } }
-        variant{ title selectedOptions{ name value } }
-      }}}
-    }}
-  }
-}"""
-
-
+# ----------------------------- Shopify helpers -------------------------------
 def shopify_token():
     r = requests.post(f"https://{SHOP}/admin/oauth/access_token",
                       json={"client_id": SHOP_CLIENT_ID, "client_secret": SHOP_SECRET,
@@ -76,6 +65,37 @@ def gql(token, query, variables=None):
     return data["data"]
 
 
+ORDERS_Q = """
+query($cursor:String){
+  orders(first:25, after:$cursor, sortKey:CREATED_AT,
+         query:"financial_status:paid AND fulfillment_status:unfulfilled"){
+    pageInfo{ hasNextPage endCursor }
+    edges{ node{
+      id legacyResourceId name email createdAt
+      shippingAddress{ name address1 address2 city provinceCode countryCodeV2 zip phone }
+      lineItems(first:50){ edges{ node{
+        title quantity
+        originalUnitPriceSet{ shopMoney{ amount } }
+        variant{ title selectedOptions{ name value } }
+      }}}
+    }}
+  }
+}"""
+
+FO_Q = """
+query($id:ID!){
+  order(id:$id){ fulfillmentOrders(first:10){ nodes{ id status } } }
+}"""
+
+FULFILL_M = """
+mutation($f:FulfillmentInput!){
+  fulfillmentCreate(fulfillment:$f){
+    fulfillment{ id status trackingInfo{ number url company } }
+    userErrors{ field message }
+  }
+}"""
+
+# ----------------------------- Pass A: intake --------------------------------
 def line_opts(node):
     var = node.get("variant") or {}
     opts = {o["name"].lower(): o["value"] for o in (var.get("selectedOptions") or [])}
@@ -83,7 +103,6 @@ def line_opts(node):
 
 
 def build_items(node):
-    """Returns (items, errors). One Printful item per Shopify line."""
     items, errors = [], []
     for e in node["lineItems"]["edges"]:
         li = e["node"]
@@ -115,36 +134,17 @@ def recipient(node):
 def create_printful(external_id, recip, items):
     url = "https://api.printful.com/orders" + ("?confirm=1" if CONFIRM else "")
     body = {"external_id": str(external_id), "recipient": recip, "items": items}
-    r = requests.post(url,
-                      headers={"Authorization": f"Bearer {PF_TOKEN}",
-                               "X-PF-Store-Id": str(PF_STORE_ID),
-                               "Content-Type": "application/json"},
+    r = requests.post(url, headers={**PF_HEADERS, "Content-Type": "application/json"},
                       json=body, timeout=60)
     if r.status_code in (200, 201):
         return "created", (r.json().get("result") or {}).get("id")
-    # An order with this external_id already exists -> we made it on a prior run.
     txt = r.text.lower()
     if r.status_code in (400, 409) and ("exist" in txt or "already" in txt or "duplicate" in txt):
         return "duplicate", None
     raise RuntimeError(f"Printful {r.status_code}: {r.text[:600]}")
 
 
-def load_state():
-    if STATE_PATH.exists():
-        try:
-            return json.loads(STATE_PATH.read_text() or "{}")
-        except Exception:
-            return {}
-    return {}
-
-
-def save_state(st):
-    STATE_PATH.write_text(json.dumps(st, indent=2, sort_keys=True))
-
-
-def main():
-    st = load_state()
-    token = shopify_token()
+def intake(token, st):
     created = errored = skipped = 0
     cursor = None
     while True:
@@ -168,7 +168,6 @@ def main():
             try:
                 status, pf_id = create_printful(oid, recipient(node), items)
             except Exception as ex:
-                # transient -> do NOT record, so it retries next run
                 print(f"RETRY  {name} ({oid}) Printful error, will retry next run: {ex}")
                 continue
             mode = "CONFIRMED/production" if CONFIRM else "DRAFT"
@@ -180,10 +179,102 @@ def main():
             cursor = conn["pageInfo"]["endCursor"]
             continue
         break
+    return created, errored, skipped
 
+
+# ----------------------------- Pass B: shipment sync -------------------------
+def printful_shipment(oid):
+    """Return first shipment {tracking_number, tracking_url, carrier} or None if not shipped."""
+    r = requests.get(f"https://api.printful.com/orders/@{oid}", headers=PF_HEADERS, timeout=30)
+    if r.status_code == 404:
+        return None
+    r.raise_for_status()
+    shipments = (r.json().get("result") or {}).get("shipments") or []
+    if not shipments:
+        return None
+    s = shipments[0]
+    return {"tracking_number": s.get("tracking_number"),
+            "tracking_url": s.get("tracking_url"),
+            "carrier": s.get("carrier")}
+
+
+def shopify_fulfill(token, oid, ship):
+    """Create a Shopify fulfillment with tracking; notify customer. Returns (ok, detail)."""
+    gid = f"gid://shopify/Order/{oid}"
+    nodes = gql(token, FO_Q, {"id": gid})["order"]["fulfillmentOrders"]["nodes"]
+    open_fos = [n["id"] for n in nodes if n["status"] in ("OPEN", "IN_PROGRESS")]
+    if not open_fos:
+        return False, "no open fulfillment orders (already fulfilled?)"
+    tracking = {k: v for k, v in (("number", ship.get("tracking_number")),
+                                  ("url", ship.get("tracking_url")),
+                                  ("company", ship.get("carrier"))) if v}
+    fulfillment = {
+        "lineItemsByFulfillmentOrder": [{"fulfillmentOrderId": x} for x in open_fos],
+        "notifyCustomer": True,
+    }
+    if tracking:
+        fulfillment["trackingInfo"] = tracking
+    res = gql(token, FULFILL_M, {"f": fulfillment})["fulfillmentCreate"]
+    errs = res.get("userErrors") or []
+    if errs:
+        return False, errs
+    return True, (res.get("fulfillment") or {}).get("id")
+
+
+def shipment_sync(token, st):
+    synced = 0
+    for oid, rec in list(st.items()):
+        if rec.get("fulfilled"):
+            continue
+        if rec.get("status") not in ("created", "duplicate"):
+            continue
+        try:
+            ship = printful_shipment(oid)
+        except Exception as ex:
+            print(f"TRACK? ({oid}) Printful lookup error: {ex}")
+            continue
+        if not ship:
+            continue  # not shipped yet
+        try:
+            ok, detail = shopify_fulfill(token, oid, ship)
+        except Exception as ex:
+            print(f"TRACK! ({oid}) Shopify fulfill error: {ex}")
+            continue
+        if ok:
+            rec["fulfilled"] = True
+            rec["tracking"] = ship.get("tracking_number")
+            rec["carrier"] = ship.get("carrier")
+            print(f"SHIP   {rec.get('name')} ({oid}) tracking {ship.get('tracking_number')} "
+                  f"({ship.get('carrier')}) -> Shopify fulfilled, customer notified")
+            synced += 1
+        else:
+            print(f"TRACK! ({oid}) Shopify fulfill rejected: {detail}")
+    return synced
+
+
+# ----------------------------- state + main ----------------------------------
+def load_state():
+    if STATE_PATH.exists():
+        try:
+            return json.loads(STATE_PATH.read_text() or "{}")
+        except Exception:
+            return {}
+    return {}
+
+
+def save_state(st):
+    STATE_PATH.write_text(json.dumps(st, indent=2, sort_keys=True))
+
+
+def main():
+    st = load_state()
+    token = shopify_token()
+    created, errored, skipped = intake(token, st)
+    synced = shipment_sync(token, st)
     save_state(st)
     print(f"\nSUMMARY  created/duplicate={created}  unfulfillable={errored}  "
-          f"skipped(already done / unrecognized)={skipped}  confirm_mode={CONFIRM}")
+          f"skipped(already done / unrecognized)={skipped}  shipped->tracked={synced}  "
+          f"confirm_mode={CONFIRM}")
     if errored:
         print("::warning::Some orders were UNFULFILLABLE - see ERROR lines above.")
 
