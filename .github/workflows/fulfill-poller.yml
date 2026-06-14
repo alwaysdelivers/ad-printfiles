@@ -1,0 +1,45 @@
+name: AD Fulfillment Poller
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+    inputs:
+      confirm_orders:
+        description: 'Submit Printful orders for PRODUCTION? (false = draft only)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: ad-fulfillment-poller
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Seed catalog path expected by fulfill.py
+        run: |
+          sudo mkdir -p /home/claude
+          sudo cp fulfillment/_catalog.json /home/claude/_catalog.json
+          sudo chmod a+r /home/claude/_catalog.json
+
+      - name: Run poller
+        env:
+          SHOPIFY_SHOP:          ${{ secrets.SHOPIFY_SHOP }}
+          SHOPIFY_CLIENT_ID:     ${{ secrets.SHOPIFY_CLIENT_ID }}
+          SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
+          PRINTFUL_TOKEN:        ${{ secrets.PRINTFUL_TOKEN }}
+          PRINTFUL_STORE_ID:     ${{ secrets.PRINTFUL_STORE_ID }}
