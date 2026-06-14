@@ -1,0 +1,61 @@
+name: AD Fulfillment Poller
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'        # every 5 min (GitHub's minimum; runs can be delayed at peak load)
+  workflow_dispatch:            # lets you run it manually from the Actions tab
+    inputs:
+      confirm_orders:
+        description: 'Submit Printful orders for PRODUCTION? (false = draft only)'
+        type: boolean
+        default: false
+
+# Never let two runs overlap (avoids state-file race / double work).
+concurrency:
+  group: ad-fulfillment-poller
+  cancel-in-progress: false
+
+permissions:
+  contents: write               # to commit the _processed.json state file back
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Seed catalog path expected by fulfill.py
+        run: |
+          sudo mkdir -p /home/claude
+          sudo cp fulfillment/_catalog.json /home/claude/_catalog.json
+          sudo chmod a+r /home/claude/_catalog.json
+
+      - name: Run poller
+        env:
+          SHOPIFY_SHOP:          ${{ secrets.SHOPIFY_SHOP }}
+          SHOPIFY_CLIENT_ID:     ${{ secrets.SHOPIFY_CLIENT_ID }}
+          SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
+          PRINTFUL_TOKEN:        ${{ secrets.PRINTFUL_TOKEN }}
+          PRINTFUL_STORE_ID:     ${{ secrets.PRINTFUL_STORE_ID }}
+          # Manual run input wins; otherwise repo variable AD_CONFIRM_ORDERS; otherwise false (draft).
+          CONFIRM_ORDERS: ${{ github.event.inputs.confirm_orders || vars.AD_CONFIRM_ORDERS || 'false' }}
+        run: python fulfillment/poller.py
+
+      - name: Commit state if changed
+        run: |
+          git add fulfillment/_processed.json
+          if git diff --cached --quiet; then
+            echo "No state change."
+          else
+            git config user.name  "ad-fulfillment-bot"
+            git config user.email "ad-fulfillment-bot@users.noreply.github.com"
+            git commit -m "fulfillment state update [skip ci]"
+            git push
+          fi
