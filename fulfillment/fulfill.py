@@ -3,7 +3,7 @@ RAW='https://raw.githubusercontent.com/alwaysdelivers/ad-printfiles/main/'
 catalog=json.load(open('/home/claude/_catalog.json'))   # {'71':{'col|size':id}, '146':{...}}
 norm=lambda s: re.sub(r'[^a-z0-9]','',(s or '').lower())
 COLOR_ALIAS={'athheather':'athleticheather'}            # shopify token -> printful (normalized)
-LIGHT={'white','sand','ash','tan','athleticheather','natural','sportgrey'}  # use light(whitegarments) file
+LIGHT={'white','sand','ash','tan','athleticheather','natural','sportgrey','silver','babyblue','softcream','carolinablue','lightblue','heathercarolinablue'}  # use light(whitegarments) file
 AREA={'tee':(1800,2400),'hoodie':(2100,2100)}
 MOCKUP_MODEL={'tee':"Men's 4",'hoodie':"Men's 4"}  # canonical Printful option_group for ALL listing mockups
 DESIGNS={
@@ -14,7 +14,7 @@ DESIGNS={
  'snowman':{'light':'printfiles/SNOWMAN_snw-01_whitegarments.png','dark':'printfiles/SNOWMAN_snw-01_darkgarments.png','ar':0.755,'hoodie':(1500,420),'tee':(1400,500)},
  'stork':{'light':'printfiles/STORK_stk-07_whitegarments.png','dark':'printfiles/STORK_stk-07_darkgarments.png','ar':0.468,'hoodie':(1500,560),'tee':(1450,620)},
  'yeti':{'light':None,'dark':'printfiles/YETI_drawing_darkgarments.png','ar':1.283,'hoodie':(1150,250),'tee':(1350,440)},
- 'usa250':{'light':'printfiles/AMERICA250_usa-250_whitegarments.png','dark':'printfiles/AMERICA250_usa-250_darkgarments.png','ar':0.687,'hoodie':(1600,440),'tee':(1500,500)},
+ 'usa250':{'light':'printfiles/AMERICA250_usa-250_whitegarments.png','dark':'printfiles/AMERICA250_usa-250_darkgarments.png','special':{'red':'printfiles/AMERICA250_usa-250_REDcharcoal.png'},'ar':0.687,'hoodie':(1600,440),'tee':(1500,500)},
 }
 # placements validated this session: all hoodies + KARMA tee. TEE creature/Stork tops are best-fit estimates -> spot-check.
 UNVERIFIED_TEE=set()  # all verified on Men's 4 model
@@ -35,6 +35,7 @@ def line_to_item(title,color,size,qty=1,retail=None):
     cv=catalog[str(pid)].get('%s|%s'%(ckey,norm(size)))
     if not cv: return {'error':'UNFULFILLABLE (no Printful blank)','title':title,'color':color,'size':size}
     fp=d['light'] if (ckey in LIGHT and d['light']) else d['dark']
+    if d.get('special') and ckey in d['special']: fp=d['special'][ckey]
     aw,ah=AREA[garment]; w,top=d[garment]; h=int(w*d['ar']); left=(aw-w)//2
     flags=[]
     if garment=='tee' and dk in UNVERIFIED_TEE: flags.append('TEE_PLACEMENT_UNVERIFIED')
