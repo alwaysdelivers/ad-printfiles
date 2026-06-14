@@ -99,16 +99,16 @@ mutation($f:FulfillmentInput!){
 def line_opts(node):
     var = node.get("variant") or {}
     opts = {o["name"].lower(): o["value"] for o in (var.get("selectedOptions") or [])}
-    return opts.get("color"), opts.get("size")
+    return opts.get("color"), opts.get("size"), opts.get("print style")
 
 
 def build_items(node):
     items, errors = [], []
     for e in node["lineItems"]["edges"]:
         li = e["node"]
-        color, size = line_opts(li)
+        color, size, pstyle = line_opts(li)
         price = (li.get("originalUnitPriceSet") or {}).get("shopMoney", {}).get("amount")
-        item = fulfill.line_to_item(li["title"], color, size, li["quantity"], price)
+        item = fulfill.line_to_item(li["title"], color, size, li["quantity"], price, pstyle)
         if item.get("error"):
             errors.append(f"{li['title']} / {color} / {size}: {item['error']}")
         else:
