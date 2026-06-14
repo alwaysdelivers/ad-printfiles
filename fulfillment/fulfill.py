@@ -34,7 +34,7 @@ def line_to_item(title,color,size,qty=1,retail=None):
     ckey=COLOR_ALIAS.get(norm(color),norm(color))
     cv=catalog[str(pid)].get('%s|%s'%(ckey,norm(size)))
     if not cv: return {'error':'UNFULFILLABLE (no Printful blank)','title':title,'color':color,'size':size}
-    fp=d['light'] if (norm(color) in LIGHT and d['light']) else d['dark']
+    fp=d['light'] if (ckey in LIGHT and d['light']) else d['dark']
     aw,ah=AREA[garment]; w,top=d[garment]; h=int(w*d['ar']); left=(aw-w)//2
     flags=[]
     if garment=='tee' and dk in UNVERIFIED_TEE: flags.append('TEE_PLACEMENT_UNVERIFIED')
