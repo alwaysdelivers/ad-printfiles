@@ -22,7 +22,6 @@ DESIGNS={
  'snowman':{'light':'printfiles/SNOWMAN_snw-01_whitegarments.png','dark':'printfiles/SNOWMAN_snw-01_darkgarments.png','ar':0.755,'hoodie':(1500,420),'tee':(1400,500)},
  'stork':{'light':'printfiles/STORK_stk-07_whitegarments.png','dark':'printfiles/STORK_stk-07_darkgarments.png','ar':0.468,'hoodie':(1500,560),'tee':(1450,620)},
  'yeti':{'light':None,'dark':'printfiles/YETI_drawing_darkgarments.png','ar':1.283,'hoodie':(1150,250),'tee':(1350,440)},
- 'god':{'light':'AD_god_god-03_light.png','dark':'AD_god_god-03_dark.png','ar':1.2,'hoodie':(1500,430),'tee':(1500,520)},
  'usa250':{'light':'printfiles/AMERICA250_usa-250_whitegarments.png','dark':'printfiles/AMERICA250_usa-250_darkgarments.png','special':{'red':'printfiles/AMERICA250_usa-250_REDcharcoal.png'},'ar':0.687,'hoodie':(1600,440),'tee':(1500,500)},
 }
 # placements validated this session: all hoodies + KARMA tee. TEE creature/Stork tops are best-fit estimates -> spot-check.
@@ -35,7 +34,6 @@ def design_of(title):
         if k in t: return k
     if 'snowman' in t or 'abominable' in t: return 'snowman'
     if 'america' in t and '250' in t: return 'usa250'
-    if 'god' in t: return 'god'
     return None
 def line_to_item(title,color,size,qty=1,retail=None,print_style=None):
     garment='hoodie' if 'hoodie' in title.lower() else 'tee'
