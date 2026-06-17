@@ -61,6 +61,16 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None):
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                 'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
                 '_design':'jesus','_garment':garment,'_file':fp,'_flags':[]}
+    if dk=='yeti':
+        ver=norm(print_style)
+        code='YETI_drawing-ice_darkgarments.png' if ver in ('ice','iceblue','blue') else 'YETI_drawing_darkgarments.png'
+        fp='printfiles/'+code
+        aw,ah=AREA[garment]
+        if garment=='hoodie': w,h,top=1637,2100,0        # MAX front (10.9" x 14")
+        else: w=1500; h=int(w/0.7796); top=180            # tee: validate before launch
+        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':(aw-w)//2}}],
+                '_design':'yeti','_garment':garment,'_file':fp,'_flags':[]}
     d=DESIGNS[dk]
     fp=d['light'] if (ckey in LIGHT and d['light']) else d['dark']
     if d.get('special') and ckey in d['special']: fp=d['special'][ckey]
