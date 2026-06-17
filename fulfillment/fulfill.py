@@ -3,6 +3,7 @@ RAW='https://raw.githubusercontent.com/alwaysdelivers/ad-printfiles/main/'
 catalog=json.load(open('/home/claude/_catalog.json'))   # {'71':{'col|size':id}, '146':{...}}
 norm=lambda s: re.sub(r'[^a-z0-9]','',(s or '').lower())
 COLOR_ALIAS={'athheather':'athleticheather'}            # shopify token -> printful (normalized)
+HOODIE_ALIAS={'athleticheather':'sportgrey'}            # Gildan 18500 names this grey differently than Bella 3001
 LIGHT={'white','sand','ash','tan','athleticheather','natural','sportgrey','silver','babyblue','softcream','carolinablue','lightblue','heathercarolinablue'}  # use light(whitegarments) file
 SLATEC={'silver','ash','softcream','sand'}
 WARM={'maroon','oxbloodblack','olive','militarygreen','forestgreen','heatheremerald'}
@@ -24,10 +25,14 @@ DESIGNS={
  'yeti':{'light':None,'dark':'printfiles/YETI_drawing_darkgarments.png','ar':1.283,'hoodie':(1150,250),'tee':(1350,440)},
  'usa250':{'light':'printfiles/AMERICA250_usa-250_whitegarments.png','dark':'printfiles/AMERICA250_usa-250_darkgarments.png','special':{'red':'printfiles/AMERICA250_usa-250_REDcharcoal.png'},'ar':0.687,'hoodie':(1600,440),'tee':(1500,500)},
 }
+# JESUS = one product, Style axis selects the lettering treatment. Trimmed art, top-anchored in a box (matches v2 mockups).
+JESUS_STYLES={'serif':('jes-01',1.349),'script':('jes-03',1.071),'bold':('jes-07',1.249),'retro':('jes-11',1.461)}  # style -> (file code, aspect w/h)
+JESUS_BOX={'tee':(1250,1100,200),'hoodie':(1250,1100,300)}  # maxw, maxh, top
 # placements validated this session: all hoodies + KARMA tee. TEE creature/Stork tops are best-fit estimates -> spot-check.
 UNVERIFIED_TEE=set()  # all verified on Men's 4 model
 def design_of(title):
     t=title.lower()
+    if 'jesus' in t: return 'jesus'
     if 'karma' in t and 'red/white' in t: return 'karma_redwhite'
     if 'karma' in t: return 'karma_blueteal'
     for k in ('sasquatch','caveman','stork','yeti'):
@@ -38,10 +43,25 @@ def design_of(title):
 def line_to_item(title,color,size,qty=1,retail=None,print_style=None):
     garment='hoodie' if 'hoodie' in title.lower() else 'tee'
     pid=146 if garment=='hoodie' else 71
-    dk=design_of(title); d=DESIGNS[dk]
+    dk=design_of(title)
     ckey=COLOR_ALIAS.get(norm(color),norm(color))
+    if garment=='hoodie': ckey=HOODIE_ALIAS.get(ckey,ckey)
     cv=catalog[str(pid)].get('%s|%s'%(ckey,norm(size)))
     if not cv: return {'error':'UNFULFILLABLE (no Printful blank)','title':title,'color':color,'size':size}
+    if dk=='jesus':
+        st=norm(print_style)
+        if st not in JESUS_STYLES: return {'error':'JESUS missing/invalid Style option','title':title,'color':color,'size':size}
+        code,aspect=JESUS_STYLES[st]
+        ground='light' if ckey in LIGHT else 'dark'
+        fp='printfiles/jesus/%s_%s.png'%(code,ground)
+        aw,ah=AREA[garment]; maxw,maxh,top=JESUS_BOX[garment]
+        if aspect>=maxw/maxh: w=maxw; h=int(maxw/aspect)
+        else: h=maxh; w=int(maxh*aspect)
+        left=(aw-w)//2
+        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
+                '_design':'jesus','_garment':garment,'_file':fp,'_flags':[]}
+    d=DESIGNS[dk]
     fp=d['light'] if (ckey in LIGHT and d['light']) else d['dark']
     if d.get('special') and ckey in d['special']: fp=d['special'][ckey]
     if dk=='usa250' and (print_style or '').strip().lower()=='mono': fp='printfiles/AMERICA250_usa-250_MONO_%s.png'%_mono_ink(ckey)
