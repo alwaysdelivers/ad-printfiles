@@ -27,7 +27,7 @@ DESIGNS={
 }
 # JESUS = one product, Style axis selects the lettering treatment. Trimmed art, top-anchored in a box (matches v2 mockups).
 JESUS_STYLES={'serif':('jes-01',1.349),'script':('jes-03',1.071),'bold':('jes-07',1.249),'retro':('jes-11',1.461)}  # style -> (file code, aspect w/h)
-JESUS_BOX={'tee':(1250,1100,200),'hoodie':(1250,1100,300)}  # maxw, maxh, top
+JESUS_BOX={'tee':(1250,1100,480),'hoodie':(1250,1100,300)}  # maxw, maxh, top
 # placements validated this session: all hoodies + KARMA tee. TEE creature/Stork tops are best-fit estimates -> spot-check.
 UNVERIFIED_TEE=set()  # all verified on Men's 4 model
 def design_of(title):
