@@ -99,7 +99,7 @@ mutation($f:FulfillmentInput!){
 def line_opts(node):
     var = node.get("variant") or {}
     opts = {o["name"].lower(): o["value"] for o in (var.get("selectedOptions") or [])}
-    return opts.get("color"), opts.get("size"), opts.get("print style") or opts.get("style") or opts.get("version")
+    return opts.get("color"), opts.get("size"), opts.get("print style") or opts.get("style") or opts.get("version") or opts.get("colorway")
 
 
 def build_items(node):
