@@ -119,5 +119,83 @@
       "color": "Tan",
       "treatment": "mono-navy"
     }
-  ]
+  ],
+  "placement_hoodie": {
+    "area_width": 2100,
+    "area_height": 2100,
+    "width": 1250,
+    "height": 1001,
+    "top": 470,
+    "left": 425
+  },
+  "hoodie_blank": "Gildan 18500 (Printful 146)",
+  "hoodie_versions": [
+    {
+      "color": "White",
+      "colorkey": "white",
+      "treatment": "full-color",
+      "printfile": "jes-07_light.png"
+    },
+    {
+      "color": "Sport Grey",
+      "colorkey": "sportgrey",
+      "treatment": "full-color",
+      "printfile": "jes-07_light.png"
+    },
+    {
+      "color": "Maroon",
+      "colorkey": "maroon",
+      "treatment": "full-color",
+      "printfile": "jes-07_dark.png"
+    },
+    {
+      "color": "Navy",
+      "colorkey": "navy",
+      "treatment": "full-color",
+      "printfile": "jes-07_dark.png"
+    },
+    {
+      "color": "Black",
+      "colorkey": "black",
+      "treatment": "full-color",
+      "printfile": "jes-07_dark.png"
+    },
+    {
+      "color": "White",
+      "colorkey": "white",
+      "treatment": "mono-navy",
+      "printfile": "jes-07_light_mono.png"
+    },
+    {
+      "color": "Sport Grey",
+      "colorkey": "sportgrey",
+      "treatment": "mono-navy",
+      "printfile": "jes-07_light_mono.png"
+    },
+    {
+      "color": "Maroon",
+      "colorkey": "maroon",
+      "treatment": "mono-cream",
+      "printfile": "jes-07_dark_mono.png"
+    },
+    {
+      "color": "Navy",
+      "colorkey": "navy",
+      "treatment": "mono-cream",
+      "printfile": "jes-07_dark_mono.png"
+    },
+    {
+      "color": "Dark Heather",
+      "colorkey": "darkheather",
+      "treatment": "mono-cream",
+      "printfile": "jes-07_dark_mono.png"
+    },
+    {
+      "color": "Black",
+      "colorkey": "black",
+      "treatment": "mono-cream",
+      "printfile": "jes-07_dark_mono.png"
+    }
+  ],
+  "hoodie_note": "Heather Slate has no 18500 equivalent; excluded on hoodie (pending substitute decision)."
 }
