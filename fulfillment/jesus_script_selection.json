@@ -1,0 +1,123 @@
+{
+  "style": "script",
+  "code": "jes-03",
+  "font": "Great Vibes",
+  "locked": "2026-06-20",
+  "placement_tee": {
+    "area_width": 1800,
+    "area_height": 2400,
+    "width": 1178,
+    "height": 1100,
+    "top": 480
+  },
+  "versions": [
+    {
+      "n": 1,
+      "color": "White",
+      "colorkey": "white",
+      "treatment": "full-color",
+      "printfile": "jes-03_light.png"
+    },
+    {
+      "n": 3,
+      "color": "Athletic Heather",
+      "colorkey": "athleticheather",
+      "treatment": "full-color",
+      "printfile": "jes-03_light.png"
+    },
+    {
+      "n": 4,
+      "color": "Heather Slate",
+      "colorkey": "heatherslate",
+      "treatment": "full-color",
+      "printfile": "jes-03_dark.png"
+    },
+    {
+      "n": 5,
+      "color": "Maroon",
+      "colorkey": "maroon",
+      "treatment": "full-color",
+      "printfile": "jes-03_dark.png"
+    },
+    {
+      "n": 6,
+      "color": "Navy",
+      "colorkey": "navy",
+      "treatment": "full-color",
+      "printfile": "jes-03_dark.png"
+    },
+    {
+      "n": 8,
+      "color": "Black",
+      "colorkey": "black",
+      "treatment": "full-color",
+      "printfile": "jes-03_dark.png"
+    },
+    {
+      "n": 9,
+      "color": "White",
+      "colorkey": "white",
+      "treatment": "mono-navy",
+      "printfile": "jes-03_light_mono.png"
+    },
+    {
+      "n": 11,
+      "color": "Athletic Heather",
+      "colorkey": "athleticheather",
+      "treatment": "mono-navy",
+      "printfile": "jes-03_light_mono.png"
+    },
+    {
+      "n": 12,
+      "color": "Heather Slate",
+      "colorkey": "heatherslate",
+      "treatment": "mono-black",
+      "printfile": "jes-03_blackmono.png"
+    },
+    {
+      "n": 13,
+      "color": "Maroon",
+      "colorkey": "maroon",
+      "treatment": "mono-cream",
+      "printfile": "jes-03_dark_mono.png"
+    },
+    {
+      "n": 14,
+      "color": "Navy",
+      "colorkey": "navy",
+      "treatment": "mono-cream",
+      "printfile": "jes-03_dark_mono.png"
+    },
+    {
+      "n": 15,
+      "color": "Dark Grey Heather",
+      "colorkey": "darkgreyheather",
+      "treatment": "mono-cream",
+      "printfile": "jes-03_dark_mono.png"
+    },
+    {
+      "n": 16,
+      "color": "Black",
+      "colorkey": "black",
+      "treatment": "mono-cream",
+      "printfile": "jes-03_dark_mono.png"
+    }
+  ],
+  "cut": [
+    {
+      "n": 2,
+      "color": "Tan",
+      "treatment": "full-color"
+    },
+    {
+      "n": 7,
+      "color": "Dark Grey Heather",
+      "treatment": "full-color"
+    },
+    {
+      "n": 10,
+      "color": "Tan",
+      "treatment": "mono-navy"
+    }
+  ]
+}
