@@ -18,6 +18,10 @@ MOCKUP_MODEL={'tee':"Men's 4",'hoodie':"Men's 4"}  # canonical Printful option_g
 DESIGNS={
  'karma_blueteal':{'light':'KARMA_blueteal_whitegarments.png','dark':'KARMA_blueteal_darkgarments.png','ar':0.579,'hoodie':(1650,440),'tee':(1600,470)},
  'karma_redwhite':{'light':None,'dark':'KARMA_redwhite_darkgarments.png','ar':0.579,'hoodie':(1650,440),'tee':(1600,470)},
+ 'karma_allblue':{'light':'KARMA_allblue_whitegarments.png','dark':'KARMA_allblue_darkgarments.png','ar':0.579,'hoodie':(1650,440),'tee':(1600,470)},
+ 'karma_bluewhite':{'light':None,'dark':'KARMA_bluewhite_darkgarments.png','ar':0.579,'hoodie':(1650,440),'tee':(1600,470)},
+ 'karma_slatewhite':{'light':None,'dark':'KARMA_slatewhite_darkgarments.png','ar':0.579,'hoodie':(1650,440),'tee':(1600,470)},
+ 'karma_blackblue':{'light':'KARMA_blackblue_whitegarments.png','dark':None,'ar':0.579,'hoodie':(1650,440),'tee':(1600,470)},
  'sasquatch':{'light':'printfiles/SASQUATCH_sqt-01_whitegarments.png','dark':'printfiles/SASQUATCH_sqt-01_darkgarments.png','ar':0.671,'hoodie':(1680,420),'tee':(1600,500)},
  'caveman':{'light':'printfiles/CAVEMAN_cav-08_whitegarments.png','dark':'printfiles/CAVEMAN_cav-08_darkgarments.png','ar':0.681,'hoodie':(1680,420),'tee':(1600,500)},
  'snowman':{'light':'printfiles/SNOWMAN_snw-01_whitegarments.png','dark':'printfiles/SNOWMAN_snw-01_darkgarments.png','ar':0.755,'hoodie':(1500,420),'tee':(1400,500)},
@@ -44,6 +48,11 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None):
     garment='hoodie' if 'hoodie' in title.lower() else 'tee'
     pid=146 if garment=='hoodie' else 71
     dk=design_of(title)
+    if dk and dk.startswith('karma'):
+        _kcw={'blueteal':'karma_blueteal','redwhite':'karma_redwhite','allblue':'karma_allblue',
+              'bluewhite':'karma_bluewhite','slatewhite':'karma_slatewhite','blackblue':'karma_blackblue'}
+        _cw=norm(print_style)
+        if _cw in _kcw: dk=_kcw[_cw]
     ckey=COLOR_ALIAS.get(norm(color),norm(color))
     if garment=='hoodie': ckey=HOODIE_ALIAS.get(ckey,ckey)
     cv=catalog[str(pid)].get('%s|%s'%(ckey,norm(size)))
