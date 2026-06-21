@@ -53,7 +53,7 @@ def design_of(title):
     for k in ('physics','geometry','chemistry','algebra'):
         if k in t: return k
     return None
-def line_to_item(title,color,size,qty=1,retail=None,print_style=None):
+def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     garment='hoodie' if 'hoodie' in title.lower() else 'tee'
     pid=146 if garment=='hoodie' else 71
     dk=design_of(title)
@@ -82,6 +82,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None):
         if st not in JESUS_STYLES: return {'error':'JESUS missing/invalid Style option','title':title,'color':color,'size':size}
         code,aspect=JESUS_STYLES[st]
         ground='light' if ckey in LIGHT else 'dark'
+        if (ink or '').strip().lower()=='mono': ground+='_mono'
         fp='printfiles/jesus/%s_%s.png'%(code,ground)
         aw,ah=AREA[garment]; maxw,maxh,top=JESUS_BOX[garment]
         if aspect>=maxw/maxh: w=maxw; h=int(maxw/aspect)
