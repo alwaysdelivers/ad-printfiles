@@ -53,7 +53,7 @@ def design_of(title):
     for k in ('physics','geometry','chemistry','algebra'):
         if k in t: return k
     return None
-def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,prefix=None):
+def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     garment='hoodie' if 'hoodie' in title.lower() else 'tee'
     pid=146 if garment=='hoodie' else 71
     dk=design_of(title)
@@ -81,16 +81,12 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,pr
         st=norm(print_style)
         if st not in JESUS_STYLES: return {'error':'JESUS missing/invalid Style option','title':title,'color':color,'size':size}
         code,aspect=JESUS_STYLES[st]
-        is_mono=(ink or '').strip().lower()=='mono'
-        is_red=(prefix or '').strip().lower()=='red' and ckey!='navy'   # red prefix not offered on navy
-        if is_red and is_mono:
-            fp='printfiles/jesus/%s_redmono.png'%code                   # whole design, one red ink
-        elif is_red:
-            ground='light' if ckey in LIGHT else 'dark'                 # red prefix + constant lockup
-            fp='printfiles/jesus/%s_%s_redprefix.png'%(code,ground)
+        t=(ink or '').strip().lower()
+        if t=='red' and ckey!='navy':
+            fp='printfiles/jesus/%s_redmono.png'%code              # all-red, single ink (red not offered on navy)
         else:
             ground='light' if ckey in LIGHT else 'dark'
-            if is_mono: ground+='_mono'
+            if t=='mono': ground+='_mono'
             fp='printfiles/jesus/%s_%s.png'%(code,ground)
         aw,ah=AREA[garment]; maxw,maxh,top=JESUS_BOX[garment]
         if aspect>=maxw/maxh: w=maxw; h=int(maxw/aspect)
