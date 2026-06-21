@@ -75,6 +75,7 @@ query($cursor:String){
       shippingAddress{ name address1 address2 city provinceCode countryCodeV2 zip phone }
       lineItems(first:50){ edges{ node{
         title quantity
+        customAttributes{ key value }
         originalUnitPriceSet{ shopMoney{ amount } }
         variant{ title selectedOptions{ name value } }
       }}}
@@ -107,8 +108,10 @@ def build_items(node):
     for e in node["lineItems"]["edges"]:
         li = e["node"]
         color, size, pstyle = line_opts(li)
+        ink = next((a["value"] for a in (li.get("customAttributes") or [])
+                    if (a.get("key") or "").strip().lower() == "ink"), None)
         price = (li.get("originalUnitPriceSet") or {}).get("shopMoney", {}).get("amount")
-        item = fulfill.line_to_item(li["title"], color, size, li["quantity"], price, pstyle)
+        item = fulfill.line_to_item(li["title"], color, size, li["quantity"], price, pstyle, ink)
         if item.get("error"):
             errors.append(f"{li['title']} / {color} / {size}: {item['error']}")
         else:
