@@ -48,6 +48,7 @@ def design_of(title):
     t=title.lower()
     if 'jesus' in t: return 'jesus'
     if 'karma' in t: return 'karma'
+    if 'creature' in t: return 'creatures'      # combined Creatures product: route by Design option
     for k in ('sasquatch','caveman','stork','yeti'):
         if k in t: return k
     if 'snowman' in t or 'abominable' in t: return 'snowman'
@@ -121,6 +122,21 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                 'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':(aw-w)//2}}],
                 '_design':'yeti','_garment':garment,'_file':fp,'_flags':[]}
+    if dk=='creatures':                                  # combined Creatures: Design option picks the creature
+        cr=norm(print_style)
+        if cr in ('yeti','yetiiceblue','yetiice','iceblue'):
+            ice = cr!='yeti'
+            base=('YETI_drawing-ice_darkgarments' if ice
+                  else ('YETI_drawing_whitegarments' if ckey in LIGHT else 'YETI_drawing_darkgarments'))
+            code=base+('_hoodie.png' if garment=='hoodie' else '.png')   # yeti hoodie uses dropped-placement files
+            fp='printfiles/'+code; aw,ah=AREA[garment]
+            w,h,top=(1637,2100,0) if garment=='hoodie' else (1600,int(1600/0.7796),110)
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':(aw-w)//2}}],
+                    '_design':'creatures','_garment':garment,'_file':fp,'_flags':[]}
+        dk={'caveman':'caveman','sasquatch':'sasquatch','abominablesnowman':'snowman','snowman':'snowman','abominable':'snowman'}.get(cr)
+        if not dk: return {'error':'CREATURES unknown design','title':title,'design':print_style,'color':color,'size':size}
+        # text creatures fall through to the DESIGNS handler below (ground-aware light/dark + their own placement)
     d=DESIGNS[dk]
     fp=d['light'] if (ckey in LIGHT and d['light']) else d['dark']
     if d.get('special') and ckey in d['special']: fp=d['special'][ckey]
