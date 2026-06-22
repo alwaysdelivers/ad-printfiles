@@ -16,12 +16,6 @@ def _mono_ink(ckey):
 AREA={'tee':(1800,2400),'hoodie':(2100,2100)}
 MOCKUP_MODEL={'tee':"Men's 4",'hoodie':"Men's 4"}  # canonical Printful option_group for ALL listing mockups
 DESIGNS={
- 'karma_blueteal':{'light':'KARMA_blueteal_whitegarments.png','dark':'KARMA_blueteal_darkgarments.png','ar':0.579,'hoodie':(1650,440),'tee':(1600,470)},
- 'karma_redwhite':{'light':None,'dark':'KARMA_redwhite_darkgarments.png','ar':0.579,'hoodie':(1650,440),'tee':(1600,470)},
- 'karma_allblue':{'light':'KARMA_allblue_whitegarments.png','dark':'KARMA_allblue_darkgarments.png','ar':0.579,'hoodie':(1650,440),'tee':(1600,470)},
- 'karma_bluewhite':{'light':None,'dark':'KARMA_bluewhite_darkgarments.png','ar':0.579,'hoodie':(1650,440),'tee':(1600,470)},
- 'karma_slatewhite':{'light':None,'dark':'KARMA_slatewhite_darkgarments.png','ar':0.579,'hoodie':(1650,440),'tee':(1600,470)},
- 'karma_blackblue':{'light':'KARMA_blackblue_whitegarments.png','dark':None,'ar':0.579,'hoodie':(1650,440),'tee':(1600,470)},
  'sasquatch':{'light':'printfiles/SASQUATCH_sqt-01_whitegarments.png','dark':'printfiles/SASQUATCH_sqt-01_darkgarments.png','ar':0.671,'hoodie':(1680,420),'tee':(1600,500)},
  'caveman':{'light':'printfiles/CAVEMAN_cav-08_whitegarments.png','dark':'printfiles/CAVEMAN_cav-08_darkgarments.png','ar':0.681,'hoodie':(1680,420),'tee':(1600,500)},
  'snowman':{'light':'printfiles/SNOWMAN_snw-01_whitegarments.png','dark':'printfiles/SNOWMAN_snw-01_darkgarments.png','ar':0.755,'hoodie':(1500,420),'tee':(1400,500)},
@@ -40,12 +34,20 @@ SCIENCE={
  'algebra':  {'ar':0.622,'tee':(1480,260),'hoodie':(1650,200)},
 }
 # placements validated this session: all hoodies + KARMA tee. TEE creature/Stork tops are best-fit estimates -> spot-check.
+# KARMA = one product per garment; Design option = spiral+lockup variant. Per-color print files (4500x5400, Printful auto-fits).
+KARMA_FILES={                                   # norm(Design value) -> file (fixed regardless of ground)
+ 'bluetealblue':'KARMA_blueteal_sblue.png','bluetealteal':'KARMA_blueteal_steal.png',
+ 'allblueblue':'KARMA_allblue_kblue.png','allbluenavy':'KARMA_allblue_navy.png',
+ 'blackbluenavy':'KARMA_blackblue_navy.png','redwhitecream':'KARMA_redwhite_cream.png',
+ 'redwhitered':'KARMA_redwhite_bred.png','bluewhitecream':'KARMA_bluewhite_cream.png',
+ 'bluewhiteblue':'KARMA_bluewhite_kblue.png','slatewhitecream':'KARMA_slatewhite_cream.png'}
+KARMA_BBBLUE={'light':'KARMA_blackblue_sblue.png','dark':'KARMA_blackblue_blueonly_sblue.png'}  # Black/Blue·Blue swaps art by ground
+KARMA_AR=4500/5400                              # print-file aspect (w/h); Printful auto-fits the full file
 UNVERIFIED_TEE=set()  # all verified on Men's 4 model
 def design_of(title):
     t=title.lower()
     if 'jesus' in t: return 'jesus'
-    if 'karma' in t and 'red/white' in t: return 'karma_redwhite'
-    if 'karma' in t: return 'karma_blueteal'
+    if 'karma' in t: return 'karma'
     for k in ('sasquatch','caveman','stork','yeti'):
         if k in t: return k
     if 'snowman' in t or 'abominable' in t: return 'snowman'
@@ -57,11 +59,6 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     garment='hoodie' if 'hoodie' in title.lower() else 'tee'
     pid=146 if garment=='hoodie' else 71
     dk=design_of(title)
-    if dk and dk.startswith('karma'):
-        _kcw={'blueteal':'karma_blueteal','redwhite':'karma_redwhite','allblue':'karma_allblue',
-              'bluewhite':'karma_bluewhite','slatewhite':'karma_slatewhite','blackblue':'karma_blackblue'}
-        _cw=norm(print_style)
-        if _cw in _kcw: dk=_kcw[_cw]
     if dk in SCIENCE:
         cw=(print_style or '').lower()                       # Colorway value, e.g. "White / Navy"
         gcol='black' if 'black' in cw else 'white'           # garment color drives the catalog blank
@@ -77,6 +74,21 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     if garment=='hoodie': ckey=HOODIE_ALIAS.get(ckey,ckey)
     cv=catalog[str(pid)].get('%s|%s'%(ckey,norm(size)))
     if not cv: return {'error':'UNFULFILLABLE (no Printful blank)','title':title,'color':color,'size':size}
+    if dk=='karma':
+        key=norm(print_style)
+        if key=='blackblueblue':
+            fp=KARMA_BBBLUE['light' if ckey in LIGHT else 'dark']      # Black/Blue·Blue: b+b art on light, blue-only on dark
+        elif key in KARMA_FILES:
+            fp=KARMA_FILES[key]
+        else:
+            return {'error':'KARMA missing/invalid Design option','title':title,'design':print_style,'color':color,'size':size}
+        aw,ah=AREA[garment]
+        if aw/ah<=KARMA_AR: w=aw; h=int(aw/KARMA_AR)                   # full-file auto-fit, aspect-preserved & centered
+        else: h=ah; w=int(ah*KARMA_AR)
+        top=(ah-h)//2; left=(aw-w)//2
+        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
+                '_design':'karma','_garment':garment,'_file':fp,'_flags':[]}
     if dk=='jesus':
         st=norm(print_style)
         if st not in JESUS_STYLES: return {'error':'JESUS missing/invalid Style option','title':title,'color':color,'size':size}
