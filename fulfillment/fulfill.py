@@ -4,7 +4,7 @@ catalog=json.load(open('/home/claude/_catalog.json'))   # {'71':{'col|size':id},
 norm=lambda s: re.sub(r'[^a-z0-9]','',(s or '').lower())
 COLOR_ALIAS={'athheather':'athleticheather'}            # shopify token -> printful (normalized)
 HOODIE_ALIAS={'athleticheather':'sportgrey'}            # Gildan 18500 names this grey differently than Bella 3001
-LIGHT={'white','sand','ash','tan','athleticheather','natural','sportgrey','silver','babyblue','softcream','carolinablue','lightblue','heathercarolinablue'}  # use light(whitegarments) file
+LIGHT={'white','sand','ash','tan','athleticheather','natural','sportgrey','silver','babyblue','babypink','softcream','carolinablue','lightblue','heathercarolinablue'}  # use light(whitegarments) file
 SLATEC={'silver','ash','softcream','sand'}
 WARM={'maroon','oxbloodblack','olive','militarygreen','forestgreen','heatheremerald'}
 def _mono_ink(ckey):
