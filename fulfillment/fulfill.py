@@ -109,10 +109,14 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
                 '_design':'jesus','_garment':garment,'_file':fp,'_flags':[]}
     if dk=='yeti':
         ver=norm(print_style)
-        code='YETI_drawing-ice_darkgarments.png' if ver in ('ice','iceblue','blue') else 'YETI_drawing_darkgarments.png'
+        ice=ver in ('ice','iceblue','blue')
+        base=('YETI_drawing-ice_darkgarments' if ice
+              else ('YETI_drawing_whitegarments' if ckey in LIGHT else 'YETI_drawing_darkgarments'))
+        # hoodie uses dropped-placement files (head lowered, ~12% smaller); tee uses originals
+        code=base+('_hoodie.png' if garment=='hoodie' else '.png')
         fp='printfiles/'+code
         aw,ah=AREA[garment]
-        if garment=='hoodie': w,h,top=1637,2100,0        # MAX front (10.9" x 14")
+        if garment=='hoodie': w,h,top=1637,2100,0        # MAX front (Printful auto-fits the file)
         else: w,h,top=1600,int(1600/0.7796),110           # tee: validated on Men's 4
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                 'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':(aw-w)//2}}],
