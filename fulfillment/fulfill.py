@@ -31,6 +31,8 @@ SCIENCE={                       # combined Science product; Design option picks 
  'physics':1.133,'geometry':0.992,'chemistry':0.834,'algebra':0.622,   # ar = printfile H/W (3600-wide frameless)
 }
 SCIENCE_TOP={'tee':260,'hoodie':200}
+# FAITH = same frame standard as JESUS (4500x5400, y1350 top-anchor, gap 420). Style -> (file code, aspect w/h).
+FAITH_STYLES={'classic':('faith-01',1.915),'elegant':('faith-02',1.867),'strong':('faith-04',1.349)}
 # placements validated this session: all hoodies + KARMA tee. TEE creature/Stork tops are best-fit estimates -> spot-check.
 # KARMA = one product per garment; Design option = spiral+lockup variant. Per-color print files (4500x5400, Printful auto-fits).
 KARMA_FILES={                                   # norm(Design value) -> file (fixed regardless of ground)
@@ -45,6 +47,7 @@ UNVERIFIED_TEE=set()  # all verified on Men's 4 model
 def design_of(title):
     t=title.lower()
     if 'jesus' in t: return 'jesus'
+    if 'faith' in t: return 'faith'
     if 'karma' in t: return 'karma'
     if 'creature' in t: return 'creatures'      # combined Creatures product: route by Design option
     for k in ('sasquatch','caveman','stork','yeti'):
@@ -111,6 +114,24 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                 'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
                 '_design':'jesus','_garment':garment,'_file':fp,'_flags':[]}
+    if dk=='faith':
+        st=norm(print_style)
+        if st not in FAITH_STYLES: return {'error':'FAITH missing/invalid Style option','title':title,'color':color,'size':size}
+        code,aspect=FAITH_STYLES[st]
+        t=(ink or '').strip().lower()
+        if t=='red' and ckey!='navy':
+            fp='printfiles/faith/%s_redmono.png'%code
+        else:
+            ground='light' if ckey in LIGHT else 'dark'
+            if t=='mono': ground+='_mono'
+            fp='printfiles/faith/%s_%s.png'%(code,ground)
+        aw,ah=AREA[garment]; maxw,maxh,top=JESUS_BOX[garment]
+        if aspect>=maxw/maxh: w=maxw; h=int(maxw/aspect)
+        else: h=maxh; w=int(maxh*aspect)
+        left=(aw-w)//2
+        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
+                '_design':'faith','_garment':garment,'_file':fp,'_flags':[]}
     if dk=='yeti':
         ver=norm(print_style)
         ice=ver in ('ice','iceblue','blue')
