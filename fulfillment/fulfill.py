@@ -27,12 +27,10 @@ DESIGNS={
 JESUS_STYLES={'serif':('jes-01',1.349),'script':('jes-03',1.071),'bold':('jes-07',1.249),'retro':('jes-11',1.461)}  # style -> (file code, aspect w/h)
 JESUS_BOX={'tee':(1250,1100,480),'hoodie':(1250,1100,470)}  # maxw, maxh, top
 # SCIENCE = one product per prefix, Colorway option = "{Garment} / {Ink}". 4 mono inks; placement locked: tee top 260 / hoodie top 200.
-SCIENCE={
- 'physics':  {'ar':1.133,'tee':(1150,260),'hoodie':(1300,200)},
- 'geometry': {'ar':0.992,'tee':(1300,260),'hoodie':(1450,200)},
- 'chemistry':{'ar':0.834,'tee':(1400,260),'hoodie':(1550,200)},
- 'algebra':  {'ar':0.622,'tee':(1480,260),'hoodie':(1650,200)},
+SCIENCE={                       # combined Science product; Design option picks subject; ink by ground; full-width-contain, top-anchored.
+ 'physics':1.133,'geometry':0.992,'chemistry':0.834,'algebra':0.622,   # ar = printfile H/W (3600-wide frameless)
 }
+SCIENCE_TOP={'tee':260,'hoodie':200}
 # placements validated this session: all hoodies + KARMA tee. TEE creature/Stork tops are best-fit estimates -> spot-check.
 # KARMA = one product per garment; Design option = spiral+lockup variant. Per-color print files (4500x5400, Printful auto-fits).
 KARMA_FILES={                                   # norm(Design value) -> file (fixed regardless of ground)
@@ -53,24 +51,29 @@ def design_of(title):
         if k in t: return k
     if 'snowman' in t or 'abominable' in t: return 'snowman'
     if 'america' in t and '250' in t: return 'usa250'
-    for k in ('physics','geometry','chemistry','algebra'):
-        if k in t: return k
+    if 'science' in t: return 'science'
     return None
 def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     garment='hoodie' if 'hoodie' in title.lower() else 'tee'
     pid=146 if garment=='hoodie' else 71
     dk=design_of(title)
-    if dk in SCIENCE:
-        cw=(print_style or '').lower()                       # Colorway value, e.g. "White / Navy"
-        gcol='black' if 'black' in cw else 'white'           # garment color drives the catalog blank
-        ink=next((i for i in ('navy','oxblood','cream','sleet') if i in cw),'navy')
-        cv=catalog[str(pid)].get('%s|%s'%(gcol,norm(size)))
-        if not cv: return {'error':'UNFULFILLABLE (no Printful blank)','title':title,'colorway':print_style,'size':size}
-        fp='printfiles/science/%s_%s.png'%(dk,ink)
-        d=SCIENCE[dk]; aw,ah=AREA[garment]; w,top=d[garment]; h=int(w*d['ar']); left=(aw-w)//2
+    if dk=='science':                                        # combined Science: Design option (option3) picks subject
+        design=norm(print_style)
+        if design not in SCIENCE:
+            return {'error':'SCIENCE missing/invalid Design option','title':title,'design':print_style,'color':color,'size':size}
+        ckey=COLOR_ALIAS.get(norm(color),norm(color))
+        if garment=='hoodie': ckey=HOODIE_ALIAS.get(ckey,ckey)
+        cv=catalog[str(pid)].get('%s|%s'%(ckey,norm(size)))
+        if not cv: return {'error':'UNFULFILLABLE (no Printful blank)','title':title,'color':color,'size':size}
+        ink='navy' if ckey in LIGHT else 'cream'             # single ink by ground (navy on light, cream on dark)
+        fp='printfiles/science/%s_%s.png'%(design,ink)
+        aw,ah=AREA[garment]; ar=SCIENCE[design]              # full-width-contain, top-anchored
+        w=aw; h=w*ar
+        if h>ah: h=ah; w=h/ar
+        left=(aw-w)/2; ta=SCIENCE_TOP[garment]; top=max(0,min(ta,ah-h))
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
-                '_design':dk,'_garment':garment,'_file':fp,'_flags':[]}
+                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':round(w),'height':round(h),'top':round(top),'left':round(left)}}],
+                '_design':'science-'+design,'_garment':garment,'_file':fp,'_flags':[]}
     ckey=COLOR_ALIAS.get(norm(color),norm(color))
     if garment=='hoodie': ckey=HOODIE_ALIAS.get(ckey,ckey)
     cv=catalog[str(pid)].get('%s|%s'%(ckey,norm(size)))
