@@ -35,12 +35,12 @@ FAITH_STYLES={'classic':('faith-01',1.915),'elegant':('faith-02',1.867),'strong'
 # placements validated this session: all hoodies + KARMA tee. TEE creature/Stork tops are best-fit estimates -> spot-check.
 # KARMA = one product per garment; Design option = spiral+lockup variant. Per-color print files (4500x5400, Printful auto-fits).
 KARMA_FILES={                                   # norm(Design value) -> file (fixed regardless of ground)
- 'bluetealblue':'KARMA_blueteal_sblue.png','bluetealteal':'KARMA_blueteal_steal.png',
- 'allblueblue':'KARMA_allblue_kblue.png','allbluenavy':'KARMA_allblue_navy.png',
- 'blackbluenavy':'KARMA_blackblue_navy.png','redwhitecream':'KARMA_redwhite_cream.png',
- 'redwhitered':'KARMA_redwhite_bred.png','bluewhitecream':'KARMA_bluewhite_cream.png',
- 'bluewhiteblue':'KARMA_bluewhite_kblue.png','slatewhitecream':'KARMA_slatewhite_cream.png'}
-KARMA_BBBLUE={'light':'KARMA_blackblue_sblue.png','dark':'KARMA_blackblue_blueonly_sblue.png'}  # Black/Blue·Blue swaps art by ground
+ 'bluetealblue':'printfiles/karma/KARMA_blueteal_sblue.png','bluetealteal':'printfiles/karma/KARMA_blueteal_steal.png',
+ 'allblueblue':'printfiles/karma/KARMA_allblue_kblue.png','allbluenavy':'printfiles/karma/KARMA_allblue_navy.png',
+ 'blackbluenavy':'printfiles/karma/KARMA_blackblue_navy.png','redwhitecream':'printfiles/karma/KARMA_redwhite_cream.png',
+ 'redwhitered':'printfiles/karma/KARMA_redwhite_bred.png','bluewhitecream':'printfiles/karma/KARMA_bluewhite_cream.png',
+ 'bluewhiteblue':'printfiles/karma/KARMA_bluewhite_kblue.png','slatewhitecream':'printfiles/karma/KARMA_slatewhite_cream.png'}
+KARMA_BBBLUE={'light':'printfiles/karma/KARMA_blackblue_sblue.png','dark':'printfiles/karma/KARMA_blackblue_blueonly_sblue.png'}  # Black/Blue·Blue swaps art by ground
 KARMA_AR=4500/5400                              # print-file aspect (w/h); Printful auto-fits the full file
 UNVERIFIED_TEE=set()  # all verified on Men's 4 model
 def design_of(title):
