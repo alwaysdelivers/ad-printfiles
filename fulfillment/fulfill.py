@@ -47,6 +47,7 @@ UNVERIFIED_TEE=set()  # all verified on Men's 4 model
 def design_of(title):
     t=title.lower()
     if 'crown' in t: return 'crown'
+    if 'cross' in t: return 'cross'      # "Cross Always Delivers" -> combined Cross product (route by Design option)
     if 'jesus' in t: return 'jesus'
     if 'faith' in t: return 'faith'
     if 'karma' in t: return 'karma'
@@ -102,6 +103,34 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                 'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
                 '_design':'crown','_garment':garment,'_file':fp,'_flags':[]}
+    if dk=='cross':
+        # CROSS combined: Design option (option3) picks the cross + treatment.
+        #   "cross-04 Standard" -> cross04-standard_{light|dark}
+        #   "cross-08 Standard" -> cross08-standard_{light|dark}
+        #   "cross-08 Split"    -> cross08-split_{light|dark}
+        #   "cross-08 Full Red" -> cross08-fullred (ground-independent; White+Black only at PDP)
+        # Files are full 4500x5400 frame -> auto-fit, aspect-preserved & centered (like Karma/Crown).
+        dv=norm(print_style)
+        light=ckey in LIGHT
+        ground='light' if light else 'dark'
+        if dv=='cross04standard':
+            fp='printfiles/cross/cross04-standard_%s.png'%ground
+        elif dv=='cross08standard':
+            fp='printfiles/cross/cross08-standard_%s.png'%ground
+        elif dv=='cross08split':
+            fp='printfiles/cross/cross08-split_%s.png'%ground
+        elif dv=='cross08fullred':
+            fp='printfiles/cross/cross08-fullred.png'
+        else:
+            return {'error':'CROSS missing/invalid Design option','title':title,'design':print_style,'color':color,'size':size}
+        CROSS_AR=4500.0/5400.0
+        aw,ah=AREA[garment]
+        if aw/ah<=CROSS_AR: w=aw; h=int(aw/CROSS_AR)
+        else: h=ah; w=int(ah*CROSS_AR)
+        top=(ah-h)//2; left=(aw-w)//2
+        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
+                '_design':'cross','_garment':garment,'_file':fp,'_flags':[]}
     if dk=='karma':
         key=norm(print_style)
         if key=='blackblueblue':
