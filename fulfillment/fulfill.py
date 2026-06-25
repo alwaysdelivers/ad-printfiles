@@ -21,7 +21,6 @@ DESIGNS={
  'snowman':{'light':'printfiles/SNOWMAN_snw-01_whitegarments.png','dark':'printfiles/SNOWMAN_snw-01_darkgarments.png','ar':0.755,'hoodie':(1500,420),'tee':(1400,500)},
  'stork':{'light':'printfiles/STORK_stk-07_whitegarments.png','dark':'printfiles/STORK_stk-07_darkgarments.png','ar':0.468,'hoodie':(1500,560),'tee':(1450,620)},
  'yeti':{'light':None,'dark':'printfiles/YETI_drawing_darkgarments.png','ar':1.283,'hoodie':(1150,250),'tee':(1350,440)},
- 'usa250':{'light':'printfiles/AMERICA250_usa-250_whitegarments.png','dark':'printfiles/AMERICA250_usa-250_darkgarments.png','special':{'red':'printfiles/AMERICA250_usa-250_REDcharcoal.png'},'ar':0.687,'hoodie':(1600,440),'tee':(1500,500)},
 }
 # JESUS = one product, Style axis selects the lettering treatment. Trimmed art, top-anchored in a box (matches v2 mockups).
 JESUS_STYLES={'serif':('jes-01',1.349),'script':('jes-03',1.071),'bold':('jes-07',1.249),'retro':('jes-11',1.461)}  # style -> (file code, aspect w/h)
@@ -55,7 +54,6 @@ def design_of(title):
     for k in ('sasquatch','caveman','stork','yeti'):
         if k in t: return k
     if 'snowman' in t or 'abominable' in t: return 'snowman'
-    if 'america' in t and '250' in t: return 'usa250'
     if 'science' in t: return 'science'
     return None
 def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
@@ -214,7 +212,6 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     d=DESIGNS[dk]
     fp=d['light'] if (ckey in LIGHT and d['light']) else d['dark']
     if d.get('special') and ckey in d['special']: fp=d['special'][ckey]
-    if dk=='usa250' and (print_style or '').strip().lower()=='mono': fp='printfiles/AMERICA250_usa-250_MONO_%s.png'%_mono_ink(ckey)
     aw,ah=AREA[garment]; w,top=d[garment]; h=int(w*d['ar']); left=(aw-w)//2
     flags=[]
     if garment=='tee' and dk in UNVERIFIED_TEE: flags.append('TEE_PLACEMENT_UNVERIFIED')
