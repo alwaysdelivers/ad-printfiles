@@ -16,11 +16,11 @@ def _mono_ink(ckey):
 AREA={'tee':(1800,2400),'hoodie':(2100,2100)}
 MOCKUP_MODEL={'tee':"Men's 4",'hoodie':"Men's 4"}  # canonical Printful option_group for ALL listing mockups
 DESIGNS={
- 'sasquatch':{'light':'printfiles/SASQUATCH_sqt-01_whitegarments.png','dark':'printfiles/SASQUATCH_sqt-01_darkgarments.png','ar':0.671,'hoodie':(1680,420),'tee':(1600,500)},
- 'caveman':{'light':'printfiles/CAVEMAN_cav-08_whitegarments.png','dark':'printfiles/CAVEMAN_cav-08_darkgarments.png','ar':0.681,'hoodie':(1680,420),'tee':(1600,500)},
- 'snowman':{'light':'printfiles/SNOWMAN_snw-01_whitegarments.png','dark':'printfiles/SNOWMAN_snw-01_darkgarments.png','ar':0.755,'hoodie':(1500,420),'tee':(1400,500)},
- 'stork':{'light':'printfiles/STORK_stk-07_whitegarments.png','dark':'printfiles/STORK_stk-07_darkgarments.png','ar':0.468,'hoodie':(1500,560),'tee':(1450,620)},
- 'yeti':{'light':None,'dark':'printfiles/YETI_drawing_darkgarments.png','ar':1.283,'hoodie':(1150,250),'tee':(1350,440)},
+ 'sasquatch':{'light':'printfiles/sasquatch/SASQUATCH_sqt-01_whitegarments.png','dark':'printfiles/sasquatch/SASQUATCH_sqt-01_darkgarments.png','ar':0.671,'hoodie':(1680,420),'tee':(1600,500)},
+ 'caveman':{'light':'printfiles/caveman/CAVEMAN_cav-08_whitegarments.png','dark':'printfiles/caveman/CAVEMAN_cav-08_darkgarments.png','ar':0.681,'hoodie':(1680,420),'tee':(1600,500)},
+ 'snowman':{'light':'printfiles/snowman/SNOWMAN_snw-01_whitegarments.png','dark':'printfiles/snowman/SNOWMAN_snw-01_darkgarments.png','ar':0.755,'hoodie':(1500,420),'tee':(1400,500)},
+ 'stork':{'light':'printfiles/stork/STORK_stk-07_whitegarments.png','dark':'printfiles/stork/STORK_stk-07_darkgarments.png','ar':0.468,'hoodie':(1500,560),'tee':(1450,620)},
+ 'yeti':{'light':None,'dark':'printfiles/yeti/YETI_drawing_darkgarments.png','ar':1.283,'hoodie':(1150,250),'tee':(1350,440)},
 }
 # JESUS = one product, Style axis selects the lettering treatment. Trimmed art, top-anchored in a box (matches v2 mockups).
 JESUS_STYLES={'serif':('jes-01',1.349),'script':('jes-03',1.071),'bold':('jes-07',1.249),'retro':('jes-11',1.461)}  # style -> (file code, aspect w/h)
