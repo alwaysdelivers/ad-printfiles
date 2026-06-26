@@ -26,7 +26,7 @@ DESIGNS={
 JESUS_STYLES={'serif':('jes-01',1.349),'script':('jes-03',1.071),'bold':('jes-07',1.249),'retro':('jes-11',1.461)}  # style -> (file code, aspect w/h)
 JESUS_BOX={'tee':(1250,1100,480),'hoodie':(1250,1100,470)}  # maxw, maxh, top
 # MOM = one product, Style axis (Grace/Elegant/Bold/Retro). Same architecture as JESUS: trimmed art, FC/Mono/Red ink, JESUS_BOX placement.
-MOM_STYLES={'grace':('mom-01',1.193),'elegant':('mom-03',1.378),'bold':('mom-04',1.332),'retro':('mom-disco',1.315)}  # norm(Style) -> (file code, aspect w/h)
+MOM_STYLES={'grace':('mom-01',1.193),'elegant':('mom-04',1.332),'bold':('mom-03',1.378),'retro':('mom-disco',1.315)}  # norm(Style) -> (file code, aspect w/h)
 # SCIENCE = one product per prefix, Colorway option = "{Garment} / {Ink}". 4 mono inks; placement locked: tee top 260 / hoodie top 200.
 SCIENCE={                       # combined Science product; Design option picks subject; ink by ground; full-width-contain, top-anchored.
  'physics':1.133,'geometry':0.992,'chemistry':0.834,'algebra':0.622,   # ar = printfile H/W (3600-wide frameless)
