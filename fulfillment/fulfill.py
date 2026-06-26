@@ -25,6 +25,8 @@ DESIGNS={
 # JESUS = one product, Style axis selects the lettering treatment. Trimmed art, top-anchored in a box (matches v2 mockups).
 JESUS_STYLES={'serif':('jes-01',1.349),'script':('jes-03',1.071),'bold':('jes-07',1.249),'retro':('jes-11',1.461)}  # style -> (file code, aspect w/h)
 JESUS_BOX={'tee':(1250,1100,480),'hoodie':(1250,1100,470)}  # maxw, maxh, top
+# MOM = one product, Style axis (Grace/Elegant/Bold/Retro). Same architecture as JESUS: trimmed art, FC/Mono/Red ink, JESUS_BOX placement.
+MOM_STYLES={'grace':('mom-01',1.193),'elegant':('mom-03',1.378),'bold':('mom-04',1.332),'retro':('mom-disco',1.315)}  # norm(Style) -> (file code, aspect w/h)
 # SCIENCE = one product per prefix, Colorway option = "{Garment} / {Ink}". 4 mono inks; placement locked: tee top 260 / hoodie top 200.
 SCIENCE={                       # combined Science product; Design option picks subject; ink by ground; full-width-contain, top-anchored.
  'physics':1.133,'geometry':0.992,'chemistry':0.834,'algebra':0.622,   # ar = printfile H/W (3600-wide frameless)
@@ -50,6 +52,7 @@ def design_of(title):
     if 'jesus' in t: return 'jesus'
     if 'faith' in t: return 'faith'
     if 'karma' in t: return 'karma'
+    if 'mom' in t: return 'mom'
     if 'creature' in t: return 'creatures'      # combined Creatures product: route by Design option
     for k in ('sasquatch','caveman','stork','yeti'):
         if k in t: return k
@@ -162,6 +165,24 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                 'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
                 '_design':'jesus','_garment':garment,'_file':fp,'_flags':[]}
+    if dk=='mom':
+        st=norm(print_style)
+        if st not in MOM_STYLES: return {'error':'MOM missing/invalid Style option','title':title,'color':color,'size':size}
+        code,aspect=MOM_STYLES[st]
+        t=(ink or '').strip().lower()
+        if t=='red' and ckey!='navy':
+            fp='printfiles/mom/%s_redmono.png'%code                # all-red, single ink (red not offered on navy)
+        else:
+            ground='light' if ckey in LIGHT else 'dark'
+            if t=='mono': ground+='_mono'
+            fp='printfiles/mom/%s_%s.png'%(code,ground)
+        aw,ah=AREA[garment]; maxw,maxh,top=JESUS_BOX[garment]
+        if aspect>=maxw/maxh: w=maxw; h=int(maxw/aspect)
+        else: h=maxh; w=int(maxh*aspect)
+        left=(aw-w)//2
+        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
+                '_design':'mom','_garment':garment,'_file':fp,'_flags':[]}
     if dk=='faith':
         st=norm(print_style)
         if st not in FAITH_STYLES: return {'error':'FAITH missing/invalid Style option','title':title,'color':color,'size':size}
