@@ -29,8 +29,12 @@ JESUS_BOX={'tee':(1250,1100,480),'hoodie':(1250,1100,470)}  # maxw, maxh, top
 MOM_STYLES={'grace':('mom-01',1.193),'elegant':('mom-04',1.332),'bold':('mom-03',1.378),'retro':('mom-disco',1.315)}  # norm(Style) -> (file code, aspect w/h)
 DAD_STYLES={'classic':('dad-02',1.088),'varsity':('dad-04',1.294),'retro':('dad-disco',1.366)}  # norm(Style)->(code,aspect w/h)
 DAD_INK={'fullcolor':'split','full color':'split','split':'split','navy':'navy','red':'red','black':'black','cream':'cream','white':'white','heathergrey':'grey','heather grey':'grey','grey':'grey','gray':'grey','karmablue':'karmablue','karma blue':'karmablue'}  # PDP Ink label -> print-file treatment key
-DAD_VALID={'white':['navy','split','red','black','karmablue'],'athleticheather':['navy','split','red','black','white'],'navy':['cream','white','grey','karmablue'],'black':['red','cream','white','grey','karmablue']}  # ckey -> valid treatments
+DAD_VALID={'white':['navy','split','red','black','karmablue'],'athleticheather':['navy','split','red','black','white'],'navy':['cream','white','grey'],'black':['red','cream','white','grey','karmablue']}  # ckey -> valid treatments (no karmablue on navy)
 DAD_DEFAULT={'white':'navy','athleticheather':'navy','navy':'cream','black':'cream'}  # fallback treatment per color
+GOD_STYLES={'monument':('god-01',1.358),'bold':('god-03',0.891),'retro':('god-09',1.327)}
+GOD_INK={'fullcolor':'split','full color':'split','split':'split','navy':'navy','red':'red','black':'black','cream':'cream','heathergrey':'grey','heather grey':'grey','grey':'grey','gray':'grey','karmablue':'karmablue','karma blue':'karmablue'}
+GOD_VALID={'white':['navy','split','red','black','karmablue'],'athleticheather':['navy','split','red','black'],'navy':['cream','grey'],'black':['red','cream','grey','karmablue']}
+GOD_DEFAULT={'white':'navy','athleticheather':'navy','navy':'cream','black':'cream'}
 # SCIENCE = one product per prefix, Colorway option = "{Garment} / {Ink}". 4 mono inks; placement locked: tee top 260 / hoodie top 200.
 SCIENCE={                       # combined Science product; Design option picks subject; ink by ground; full-width-contain, top-anchored.
  'physics':1.133,'geometry':0.992,'chemistry':0.834,'algebra':0.622,   # ar = printfile H/W (3600-wide frameless)
@@ -63,6 +67,7 @@ def design_of(title):
     if 'snowman' in t or 'abominable' in t: return 'snowman'
     if 'science' in t: return 'science'
     if 'dad' in t: return 'dad'
+    if 'god' in t: return 'god'
     return None
 def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     garment='hoodie' if 'hoodie' in title.lower() else 'tee'
@@ -187,6 +192,22 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                 'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
                 '_design':'dad','_garment':garment,'_file':fp,'_flags':[]}
+    if dk=='god':
+        st=norm(print_style)
+        if st not in GOD_STYLES: return {'error':'GOD missing/invalid Style option','title':title,'color':color,'size':size}
+        code,aspect=GOD_STYLES[st]
+        tk=GOD_INK.get((ink or '').strip().lower())
+        valid=GOD_VALID.get(ckey,[])
+        if (tk is None) or (valid and tk not in valid):
+            tk=GOD_DEFAULT.get(ckey,'navy')
+        fp='printfiles/god/%s_%s.png'%(code,tk)
+        aw,ah=AREA[garment]; maxw,maxh,top=JESUS_BOX[garment]
+        if aspect>=maxw/maxh: w=maxw; h=int(maxw/aspect)
+        else: h=maxh; w=int(maxh*aspect)
+        left=(aw-w)//2
+        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
+                '_design':'god','_garment':garment,'_file':fp,'_flags':[]}
     if dk=='mom':
         st=norm(print_style)
         if st not in MOM_STYLES: return {'error':'MOM missing/invalid Style option','title':title,'color':color,'size':size}
