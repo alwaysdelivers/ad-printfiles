@@ -37,8 +37,8 @@ GOD_VALID={'white':['navy','split','red','black','karmablue'],'athleticheather':
 GOD_DEFAULT={'white':'navy','athleticheather':'navy','navy':'cream','black':'cream'}
 AMERICA_STYLES={'classic':('classic',2010/1363),'heritage':('heritage',2010/1674),'star':('star',2010/1921),'retro':('retro',2010/1160),'watermark':('watermark',2010/1315)}
 AMERICA_INK={'navy':'navy','red':'red','black':'black','gold':'gold','white':'white','grey':'grey','heather grey':'grey','heathergrey':'grey','karmablue':'karmablue','karma blue':'karmablue','ice':'ice','ice blue':'ice','iceblue':'ice','karma':'karma'}
-AMERICA_VALID_STD={'white':['navy','red','black','gold','karmablue'],'athleticheather':['navy','red','black','gold','karmablue'],'navy':['white','grey','ice'],'black':['red','white','grey','karmablue','ice']}
-AMERICA_VALID_WM={'white':['navy','red'],'athleticheather':['navy','red'],'navy':[],'black':['ice','karma']}
+AMERICA_VALID_STD={'white':['navy','red','black','gold','karmablue'],'athleticheather':['navy','red','black','gold','karmablue'],'navy':['white','grey','ice','red'],'black':['red','white','grey','karmablue','ice']}
+AMERICA_VALID_WM={'white':['navy','red'],'athleticheather':['navy','red'],'navy':['red'],'black':['ice','karma','red']}
 AMERICA_DEFAULT_STD={'white':'navy','athleticheather':'navy','navy':'white','black':'red'}
 AMERICA_DEFAULT_WM={'white':'navy','athleticheather':'navy','navy':'navy','black':'ice'}
 AMERICA_MAXW=1600; AMERICA_TOP={'tee':480,'hoodie':470}
@@ -263,7 +263,10 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         else:
             valid=AMERICA_VALID_STD.get(ckey,[]); default=AMERICA_DEFAULT_STD.get(ckey,'navy')
         if not tk or tk not in valid: tk=default
-        fp='printfiles/america/%s_%s.png'%(code,tk)
+        if st=='watermark' and tk=='red' and ckey not in ('white','athleticheather','sportgrey'):
+            fp='printfiles/america/watermark_red_dark.png'
+        else:
+            fp='printfiles/america/%s_%s.png'%(code,tk)
         aw,ah=AREA[garment]; w=AMERICA_MAXW; h=int(w/aspect); top=AMERICA_TOP[garment]; left=(aw-w)//2
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                 'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
