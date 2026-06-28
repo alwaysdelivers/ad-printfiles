@@ -35,6 +35,13 @@ GOD_STYLES={'monument':('god-01',1.358),'bold':('god-03',0.891),'retro':('god-09
 GOD_INK={'fullcolor':'split','full color':'split','split':'split','navy':'navy','red':'red','black':'black','cream':'cream','heathergrey':'grey','heather grey':'grey','grey':'grey','gray':'grey','karmablue':'karmablue','karma blue':'karmablue'}
 GOD_VALID={'white':['navy','split','red','black','karmablue'],'athleticheather':['navy','split','red','black'],'navy':['cream','grey'],'black':['red','cream','grey','karmablue']}
 GOD_DEFAULT={'white':'navy','athleticheather':'navy','navy':'cream','black':'cream'}
+AMERICA_STYLES={'classic':('classic',2010/1363),'heritage':('heritage',2010/1674),'star':('star',2010/1921),'retro':('retro',2010/1160),'watermark':('watermark',2010/1315)}
+AMERICA_INK={'navy':'navy','red':'red','black':'black','gold':'gold','white':'white','grey':'grey','heather grey':'grey','heathergrey':'grey','karmablue':'karmablue','karma blue':'karmablue','ice':'ice','ice blue':'ice','iceblue':'ice','bred':'bred','bright red':'bred','brightred':'bred','karma':'karma'}
+AMERICA_VALID_STD={'white':['navy','red','black','gold','karmablue','bred'],'athleticheather':['navy','red','black','gold','karmablue','bred'],'navy':['white','grey','ice'],'black':['red','white','grey','karmablue','ice','bred']}
+AMERICA_VALID_WM={'white':['navy','red'],'athleticheather':['navy','red'],'navy':[],'black':['ice','karma']}
+AMERICA_DEFAULT_STD={'white':'navy','athleticheather':'navy','navy':'white','black':'red'}
+AMERICA_DEFAULT_WM={'white':'navy','athleticheather':'navy','navy':'navy','black':'ice'}
+AMERICA_MAXW=1600; AMERICA_TOP={'tee':480,'hoodie':470}
 # SCIENCE = one product per prefix, Colorway option = "{Garment} / {Ink}". 4 mono inks; placement locked: tee top 260 / hoodie top 200.
 SCIENCE={                       # combined Science product; Design option picks subject; ink by ground; full-width-contain, top-anchored.
  'physics':1.133,'geometry':0.992,'chemistry':0.834,'algebra':0.622,   # ar = printfile H/W (3600-wide frameless)
@@ -68,6 +75,7 @@ def design_of(title):
     if 'science' in t: return 'science'
     if 'dad' in t: return 'dad'
     if 'god' in t: return 'god'
+    if 'america' in t: return 'america'
     return None
 def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     garment='hoodie' if 'hoodie' in title.lower() else 'tee'
@@ -244,6 +252,22 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                 'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
                 '_design':'faith','_garment':garment,'_file':fp,'_flags':[]}
+    if dk=='america':
+        st=norm(print_style)
+        if st not in AMERICA_STYLES: return {'error':'AMERICA missing/invalid Style option','title':title,'color':color,'size':size}
+        code,aspect=AMERICA_STYLES[st]
+        label=(ink or '').strip()
+        tk=AMERICA_INK.get(label.lower()) or AMERICA_INK.get(norm(label))
+        if st=='watermark':
+            valid=AMERICA_VALID_WM.get(ckey,[]); default=AMERICA_DEFAULT_WM.get(ckey,'navy')
+        else:
+            valid=AMERICA_VALID_STD.get(ckey,[]); default=AMERICA_DEFAULT_STD.get(ckey,'navy')
+        if not tk or tk not in valid: tk=default
+        fp='printfiles/america/%s_%s.png'%(code,tk)
+        aw,ah=AREA[garment]; w=AMERICA_MAXW; h=int(w/aspect); top=AMERICA_TOP[garment]; left=(aw-w)//2
+        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
+                '_design':'america','_garment':garment,'_file':fp,'_flags':[]}
     if dk=='yeti':
         ver=norm(print_style)
         ice=ver in ('ice','iceblue','blue')
