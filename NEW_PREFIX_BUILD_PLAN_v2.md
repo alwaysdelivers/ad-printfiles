@@ -442,3 +442,76 @@ Combined product? Add to `FG_HYBRID` map + handle to `unless` skip-list. Single/
 - Proofs: openable HTML, cursor-following hover-lens magnifier, white background, base64-embedded. Never inline images in chat.
 - **Migrations/renames:** create-new → verify resolves → repoint references → verify clean → ONLY THEN delete old. Audit dynamic URL construction, not just literal strings.
 - Own mistakes tersely; re-read exact changed bytes before claiming done.
+
+---
+
+## STANDARDIZE EXISTING PREFIXES — Backport protocol
+
+Six live multi-ink prefixes need backporting to current standards. Do ONE prefix per session. Do NOT start the next until current is complete and verified.
+
+### Priority order (easiest → hardest)
+1. **DAD** — has valid_map; missing empty/reset state, chip_r2, per_style_chip, getValidForColor
+2. **GOD** — same as DAD
+3. **MOM** — missing valid_map + all of the above
+4. **FAITH** — same as MOM
+5. **JESUS** — most styles/treatments, missing everything
+6. **CROSS** — same as JESUS
+
+### Pre-work for every prefix (MANDATORY before touching anything)
+1. Fetch the live section via theme GraphQL API — read it in full
+2. Extract and `node --check` the existing script block
+3. Identify the existing namespace (`{ns}-`), variable names (`treat`/`ink`/`color`), and TREATS array
+4. Note what valid-map structure exists (or doesn't)
+5. Record the current chip URL builder pattern and suffix
+
+### What NOT to change
+- Do not rename variables, restructure the IIFE, or change working patterns
+- Do not alter existing valid maps if present — only ADD to them
+- Do not change the ATC, variant lookup, or deep-link reader
+- Additive only — surgically insert new patterns, leave everything else intact
+
+### Backport checklist (run in this order, STOP after each, verify before continuing)
+
+**STOP A — valid map (only for MOM, FAITH, JESUS, CROSS)**
+- Read all existing ink×garment combinations from current section + master sheet
+- Build `TREAT_VALID_STD = { ckey: [treatments] }` from actual combinations
+- Add `getValid()` using the map; add `getValidForColor(c)` helper
+- Verify: `node --check`; verify `getValidForColor('white')` returns correct treatments
+- STOP — show valid map for approval before pushing
+
+**STOP B — empty/reset state (all 6 prefixes)**
+Apply all 6 null-state guards (see Step 5 — Empty/reset state):
+1. `getValid()`: add `if(!color) return TREATS;` at top
+2. `treatUrl()`: add `if(!treat||!color) return PLACEHOLDER_URL;` — set PLACEHOLDER_URL = CDN URL for `{garment}_classic_{default_color}_{default_ink}.jpg` (or equivalent first style/color/ink combo for that prefix)
+3. `sync()` auto-snap: guard with `if(color && treat && ...)`
+4. `renderTreat()` snap: guard with `if(treat && ...)`
+5. `styleAvail = treat ? ... : true`
+6. `colorOk = treat ? ... : true`; `b.disabled = treat ? !colorOk : false`
+Add `defaultColorForTreat()`, update `setTreat()` (guard first, then auto-snap), update `syncSize()` (M pre-select), add `resetPDP()` + `window.resetPDP=resetPDP`, add Reset button to HTML.
+- Verify: `node --check`; load PDP; confirm all options show, none selected, placeholder visible, M pre-selected, Reset works
+- STOP — show PDP screenshot for approval before pushing
+
+**STOP C — chip versioning (all 6 prefixes)**
+- Identify current chip suffix (likely no `_r2`)
+- Push new chips under `_r2` suffix for any inks that need it
+- Update chip URL builder to use `_r2` suffix
+- Add per-style chipTreat: `var chipTreat=treat?((styleValid.indexOf(treat)>=0)?treat:(styleValid[0]||'navy')):(styleValid[0]||'navy');`
+- Note: light-ink chips (white/cream/grey) must use `_chip_v2_r2.jpg` on navy background
+- Verify: chips load correctly for all inks × styles on PDP
+- STOP — verify chips before pushing
+
+### Verification after all stops
+- `node --check` on final section
+- Load PDP fresh: empty state correct, chips work, reset works, deep-link works
+- Verify deployed file via GraphQL API readback (not storefront)
+
+### Per-prefix notes
+| Prefix | Namespace | Styles | Has valid_map | Notes |
+|---|---|---|---|---|
+| DAD | `dadr-` or similar | Classic/Varsity/Retro | ✓ | Read existing map before adding guards |
+| GOD | `godr-` or similar | Monument/Bold/Retro | ✓ | Read existing map before adding guards |
+| MOM | mom namespace | Grace/Bold/Elegant/Retro | ✗ | Ground-keyed (light/dark/red) — build STD map from existing combos |
+| FAITH | faith namespace | 1–2 styles | ✗ | Confirm style count before building map |
+| JESUS | jes namespace | Grace/Script/Bold/Retro + cross | ✗ | Most complex — read section fully before planning |
+| CROSS | cross namespace | same as JESUS | ✗ | Clone JESUS backport once JESUS is done |
+
