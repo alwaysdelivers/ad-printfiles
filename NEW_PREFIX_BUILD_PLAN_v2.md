@@ -276,11 +276,18 @@ window.resetPDP=resetPDP;
   `['white','grey'].indexOf(chipTreat)>-1 ? '_chip_v2_r2.jpg' : '_chip_r2.jpg'`
 - **Per-style chipTreat** (null or invalid → first valid for that style):
   `var chipTreat=treat?((styleValid.indexOf(treat)>=0)?treat:(styleValid[0]||'navy')):(styleValid[0]||'navy');`
+- **⚠ SPLIT INK TRAP (LOCKED — do not deviate):** `split` (Full Color) has NO CDN chip file. It is ALWAYS base64 from `CFG.sw[s]`, keyed per style name. `CFG.sw` contains one base64 entry per style (e.g. `{"Classic":"/9j/…","Varsity":"/9j/…","Retro":"/9j/…"}`). The correct `thumbSrc` condition is:
+  ```javascript
+  var thumbSrc = (treat === 'split')
+    ? ('data:image/jpeg;base64,' + CFG.sw[s])   // ALL style tiles use base64 when split selected
+    : ('…CDN…' + s.toLowerCase() + '_' + chipTreat + suffix);
+  ```
+  **NEVER** add `&& s === style` to the split condition — that would show base64 only for the selected tile and attempt a CDN fetch (404) for all others. **NEVER** add a fallback that overwrites `chipTreat` from `'split'` to a CDN ink — that is the same bug in reverse.
 - Watermark dark chips: navy bg (`_chip_v2_r2.jpg`) for light inks (white/grey/ice); white bg (`_chip_r2.jpg`) for mid inks (gold/karmablue). If CDN still serves stale after purge, push as `_r3` and add special case to URL builder.
 
 ### Chips — canonical build rules
 - 440×338 canvas, built from print art (never from a mockup).
-- Full Color chip = base64 in PDP config `sw`, built from `_split` print art. Must contain both navy and red pixels.
+- Full Color chip = base64 in PDP config `sw`, built from `_split` print art. Must contain both navy and red pixels. **`sw` is a per-style object — every style name is a key** (e.g. `sw.Classic`, `sw.Varsity`, `sw.Retro`). All style tiles show their own `sw[s]` chip when `split` is selected — not just the active style.
 - **Composite correctly** — direct RGBA paste, convert RGB at save only:
   ```python
   chip = Image.new('RGBA', (440,338), (255,255,255,255))
@@ -497,6 +504,7 @@ Add `defaultColorForTreat()`, update `setTreat()` (guard first, then auto-snap),
 - Update chip URL builder to use `_r2` suffix
 - Add per-style chipTreat: `var chipTreat=treat?((styleValid.indexOf(treat)>=0)?treat:(styleValid[0]||'navy')):(styleValid[0]||'navy');`
 - Note: light-ink chips (white/cream/grey) must use `_chip_v2_r2.jpg` on navy background
+- **If prefix has `split` ink:** `thumbSrc` must be `(treat==='split') ? base64_CFG.sw[s] : CDN`. No `&& s===style` qualifier. No CDN fallback for split. Verify all three style tiles show Full Color chip when split selected — not just the active tile.
 - Verify: chips load correctly for all inks × styles on PDP
 - STOP — verify chips before pushing
 
