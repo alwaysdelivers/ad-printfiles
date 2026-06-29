@@ -155,6 +155,19 @@ Body:   {"message":"...", "content":"{base64}", "sha":"{existing_sha_or_omit}"}
 ### jsDelivr cache
 - New file: may 404 on CDN while raw.githubusercontent = 200 (normal). Purge: `GET purge.jsdelivr.net/gh/alwaysdelivers/ad-printfiles@main/{path}`.
 - **Content change:** purge alone unreliable. Always push under a NEW filename suffix (`_v2`, `_r2`, `_r3`) and update all references. Never overwrite CDN-served content in place.
+
+### PRINT FILE PLACEMENT — FULL-FRAME vs TRIMMED-CONTENT (LOCKED)
+Two classes of print files exist. Using the wrong placement calculation for either class will produce a tiny or misaligned print on the mockup ghost.
+
+**Class A — Trimmed-content (JESUS_BOX):** Print file is cropped to the art content with minimal padding. File aspect ratio reflects the art dimensions. Use `JESUS_BOX` placement: `maxw=1250, maxh=1100`; fit by art aspect ratio; `top=480(tee)/470(hoodie)`, `left=(aw-w)//2`.
+- Examples: DAD, GOD, MOM, AMERICA — print files are 4500×5400 but the art fills most of the canvas
+
+**Class B — Full-frame (CROWN_AR):** Print file is the full 4500×5400 canvas. The art occupies only a portion of the canvas. File aspect ratio is always `4500/5400 = 0.8333`. Use full-frame placement: `CROWN_AR=4500.0/5400.0`; `if aw/ah<=CROWN_AR: w=aw, h=int(aw/CROWN_AR); else: h=ah, w=int(ah*CROWN_AR)`; `top=(ah-h)//2, left=(aw-w)//2`.
+- Examples: FAITH, CROWN — art is positioned within the 4500×5400 frame by the lockup standard
+
+**How to tell which class:** Download the print file and measure it. If width=4500 and height=5400, check whether the art content fills most of the canvas (Class A) or occupies only a portion with significant whitespace (Class B). Do NOT use the `aspect` from `fulfill.py STYLES` dict as the Printful placement aspect — that aspect is for fulfill.py's internal fit calculation, not for Printful mockup API placement of full-frame files.
+
+**NEVER use JESUS_BOX on a full-frame print file. NEVER use CROWN_AR on a trimmed-content print file.**
 - Main image URL has **no `?v=` query string** — cache-busting is handled by chip filename versioning, not query params.
 
 **STOP — confirm all asset URLs resolve 200.**
@@ -505,13 +518,33 @@ Add `defaultColorForTreat()`, update `setTreat()` (guard first, then auto-snap),
 - Add per-style chipTreat: `var chipTreat=treat?((styleValid.indexOf(treat)>=0)?treat:(styleValid[0]||'navy')):(styleValid[0]||'navy');`
 - Note: light-ink chips (white/cream/grey) must use `_chip_v2_r2.jpg` on navy background
 - **If prefix has `split` ink:** `thumbSrc` must be `(treat==='split') ? base64_CFG.sw[s] : CDN`. No `&& s===style` qualifier. No CDN fallback for split. Verify all three style tiles show Full Color chip when split selected — not just the active tile.
+- **CDN RESOLUTION GATE (mandatory, no exceptions):** After pushing every chip file, HEAD-check each one on `cdn.jsdelivr.net` before touching the section. A 200 on `raw.githubusercontent.com` does NOT mean CDN is ready. If any file returns 403 or 404 on CDN, do NOT push the section — fix the CDN issue first by pushing under a new filename suffix and re-checking. This gate exists because jsDelivr can permanently cache a 403 for a filename it first encountered when the file didn't exist, and purge will not fix it.
 - Verify: chips load correctly for all inks × styles on PDP
 - STOP — verify chips before pushing
 
-### Verification after all stops
-- `node --check` on final section
-- Load PDP fresh: empty state correct, chips work, reset works, deep-link works
-- Verify deployed file via GraphQL API readback (not storefront)
+### Verification after all stops — MANDATORY FUNCTIONAL GATE
+
+**String-match checks are necessary but not sufficient. Always run the functional gate below before declaring done.**
+
+**1. node --check** on final section JS block.
+
+**2. CDN resolution check** — HEAD every file the section references: PLACEHOLDER_URL, all chip `_r2` URLs, sample treatUrls (at least White/fc, Navy/red, Black/mono). A 200 on raw.githubusercontent does NOT mean CDN is ready. Must be 200 on cdn.jsdelivr.net.
+
+**3. Boot sequence walkthrough** — trace what the user sees at each stage, in order:
+- t=0ms: hero img has no src → blank. Is there a pre-set src or PLACEHOLDER set before ensure()? If not, add one.
+- ensure() fires async → prod() returns null → renderStyle() exits immediately → no chips. What does the user see while waiting? Acceptable only if fast; if uncertain, add a loading state.
+- ensure() resolves → sync() fires → setImg(treatUrl()). treat=null → PLACEHOLDER_URL. Does PLACEHOLDER_URL exist on CDN? Check it.
+- renderStyle() fires with real product data → chips render. Confirm CFG.sw has base64 for all styles. Confirm all non-fc chip files resolve on CDN.
+- renderTreat() fires → all buttons show, none selected (treat=null). Confirm .dis logic correct.
+- syncSize() fires → M pre-selected if available. ATC shows "Select ink + garment color".
+- User selects ink → setTreat() → sync() → setImg(treatUrl()). Confirm URL pattern matches actual filenames in repo.
+- Reset → resetPDP() → garment resets to tee, treat/color/size null, hero shows PLACEHOLDER, chips show fc base64.
+
+**This walkthrough must be done before every push. It takes 5 minutes and catches what string checks miss.**
+
+**4. Cross-check against a known-working prefix** — open DAD or GOD, read their boot sequence line by line, compare to the new prefix. Any divergence is a bug candidate.
+
+**5. Load PDP fresh** (after deploy): empty state correct, chips work, reset works, deep-link works.
 
 ### Per-prefix notes
 | Prefix | Namespace | Styles | Has valid_map | Notes |
