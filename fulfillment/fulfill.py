@@ -52,6 +52,9 @@ SCIENCE={                       # combined Science product; Design option picks 
 SCIENCE_TOP={'tee':260,'hoodie':200}
 # FAITH = same frame standard as JESUS (4500x5400, y1350 top-anchor, gap 420). Style -> (file code, aspect w/h).
 FAITH_STYLES={'classic':('faith-01',1.915),'elegant':('faith-02',1.867),'strong':('faith-04',1.349)}
+FAITH_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red'}
+FAITH_VALID={'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['fc','mono','red'],'black':['fc','mono','red']}
+FAITH_DEFAULT={'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}
 # placements validated this session: all hoodies + KARMA tee. TEE creature/Stork tops are best-fit estimates -> spot-check.
 # KARMA = one product per garment; Design option = spiral+lockup variant. Per-color print files (4500x5400, Printful auto-fits).
 KARMA_FILES={                                   # norm(Design value) -> file (fixed regardless of ground)
@@ -251,17 +254,24 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         st=norm(print_style)
         if st not in FAITH_STYLES: return {'error':'FAITH missing/invalid Style option','title':title,'color':color,'size':size}
         code,aspect=FAITH_STYLES[st]
-        t=(ink or '').strip().lower()
-        if t=='red' and ckey!='navy':
+        label=(ink or '').strip().lower()
+        tk=FAITH_INK.get(label)
+        if not tk or tk not in FAITH_VALID.get(ckey,[]):
+            tk=FAITH_DEFAULT.get(ckey,'fc')
+        if tk=='red':
             fp='printfiles/faith/%s_redmono.png'%code
-        else:
-            ground='light' if ckey in LIGHT else 'dark'
-            if t=='mono': ground+='_mono'
+        elif tk=='mono':
+            ground='light_mono' if ckey in LIGHT else 'dark_mono'
             fp='printfiles/faith/%s_%s.png'%(code,ground)
-        aw,ah=AREA[garment]; maxw,maxh,top=JESUS_BOX[garment]
-        if aspect>=maxw/maxh: w=maxw; h=int(maxw/aspect)
-        else: h=maxh; w=int(maxh*aspect)
-        left=(aw-w)//2
+        else:  # fc
+            ground='light' if ckey in LIGHT else 'dark'
+            fp='printfiles/faith/%s_%s.png'%(code,ground)
+        # Full-frame 4500x5400 placement (same as CROWN)
+        FAITH_AR=4500.0/5400.0
+        aw,ah=AREA[garment]
+        if aw/ah<=FAITH_AR: w=aw; h=int(aw/FAITH_AR)
+        else: h=ah; w=int(ah*FAITH_AR)
+        top=(ah-h)//2; left=(aw-w)//2
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                 'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
                 '_design':'faith','_garment':garment,'_file':fp,'_flags':[]}
