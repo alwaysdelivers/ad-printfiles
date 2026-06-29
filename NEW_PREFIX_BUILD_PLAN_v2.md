@@ -19,6 +19,8 @@
 
 > **RULE 0g — READ FROM LIVE SOURCES.** Every section fetch must be a live API call in the current response. Never rely on memory, transcript summary, or prior response content.
 
+> **RULE 0h — TRACE EVERY BRANCH.** For any section with multiple families, modes, or conditionally hidden rows (e.g. Cross jesus-cross/the-cross, any section that hides a UI row based on state), the boot sequence walkthrough MUST be traced separately for every branch. The happy path is not enough. If a row is hidden in branch A, everything inside it is also hidden — including the Reset button.
+
 ---
 
 ## MANDATORY PRE-PUSH VERIFICATION OATH
@@ -31,6 +33,9 @@ Before any section deploy or file push, confirm all six statements are true. If 
 4. **CDN HEAD-check passed (200) on every file the section references** — PLACEHOLDER_URL, all chip files, sample treatUrls. A 200 on raw.githubusercontent is NOT sufficient.
 5. **Boot sequence walkthrough completed** — traced t=0 through reset, confirmed no blank states or broken URLs.
 6. **I have not taken any action beyond what was explicitly approved in the immediately preceding message.**
+7. **colorOrder is `["White", "Athletic Heather", "Navy", "Black"]`** — verified in deployed file.
+8. **TREAT_LABEL display values match store standard** — verified: no internal key names shown to user.
+9. **Reset button is outside any conditionally hidden wrapper** — verified: it remains visible in every branch/state.
 
 ---
 
@@ -47,7 +52,16 @@ Run this before every section push. Trace each stage:
 - **User selects ink → setTreat() → sync() → setImg(treatUrl()):** URL matches actual filenames in repo. Verify one sample URL live.
 - **Reset → resetPDP():** garment resets to tee, treat/color/size null, hero shows PLACEHOLDER, chips show fc base64.
 
-**Cross-check against DAD (known-good):** After tracing, open DAD section and compare its boot sequence line by line. Any divergence is a bug candidate.
+**For sections with conditionally hidden rows (e.g. Cross, combined products):** Trace EVERY branch separately:
+- Trace with family='jesus-cross' (or equivalent first branch): what shows, what hides, is Reset button still visible?
+- Trace with family='the-cross' (or equivalent second branch): repeat full walkthrough.
+- Trace the Reset path for each branch: does every element return to correct default state?
+
+**Four additional checks before every push:**
+1. **colorOrder** in CFG = `["White", "Athletic Heather", "Navy", "Black"]` (light→dark). Any other order is a bug.
+2. **TREAT_LABEL values** match store standard: `navy:'Navy'`, `split:'Full Color'`, `red:'Red'`, `grey:'Heather Grey'`, `karmablue:'Neon Blue'`, `cream:'Cream'`, `black:'Black'`, `gold:'Gold'`, `ice:'Ice Blue'`. Never use internal key names as display labels (e.g. never show "std", "fc", "mono" to the user).
+3. **Reset button is outside any conditionally hidden wrapper.** If the Reset button is inside a div that gets `display:none` for any state, it will disappear in that state. Reset must always be visible.
+4. **Cross-check against DAD (known-good):** Open DAD section, compare boot sequence line by line. Any divergence is a bug candidate.
 
 ---
 
@@ -86,7 +100,7 @@ State and get approval on EVERY item below. Do not assume any of these — ask.
 - Reference hexes: navy `#1e3a5f`, cream `#f5f1e8`, red `#a8201a`, gold `#c08a2e`, black `#0a0a0a`, ice `#7fc4e0`, grey `#b9c0cb`, karmablue `#2f8fe2`. Faith-lane lockup colors differ; see Step 1.
 - `split`/Full Color = navy on `_ALWAYS` + `_AD`, red on remainder. Contains BOTH navy and red.
 
-**0e. Colors offered** — default White, Athletic Heather, Navy, Black unless user specifies otherwise.
+**0e. Colors offered** — default White, Athletic Heather, Navy, Black unless user specifies otherwise. **colorOrder MUST be this exact sequence: `["White", "Athletic Heather", "Navy", "Black"]` (luminance light→dark).** Any deviation is a defect.
 
 **0f. Valid ink × garment-color matrix (GENERATE from contrast rule — do not eyeball).**
 
@@ -199,6 +213,14 @@ Submit one task → poll to `completed` → **65s gap** → next. Two tasks with
 
 ### After generating mockups — CDN resolution gate
 After pushing each mockup file, HEAD-check on `cdn.jsdelivr.net` before referencing it anywhere. A 200 on `raw.githubusercontent.com` does NOT mean CDN is ready.
+
+### Mockup size consistency check
+Before submitting for approval, compare new mockup print dimensions against existing mockups of the same prefix:
+- Download 2 existing mockups (one matching garment+color) and measure the print bounding box in pixels using PIL
+- Measure the same on new mockups
+- Print widths must match within 10px. Print heights must match within 20px (ghost crop variance is acceptable)
+- Center X and Y must match within 15px
+- If new mockups are significantly smaller → wrong placement class (check Class A vs Class B). Regenerate before showing.
 
 **STOP — show mockup approval grid (openable HTML, hover-lens magnifier, white background, base64-embedded) for approval. Never show images inline in chat.**
 
@@ -338,6 +360,34 @@ window.resetPDP=resetPDP;
 - Light-ink chips (white/cream/grey): navy background chip (`_chip_v2_r2.jpg`). All others: white background (`_chip_r2.jpg`).
 - **⚠ SPLIT INK TRAP (LOCKED):** `split` has NO CDN chip file. Always base64 from `CFG.sw[s]`. Never add `&& s===style`. Never CDN fallback for split.
 
+### Store-standard display labels (LOCKED — never deviate)
+`TREAT_LABEL` values must use these exact display strings. Internal keys are never shown to users.
+
+| Treatment key | Display label |
+|---|---|
+| `navy` | Navy |
+| `split` | Full Color |
+| `red` | Red |
+| `black` | Black |
+| `grey` | Heather Grey |
+| `karmablue` | Neon Blue |
+| `cream` | Cream |
+| `gold` | Gold |
+| `ice` | Ice Blue |
+| `white` | White |
+
+For combined/multi-design products with treatment keys like `std`/`split`/`red`: map to the equivalent standard label (`std`→`Navy`, `split`→`Full Color`, `red`→`Red`).
+
+### colorOrder standard (LOCKED)
+`CFG.colorOrder` MUST be `["White", "Athletic Heather", "Navy", "Black"]` in every section. This drives swatch render order (left→right = light→dark). Any deviation is a defect — fix it, do not treat it as "how the section works."
+
+### Reset button placement (LOCKED)
+The Reset button MUST be in its own `<div>` that is never conditionally hidden. It must NEVER be placed inside a wrapper div that gets `display:none` for any state (e.g. inside an ink row wrapper that hides when a family has no ink axis). If a section hides any row conditionally, verify the Reset button is outside that row.
+
+### ATC payload — Ink property
+- Standard prefixes: send `properties:{Ink: TREAT_LABEL[treat]}` — display label, not file key.
+- Combined/multi-design products (Cross, Creatures, Science): send `{id, quantity}` only — design is in option3, no Ink property needed.
+
 ### Deep-link reader
 MANDATORY in BOOT `ensure()` callback only — reads `?variant=`, preselects style/color/ink, falls back to defaults.
 
@@ -446,7 +496,10 @@ This gate must be completed and reported to Ati before writing any plan or any c
 4. **Run `node --check`** on the extracted IIFE. Report pass/fail.
 5. **List every function that exists but is NOT in the standard** — these are candidates for preservation. List them by exact name.
 6. **List every unique architectural difference from DAD (standard):** different namespace, different URL pattern, different state variable names, different boot sequence, different family/product structure.
-7. **Report all of the above to Ati.** Do not proceed until she says go.
+7. **Check colorOrder** in CFG block. Report exact value. If not `["White", "Athletic Heather", "Navy", "Black"]` — flag as defect to fix.
+8. **Check TREAT_LABEL / existing ink labels** against store standard. Report any labels that don't match (e.g. "Standard" should be "Navy", "Full Red" should be "Red").
+9. **Check Reset button placement** — is it inside any conditionally hidden wrapper? If yes, flag it.
+10. **Report all of the above to Ati.** Do not proceed until she says go.
 
 Failure to complete Gate 0 means every plan produced is based on assumed content, not actual content. Gate 0 failures caused every audit error this session.
 
@@ -502,7 +555,7 @@ Apply all 6 null-state guards (see Step 5). Also:
 | FAITH | `jes-` / `jit-` | Classic/Elegant/Strong | ✓ complete | Full-frame print files (Class B); red valid all garments; chip suffix `_chip_w2_r2` |
 | CROWN | `crown-` / `cit-` | None (no style axis) | ✓ complete | split/mono only; split invalid on Navy/Black; no STOP C |
 | JESUS | `jesp-` | To be confirmed | pending | Most complex; read section fully before planning |
-| CROSS | `crx-` | Dual-family (jesus-cross / the-cross) | pending | See Cross architecture notes below |
+| CROSS | `crx-` | Dual-family (jesus-cross / the-cross) | ✓ complete | treat=null; Navy/Full Color/Red labels; Reset outside inkwrap; colorOrder fixed |
 
 ### Cross architecture notes (LOCKED — read before touching)
 
@@ -510,11 +563,7 @@ The cross section is a **dual-family** PDP serving two products simultaneously:
 - **jesus-cross** (`family='jesus-cross'`): Single design (`cross-04`), no ink choices. Ink row hidden. `treat` irrelevant — `designValue()` returns `CFG.jesusCrossDesign` regardless.
 - **the-cross** (`family='the-cross'`): Three treats — `std`, `split`, `red`. Red only valid on White and Black (`CFG.redColors=['White','Black']`). Ink row visible.
 
-**`treat` is NOT initialized to null in this section.** It starts as `CFG.defaultTreat='std'` because `treat` drives `designValue()` → `dcode()` → product option3 matching → `curV()`. Setting `treat=null` without null-guarding `designValue()` and `dcode()` would break variant lookup on load.
-
-**Decision recorded (pending Ati approval):**
-- Option A: `treat=null` on init — add null guards to `designValue()`, `dcode()`, `imgUrl()` — user must pick treat before ATC works
-- Option B: keep `treat=CFG.defaultTreat='std'` on init — ATC works immediately on load — `resetPDP()` resets to `treat='std'` not null
+**`treat` is initialized to `null`.** `dcode()` and `imgUrl()` have null guards: `dcode()` returns `CFG.dcodeTheCross['std']` as fallback when `treat=null`; `imgUrl()` returns `PLACEHOLDER_URL` when `!color`. Treats are standard display-labelled: `std`→Navy, `split`→Full Color, `red`→Red. The three style tiles (Standard/Split/Full Red internal names) are displayed as Navy/Full Color/Red matching store convention. **Decision: Option A (treat=null) — COMPLETE.**
 
 **Functions to preserve — do not alter:**
 `designValue()`, `dcode()`, `gp()`, `imgUrl()`, `colorsForDesign()`, `sizesOf()`, `curV()`, `renderFamily()`, `setFamily()`, `isRed()`, `redOK()`, `priceLine()`, `zOpen()`, `zClose()`.
