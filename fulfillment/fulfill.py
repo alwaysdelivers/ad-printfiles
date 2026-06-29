@@ -37,8 +37,8 @@ GOD_VALID={'white':['navy','split','red','black','karmablue'],'athleticheather':
 GOD_DEFAULT={'white':'navy','athleticheather':'navy','navy':'cream','black':'cream'}
 AMERICA_STYLES={'classic':('classic',2010/1363),'heritage':('heritage',2010/1674),'star':('star',2010/1921),'retro':('retro',2010/1160),'watermark':('watermark',2010/1315)}
 AMERICA_INK={'navy':'navy','red':'red','black':'black','gold':'gold','white':'white','grey':'grey','heather grey':'grey','heathergrey':'grey','karmablue':'karmablue','karma blue':'karmablue','ice':'ice','ice blue':'ice','iceblue':'ice','karma':'karma'}
-AMERICA_VALID_STD={'white':['navy','red','black','gold','karmablue'],'athleticheather':['navy','red','black','gold','karmablue'],'navy':['white','grey','ice','red','gold'],'black':['red','white','grey','karmablue','ice','gold']}
-AMERICA_VALID_WM={'white':['navy','red'],'athleticheather':['navy','red'],'navy':['red','gold','white','karmablue'],'black':['ice','karma','red','gold','white','karmablue']}
+AMERICA_VALID_STD={'white':['navy','red','black','gold','karmablue','ice'],'athleticheather':['navy','red','black','gold','karmablue','ice'],'navy':['white','grey','ice','red','gold'],'black':['red','white','grey','karmablue','ice','gold']}
+AMERICA_VALID_WM={'white':['navy','red'],'athleticheather':['navy','red'],'navy':['red','gold','white','karmablue','ice'],'black':['ice','karma','red','gold','white','karmablue']}
 AMERICA_DEFAULT_STD={'white':'navy','athleticheather':'navy','navy':'white','black':'red'}
 AMERICA_DEFAULT_WM={'white':'navy','athleticheather':'navy','navy':'navy','black':'ice'}
 AMERICA_MAXW=1600; AMERICA_TOP={'tee':480,'hoodie':470}
