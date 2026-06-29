@@ -25,8 +25,11 @@ DESIGNS={
 # JESUS = one product, Style axis selects the lettering treatment. Trimmed art, top-anchored in a box (matches v2 mockups).
 JESUS_STYLES={'serif':('jes-01',1.349),'script':('jes-03',1.071),'bold':('jes-07',1.249),'retro':('jes-11',1.461)}  # style -> (file code, aspect w/h)
 JESUS_BOX={'tee':(1250,1100,480),'hoodie':(1250,1100,470)}  # maxw, maxh, top
-# MOM = one product, Style axis (Grace/Elegant/Bold/Retro). Same architecture as JESUS: trimmed art, FC/Mono/Red ink, JESUS_BOX placement.
+# MOM = one product, Style axis (Grace/Elegant/Bold/Retro). Treatment-keyed, 3 inks.
 MOM_STYLES={'grace':('mom-01',1.193),'elegant':('mom-04',1.332),'bold':('mom-03',1.378),'retro':('mom-disco',1.315)}  # norm(Style) -> (file code, aspect w/h)
+MOM_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red'}
+MOM_VALID={'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['fc','mono','red'],'black':['fc','mono','red']}
+MOM_DEFAULT={'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}
 DAD_STYLES={'classic':('dad-02',1.088),'varsity':('dad-04',1.294),'retro':('dad-disco',1.366)}  # norm(Style)->(code,aspect w/h)
 DAD_INK={'fullcolor':'split','full color':'split','split':'split','navy':'navy','red':'red','black':'black','white':'white','heathergrey':'grey','heather grey':'grey','grey':'grey','gray':'grey','karmablue':'karmablue','karma blue':'karmablue','neon blue':'karmablue'}  # PDP Ink label -> print-file treatment key
 DAD_VALID={'white':['navy','split','red','black','karmablue'],'athleticheather':['navy','split','red','black','white'],'navy':['white','grey'],'black':['red','white','grey','karmablue']}  # ckey -> valid treatments (cream culled)
@@ -220,12 +223,18 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         st=norm(print_style)
         if st not in MOM_STYLES: return {'error':'MOM missing/invalid Style option','title':title,'color':color,'size':size}
         code,aspect=MOM_STYLES[st]
-        t=(ink or '').strip().lower()
-        if t=='red' and ckey!='navy':
-            fp='printfiles/mom/%s_redmono.png'%code                # all-red, single ink (red not offered on navy)
-        else:
+        label=(ink or '').strip().lower()
+        tk=MOM_INK.get(label)
+        if not tk or tk not in MOM_VALID.get(ckey,[]):
+            tk=MOM_DEFAULT.get(ckey,'fc')
+        # treatment-keyed → ground-keyed file mapping
+        if tk=='red':
+            fp='printfiles/mom/%s_redmono.png'%code
+        elif tk=='mono':
+            ground='light_mono' if ckey in LIGHT else 'dark_mono'
+            fp='printfiles/mom/%s_%s.png'%(code,ground)
+        else:  # fc
             ground='light' if ckey in LIGHT else 'dark'
-            if t=='mono': ground+='_mono'
             fp='printfiles/mom/%s_%s.png'%(code,ground)
         aw,ah=AREA[garment]; maxw,maxh,top=JESUS_BOX[garment]
         if aspect>=maxw/maxh: w=maxw; h=int(maxw/aspect)
