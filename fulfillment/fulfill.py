@@ -106,17 +106,21 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     cv=catalog[str(pid)].get('%s|%s'%(ckey,norm(size)))
     if not cv: return {'error':'UNFULFILLABLE (no Printful blank)','title':title,'color':color,'size':size}
     if dk=='crown':
-        # CROWN: Ink property = Full Color (split file, light grounds only) or Mono (single-color file).
-        # Files are full 4500x5400 frame -> auto-fit, aspect-preserved & centered (like Karma).
+        # CROWN: treatment-keyed. split=Full Color (light grounds only), mono=Mono (all grounds).
         CK={'white':'White','athleticheather':'Heather','sportgrey':'Heather','navy':'Navy','black':'Black'}
+        CROWN_INK={'full color':'split','fullcolor':'split','split':'split','fc':'split','mono':'mono'}
+        CROWN_VALID={'white':['split','mono'],'athleticheather':['split','mono'],'navy':['mono'],'black':['mono']}
+        CROWN_DEFAULT={'white':'split','athleticheather':'split','navy':'mono','black':'mono'}
         cc=CK.get(ckey)
         if not cc: return {'error':'CROWN unknown color','title':title,'color':color,'size':size}
-        inkv=(ink or '').strip().lower()
-        light=ckey in LIGHT
-        if inkv in ('full color','fullcolor','fc') and light:
+        label=(ink or '').strip().lower()
+        tk=CROWN_INK.get(label)
+        if not tk or tk not in CROWN_VALID.get(ckey,[]):
+            tk=CROWN_DEFAULT.get(ckey,'mono')
+        if tk=='split':
             fp='printfiles/crown/%s_split.png'%cc.lower()
         else:
-            fp='printfiles/crown/%s.png'%cc.lower()      # Mono / single-color; dark grounds always single
+            fp='printfiles/crown/%s.png'%cc.lower()
         CROWN_AR=4500.0/5400.0
         aw,ah=AREA[garment]
         if aw/ah<=CROWN_AR: w=aw; h=int(aw/CROWN_AR)
