@@ -144,6 +144,10 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         ground='light' if light else 'dark'
         if dv=='cross04standard':
             fp='printfiles/cross/cross04-standard_%s.png'%ground
+        elif dv=='cross04mono':
+            fp='printfiles/cross/cross04-mono_%s.png'%ground
+        elif dv=='cross04fullred':
+            fp='printfiles/cross/cross04-fullred.png'
         elif dv=='cross08standard':
             fp='printfiles/cross/cross08-standard_%s.png'%ground
         elif dv=='cross08split':
