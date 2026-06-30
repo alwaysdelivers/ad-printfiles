@@ -483,8 +483,8 @@ Six live multi-ink prefixes. Do ONE prefix per session. Full stop after each sto
 3. MOM ✓ complete
 4. FAITH ✓ complete
 5. CROWN ✓ complete
-6. JESUS — most complex, read section fully before planning
-7. CROSS — dual-family architecture; read audit report before planning
+6. CROSS — ⚠ section/products rebuilt and deployed, BUT mockup sizing bug unresolved (see "CROSS — KNOWN UNRESOLVED ISSUE" below). Do this FIRST in next session — do not start JESUS until Cross sizing is fixed and visually confirmed.
+7. JESUS — most complex, not started, read section fully before planning
 
 ### GATE 0 — Mandatory read and report (BEFORE touching anything)
 
@@ -555,28 +555,61 @@ Apply all 6 null-state guards (see Step 5). Also:
 | FAITH | `jes-` / `jit-` | Classic/Elegant/Strong | ✓ complete | Full-frame print files (Class B); red valid all garments; chip suffix `_chip_w2_r2` |
 | CROWN | `crown-` / `cit-` | None (no style axis) | ✓ complete | split/mono only; split invalid on Navy/Black; no STOP C |
 | JESUS | `jesp-` | To be confirmed | pending | Most complex; read section fully before planning |
-| CROSS | `crx-` | Dual-family (jesus-cross / the-cross) | ✓ complete | treat=null; Navy/Full Color/Red labels; Reset outside inkwrap; colorOrder fixed |
+| CROSS | `crxp-` (rebuilt clean from DAD clone) | Jesus Cross / The Cross | ⚠ INCOMPLETE — mockup sizing bug unresolved | See "CROSS — KNOWN UNRESOLVED ISSUE" below before touching |
+
+### CROSS — KNOWN UNRESOLVED ISSUE (read before touching — session ended without fix)
+
+**Symptom:** On the PDP, Jesus Cross Mono and Red render visibly smaller than Jesus Cross Full Color, despite all three mockup files reporting identical pixel dimensions (2000×2000) and near-identical print-to-canvas ratios when measured programmatically (~82.8–82.9% of image height in bounding-box analysis).
+
+**What was tried and did NOT fix it:**
+1. Regenerating the 16 affected Jesus Cross mono/red mockups via fresh Printful tasks — still produced 1000×1000 output (Printful's mockup generator intermittently returns half-resolution images for reasons not yet identified; same task body, same params as the working 2000×2000 calls).
+2. Upscaling the 1000×1000 outputs to 2000×2000 with PIL LANCZOS and re-pushing under the same filenames — CDN confirmed 2000×2000 after purge, bounding-box measurement confirmed ~83% height match — but the user re-reported the same visual size mismatch after this fix was deployed.
+
+**What this means:** Pixel-dimension parity and bounding-box percentage parity are NOT sufficient to confirm visual parity. There is some other variable causing the visible size difference that was never identified — candidates not yet ruled out:
+- Ghost-mockup garment scale/zoom may differ between Printful's two render paths (the 1000×1000 path may use a different camera distance/crop on the garment itself, independent of the print art's pixel size within the canvas)
+- The upscale-from-1000 approach interpolates a lower-detail source — this preserves the same *proportion* but does NOT correct for a different underlying garment photograph/crop if that's the actual source of the mismatch
+- Possible: the original 1000×1000 mockups were never actually placing the print at the same physical position/size on the garment — only LOOKED similar by % when measured against image height, because the garment itself occupies a different fraction of the 1000×1000 vs 2000×2000 canvas
+
+**Required next step (do GATE 0 style investigation before any fix attempt):**
+1. Do NOT rely on PIL bounding-box percentage as a proxy for "looks the same size." Pull up the actual rendered images side by side at the same physical display size and eyeball-measure the garment width-to-print-width ratio directly — measure print width as % of GARMENT chest width, not % of canvas height.
+2. Compare the `position` object sent to Printful for a working fc/split task vs a mono/red task — confirm `area_width`/`area_height`/`width`/`height`/`top`/`left` are byte-identical for the same garment+color combo.
+3. If params are identical and Printful still returns visually different garment scale, the difference may be in which Printful "mockup style"/template variant got selected — investigate via `mockup-generator/templates/{product_id}` to see if 1000×1000 vs 2000×2000 outputs map to different `template_id`s with different `print_area_width`/`print_area_height`/`print_area_top`/`print_area_left` baked into the template itself (this would explain why upscaling the image after the fact cannot fix it — the garment-to-print ratio was wrong at generation time, not just the output resolution).
+4. Likely real fix: explicitly pass `template_id` in the create-task request body, hardcoded to the same `template_id` used for the working fc/split mockups, for every batch — not just `variant_ids`+`files`. Confirm via fresh template lookup (`mockup-generator/templates/71?variant_id={id}`) which template_id the working images correspond to, since the earlier attempt to pass `template_id` failed with "No variants to generate" (likely wrong template_id was guessed, not that the parameter itself is unusable).
+5. Re-verify using actual side-by-side visual comparison (zoomed crop of just the print on identical-size garment renders), not pixel-dimension or bounding-box-percentage checks alone.
+
+### RULE 0i — PIXEL DIMENSIONS AND BOUNDING-BOX PERCENTAGE ARE NOT PROOF OF VISUAL PARITY (LOCKED)
+
+When comparing mockups for visual consistency (same print size across different inks/treatments of the same design):
+- Confirming identical pixel dimensions (e.g. both 2000×2000) is NECESSARY but NOT SUFFICIENT.
+- Confirming identical bounding-box-as-%-of-canvas is NECESSARY but NOT SUFFICIENT — this can match while the underlying garment photo itself is scaled/cropped differently.
+- The only sufficient verification is: crop both images to just the garment, scale both garment crops to the same width, and confirm the print element occupies the same fraction of garment width/height in both. Or: show both images at literal identical display size side by side and visually confirm.
+- If a user reports "this looks smaller" after you have confirmed pixel/percentage parity, do NOT re-assert that the fix worked — investigate the garment-scale variable specifically, per the Cross unresolved issue above.
 
 ### Cross architecture notes (LOCKED — read before touching)
 
-The cross section is a **dual-family** PDP serving two products simultaneously:
-- **jesus-cross** (`family='jesus-cross'`): Single design (`cross-04`), no ink choices. Ink row hidden. `treat` irrelevant — `designValue()` returns `CFG.jesusCrossDesign` regardless.
-- **the-cross** (`family='the-cross'`): Three treats — `std`, `split`, `red`. Red only valid on White and Black (`CFG.redColors=['White','Black']`). Ink row visible.
+**Cross was rebuilt from scratch this session as a clean clone of DAD's standard architecture.** The earlier "dual-family combined product" approach (separate `family` state variable, `jesus-cross`/`the-cross` design-value branching, single shared product with option3=Design) was found to be the wrong structure and was abandoned. Do NOT reintroduce family-based branching.
 
-**`treat` is initialized to `null`.** `dcode()` and `imgUrl()` have null guards: `dcode()` returns `CFG.dcodeTheCross['std']` as fallback when `treat=null`; `imgUrl()` returns `PLACEHOLDER_URL` when `!color`. Treats are standard display-labelled: `std`→Navy, `split`→Full Color, `red`→Red. The three style tiles (Standard/Split/Full Red internal names) are displayed as Navy/Full Color/Red matching store convention. **Decision: Option A (treat=null) — COMPLETE.**
+**Current correct structure (as of last session):**
+- Two Shopify products: `cross-always-delivers-tee` (48 variants) and `cross-always-delivers-hoodie` (48 variants)
+- option1=Color, option2=Size, **option3=Style** with values `"Jesus Cross"` / `"The Cross"` — same pattern as DAD/GOD/MOM/FAITH, NOT a Design-keyed combined product
+- Ink = line-item property, NOT baked into option3 — same as every other standard prefix
+- Namespace: `crxp-` / `crxpt-` / `crxpg-` (cloned from DAD's `dadp-`/`dadpt-`/`dadpg-`)
+- `TREATS=["fc","mono","red"]` — only 3 inks, same set for BOTH styles (Jesus Cross and The Cross use identical Full Color/Mono/Red, not different ink sets)
+- `TREAT_VALID` — fc/mono/red valid on all 4 garments (White/AthHeather/Navy/Black) for both styles
+- `SC` map: `{"Jesus Cross":"jesuscross","The Cross":"thecross"}` — used to build mockup/chip filenames
+- Mockup naming: `{garment}_{jesuscross|thecross}_{Color}_{fc|mono|red}.jpg` — standard convention, NOT `c04std`/`c08split` internal codes (those were renamed away during cleanup)
+- Print files: `cross04-standard_{light|dark}.png` / `cross04-mono_{light|dark}.png` / `cross04-fullred.png` for Jesus Cross; `cross08-standard_{light|dark}.png` / `cross08-split_{light|dark}.png` / `cross08-fullred.png` for The Cross — fulfill.py maps `style+ink` → correct file, see fulfill.py cross routing block
+- Functions follow standard DAD pattern: `treatUrl()`, `renderStyle()`, `renderTreat()`, `setTreat()`, `resetPDP()`, `jesGarment()` (boot/toggle function — name inherited from clone source, not renamed)
 
-**Functions to preserve — do not alter:**
-`designValue()`, `dcode()`, `gp()`, `imgUrl()`, `colorsForDesign()`, `sizesOf()`, `curV()`, `renderFamily()`, `setFamily()`, `isRed()`, `redOK()`, `priceLine()`, `zOpen()`, `zClose()`.
+**STOP C is a no-op for Cross** — chips are base64 `CFG.sw` for fc, CDN files for mono/red, built from print files with the standard 440×338 white-canvas direct-RGBA-paste method (same as every other prefix). No dual-family chip complexity.
 
-**Valid map for The Cross:**
-| Garment | Valid treats |
+**Valid map — SAME for both styles:**
+| Garment | Valid inks |
 |---|---|
-| White | std, split, red |
-| Athletic Heather | std, split |
-| Navy | std, split |
-| Black | std, split, red |
-
-Jesus Cross: no treat axis — treat not relevant to valid map.
+| White | fc, mono, red |
+| Athletic Heather | fc, mono, red |
+| Navy | fc, mono, red |
+| Black | fc, mono, red |
 
 ### Watermark dark-garment print files (LOCKED)
 When an ink is valid for Watermark on Navy/Black garments, a separate `watermark_{ink}_dark.png` is needed.
