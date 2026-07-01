@@ -134,31 +134,29 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
                 '_design':'crown','_garment':garment,'_file':fp,'_flags':[]}
     if dk=='cross':
         CROSS_STYLES={'jesuscross':('c04','jesuscross'),'thecross':('c08','thecross')}
-        CROSS_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red','full red':'red'}
-        CROSS_VALID={c:['fc','mono','red'] for c in ['white','athleticheather','navy','black']}
-        CROSS_DEFAULT={c:'fc' for c in ['white','athleticheather','navy','black']}
+        CROSS_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red','full red':'red','heather grey':'grey','grey':'grey'}
+        CROSS_VALID={'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['grey','red'],'black':['fc','mono','grey','red']}
+        CROSS_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'fc'}
+        # Corrected placement: content fills ~93% of print area (matches approved mockups). Derived from
+        # cross-04 content bbox x[1390,3109] y[1437,5021] in the 4500x5400 file; same for all inks.
+        CROSS_PLACE={'tee':{'area_width':1800,'area_height':2400,'width':2641,'height':3169,'top':-740,'left':-461},
+                     'hoodie':{'area_width':2100,'area_height':2100,'width':2324,'height':2789,'top':-656,'left':-156}}
         st=norm(print_style)
         if st not in CROSS_STYLES: return {'error':'CROSS missing/invalid Style','title':title,'style':print_style}
         _code,_slug=CROSS_STYLES[st]
         label=(ink or '').strip().lower()
         tk=CROSS_INK.get(label)
         if not tk or tk not in CROSS_VALID.get(ckey,[]): tk=CROSS_DEFAULT.get(ckey,'fc')
-        light=ckey in LIGHT; ground='light' if light else 'dark'
         if _code=='c04':
-            if tk=='fc':   fp='printfiles/cross/cross04-standard_%s.png'%ground
-            elif tk=='mono': fp='printfiles/cross/cross04-mono_%s.png'%ground
-            else:          fp='printfiles/cross/cross04-fullred.png'
+            if tk=='fc':     fp='printfiles/cross/cross-04_fc_%s_r2.png'%('dark' if ckey=='black' else 'light')
+            elif tk=='mono': fp='printfiles/cross/cross-04_mono_r2.png'
+            elif tk=='grey': fp='printfiles/cross/cross-04_grey_r2.png'
+            else:            fp='printfiles/cross/cross-04_red_r2.png'
         else:
-            if tk=='fc':   fp='printfiles/cross/cross08-split_%s.png'%ground
-            elif tk=='mono': fp='printfiles/cross/cross08-standard_%s.png'%ground
-            else:          fp='printfiles/cross/cross08-fullred.png'
-        CROSS_AR=4500.0/5400.0
-        aw,ah=AREA[garment]
-        if aw/ah<=CROSS_AR: w=aw; h=int(aw/CROSS_AR)
-        else: h=ah; w=int(ah*CROSS_AR)
-        top=(ah-h)//2; left=(aw-w)//2
+            return {'error':'CROSS The-Cross (c08) not production-ready — print files not yet corrected','title':title,'style':print_style}
+        pos=CROSS_PLACE[garment]
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
+                'files':[{'type':'front','url':RAW+fp,'position':pos}],
                 '_design':'cross','_garment':garment,'_style':print_style,'_ink':tk,'_file':fp,'_flags':[]}
     if dk=='karma':
         key=norm(print_style)
