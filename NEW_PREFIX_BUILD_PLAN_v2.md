@@ -594,11 +594,11 @@ When comparing mockups for visual consistency (same print size across different 
 - option1=Color, option2=Size, **option3=Style** with values `"Jesus Cross"` / `"The Cross"` — same pattern as DAD/GOD/MOM/FAITH, NOT a Design-keyed combined product
 - Ink = line-item property, NOT baked into option3 — same as every other standard prefix
 - Namespace: `crxp-` / `crxpt-` / `crxpg-` (cloned from DAD's `dadp-`/`dadpt-`/`dadpg-`)
-- `TREATS=["fc","mono","red"]` — only 3 inks, same set for BOTH styles (Jesus Cross and The Cross use identical Full Color/Mono/Red, not different ink sets)
-- `TREAT_VALID` — fc/mono/red valid on all 4 garments (White/AthHeather/Navy/Black) for both styles
+- `TREATS=["fc","mono","grey","red"]` — 4 inks, same set for BOTH styles
+- `TREAT_VALID` — garment-specific: White/AthHeather=[fc,mono,red]; Navy=[grey,red]; Black=[fc,mono,grey,red]
 - `SC` map: `{"Jesus Cross":"jesuscross","The Cross":"thecross"}` — used to build mockup/chip filenames
-- Mockup naming: `{garment}_{jesuscross|thecross}_{Color}_{fc|mono|red}.jpg` — standard convention, NOT `c04std`/`c08split` internal codes (those were renamed away during cleanup)
-- Print files: `cross04-standard_{light|dark}.png` / `cross04-mono_{light|dark}.png` / `cross04-fullred.png` for Jesus Cross; `cross08-standard_{light|dark}.png` / `cross08-split_{light|dark}.png` / `cross08-fullred.png` for The Cross — fulfill.py maps `style+ink` → correct file, see fulfill.py cross routing block
+- Mockup naming: `{garment}_{jesuscross|thecross}_{Color}_{fc|mono|grey|red}.jpg` — standard convention
+- Print files: `cross-04_fc_{light|dark}_r2.png` / `cross-04_mono_r2.png` / `cross-04_grey_r2.png` / `cross-04_red_r2.png` for Jesus Cross; `cross-08_fc_{light|dark}.png` / `cross-08_mono.png` / `cross-08_grey.png` / `cross-08_red.png` for The Cross
 - Functions follow standard DAD pattern: `treatUrl()`, `renderStyle()`, `renderTreat()`, `setTreat()`, `resetPDP()`, `jesGarment()` (boot/toggle function — name inherited from clone source, not renamed)
 
 **STOP C is a no-op for Cross** — chips are base64 `CFG.sw` for fc, CDN files for mono/red, built from print files with the standard 440×338 white-canvas direct-RGBA-paste method (same as every other prefix). No dual-family chip complexity.
