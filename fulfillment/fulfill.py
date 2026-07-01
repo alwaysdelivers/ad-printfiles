@@ -153,7 +153,10 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
             elif tk=='grey': fp='printfiles/cross/cross-04_grey_r2.png'
             else:            fp='printfiles/cross/cross-04_red_r2.png'
         else:
-            return {'error':'CROSS The-Cross (c08) not production-ready — print files not yet corrected','title':title,'style':print_style}
+            if tk=='fc':     fp='printfiles/cross/cross-08_fc_%s.png'%('dark' if ckey=='black' else 'light')
+            elif tk=='mono': fp='printfiles/cross/cross-08_mono.png'
+            elif tk=='grey': fp='printfiles/cross/cross-08_grey.png'
+            else:            fp='printfiles/cross/cross-08_red.png'
         pos=CROSS_PLACE[garment]
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                 'files':[{'type':'front','url':RAW+fp,'position':pos}],
