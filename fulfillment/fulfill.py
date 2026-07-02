@@ -56,15 +56,15 @@ FAITH_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red
 FAITH_VALID={'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['fc','mono','red'],'black':['fc','mono','red']}
 FAITH_DEFAULT={'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}
 # placements validated this session: all hoodies + KARMA tee. TEE creature/Stork tops are best-fit estimates -> spot-check.
-# KARMA = one product per garment; Design option = spiral+lockup variant. Per-color print files (4500x5400, Printful auto-fits).
-KARMA_FILES={                                   # norm(Design value) -> file (fixed regardless of ground)
- 'bluetealblue':'printfiles/karma/KARMA_blueteal_sblue.png','bluetealteal':'printfiles/karma/KARMA_blueteal_steal.png',
- 'allblueblue':'printfiles/karma/KARMA_allblue_kblue.png','allbluenavy':'printfiles/karma/KARMA_allblue_navy.png',
- 'blackbluenavy':'printfiles/karma/KARMA_blackblue_navy.png','redwhitecream':'printfiles/karma/KARMA_redwhite_cream.png',
- 'redwhitered':'printfiles/karma/KARMA_redwhite_bred.png','bluewhitecream':'printfiles/karma/KARMA_bluewhite_cream.png',
- 'bluewhiteblue':'printfiles/karma/KARMA_bluewhite_kblue.png','slatewhitecream':'printfiles/karma/KARMA_slatewhite_cream.png'}
-KARMA_BBBLUE={'light':'printfiles/karma/KARMA_blackblue_sblue.png','dark':'printfiles/karma/KARMA_blackblue_blueonly_sblue.png'}  # Black/Blue·Blue swaps art by ground
-KARMA_AR=4500/5400                              # print-file aspect (w/h); Printful auto-fits the full file
+# KARMA (rebuilt): Style option (option1) + Color (option2). No ink axis. 6 print files, placement matches PDP mockups.
+KARMA_STYLE_FILE={  # norm(Style) -> {ckey -> print-file slug}
+ 'blackblue':{'white':'KARMA_blackblue_black','athleticheather':'KARMA_blackblue_black','black':'KARMA_blackblue_kblue'},
+ 'blueteal':{'white':'KARMA_blueteal_teal','navy':'KARMA_blueteal_teal','black':'KARMA_blueteal_teal'},
+ 'bluecream':{'navy':'KARMA_bluewhite_cream','black':'KARMA_bluewhite_cream'},
+ 'redwhite':{'navy':'KARMA_redwhite_white','black':'KARMA_redwhite_white'},
+ 'slatewhite':{'navy':'KARMA_slatewhite_white','black':'KARMA_slatewhite_white'}}
+KARMA_PLACE={'tee':{'area_width':1800,'area_height':2400,'width':1800,'height':1041,'top':200,'left':0},
+             'hoodie':{'area_width':2100,'area_height':2100,'width':2100,'height':1215,'top':200,'left':0}}
 UNVERIFIED_TEE=set()  # all verified on Men's 4 model
 def design_of(title):
     t=title.lower()
@@ -162,20 +162,17 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
                 'files':[{'type':'front','url':RAW+fp,'position':pos}],
                 '_design':'cross','_garment':garment,'_style':print_style,'_ink':tk,'_file':fp,'_flags':[]}
     if dk=='karma':
-        key=norm(print_style)
-        if key=='blackblueblue':
-            fp=KARMA_BBBLUE['light' if ckey in LIGHT else 'dark']      # Black/Blue·Blue: b+b art on light, blue-only on dark
-        elif key in KARMA_FILES:
-            fp=KARMA_FILES[key]
-        else:
-            return {'error':'KARMA missing/invalid Design option','title':title,'design':print_style,'color':color,'size':size}
-        aw,ah=AREA[garment]
-        if aw/ah<=KARMA_AR: w=aw; h=int(aw/KARMA_AR)                   # full-file auto-fit, aspect-preserved & centered
-        else: h=ah; w=int(ah*KARMA_AR)
-        top=(ah-h)//2; left=(aw-w)//2
+        st=norm(print_style)
+        sf=KARMA_STYLE_FILE.get(st)
+        if not sf: return {'error':'KARMA missing/invalid Style option','title':title,'style':print_style,'color':color,'size':size}
+        kkey='athleticheather' if ckey=='sportgrey' else ckey   # hoodie blank aliases AthHeather->sportgrey; unify for file lookup
+        slug=sf.get(kkey)
+        if not slug: return {'error':'KARMA invalid Style x Color','title':title,'style':print_style,'color':color,'size':size}
+        fp='printfiles/karma/%s.png'%slug
+        pos=KARMA_PLACE[garment]
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
-                '_design':'karma','_garment':garment,'_file':fp,'_flags':[]}
+                'files':[{'type':'front','url':RAW+fp,'position':pos}],
+                '_design':'karma','_garment':garment,'_style':print_style,'_file':fp,'_flags':[]}
     if dk=='jesus':
         st=norm(print_style)
         if st not in JESUS_STYLES: return {'error':'JESUS missing/invalid Style option','title':title,'color':color,'size':size}
