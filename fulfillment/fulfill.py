@@ -178,7 +178,9 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         if st not in JESUS_STYLES: return {'error':'JESUS missing/invalid Style option','title':title,'color':color,'size':size}
         code,aspect=JESUS_STYLES[st]
         t=(ink or '').strip().lower()
-        if t=='red' and ckey!='navy':
+        if t=='black' and ckey!='black':
+            fp='printfiles/jesus/%s_blackmono.png'%code            # pure-black ink (not offered on black garment)
+        elif t=='red' and ckey!='navy':
             fp='printfiles/jesus/%s_redmono.png'%code              # all-red, single ink (red not offered on navy)
         else:
             ground='light' if ckey in LIGHT else 'dark'
