@@ -3,78 +3,88 @@ RAW='https://raw.githubusercontent.com/alwaysdelivers/ad-printfiles/main/'
 catalog=json.load(open('/home/claude/_catalog.json'))   # {'71':{'col|size':id}, '146':{...}}
 norm=lambda s: re.sub(r'[^a-z0-9]','',(s or '').lower())
 COLOR_ALIAS={'athheather':'athleticheather'}            # shopify token -> printful (normalized)
-HOODIE_ALIAS={'athleticheather':'sportgrey'}            # Gildan 18500 names this grey differently than Bella 3001
-LIGHT={'white','sand','ash','tan','athleticheather','natural','sportgrey','silver','babyblue','babypink','softcream','carolinablue','lightblue','heathercarolinablue'}  # use light(whitegarments) file
+HOODIE_ALIAS={'athleticheather':'sportgrey'}            # Gildan 18500 grey name differs from Bella 3001
+LIGHT={'white','sand','ash','tan','athleticheather','natural','sportgrey','silver','babyblue','babypink','softcream','carolinablue','lightblue','heathercarolinablue'}
 SLATEC={'silver','ash','softcream','sand'}
 WARM={'maroon','oxbloodblack','olive','militarygreen','forestgreen','heatheremerald'}
-def _mono_ink(ckey):
-    if ckey=='red': return 'charcoal'
-    if ckey in SLATEC: return 'slate'
-    if ckey in LIGHT: return 'navy'
-    if ckey in WARM: return 'gold'
-    return 'cream'
-AREA={'tee':(1800,2400),'hoodie':(2100,2100)}
-MOCKUP_MODEL={'tee':"Men's 4",'hoodie':"Men's 4"}  # canonical Printful option_group for ALL listing mockups
-DESIGNS={
- 'sasquatch':{'light':'printfiles/sasquatch/SASQUATCH_sqt-01_whitegarments.png','dark':'printfiles/sasquatch/SASQUATCH_sqt-01_darkgarments.png','ar':0.671,'hoodie':(1680,420),'tee':(1600,500)},
- 'caveman':{'light':'printfiles/caveman/CAVEMAN_cav-08_whitegarments.png','dark':'printfiles/caveman/CAVEMAN_cav-08_darkgarments.png','ar':0.681,'hoodie':(1680,420),'tee':(1600,500)},
- 'snowman':{'light':'printfiles/snowman/SNOWMAN_snw-01_whitegarments.png','dark':'printfiles/snowman/SNOWMAN_snw-01_darkgarments.png','ar':0.755,'hoodie':(1500,420),'tee':(1400,500)},
- 'stork':{'light':'printfiles/stork/STORK_stk-07_whitegarments.png','dark':'printfiles/stork/STORK_stk-07_darkgarments.png','ar':0.468,'hoodie':(1500,560),'tee':(1450,620)},
- 'yeti':{'light':None,'dark':'printfiles/yeti/YETI_drawing_darkgarments.png','ar':1.283,'hoodie':(1150,250),'tee':(1350,440)},
-}
-# JESUS = one product, Style axis selects the lettering treatment. Trimmed art, top-anchored in a box (matches v2 mockups).
-JESUS_STYLES={'serif':('jes-01',1.349),'script':('jes-03',1.071),'bold':('jes-07',1.249),'retro':('jes-11',1.461)}  # style -> (file code, aspect w/h)
-JESUS_BOX={'tee':(1250,1100,480),'hoodie':(1250,1100,470)}  # maxw, maxh, top
-# MOM = one product, Style axis (Grace/Elegant/Bold/Retro). Treatment-keyed, 3 inks.
-MOM_STYLES={'grace':('mom-01',1.193),'elegant':('mom-04',1.332),'bold':('mom-03',1.378),'retro':('mom-disco',1.315)}  # norm(Style) -> (file code, aspect w/h)
-MOM_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red'}
-MOM_VALID={'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['fc','mono','red'],'black':['fc','mono','red']}
-MOM_DEFAULT={'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}
-DAD_STYLES={'classic':('dad-02',1.088),'varsity':('dad-04',1.294),'retro':('dad-disco',1.366)}  # norm(Style)->(code,aspect w/h)
-DAD_INK={'fullcolor':'split','full color':'split','split':'split','navy':'navy','red':'red','black':'black','white':'white','heathergrey':'grey','heather grey':'grey','grey':'grey','gray':'grey','karmablue':'karmablue','karma blue':'karmablue','neon blue':'karmablue'}  # PDP Ink label -> print-file treatment key
-DAD_VALID={'white':['navy','split','red','black','karmablue'],'athleticheather':['navy','split','red','black','white'],'navy':['white','grey'],'black':['red','white','grey','karmablue']}  # ckey -> valid treatments (cream culled)
-DAD_DEFAULT={'white':'navy','athleticheather':'navy','navy':'white','black':'white'}  # fallback treatment per color
-GOD_STYLES={'monument':('god-01',1.358),'bold':('god-03',0.891),'retro':('god-09',1.327)}
-GOD_INK={'fullcolor':'split','full color':'split','split':'split','navy':'navy','red':'red','black':'black','cream':'cream','heathergrey':'grey','heather grey':'grey','grey':'grey','gray':'grey','karmablue':'karmablue','karma blue':'karmablue','neon blue':'karmablue'}
-GOD_VALID={'white':['navy','split','red','black','karmablue'],'athleticheather':['navy','split','red','black'],'navy':['cream','grey'],'black':['red','cream','grey','karmablue']}
+
+# ---- FULL-BLEED MODEL --------------------------------------------------------
+# Print files are full-canvas with positioning baked in:
+#   tee    = 3600x4800 (12x16"),  hoodie = 4200x4200 (14x14")
+# Printful position area is expressed at 150dpi; the file fills the whole area.
+AREA={'tee':(1800,2400),'hoodie':(2100,2100)}           # px150 print area
+def fullbleed(garment):
+    aw,ah=AREA[garment]
+    return {'area_width':aw,'area_height':ah,'width':aw,'height':ah,'top':0,'left':0}
+def PF(prefix, base, garment):                          # -> printfiles/<prefix>/<BASE>_<garment>.png
+    return 'printfiles/%s/%s_%s.png'%(prefix, base, garment)
+def ground(ckey): return 'light' if ckey in LIGHT else 'dark'
+
+MOCKUP_MODEL={'tee':"Men's 4",'hoodie':"Men's 4"}
+
+# ---- STYLE / INK RESOLUTION (live product truth; v33) ------------------------
+JESUS_STYLES={'serif':'jes-01','script':'jes-03','bold':'jes-07','retro':'jes-11'}
+MOM_STYLES={'grace':'mom-01','bold':'mom-03','retro':'mom-disco'}          # elegant dropped (v33)
+DAD_STYLES={'classic':'dad-02','varsity':'dad-04','retro':'dad-disco'}
+GOD_STYLES={'monument':'god-01','bold':'god-03','retro':'god-09'}
+FAITH_STYLES={'elegant':'faith-02','bold':'faith-04'}                      # classic dropped, strong->bold (v33)
+STORK_STYLES={'classic':'stk-07','elegant':'stk-01'}                        # 2 styles (v33)
+AMERICA_STYLES={'classic','heritage','star','retro','watermark'}
+CROSS_STYLES={'jesuscross':'cross-04','thecross':'cross-08'}
+
+# faith-lane inks (fc/mono/red) -> file colorway suffix, by ground
+def faithlane_cw(tk, ckey):
+    if tk=='red':  return 'redmono'
+    if tk=='mono': return ground(ckey)+'_mono'
+    return ground(ckey)                                 # fc -> light/dark
+FAITHLANE_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red'}
+FAITHLANE_VALID={'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['fc','mono','red'],'black':['fc','mono','red']}
+
+# god/dad ink label -> treatment; treatment -> new file colorway
+GD_INK={'fullcolor':'fc','full color':'fc','split':'fc','fc':'fc','navy':'navy','red':'red','black':'black',
+        'cream':'cream','white':'white','heathergrey':'grey','heather grey':'grey','grey':'grey','gray':'grey',
+        'karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
+def gd_cw(tk, ckey):
+    return ('fc_'+ground(ckey)) if tk=='fc' else tk     # fc -> fc_light/fc_dark; else literal
+GOD_VALID={'white':['navy','fc','red','black','neonblue'],'athleticheather':['navy','fc','red','black'],'navy':['fc','cream','grey'],'black':['fc','red','cream','grey','neonblue']}
 GOD_DEFAULT={'white':'navy','athleticheather':'navy','navy':'cream','black':'cream'}
-AMERICA_STYLES={'classic':('classic',2010/1363),'heritage':('heritage',2010/1674),'star':('star',2010/1921),'retro':('retro',2010/1160),'watermark':('watermark',2010/1315)}
-AMERICA_INK={'navy':'navy','red':'red','black':'black','gold':'gold','white':'white','grey':'grey','heather grey':'grey','heathergrey':'grey','karmablue':'karmablue','karma blue':'karmablue','neon blue':'karmablue','ice':'ice','ice blue':'ice','iceblue':'ice'}
-AMERICA_VALID_STD={'white':['navy','red','black','gold','karmablue','ice'],'athleticheather':['navy','red','black','gold','karmablue','ice'],'navy':['white','grey','ice','red','gold'],'black':['red','white','grey','karmablue','ice','gold']}
-AMERICA_VALID_WM={'white':['navy','red'],'athleticheather':['navy','red'],'navy':['red','gold','white','karmablue','ice','grey'],'black':['ice','red','gold','white','karmablue','grey']}
-AMERICA_DEFAULT_STD={'white':'navy','athleticheather':'navy','navy':'white','black':'red'}
-AMERICA_DEFAULT_WM={'white':'navy','athleticheather':'navy','navy':'navy','black':'ice'}
-AMERICA_MAXW=1600; AMERICA_TOP={'tee':480,'hoodie':470}
-# SCIENCE = one product per prefix, Colorway option = "{Garment} / {Ink}". 4 mono inks; placement locked: tee top 260 / hoodie top 200.
-SCIENCE={                       # combined Science product; Design option picks subject; ink by ground; full-width-contain, top-anchored.
- 'physics':1.133,'geometry':0.992,'chemistry':0.834,'algebra':0.622,   # ar = printfile H/W (3600-wide frameless)
-}
-SCIENCE_TOP={'tee':260,'hoodie':200}
-# FAITH = same frame standard as JESUS (4500x5400, y1350 top-anchor, gap 420). Style -> (file code, aspect w/h).
-FAITH_STYLES={'classic':('faith-01',1.915),'elegant':('faith-02',1.867),'strong':('faith-04',1.349)}
-FAITH_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red'}
-FAITH_VALID={'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['fc','mono','red'],'black':['fc','mono','red']}
-FAITH_DEFAULT={'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}
-# placements validated this session: all hoodies + KARMA tee. TEE creature/Stork tops are best-fit estimates -> spot-check.
-# KARMA (rebuilt): Style option (option1) + Color (option2). No ink axis. 6 print files, placement matches PDP mockups.
-KARMA_STYLE_FILE={  # norm(Style) -> {ckey -> print-file slug}
- 'blackblue':{'white':'KARMA_blackblue_black','athleticheather':'KARMA_blackblue_black','black':'KARMA_blackblue_kblue'},
+DAD_VALID={'white':['navy','fc','red','black','neonblue'],'athleticheather':['navy','fc','red','black','white'],'navy':['fc','white','grey'],'black':['fc','red','white','grey','neonblue']}
+DAD_DEFAULT={'white':'navy','athleticheather':'navy','navy':'white','black':'white'}
+
+# america inks (single-ink per color) -> file colorway; ice removed, karmablue->neonblue
+AMERICA_INK={'navy':'navy','red':'red','black':'black','gold':'gold','white':'white','grey':'grey','heather grey':'grey','heathergrey':'grey','karmablue':'neonblue','karma blue':'neonblue','neonblue':'neonblue','fullcolor':'fc','full color':'fc','fc':'fc'}
+AMERICA_VALID={'white':['navy','red','black','gold','neonblue','fc'],'athleticheather':['navy','red','black','gold','neonblue','fc'],'navy':['white','grey','red','gold','fc'],'black':['red','gold','white','neonblue','grey','fc']}
+AMERICA_DEFAULT={'white':'navy','athleticheather':'navy','navy':'white','black':'red'}
+def america_cw(tk, ckey):
+    return ('fc_'+ground(ckey)) if tk=='fc' else tk
+
+CROSS_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red','full red':'red','heather grey':'grey','grey':'grey'}
+CROSS_VALID={'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['grey','red'],'black':['fc','mono','grey','red']}
+CROSS_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'fc'}
+def cross_cw(tk, ckey):
+    return ('fc_'+ground(ckey)) if tk=='fc' else tk     # fc_light/fc_dark; mono/grey/red literal
+
+CROWN_INK={'full color':'split','fullcolor':'split','split':'split','fc':'split','mono':'mono'}
+CROWN_VALID={'white':['split','mono'],'athleticheather':['split','mono'],'navy':['mono'],'black':['mono']}
+CROWN_DEFAULT={'white':'split','athleticheather':'split','navy':'mono','black':'mono'}
+CROWN_COLOR={'white':'white','athleticheather':'heather','sportgrey':'heather','navy':'navy','black':'black'}
+
+KARMA_STYLE_FILE={
+ 'blackblue':{'white':'KARMA_blackblue_neon','athleticheather':'KARMA_blackblue_neon','navy':'KARMA_blackblue_neon','black':'KARMA_blackblue_neon'},
  'blueteal':{'white':'KARMA_blueteal_teal','navy':'KARMA_blueteal_teal','black':'KARMA_blueteal_teal'},
- 'bluecream':{'navy':'KARMA_bluewhite_cream','black':'KARMA_bluewhite_cream'},
- 'redwhite':{'navy':'KARMA_redwhite_white','black':'KARMA_redwhite_white'},
- 'slatewhite':{'navy':'KARMA_slatewhite_white','black':'KARMA_slatewhite_white'}}
-KARMA_PLACE={'tee':{'area_width':1800,'area_height':2400,'width':1800,'height':1041,'top':200,'left':0},
-             'hoodie':{'area_width':2100,'area_height':2100,'width':2100,'height':1215,'top':200,'left':0}}
-UNVERIFIED_TEE=set()  # all verified on Men's 4 model
+ 'bluecream':{'navy':'KARMA_bluewhite_blue','black':'KARMA_bluewhite_blue'},
+ 'redwhite':{'navy':'KARMA_redwhite_red','black':'KARMA_redwhite_red'},
+ 'slatewhite':{'navy':'KARMA_slatewhite_slate','black':'KARMA_slatewhite_slate'}}
+
 def design_of(title):
     t=title.lower()
     if 'crown' in t: return 'crown'
-    if 'cross' in t: return 'cross'      # "Cross Always Delivers" -> combined Cross product (route by Design option)
+    if 'cross' in t: return 'cross'
     if 'jesus' in t: return 'jesus'
     if 'faith' in t: return 'faith'
     if 'karma' in t: return 'karma'
     if 'mom' in t: return 'mom'
-    if 'creature' in t: return 'creatures'      # combined Creatures product: route by Design option
+    if 'creature' in t: return 'creatures'
     for k in ('sasquatch','caveman','stork','yeti'):
         if k in t: return k
     if 'snowman' in t or 'abominable' in t: return 'snowman'
@@ -83,260 +93,120 @@ def design_of(title):
     if 'god' in t: return 'god'
     if 'america' in t: return 'america'
     return None
+
+def _resolve_ink(label, table, valid, default, ckey):
+    tk=table.get((label or '').strip().lower()) or table.get(norm(label))
+    if not tk or tk not in valid.get(ckey,[]): tk=default.get(ckey)
+    return tk
+
 def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     garment='hoodie' if 'hoodie' in title.lower() else 'tee'
     pid=146 if garment=='hoodie' else 71
     dk=design_of(title)
-    if dk=='science':                                        # combined Science: Design option (option3) picks subject
-        design=norm(print_style)
-        if design not in SCIENCE:
-            return {'error':'SCIENCE missing/invalid Design option','title':title,'design':print_style,'color':color,'size':size}
-        ckey=COLOR_ALIAS.get(norm(color),norm(color))
-        if garment=='hoodie': ckey=HOODIE_ALIAS.get(ckey,ckey)
-        cv=catalog[str(pid)].get('%s|%s'%(ckey,norm(size)))
-        if not cv: return {'error':'UNFULFILLABLE (no Printful blank)','title':title,'color':color,'size':size}
-        ink='navy' if ckey in LIGHT else 'cream'             # single ink by ground (navy on light, cream on dark)
-        fp='printfiles/science/%s_%s.png'%(design,ink)
-        aw,ah=AREA[garment]; ar=SCIENCE[design]              # full-width-contain, top-anchored
-        w=aw; h=w*ar
-        if h>ah: h=ah; w=h/ar
-        left=(aw-w)/2; ta=SCIENCE_TOP[garment]; top=max(0,min(ta,ah-h))
-        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':round(w),'height':round(h),'top':round(top),'left':round(left)}}],
-                '_design':'science-'+design,'_garment':garment,'_file':fp,'_flags':[]}
     ckey=COLOR_ALIAS.get(norm(color),norm(color))
-    if garment=='hoodie': ckey=HOODIE_ALIAS.get(ckey,ckey)
-    cv=catalog[str(pid)].get('%s|%s'%(ckey,norm(size)))
+    lookup_ckey=HOODIE_ALIAS.get(ckey,ckey) if garment=='hoodie' else ckey
+    cv=catalog[str(pid)].get('%s|%s'%(lookup_ckey,norm(size)))
     if not cv: return {'error':'UNFULFILLABLE (no Printful blank)','title':title,'color':color,'size':size}
-    if dk=='crown':
-        # CROWN: treatment-keyed. split=Full Color (light grounds only), mono=Mono (all grounds).
-        CK={'white':'White','athleticheather':'Heather','sportgrey':'Heather','navy':'Navy','black':'Black'}
-        CROWN_INK={'full color':'split','fullcolor':'split','split':'split','fc':'split','mono':'mono'}
-        CROWN_VALID={'white':['split','mono'],'athleticheather':['split','mono'],'navy':['mono'],'black':['mono']}
-        CROWN_DEFAULT={'white':'split','athleticheather':'split','navy':'mono','black':'mono'}
-        cc=CK.get(ckey)
-        if not cc: return {'error':'CROWN unknown color','title':title,'color':color,'size':size}
-        label=(ink or '').strip().lower()
-        tk=CROWN_INK.get(label)
-        if not tk or tk not in CROWN_VALID.get(ckey,[]):
-            tk=CROWN_DEFAULT.get(ckey,'mono')
-        if tk=='split':
-            fp='printfiles/crown/%s_split.png'%cc.lower()
-        else:
-            fp='printfiles/crown/%s.png'%cc.lower()
-        CROWN_AR=4500.0/5400.0
-        aw,ah=AREA[garment]
-        if aw/ah<=CROWN_AR: w=aw; h=int(aw/CROWN_AR)
-        else: h=ah; w=int(ah*CROWN_AR)
-        top=(ah-h)//2; left=(aw-w)//2
-        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
-                '_design':'crown','_garment':garment,'_file':fp,'_flags':[]}
-    if dk=='cross':
-        CROSS_STYLES={'jesuscross':('c04','jesuscross'),'thecross':('c08','thecross')}
-        CROSS_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red','full red':'red','heather grey':'grey','grey':'grey'}
-        CROSS_VALID={'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['grey','red'],'black':['fc','mono','grey','red']}
-        CROSS_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'fc'}
-        # Corrected placement: content fills ~93% of print area (matches approved mockups). Derived from
-        # cross-04 content bbox x[1390,3109] y[1437,5021] in the 4500x5400 file; same for all inks.
-        CROSS_PLACE={'tee':{'area_width':1800,'area_height':2400,'width':2641,'height':3169,'top':-740,'left':-461},
-                     'hoodie':{'area_width':2100,'area_height':2100,'width':2324,'height':2789,'top':-656,'left':-156}}
-        st=norm(print_style)
-        if st not in CROSS_STYLES: return {'error':'CROSS missing/invalid Style','title':title,'style':print_style}
-        _code,_slug=CROSS_STYLES[st]
-        label=(ink or '').strip().lower()
-        tk=CROSS_INK.get(label)
-        if not tk or tk not in CROSS_VALID.get(ckey,[]): tk=CROSS_DEFAULT.get(ckey,'fc')
-        if _code=='c04':
-            if tk=='fc':     fp='printfiles/cross/cross-04_fc_%s_r2.png'%('dark' if ckey=='black' else 'light')
-            elif tk=='mono': fp='printfiles/cross/cross-04_mono_r2.png'
-            elif tk=='grey': fp='printfiles/cross/cross-04_grey_r2.png'
-            else:            fp='printfiles/cross/cross-04_red_r2.png'
-        else:
-            if tk=='fc':     fp='printfiles/cross/cross-08_fc_%s.png'%('dark' if ckey=='black' else 'light')
-            elif tk=='mono': fp='printfiles/cross/cross-08_mono.png'
-            elif tk=='grey': fp='printfiles/cross/cross-08_grey.png'
-            else:            fp='printfiles/cross/cross-08_red.png'
-        pos=CROSS_PLACE[garment]
-        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':pos}],
-                '_design':'cross','_garment':garment,'_style':print_style,'_ink':tk,'_file':fp,'_flags':[]}
-    if dk=='karma':
-        st=norm(print_style)
-        sf=KARMA_STYLE_FILE.get(st)
-        if not sf: return {'error':'KARMA missing/invalid Style option','title':title,'style':print_style,'color':color,'size':size}
-        kkey='athleticheather' if ckey=='sportgrey' else ckey   # hoodie blank aliases AthHeather->sportgrey; unify for file lookup
-        slug=sf.get(kkey)
-        if not slug: return {'error':'KARMA invalid Style x Color','title':title,'style':print_style,'color':color,'size':size}
-        fp='printfiles/karma/%s.png'%slug
-        pos=KARMA_PLACE[garment]
-        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':pos}],
-                '_design':'karma','_garment':garment,'_style':print_style,'_file':fp,'_flags':[]}
+    def out(prefix, base, extra=None):
+        item={'variant_id':cv,'quantity':qty,'retail_price':retail,
+              'files':[{'type':'front','url':RAW+PF(prefix,base,garment),'position':fullbleed(garment)}],
+              '_design':dk,'_garment':garment,'_file':PF(prefix,base,garment),'_flags':[]}
+        if extra: item.update(extra)
+        return item
+
     if dk=='jesus':
-        st=norm(print_style)
-        if st not in JESUS_STYLES: return {'error':'JESUS missing/invalid Style option','title':title,'color':color,'size':size}
-        code,aspect=JESUS_STYLES[st]
-        t=(ink or '').strip().lower()
-        if t=='black' and ckey!='black':
-            fp='printfiles/jesus/%s_blackmono.png'%code            # pure-black ink (not offered on black garment)
-        elif t=='red' and ckey!='navy':
-            fp='printfiles/jesus/%s_redmono.png'%code              # all-red, single ink (red not offered on navy)
-        else:
-            ground='light' if ckey in LIGHT else 'dark'
-            if t=='mono': ground+='_mono'
-            fp='printfiles/jesus/%s_%s.png'%(code,ground)
-        aw,ah=AREA[garment]; maxw,maxh,top=JESUS_BOX[garment]
-        if aspect>=maxw/maxh: w=maxw; h=int(maxw/aspect)
-        else: h=maxh; w=int(maxh*aspect)
-        left=(aw-w)//2
-        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
-                '_design':'jesus','_garment':garment,'_file':fp,'_flags':[]}
-    if dk=='dad':
-        st=norm(print_style)
-        if st not in DAD_STYLES: return {'error':'DAD missing/invalid Style option','title':title,'color':color,'size':size}
-        code,aspect=DAD_STYLES[st]
-        # resolve the chosen Ink (PDP label) -> treatment key; fall back to per-color default
-        tk=DAD_INK.get((ink or '').strip().lower())
-        valid=DAD_VALID.get(ckey,[])
-        if (tk is None) or (valid and tk not in valid):
-            tk=DAD_DEFAULT.get(ckey,'navy')
-        fp='printfiles/dad/%s_%s.png'%(code,tk)
-        aw,ah=AREA[garment]; maxw,maxh,top=JESUS_BOX[garment]
-        if aspect>=maxw/maxh: w=maxw; h=int(maxw/aspect)
-        else: h=maxh; w=int(maxh*aspect)
-        left=(aw-w)//2
-        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
-                '_design':'dad','_garment':garment,'_file':fp,'_flags':[]}
-    if dk=='god':
-        st=norm(print_style)
-        if st not in GOD_STYLES: return {'error':'GOD missing/invalid Style option','title':title,'color':color,'size':size}
-        code,aspect=GOD_STYLES[st]
-        tk=GOD_INK.get((ink or '').strip().lower())
-        valid=GOD_VALID.get(ckey,[])
-        if (tk is None) or (valid and tk not in valid):
-            tk=GOD_DEFAULT.get(ckey,'navy')
-        fp='printfiles/god/%s_%s.png'%(code,tk)
-        aw,ah=AREA[garment]; maxw,maxh,top=JESUS_BOX[garment]
-        if aspect>=maxw/maxh: w=maxw; h=int(maxw/aspect)
-        else: h=maxh; w=int(maxh*aspect)
-        left=(aw-w)//2
-        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
-                '_design':'god','_garment':garment,'_file':fp,'_flags':[]}
-    if dk=='mom':
-        st=norm(print_style)
-        if st not in MOM_STYLES: return {'error':'MOM missing/invalid Style option','title':title,'color':color,'size':size}
-        code,aspect=MOM_STYLES[st]
-        label=(ink or '').strip().lower()
-        tk=MOM_INK.get(label)
-        if not tk or tk not in MOM_VALID.get(ckey,[]):
-            tk=MOM_DEFAULT.get(ckey,'fc')
-        # treatment-keyed → ground-keyed file mapping
-        if tk=='red':
-            fp='printfiles/mom/%s_redmono.png'%code
-        elif tk=='mono':
-            ground='light_mono' if ckey in LIGHT else 'dark_mono'
-            fp='printfiles/mom/%s_%s.png'%(code,ground)
-        else:  # fc
-            ground='light' if ckey in LIGHT else 'dark'
-            fp='printfiles/mom/%s_%s.png'%(code,ground)
-        aw,ah=AREA[garment]; maxw,maxh,top=JESUS_BOX[garment]
-        if aspect>=maxw/maxh: w=maxw; h=int(maxw/aspect)
-        else: h=maxh; w=int(maxh*aspect)
-        left=(aw-w)//2
-        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
-                '_design':'mom','_garment':garment,'_file':fp,'_flags':[]}
-    if dk=='faith':
-        st=norm(print_style)
-        if st not in FAITH_STYLES: return {'error':'FAITH missing/invalid Style option','title':title,'color':color,'size':size}
-        code,aspect=FAITH_STYLES[st]
-        label=(ink or '').strip().lower()
-        tk=FAITH_INK.get(label)
-        if not tk or tk not in FAITH_VALID.get(ckey,[]):
-            tk=FAITH_DEFAULT.get(ckey,'fc')
-        if tk=='red':
-            fp='printfiles/faith/%s_redmono.png'%code
-        elif tk=='mono':
-            ground='light_mono' if ckey in LIGHT else 'dark_mono'
-            fp='printfiles/faith/%s_%s.png'%(code,ground)
-        else:  # fc
-            ground='light' if ckey in LIGHT else 'dark'
-            fp='printfiles/faith/%s_%s.png'%(code,ground)
-        # Full-frame 4500x5400 placement (same as CROWN)
-        FAITH_AR=4500.0/5400.0
-        aw,ah=AREA[garment]
-        if aw/ah<=FAITH_AR: w=aw; h=int(aw/FAITH_AR)
-        else: h=ah; w=int(ah*FAITH_AR)
-        top=(ah-h)//2; left=(aw-w)//2
-        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
-                '_design':'faith','_garment':garment,'_file':fp,'_flags':[]}
+        st=norm(print_style); code=JESUS_STYLES.get(st)
+        if not code: return {'error':'JESUS invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, FAITHLANE_INK, FAITHLANE_VALID, {'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}, ckey)
+        # jesus has black-ink option too (blackmono, not on black garment)
+        lab=(ink or '').strip().lower()
+        if lab=='black' and ckey!='black': cw='blackmono'
+        else: cw=faithlane_cw(tk, ckey)
+        return out('jesus', 'JESUS_%s_%s'%(code,cw))
+
+    if dk in ('mom','faith','stork'):
+        STY={'mom':MOM_STYLES,'faith':FAITH_STYLES,'stork':STORK_STYLES}[dk]
+        st=norm(print_style); code=STY.get(st)
+        if not code: return {'error':'%s invalid Style'%dk.upper(),'title':title,'style':print_style}
+        tk=_resolve_ink(ink, FAITHLANE_INK, FAITHLANE_VALID, {'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}, ckey)
+        cw=faithlane_cw(tk, ckey)
+        PMAP={'mom':'MOM','faith':'FAITH','stork':'STORK'}
+        return out(dk, '%s_%s_%s'%(PMAP[dk],code,cw))
+
+    if dk in ('god','dad'):
+        STY=GOD_STYLES if dk=='god' else DAD_STYLES
+        VAL=GOD_VALID if dk=='god' else DAD_VALID
+        DEF=GOD_DEFAULT if dk=='god' else DAD_DEFAULT
+        st=norm(print_style); code=STY.get(st)
+        if not code: return {'error':'%s invalid Style'%dk.upper(),'title':title,'style':print_style}
+        tk=_resolve_ink(ink, GD_INK, VAL, DEF, ckey)
+        if not tk: return {'error':'%s invalid ink'%dk.upper(),'title':title,'ink':ink}
+        cw=gd_cw(tk, ckey)
+        return out(dk, '%s_%s_%s'%(dk.upper(),code,cw))
+
     if dk=='america':
         st=norm(print_style)
-        if st not in AMERICA_STYLES: return {'error':'AMERICA missing/invalid Style option','title':title,'color':color,'size':size}
-        code,aspect=AMERICA_STYLES[st]
-        label=(ink or '').strip()
-        tk=AMERICA_INK.get(label.lower()) or AMERICA_INK.get(norm(label))
-        if st=='watermark':
-            valid=AMERICA_VALID_WM.get(ckey,[]); default=AMERICA_DEFAULT_WM.get(ckey,'navy')
-        else:
-            valid=AMERICA_VALID_STD.get(ckey,[]); default=AMERICA_DEFAULT_STD.get(ckey,'navy')
-        if not tk or tk not in valid: tk=default
-        if st=='watermark' and tk=='red' and ckey not in ('white','athleticheather','sportgrey'):
-            fp='printfiles/america/watermark_red_dark.png'
-        elif st=='watermark' and tk=='gold' and ckey not in ('white','athleticheather','sportgrey'):
-            fp='printfiles/america/watermark_gold_dark.png'
-        elif st=='watermark' and tk=='white' and ckey not in ('white','athleticheather','sportgrey'):
-            fp='printfiles/america/watermark_white_dark.png'
-        elif st=='watermark' and tk=='karmablue' and ckey not in ('white','athleticheather','sportgrey'):
-            fp='printfiles/america/watermark_karmablue_dark.png'
-        elif st=='watermark' and tk=='grey' and ckey not in ('white','athleticheather','sportgrey'):
-            fp='printfiles/america/watermark_grey_dark.png'
-        else:
-            fp='printfiles/america/%s_%s.png'%(code,tk)
-        aw,ah=AREA[garment]; w=AMERICA_MAXW; h=int(w/aspect); top=AMERICA_TOP[garment]; left=(aw-w)//2
-        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
-                '_design':'america','_garment':garment,'_file':fp,'_flags':[]}
-    if dk=='yeti':
-        ver=norm(print_style)
-        ice=ver in ('ice','iceblue','blue')
-        base=('YETI_drawing-ice_darkgarments' if ice
-              else ('YETI_drawing_whitegarments' if ckey in LIGHT else 'YETI_drawing_darkgarments'))
-        # hoodie uses dropped-placement files (head lowered, ~12% smaller); tee uses originals
-        code=base+('_hoodie.png' if garment=='hoodie' else '.png')
-        fp='printfiles/'+code
-        aw,ah=AREA[garment]
-        if garment=='hoodie': w,h,top=1637,2100,0        # MAX front (Printful auto-fits the file)
-        else: w,h,top=1600,int(1600/0.7796),110           # tee: validated on Men's 4
-        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':(aw-w)//2}}],
-                '_design':'yeti','_garment':garment,'_file':fp,'_flags':[]}
-    if dk=='creatures':                                  # combined Creatures: Design option picks the creature
+        if st not in AMERICA_STYLES: return {'error':'AMERICA invalid Style','title':title,'style':print_style}
+        # watermark-only pattern variants (separate selectable treatments)
+        AM_PAT={'pat1':'watermark_pat1_redUSA_navyAM','pat2':'watermark_pat2_blueUSA_redAM',
+                'pat3':'watermark_pat3_redUSA_whiteAM','pat4':'watermark_pat4_whiteUSA_redAM'}
+        lab=norm(ink)
+        if st=='watermark' and lab in AM_PAT:
+            return out('america', 'AMERICA_'+AM_PAT[lab])
+        tk=_resolve_ink(ink, AMERICA_INK, AMERICA_VALID, AMERICA_DEFAULT, ckey)
+        if not tk: return {'error':'AMERICA invalid ink','title':title,'ink':ink}
+        cw=america_cw(tk, ckey)
+        return out('america', 'AMERICA_%s_%s'%(st,cw))
+
+    if dk=='cross':
+        st=norm(print_style); code=CROSS_STYLES.get(st)
+        if not code: return {'error':'CROSS invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, CROSS_INK, CROSS_VALID, CROSS_DEFAULT, ckey)
+        cw=cross_cw(tk, ckey)
+        return out('cross', 'CROSS_%s_%s'%(code,cw))
+
+    if dk=='crown':
+        cc=CROWN_COLOR.get(ckey)
+        if not cc: return {'error':'CROWN unknown color','title':title,'color':color}
+        tk=_resolve_ink(ink, CROWN_INK, CROWN_VALID, CROWN_DEFAULT, ckey)
+        base=('CROWN_%s_split'%cc) if tk=='split' else ('CROWN_%s'%cc)
+        return out('crown', base)
+
+    if dk=='karma':
+        st=norm(print_style); sf=KARMA_STYLE_FILE.get(st)
+        if not sf: return {'error':'KARMA invalid Style','title':title,'style':print_style}
+        kkey='athleticheather' if lookup_ckey=='sportgrey' else lookup_ckey
+        base=sf.get(kkey) or sf.get(ckey)
+        if not base: return {'error':'KARMA invalid Style x Color','title':title,'style':print_style,'color':color}
+        return out('karma', base)
+
+    if dk=='science':
+        design=norm(print_style)
+        if design not in ('physics','geometry','chemistry','algebra'):
+            return {'error':'SCIENCE invalid Design','title':title,'design':print_style}
+        SCI_INK={'navy':'navy','cream':'cream','oxblood':'oxblood','sleet':'sleet',
+                 'slate':'sleet','grey':'sleet','gray':'sleet','oxbloodred':'oxblood'}
+        ink_cw=SCI_INK.get(norm(ink))
+        if not ink_cw: ink_cw='navy' if ckey in LIGHT else 'cream'   # fallback by ground
+        return out('science', 'SCIENCE_%s_%s'%(design,ink_cw))
+
+    # ---- creatures (combined) + standalone creature routes --------------------
+    if dk=='creatures':
         cr=norm(print_style)
         if cr in ('yeti','yetiiceblue','yetiice','iceblue'):
-            ice = cr!='yeti'
-            base=('YETI_drawing-ice_darkgarments' if ice
-                  else ('YETI_drawing_whitegarments' if ckey in LIGHT else 'YETI_drawing_darkgarments'))
-            code=base+('_hoodie.png' if garment=='hoodie' else '.png')   # yeti hoodie uses dropped-placement files
-            fp='printfiles/'+code; aw,ah=AREA[garment]
-            w,h,top=(1637,2100,0) if garment=='hoodie' else (1600,int(1600/0.7796),110)
-            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-                    'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':(aw-w)//2}}],
-                    '_design':'creatures','_garment':garment,'_file':fp,'_flags':[]}
-        dk={'caveman':'caveman','sasquatch':'sasquatch','abominablesnowman':'snowman','snowman':'snowman','abominable':'snowman'}.get(cr)
-        if not dk: return {'error':'CREATURES unknown design','title':title,'design':print_style,'color':color,'size':size}
-        # text creatures fall through to the DESIGNS handler below (ground-aware light/dark + their own placement)
-    d=DESIGNS[dk]
-    fp=d['light'] if (ckey in LIGHT and d['light']) else d['dark']
-    if d.get('special') and ckey in d['special']: fp=d['special'][ckey]
-    aw,ah=AREA[garment]; w,top=d[garment]; h=int(w*d['ar']); left=(aw-w)//2
-    flags=[]
-    if garment=='tee' and dk in UNVERIFIED_TEE: flags.append('TEE_PLACEMENT_UNVERIFIED')
-    return {'variant_id':cv,'quantity':qty,'retail_price':retail,
-            'files':[{'type':'front','url':RAW+fp,'position':{'area_width':aw,'area_height':ah,'width':w,'height':h,'top':top,'left':left}}],
-            '_design':dk,'_garment':garment,'_file':fp,'_flags':flags}
+            base='YETI_ICE_allgarments' if cr!='yeti' else ('YETI_whitegarments' if ckey in LIGHT else 'YETI_darkgarments')
+            return out('creatures', base)
+        m={'caveman':'CAVEMAN','sasquatch':'SASQUATCH','abominablesnowman':'SNOWMAN','snowman':'SNOWMAN','abominable':'SNOWMAN'}.get(cr)
+        if not m: return {'error':'CREATURES unknown design','title':title,'design':print_style}
+        base='%s_%s'%(m, 'whitegarments' if ckey in LIGHT else 'darkgarments')
+        return out('creatures', base)
+    if dk in ('caveman','sasquatch','snowman'):
+        m={'caveman':'CAVEMAN','sasquatch':'SASQUATCH','snowman':'SNOWMAN'}[dk]
+        base='%s_%s'%(m,'whitegarments' if ckey in LIGHT else 'darkgarments')
+        return out('creatures', base)
+    if dk=='yeti':
+        ice=norm(print_style) in ('ice','iceblue','blue')
+        base='YETI_ICE_allgarments' if ice else ('YETI_whitegarments' if ckey in LIGHT else 'YETI_darkgarments')
+        return out('creatures', base)
+
+    return {'error':'unknown design','title':title}
