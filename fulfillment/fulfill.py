@@ -184,10 +184,10 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         design=norm(print_style)
         if design not in ('physics','geometry','chemistry','algebra'):
             return {'error':'SCIENCE invalid Design','title':title,'design':print_style}
-        SCI_INK={'navy':'navy','cream':'cream','oxblood':'oxblood','sleet':'sleet',
-                 'slate':'sleet','grey':'sleet','gray':'sleet','oxbloodred':'oxblood'}
+        SCI_INK={'navy':'navy','cream':'cream','red':'red','oxblood':'red','black':'black','sleet':'sleet',
+                 'slate':'sleet','grey':'sleet','gray':'sleet','oxbloodred':'red'}
         ink_cw=SCI_INK.get(norm(ink))
-        if not ink_cw: ink_cw='navy' if ckey in LIGHT else 'cream'   # fallback by ground
+        if not ink_cw: ink_cw='black' if ckey in LIGHT else 'cream'   # fallback by ground
         return out('science', 'SCIENCE_%s_%s'%(design,ink_cw))
 
     # ---- creatures (combined) + standalone creature routes --------------------
