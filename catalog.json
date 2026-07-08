@@ -601,15 +601,6 @@
      "grey"
     ]
    },
-   "extra_files": {
-    "watermark_patterns": [
-     "pat1_redUSA_navyAM",
-     "pat2_blueUSA_redAM",
-     "pat3_redUSA_whiteAM",
-     "pat4_whiteUSA_redAM"
-    ],
-    "note": "pattern files exist for watermark style; not currently exposed as ink pills"
-   },
    "defaults": {
     "design": "Classic",
     "ink": "fc",

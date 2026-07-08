@@ -147,12 +147,6 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     if dk=='america':
         st=norm(print_style)
         if st not in AMERICA_STYLES: return {'error':'AMERICA invalid Style','title':title,'style':print_style}
-        # watermark-only pattern variants (separate selectable treatments)
-        AM_PAT={'pat1':'watermark_pat1_redUSA_navyAM','pat2':'watermark_pat2_blueUSA_redAM',
-                'pat3':'watermark_pat3_redUSA_whiteAM','pat4':'watermark_pat4_whiteUSA_redAM'}
-        lab=norm(ink)
-        if st=='watermark' and lab in AM_PAT:
-            return out('america', 'AMERICA_'+AM_PAT[lab])
         tk=_resolve_ink(ink, AMERICA_INK, AMERICA_VALID, AMERICA_DEFAULT, ckey)
         if not tk: return {'error':'AMERICA invalid ink','title':title,'ink':ink}
         cw=america_cw(tk, ckey)
