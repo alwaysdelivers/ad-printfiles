@@ -23,7 +23,8 @@
   "changelog_2026-07-07": "Reconciled to live: FAITH drop Classic; MOM drop Elegant; KARMA 5 spirals (drop disco); CREATURES drop greyscale Yeti; STORK color-only baby colors; AMERICA inks drop ice/karma add fc; SCIENCE inks black/cream/red (line-item property); added full ink/colorway/validity/defaults/naming per prefix.",
   "reconciled_prefixes": [
    "AMERICA",
-   "CREATURES"
+   "CREATURES",
+   "THE_STORK"
   ],
   "default_ink_rule": "Default ink = Full Color (fc) where valid. If a prefix cannot use Full Color as default, choose that prefix's default at reconciliation time."
  },
@@ -1165,16 +1166,24 @@
   },
   "THE_STORK": {
    "status": "live",
+   "reconciled": true,
+   "reconciled_date": "2026-07-08",
    "product_type": [
     "tee",
     "hoodie"
    ],
-   "handle": "the-stork-always-delivers-tee",
+   "handles": {
+    "tee": "the-stork-always-delivers-tee",
+    "hoodie": "the-stork-always-delivers-hoodie"
+   },
+   "folder": "stork",
+   "naming": "stork",
+   "html_source": "STORK_full_set_preview.html",
    "options": {
     "Color": [
+     "White",
      "Baby Pink",
      "Baby Blue",
-     "White",
      "Black"
     ],
     "Size": [
@@ -1184,30 +1193,89 @@
      "XL",
      "2XL",
      "3XL"
+    ],
+    "Style": [
+     "Classic",
+     "Elegant"
     ]
    },
+   "ink_capture": "line-item property 'Ink' (ink is NOT a Shopify variant option)",
    "designs": [
     {
+     "code": "stk-01",
+     "label": "Classic",
+     "font": "Playfair"
+    },
+    {
      "code": "stk-07",
-     "label": "The Stork (single design)"
+     "label": "Elegant",
+     "font": "Great Vibes"
     }
    ],
-   "note": "no stork retro (rejected)",
-   "seo": {},
-   "folder": "stork",
-   "naming": "stork-color-only",
-   "inks": [],
-   "colorway_rule": "single design; Black garment -> dark file, others -> light file",
-   "ink_validity": {},
-   "notes": [
-    "color-only (no Style/Ink axis)",
-    "baby colors are tee-only; hoodie has no baby pink"
+   "inks": [
+    {
+     "token": "fc",
+     "label": "Full Color"
+    },
+    {
+     "token": "navy",
+     "label": "Navy"
+    },
+    {
+     "token": "cream",
+     "label": "Cream",
+     "note": "cream #f0f0d8 dark-ground mono"
+    },
+    {
+     "token": "red",
+     "label": "Red"
+    }
    ],
+   "colorway_rule": "STORK_{code}_{cw}_{garment}; cw: fc->{ground}, navy->light_mono, cream->dark_mono, red->redmono; ground=dark if Black else light",
+   "ink_validity": {
+    "White": [
+     "fc",
+     "navy",
+     "red"
+    ],
+    "Baby Pink": [
+     "fc",
+     "navy",
+     "red"
+    ],
+    "Baby Blue": [
+     "fc",
+     "navy",
+     "red"
+    ],
+    "Black": [
+     "fc",
+     "cream",
+     "red"
+    ]
+   },
    "defaults": {
-    "design": "The Stork (single design)",
-    "ink": null,
-    "color": "Baby Pink"
-   }
+    "style": "Classic",
+    "default_ink": "fc",
+    "color": "White",
+    "ink_by_color": {
+     "White": "fc",
+     "Baby Pink": "fc",
+     "Baby Blue": "fc",
+     "Black": "fc"
+    }
+   },
+   "files": {
+    "tee": 10,
+    "hoodie": 10
+   },
+   "notes": [
+    "Faith-lane rebuild (per STORK_full_set_preview.html): 2 designs (Classic Playfair, Elegant Great Vibes) x inks Full Color/Navy/Cream/Red.",
+    "HTML's 5 file-colorways (fc light, fc dark, mono navy, mono cream, red) shown as 4 ink pills (Full Color folds light+dark).",
+    "Navy ink on light grounds only; Cream ink on dark (Black) only.",
+    "Garment colors (White/Baby Pink/Baby Blue/Black) are a layered choice; HTML defines designs+inks+placement only.",
+    "Replaces the OLD color-only baby stork (single design, no Style/Ink) - live product REBUILT to this."
+   ]
   },
   "CREATURES": {
    "status": "live",
