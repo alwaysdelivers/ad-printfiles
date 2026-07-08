@@ -23,7 +23,8 @@
   "changelog_2026-07-07": "Reconciled to live: FAITH drop Classic; MOM drop Elegant; KARMA 5 spirals (drop disco); CREATURES drop greyscale Yeti; STORK color-only baby colors; AMERICA inks drop ice/karma add fc; SCIENCE inks black/cream/red (line-item property); added full ink/colorway/validity/defaults/naming per prefix.",
   "reconciled_prefixes": [
    "AMERICA"
-  ]
+  ],
+  "default_ink_rule": "Default ink = Full Color (fc) where valid. If a prefix cannot use Full Color as default, choose that prefix's default at reconciliation time."
  },
  "standard": {
   "canvas": {
@@ -608,12 +609,14 @@
    },
    "defaults": {
     "style": "Classic",
+    "default_ink": "fc",
     "ink_by_color": {
-     "White": "navy",
-     "Athletic Heather": "navy",
-     "Navy": "cream",
-     "Black": "red"
-    }
+     "White": "fc",
+     "Athletic Heather": "fc",
+     "Navy": "fc",
+     "Black": "fc"
+    },
+    "note": "Default ink is Full Color (fc) on every fabric \u2014 matches the live PDP reset/initial state. fc is valid on all styles+fabrics."
    },
    "files": {
     "tee": 45,
