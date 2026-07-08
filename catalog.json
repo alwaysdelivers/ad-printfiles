@@ -1,0 +1,1357 @@
+{
+ "_meta": {
+  "schema_version": "2.0",
+  "generated": "2026-07-07",
+  "source_of_truth": "This file. Print files, Shopify options, Printful map, and SEO copy are all generated FROM this. Never hand-edit downstream layers.",
+  "reconciled_against": "LIVE Shopify products + ad-printfiles repo + deployed PDP resolvers (2026-07-07)",
+  "status_values": [
+   "pending",
+   "built",
+   "seo",
+   "fulfilled",
+   "live",
+   "deprecated"
+  ],
+  "treatment_values": [
+   "retro",
+   "block",
+   "script",
+   "spiral",
+   "graphic"
+  ],
+  "ink_name_note": "'karmablue' ink renamed to 'neonblue' (Neon Blue) globally, 2026-07-06",
+  "changelog_2026-07-07": "Reconciled to live: FAITH drop Classic; MOM drop Elegant; KARMA 5 spirals (drop disco); CREATURES drop greyscale Yeti; STORK color-only baby colors; AMERICA inks drop ice/karma add fc; SCIENCE inks black/cream/red (line-item property); added full ink/colorway/validity/defaults/naming per prefix."
+ },
+ "standard": {
+  "canvas": {
+   "w_px": 3600,
+   "h_px": 4800,
+   "w_in": 12,
+   "h_in": 16,
+   "dpi": 300,
+   "format": "PNG transparent"
+  },
+  "placement": {
+   "prefix_width_in": 10.0,
+   "prefix_width_px": 3000,
+   "prefix_top_in": 3.0,
+   "prefix_top_px": 900,
+   "gap_in": 2.4,
+   "gap_px": 720,
+   "wordmark_w_in": 7.25,
+   "wordmark_w_px": 2175,
+   "wordmark_h_in": 2.0,
+   "wordmark_h_px": 600,
+   "horizontal_align": "centered"
+  },
+  "treatment_heights": {
+   "retro": {
+    "rule": "stretch to fixed height",
+    "height_in": 3.5,
+    "height_px": 1050,
+    "note": "Monoton/line-based cuts; vertical stretch reads as intentional"
+   },
+   "block": {
+    "rule": "3.0in floor",
+    "floor_in": 3.0,
+    "floor_px": 900,
+    "note": "solid sans/serif; stretch up to floor if shorter, natural if taller"
+   },
+   "script": {
+    "rule": "proportional natural",
+    "note": "cursive faces; never stretch"
+   },
+   "spiral": {
+    "rule": "proportional natural at 10in wide",
+    "note": "KARMA two-color spiral"
+   },
+   "graphic": {
+    "rule": "case-by-case",
+    "note": "image/illustration lanes (creatures, science, coffee)"
+   }
+  },
+  "wordmark": {
+   "text": "_ALWAYS DELIVERS",
+   "font": "Patua One",
+   "rule": "single canonical lockup on every design; constant, never flexes to prefix",
+   "color_on_light": "#1e3a5f",
+   "color_on_dark": "#f0f0d8",
+   "render_pipeline": "generated from master-sheet v32 JS via node -> SVG -> cairosvg (never recreated in Python)"
+  },
+  "colorway_palette": {
+   "navy": {
+    "hex": "#1e3a5f",
+    "use": "light grounds (White, Ath Heather)"
+   },
+   "cream": {
+    "hex": "#f0f0d8",
+    "use": "dark grounds (Navy, Black)"
+   },
+   "red": {
+    "hex": "#a8201a",
+    "use": "bright-red accent"
+   },
+   "gold": {
+    "hex": "#c08a2e",
+    "use": "sanctioned dark accent"
+   },
+   "grey": {
+    "hex": "#b9c0cb",
+    "use": "heather-grey accent"
+   },
+   "ice": {
+    "hex": "#7fc4e0",
+    "use": "ice-blue (cold/Yeti lane)"
+   },
+   "black": {
+    "hex": "#0a0a0a",
+    "use": "black ink"
+   },
+   "neonblue": {
+    "hex": "#2f8fe2",
+    "use": "neon-blue accent (formerly 'karmablue')"
+   }
+  },
+  "printful_send": {
+   "tee": {
+    "product": 71,
+    "area_width": 1800,
+    "area_height": 2400,
+    "width": 1800,
+    "height": 2400,
+    "top": 0,
+    "left": 0,
+    "note": "full-fill; placement baked into file margins; 150 units = 1in"
+   },
+   "hoodie": {
+    "product": 146,
+    "area_width": 2100,
+    "area_height": 2100,
+    "note": "14x14 spec TBD - separate pass"
+   }
+  },
+  "asset_storage": {
+   "masters": "Always Delivers Google Drive (folder 1-KrOVyOdjAAQeHj7zhaGPLmQBQ6z3Cd-)",
+   "served_printfiles": "Always Delivers repo ONLY (never smallshiptravel - separate project)",
+   "hires_convention": "hires/<prefix>/<PREFIX>_<style>_<colorway|ground>.png"
+  }
+ },
+ "seo_framework": {
+  "title": "{PREFIX} Always Delivers \u2014 {product_type}",
+  "meta_description": "{PREFIX} Always Delivers {product_type}. {hook}. Premium {blank} in {n} styles and 4 colors. Designed & printed in the USA.",
+  "body_html_structure": [
+   "hook line",
+   "per-style selling points",
+   "materials & fit",
+   "care",
+   "brand line"
+  ],
+  "image_alt": "{PREFIX} Always Delivers {style} design on {color} {product_type}",
+  "keyword_strategy": "primary: '{prefix} shirt / hoodie'; secondary: '{prefix} always delivers', 'funny {prefix} gift'; brand: 'always delivers apparel'",
+  "voice": "confident, warm, a little wry; faith lane (JESUS/GOD/FAITH/CROSS) stays apolitical/identity-based (Miss Glory tone); never political",
+  "generation": "framework here; actual copy generated INLINE per prefix at cutover, written into each prefix's seo block"
+ },
+ "prefixes": {
+  "JESUS": {
+   "status": "live",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": "jesus-always-delivers-tee",
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Serif",
+     "Script",
+     "Bold",
+     "Retro"
+    ]
+   },
+   "designs": [
+    {
+     "code": "jes-01",
+     "label": "Serif"
+    },
+    {
+     "code": "jes-03",
+     "label": "Script"
+    },
+    {
+     "code": "jes-07",
+     "label": "Bold"
+    },
+    {
+     "code": "jes-11",
+     "label": "Retro"
+    }
+   ],
+   "seo": {},
+   "folder": "jesus",
+   "naming": "faith-lane",
+   "inks": [
+    {
+     "token": "fc",
+     "label": "Full Color"
+    },
+    {
+     "token": "mono",
+     "label": "Mono"
+    },
+    {
+     "token": "red",
+     "label": "Red"
+    },
+    {
+     "token": "black",
+     "label": "Black"
+    }
+   ],
+   "colorway_rule": "fc->{ground}; mono->{ground}_mono; red->redmono; black->blackmono",
+   "ink_validity": {
+    "White": [
+     "fc",
+     "mono",
+     "red",
+     "black"
+    ],
+    "Athletic Heather": [
+     "fc",
+     "mono",
+     "red",
+     "black"
+    ],
+    "Navy": [
+     "fc",
+     "mono",
+     "black"
+    ],
+    "Black": [
+     "fc",
+     "mono",
+     "red"
+    ]
+   },
+   "defaults": {
+    "design": "Serif",
+    "ink": "fc",
+    "color": "White"
+   }
+  },
+  "GOD": {
+   "status": "live",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": "god-always-delivers-tee",
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Monument",
+     "Bold",
+     "Retro"
+    ]
+   },
+   "designs": [
+    {
+     "code": "god-01",
+     "label": "Monument"
+    },
+    {
+     "code": "god-03",
+     "label": "Bold"
+    },
+    {
+     "code": "god-09",
+     "label": "Retro"
+    }
+   ],
+   "seo": {},
+   "folder": "god",
+   "naming": "two-color",
+   "inks": [
+    {
+     "token": "fc",
+     "label": "Full Color"
+    },
+    {
+     "token": "navy",
+     "label": "Navy"
+    },
+    {
+     "token": "red",
+     "label": "Red"
+    },
+    {
+     "token": "black",
+     "label": "Black"
+    },
+    {
+     "token": "cream",
+     "label": "Cream"
+    },
+    {
+     "token": "grey",
+     "label": "Heather Grey"
+    },
+    {
+     "token": "neonblue",
+     "label": "Neon Blue"
+    }
+   ],
+   "colorway_rule": "fc->fc_{ground}; neonblue->neonblue; else literal token",
+   "ink_validity": {
+    "White": [
+     "fc",
+     "navy",
+     "red",
+     "black",
+     "neonblue"
+    ],
+    "Athletic Heather": [
+     "fc",
+     "navy",
+     "red",
+     "black"
+    ],
+    "Navy": [
+     "fc",
+     "cream",
+     "grey"
+    ],
+    "Black": [
+     "fc",
+     "red",
+     "cream",
+     "grey",
+     "neonblue"
+    ]
+   },
+   "defaults": {
+    "design": "Monument",
+    "ink": "fc",
+    "color": "White"
+   }
+  },
+  "FAITH": {
+   "status": "live",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": "faith-always-delivers-tee",
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Elegant",
+     "Strong"
+    ]
+   },
+   "designs": [
+    {
+     "code": "faith-02",
+     "label": "Elegant"
+    },
+    {
+     "code": "faith-04",
+     "label": "Strong"
+    }
+   ],
+   "seo": {},
+   "folder": "faith",
+   "naming": "faith-lane",
+   "inks": [
+    {
+     "token": "fc",
+     "label": "Full Color"
+    },
+    {
+     "token": "mono",
+     "label": "Mono"
+    },
+    {
+     "token": "red",
+     "label": "Red"
+    }
+   ],
+   "colorway_rule": "fc->{ground}; mono->{ground}_mono; red->redmono",
+   "ink_validity": {
+    "White": [
+     "fc",
+     "mono",
+     "red"
+    ],
+    "Athletic Heather": [
+     "fc",
+     "mono",
+     "red"
+    ],
+    "Navy": [
+     "fc",
+     "mono",
+     "red"
+    ],
+    "Black": [
+     "fc",
+     "mono",
+     "red"
+    ]
+   },
+   "defaults": {
+    "design": "Elegant",
+    "ink": "fc",
+    "color": "White"
+   }
+  },
+  "AMERICA": {
+   "status": "live",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": "america-always-delivers-tee",
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Classic",
+     "Heritage",
+     "Star",
+     "Retro",
+     "Watermark"
+    ]
+   },
+   "designs": [
+    {
+     "code": "classic",
+     "label": "Classic"
+    },
+    {
+     "code": "heritage",
+     "label": "Heritage"
+    },
+    {
+     "code": "star",
+     "label": "Star"
+    },
+    {
+     "code": "retro",
+     "label": "Retro"
+    },
+    {
+     "code": "watermark",
+     "label": "Watermark"
+    }
+   ],
+   "note": "old v32 codes usa-03/06/09/17 RETIRED; classic/heritage/star/retro + watermark; both full-color(multi-tone) and single-ink colorway sets exist",
+   "seo": {},
+   "colorway_system": {
+    "single_ink": "5 styles x 8 inks = 40",
+    "full_color": "classic/heritage/star/retro x light+dark = 8 (multi-tone, red accents)",
+    "patriotic_watermark": "4 (2x2 ground x lead color)"
+   },
+   "hires_status": "COMPLETE - 52 files @300dpi in Prefixes/America/",
+   "folder": "america",
+   "naming": "america",
+   "inks": [
+    {
+     "token": "fc",
+     "label": "Full Color"
+    },
+    {
+     "token": "navy",
+     "label": "Navy"
+    },
+    {
+     "token": "red",
+     "label": "Red"
+    },
+    {
+     "token": "black",
+     "label": "Black"
+    },
+    {
+     "token": "gold",
+     "label": "Gold"
+    },
+    {
+     "token": "white",
+     "label": "White"
+    },
+    {
+     "token": "grey",
+     "label": "Heather Grey"
+    },
+    {
+     "token": "neonblue",
+     "label": "Neon Blue"
+    }
+   ],
+   "colorway_rule": "fc->fc_{ground}; else literal token",
+   "ink_validity_std": {
+    "White": [
+     "fc",
+     "navy",
+     "red",
+     "black",
+     "gold",
+     "neonblue"
+    ],
+    "Athletic Heather": [
+     "fc",
+     "navy",
+     "red",
+     "black",
+     "gold",
+     "neonblue"
+    ],
+    "Navy": [
+     "fc",
+     "white",
+     "grey",
+     "red",
+     "gold"
+    ],
+    "Black": [
+     "fc",
+     "red",
+     "white",
+     "grey",
+     "neonblue",
+     "gold"
+    ]
+   },
+   "ink_validity_watermark": {
+    "White": [
+     "fc",
+     "navy",
+     "red"
+    ],
+    "Athletic Heather": [
+     "fc",
+     "navy",
+     "red"
+    ],
+    "Navy": [
+     "fc",
+     "red",
+     "gold",
+     "white",
+     "neonblue",
+     "grey"
+    ],
+    "Black": [
+     "fc",
+     "red",
+     "gold",
+     "white",
+     "neonblue",
+     "grey"
+    ]
+   },
+   "extra_files": {
+    "watermark_patterns": [
+     "pat1_redUSA_navyAM",
+     "pat2_blueUSA_redAM",
+     "pat3_redUSA_whiteAM",
+     "pat4_whiteUSA_redAM"
+    ],
+    "note": "pattern files exist for watermark style; not currently exposed as ink pills"
+   },
+   "defaults": {
+    "design": "Classic",
+    "ink": "fc",
+    "color": "White"
+   }
+  },
+  "DAD": {
+   "status": "live",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": "dad-always-delivers-tee",
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Classic",
+     "Varsity",
+     "Retro"
+    ]
+   },
+   "designs": [
+    {
+     "code": "dad-02",
+     "label": "Classic"
+    },
+    {
+     "code": "dad-04",
+     "label": "Varsity"
+    },
+    {
+     "code": "dad-disco",
+     "label": "Retro"
+    }
+   ],
+   "seo": {},
+   "folder": "dad",
+   "naming": "two-color",
+   "inks": [
+    {
+     "token": "fc",
+     "label": "Full Color"
+    },
+    {
+     "token": "navy",
+     "label": "Navy"
+    },
+    {
+     "token": "red",
+     "label": "Red"
+    },
+    {
+     "token": "black",
+     "label": "Black"
+    },
+    {
+     "token": "white",
+     "label": "White"
+    },
+    {
+     "token": "grey",
+     "label": "Heather Grey"
+    },
+    {
+     "token": "neonblue",
+     "label": "Neon Blue"
+    }
+   ],
+   "colorway_rule": "fc->fc_{ground}; neonblue->neonblue; else literal token",
+   "ink_validity": {
+    "White": [
+     "fc",
+     "navy",
+     "red",
+     "black",
+     "neonblue"
+    ],
+    "Athletic Heather": [
+     "fc",
+     "navy",
+     "red",
+     "black",
+     "white"
+    ],
+    "Navy": [
+     "fc",
+     "white",
+     "grey"
+    ],
+    "Black": [
+     "fc",
+     "red",
+     "white",
+     "grey",
+     "neonblue"
+    ]
+   },
+   "defaults": {
+    "design": "Classic",
+    "ink": "fc",
+    "color": "White"
+   }
+  },
+  "MOM": {
+   "status": "live",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": "mom-always-delivers-tee",
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Grace",
+     "Bold",
+     "Retro"
+    ]
+   },
+   "designs": [
+    {
+     "code": "mom-01",
+     "label": "Grace"
+    },
+    {
+     "code": "mom-03",
+     "label": "Bold"
+    },
+    {
+     "code": "mom-disco",
+     "label": "Retro"
+    }
+   ],
+   "seo": {},
+   "folder": "mom",
+   "naming": "faith-lane",
+   "inks": [
+    {
+     "token": "fc",
+     "label": "Full Color"
+    },
+    {
+     "token": "mono",
+     "label": "Mono"
+    },
+    {
+     "token": "red",
+     "label": "Red"
+    }
+   ],
+   "colorway_rule": "fc->{ground}; mono->{ground}_mono; red->redmono",
+   "ink_validity": {
+    "White": [
+     "fc",
+     "mono",
+     "red"
+    ],
+    "Athletic Heather": [
+     "fc",
+     "mono",
+     "red"
+    ],
+    "Navy": [
+     "fc",
+     "mono",
+     "red"
+    ],
+    "Black": [
+     "fc",
+     "mono",
+     "red"
+    ]
+   },
+   "defaults": {
+    "design": "Grace",
+    "ink": "fc",
+    "color": "White"
+   }
+  },
+  "KARMA": {
+   "status": "live",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": "karma-always-delivers-tee",
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Black & Blue",
+     "Blue & Teal",
+     "Blue & Cream",
+     "Red & White",
+     "Slate & White"
+    ]
+   },
+   "designs": [
+    {
+     "code": "blackblue_neon",
+     "label": "Black & Blue"
+    },
+    {
+     "code": "blueteal_teal",
+     "label": "Blue & Teal"
+    },
+    {
+     "code": "bluewhite_blue",
+     "label": "Blue & Cream"
+    },
+    {
+     "code": "redwhite_red",
+     "label": "Red & White"
+    },
+    {
+     "code": "slatewhite_slate",
+     "label": "Slate & White"
+    }
+   ],
+   "seo": {},
+   "folder": "karma",
+   "naming": "karma",
+   "inks": [],
+   "colorway_rule": "no ink axis; each style is a fixed 2-color spiral file (KARMA_{code})",
+   "ink_validity": {},
+   "options_note": "Style option = the 5 spirals; Color = garment (White/Athletic Heather/Navy/Black)",
+   "defaults": {
+    "design": "Black & Blue",
+    "ink": null,
+    "color": "White"
+   }
+  },
+  "CROSS": {
+   "status": "live",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": "cross-always-delivers-tee",
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Jesus Cross",
+     "The Cross"
+    ]
+   },
+   "designs": [
+    {
+     "code": "cross-04",
+     "label": "Jesus Cross"
+    },
+    {
+     "code": "cross-08",
+     "label": "The Cross"
+    }
+   ],
+   "seo": {},
+   "folder": "cross",
+   "naming": "cross",
+   "inks": [
+    {
+     "token": "fc",
+     "label": "Full Color"
+    },
+    {
+     "token": "mono",
+     "label": "Mono"
+    },
+    {
+     "token": "red",
+     "label": "Red"
+    },
+    {
+     "token": "grey",
+     "label": "Heather Grey"
+    }
+   ],
+   "colorway_rule": "fc->fc_{ground}; else literal token",
+   "ink_validity": {
+    "White": [
+     "fc",
+     "mono",
+     "red"
+    ],
+    "Athletic Heather": [
+     "fc",
+     "mono",
+     "red"
+    ],
+    "Navy": [
+     "grey",
+     "red"
+    ],
+    "Black": [
+     "fc",
+     "mono",
+     "grey",
+     "red"
+    ]
+   },
+   "defaults": {
+    "design": "Jesus Cross",
+    "ink": "fc",
+    "color": "White"
+   }
+  },
+  "CROWN": {
+   "status": "live",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": "crown-always-delivers-tee",
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Crown of Thorns"
+    ]
+   },
+   "designs": [
+    {
+     "code": "crown",
+     "label": "Crown of Thorns"
+    }
+   ],
+   "note": "was MISSING from v32 - add",
+   "seo": {},
+   "folder": "crown",
+   "naming": "crown",
+   "inks": [
+    {
+     "token": "split",
+     "label": "Full Color"
+    },
+    {
+     "token": "mono",
+     "label": "Mono"
+    }
+   ],
+   "colorway_rule": "file = CROWN_{colorkey}{'_split' if split}  (color-name files, lowercase)",
+   "ink_validity": {
+    "White": [
+     "split",
+     "mono"
+    ],
+    "Athletic Heather": [
+     "split",
+     "mono"
+    ],
+    "Navy": [
+     "mono"
+    ],
+    "Black": [
+     "mono"
+    ]
+   },
+   "defaults": {
+    "design": "Crown of Thorns",
+    "ink": "split",
+    "color": "White"
+   }
+  },
+  "SCIENCE": {
+   "status": "live",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": "science-always-delivers-tee",
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Physics",
+     "Geometry",
+     "Chemistry",
+     "Algebra"
+    ]
+   },
+   "designs": [
+    {
+     "code": "physics",
+     "label": "Physics"
+    },
+    {
+     "code": "geometry",
+     "label": "Geometry"
+    },
+    {
+     "code": "chemistry",
+     "label": "Chemistry"
+    },
+    {
+     "code": "algebra",
+     "label": "Algebra"
+    }
+   ],
+   "note": "was MISSING from v32 - add",
+   "seo": {},
+   "folder": "science",
+   "naming": "science",
+   "inks": [
+    {
+     "token": "black",
+     "label": "Black"
+    },
+    {
+     "token": "cream",
+     "label": "Cream"
+    },
+    {
+     "token": "red",
+     "label": "Red"
+    }
+   ],
+   "colorway_rule": "file = SCIENCE_{design}_{token}  (token used directly; ink chosen via line-item property)",
+   "ink_validity": {
+    "White": [
+     "black",
+     "red"
+    ],
+    "Athletic Heather": [
+     "black",
+     "red"
+    ],
+    "Navy": [
+     "cream",
+     "red"
+    ],
+    "Black": [
+     "cream",
+     "red"
+    ]
+   },
+   "ink_capture": "line-item property 'Ink' (product has no ink variant option)",
+   "extra_files": {
+    "unused_inks": [
+     "navy",
+     "sleet"
+    ],
+    "note": "navy + sleet files exist but are not offered in the picker"
+   },
+   "defaults": {
+    "design": "Physics",
+    "ink": "black",
+    "color": "White"
+   }
+  },
+  "THE_STORK": {
+   "status": "live",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": "the-stork-always-delivers-tee",
+   "options": {
+    "Color": [
+     "Baby Pink",
+     "Baby Blue",
+     "White",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ]
+   },
+   "designs": [
+    {
+     "code": "stk-07",
+     "label": "The Stork (single design)"
+    }
+   ],
+   "note": "no stork retro (rejected)",
+   "seo": {},
+   "folder": "stork",
+   "naming": "stork-color-only",
+   "inks": [],
+   "colorway_rule": "single design; Black garment -> dark file, others -> light file",
+   "ink_validity": {},
+   "notes": [
+    "color-only (no Style/Ink axis)",
+    "baby colors are tee-only; hoodie has no baby pink"
+   ],
+   "defaults": {
+    "design": "The Stork (single design)",
+    "ink": null,
+    "color": "Baby Pink"
+   }
+  },
+  "CREATURES": {
+   "status": "live",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": "creatures-always-delivers-tee",
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Caveman",
+     "Sasquatch",
+     "Abominable Snowman",
+     "Yeti Ice-Blue"
+    ]
+   },
+   "designs": [
+    {
+     "code": "CAVEMAN",
+     "label": "Caveman"
+    },
+    {
+     "code": "SASQUATCH",
+     "label": "Sasquatch"
+    },
+    {
+     "code": "SNOWMAN",
+     "label": "Abominable Snowman"
+    },
+    {
+     "code": "YETI_ICE",
+     "label": "Yeti Ice-Blue"
+    }
+   ],
+   "note": "yeti canonical = yti-creature (per decision); deprecate sqt-04 + Saint Bernard (sb-head/sb-body); snowman add to v32",
+   "seo": {},
+   "folder": "creatures",
+   "naming": "creatures",
+   "inks": [],
+   "colorway_rule": "CAVEMAN/SASQUATCH/SNOWMAN -> {whitegarments|darkgarments} by ground; YETI_ICE -> ICE_allgarments",
+   "ink_validity": {},
+   "dropped": [
+    "greyscale Yeti (yti-creature) removed"
+   ],
+   "defaults": {
+    "design": "Caveman",
+    "ink": null,
+    "color": "White"
+   }
+  },
+  "GRANDMA": {
+   "status": "pending",
+   "product_type": [
+    "tee",
+    "hoodie"
+   ],
+   "handle": null,
+   "options": {
+    "Style": [
+     "Grace",
+     "Elegant",
+     "Dancing",
+     "Retro"
+    ]
+   },
+   "designs": [
+    {
+     "code": "gma-01",
+     "label": "Grace",
+     "font": "Great Vibes",
+     "treatment": "script",
+     "status": "built"
+    },
+    {
+     "code": "gma-02",
+     "label": "Elegant",
+     "font": "Cormorant",
+     "treatment": "script",
+     "status": "pending"
+    },
+    {
+     "code": "gma-04",
+     "label": "Dancing",
+     "font": "Dancing Script",
+     "treatment": "script",
+     "status": "pending"
+    },
+    {
+     "code": "gma-disco",
+     "label": "Retro",
+     "font": "Monoton",
+     "treatment": "retro",
+     "status": "pending",
+     "note": "retro height 3.5in confirmed"
+    }
+   ],
+   "colorways": "TBD",
+   "note": "roadmap - not published",
+   "seo": {}
+  },
+  "TEXAS": {
+   "status": "pending",
+   "designs": [
+    {
+     "code": "texas-01",
+     "status": "pending"
+    }
+   ],
+   "seo": {}
+  },
+  "MIAMI": {
+   "status": "pending",
+   "designs": [
+    {
+     "code": "miami-01",
+     "status": "pending"
+    },
+    {
+     "code": "miami-02",
+     "status": "pending"
+    }
+   ],
+   "seo": {}
+  },
+  "VEGAS": {
+   "status": "pending",
+   "designs": [
+    {
+     "code": "vegas-01",
+     "status": "pending"
+    },
+    {
+     "code": "vegas-02",
+     "status": "pending"
+    }
+   ],
+   "seo": {}
+  },
+  "COUNTRY": {
+   "status": "pending",
+   "designs": [
+    {
+     "code": "country-01",
+     "status": "pending"
+    }
+   ],
+   "seo": {}
+  }
+ },
+ "_not_yet_in_catalog": {
+  "note": "lanes from v32 still to audit/decide before adding",
+  "lanes": [
+   "coffee (coffee-rev)",
+   "wine (wine-rev)",
+   "refuel (refuel-01)",
+   "gameday (gameday-01)",
+   "firstclass (firstclass-01/02)",
+   "taco (taco-01/02)",
+   "datenight (datenight-01/02)",
+   "chalobeta (cb-01)"
+  ]
+ }
+}
