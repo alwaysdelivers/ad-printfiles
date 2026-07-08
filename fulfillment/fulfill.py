@@ -73,8 +73,8 @@ CROSS_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'fc'}
 def cross_cw(tk, ckey):
     return ('fc_'+ground(ckey)) if tk=='fc' else tk     # fc_light/fc_dark; mono/grey/red literal
 
-CROWN_INK={'full color':'split','fullcolor':'split','split':'split','fc':'split','mono':'mono'}
-CROWN_VALID={'white':['split','mono'],'athleticheather':['split','mono'],'navy':['mono'],'black':['mono']}
+CROWN_INK={'full color':'split','fullcolor':'split','split':'split','fc':'split','navy':'mono','slate':'mono','mono':'mono'}
+CROWN_VALID={'white':['split','mono'],'athleticheather':['split','mono'],'navy':['mono'],'black':['mono']}  # mono token = Navy ink (light) or Slate ink (dark); same file
 CROWN_DEFAULT={'white':'split','athleticheather':'split','navy':'mono','black':'mono'}
 CROWN_COLOR={'white':'white','athleticheather':'heather','sportgrey':'heather','navy':'navy','black':'black'}
 
