@@ -22,7 +22,8 @@
   "ink_name_note": "'karmablue' ink renamed to 'neonblue' (Neon Blue) globally, 2026-07-06",
   "changelog_2026-07-07": "Reconciled to live: FAITH drop Classic; MOM drop Elegant; KARMA 5 spirals (drop disco); CREATURES drop greyscale Yeti; STORK color-only baby colors; AMERICA inks drop ice/karma add fc; SCIENCE inks black/cream/red (line-item property); added full ink/colorway/validity/defaults/naming per prefix.",
   "reconciled_prefixes": [
-   "AMERICA"
+   "AMERICA",
+   "CREATURES"
   ],
   "default_ink_rule": "Default ink = Full Color (fc) where valid. If a prefix cannot use Full Color as default, choose that prefix's default at reconciliation time."
  },
@@ -1209,11 +1210,19 @@
   },
   "CREATURES": {
    "status": "live",
+   "reconciled": true,
+   "reconciled_date": "2026-07-08",
    "product_type": [
     "tee",
     "hoodie"
    ],
-   "handle": "creatures-always-delivers-tee",
+   "handles": {
+    "tee": "creatures-always-delivers-tee",
+    "hoodie": "creatures-always-delivers-hoodie"
+   },
+   "folder": "creatures",
+   "naming": "creatures",
+   "html_source": "CREATURES_full_set_preview.html",
    "options": {
     "Color": [
      "White",
@@ -1229,7 +1238,7 @@
      "2XL",
      "3XL"
     ],
-    "Style": [
+    "Design": [
      "Caveman",
      "Sasquatch",
      "Abominable Snowman",
@@ -1251,24 +1260,60 @@
     },
     {
      "code": "YETI_ICE",
-     "label": "Yeti Ice-Blue"
+     "label": "Yeti Ice-Blue",
+     "color_axis": true
     }
    ],
-   "note": "yeti canonical = yti-creature (per decision); deprecate sqt-04 + Saint Bernard (sb-head/sb-body); snowman add to v32",
-   "seo": {},
-   "folder": "creatures",
-   "naming": "creatures",
-   "inks": [],
-   "colorway_rule": "CAVEMAN/SASQUATCH/SNOWMAN -> {whitegarments|darkgarments} by ground; YETI_ICE -> ICE_allgarments",
-   "ink_validity": {},
-   "dropped": [
-    "greyscale Yeti (yti-creature) removed"
+   "yeti_colors": [
+    {
+     "token": "ice",
+     "label": "Ice-Blue",
+     "dot": "#7fc4e0",
+     "file": "YETI_ICE_allgarments",
+     "shopify_design": "Yeti Ice-Blue"
+    },
+    {
+     "token": "grey",
+     "label": "Greyscale",
+     "dot": "#9aa3ad",
+     "file_rule": "YETI_{whitegarments|darkgarments} by ground",
+     "shopify_design": "Yeti"
+    }
    ],
+   "yeti_color_validity": {
+    "White": [
+     "ice",
+     "grey"
+    ],
+    "Athletic Heather": [
+     "ice",
+     "grey"
+    ],
+    "Navy": [
+     "grey"
+    ],
+    "Black": [
+     "ice",
+     "grey"
+    ]
+   },
+   "yeti_default_color": "ice",
+   "colorway_rule": "CAVEMAN/SASQUATCH/SNOWMAN -> {whitegarments|darkgarments} by ground; Yeti color axis: ice->YETI_ICE_allgarments, grey->YETI_{whitegarments|darkgarments}",
+   "no_ink_axis": true,
+   "capture": "Yeti color axis maps to the two existing Shopify Design variants (Ice-Blue=Yeti Ice-Blue variant, Greyscale=Yeti variant) \u2014 the pill selects the variant; no product change",
    "defaults": {
     "design": "Caveman",
-    "ink": null,
     "color": "White"
-   }
+   },
+   "files": {
+    "tee": 9,
+    "hoodie": 9
+   },
+   "notes": [
+    "Greyscale Yeti is NOT a menu version; it is the Greyscale color of the Yeti Ice-Blue version (like America ink).",
+    "Ice-Blue not offered on Navy; Yeti defaults to Greyscale on Navy.",
+    "Home + shop-all show the blue (Ice-Blue) yeti."
+   ]
   },
   "GRANDMA": {
    "status": "pending",
