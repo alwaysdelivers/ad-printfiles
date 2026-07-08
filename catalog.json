@@ -1160,7 +1160,8 @@
     "design": "Physics",
     "ink": "black",
     "color": "White"
-   }
+   },
+   "shop_all_per_design": true
   },
   "THE_STORK": {
    "status": "live",
@@ -1313,7 +1314,9 @@
     "Greyscale Yeti is NOT a menu version; it is the Greyscale color of the Yeti Ice-Blue version (like America ink).",
     "Ice-Blue not offered on Navy; Yeti defaults to Greyscale on Navy.",
     "Home + shop-all show the blue (Ice-Blue) yeti."
-   ]
+   ],
+   "hero_design": "Yeti Ice-Blue",
+   "shop_all_per_design": true
   },
   "GRANDMA": {
    "status": "pending",
