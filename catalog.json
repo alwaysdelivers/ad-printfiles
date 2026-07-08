@@ -530,8 +530,9 @@
      "label": "Gold"
     },
     {
-     "token": "white",
-     "label": "White"
+     "token": "cream",
+     "label": "Cream",
+     "note": "cream #f0f0d8 (on-dark brand standard); label was White"
     },
     {
      "token": "grey",
@@ -565,14 +566,14 @@
      "fc",
      "red",
      "gold",
-     "white",
+     "cream",
      "grey"
     ],
     "Black": [
      "fc",
      "red",
      "gold",
-     "white",
+     "cream",
      "grey",
      "karmablue"
     ]
@@ -592,7 +593,7 @@
      "fc",
      "red",
      "gold",
-     "white",
+     "cream",
      "grey",
      "karmablue"
     ],
@@ -600,7 +601,7 @@
      "fc",
      "red",
      "gold",
-     "white",
+     "cream",
      "grey",
      "karmablue"
     ]
@@ -631,7 +632,8 @@
     "No patterns",
     "Ice removed",
     "tee and hoodie share identical style x ink matrix",
-    "HTML (AMERICA_set.html) is the source of truth. Only its approved combinations (110) are user-selectable. Neon Blue is available on all 5 styles per HTML."
+    "HTML (AMERICA_set.html) is the source of truth. Only its approved combinations (110) are user-selectable. Neon Blue is available on all 5 styles per HTML.",
+    "Ink 'white' renamed to 'cream' (files, token, label) \u2014 the ink is brand cream #f0f0d8, not pure white."
    ],
    "ui_behavior": {
     "tile_gating": "Style and Fabric tiles are always selectable (never greyed). The Ink options are restricted per (style,fabric) to exactly the HTML-approved set; ink auto-defaults to a valid one on change. Selectable set = HTML-approved set (110)."

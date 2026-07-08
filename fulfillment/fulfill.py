@@ -52,9 +52,9 @@ DAD_VALID={'white':['navy','fc','red','black','neonblue'],'athleticheather':['na
 DAD_DEFAULT={'white':'navy','athleticheather':'navy','navy':'white','black':'white'}
 
 # america inks (single-ink per color) -> file colorway; ice removed, karmablue->neonblue
-AMERICA_INK={'navy':'navy','red':'red','black':'black','gold':'gold','white':'white','grey':'grey','heather grey':'grey','heathergrey':'grey','karmablue':'neonblue','karma blue':'neonblue','neonblue':'neonblue','fullcolor':'fc','full color':'fc','fc':'fc'}
-AMERICA_VALID={'white':['navy','red','black','gold','neonblue','fc'],'athleticheather':['navy','red','black','gold','neonblue','fc'],'navy':['white','grey','red','gold','fc'],'black':['red','gold','white','neonblue','grey','fc']}
-AMERICA_DEFAULT={'white':'navy','athleticheather':'navy','navy':'white','black':'red'}
+AMERICA_INK={'navy':'navy','red':'red','black':'black','gold':'gold','cream':'cream','white':'cream','grey':'grey','heather grey':'grey','heathergrey':'grey','karmablue':'neonblue','karma blue':'neonblue','neonblue':'neonblue','fullcolor':'fc','full color':'fc','fc':'fc'}
+AMERICA_VALID={'white':['navy','red','black','gold','neonblue','fc'],'athleticheather':['navy','red','black','gold','neonblue','fc'],'navy':['cream','grey','red','gold','fc'],'black':['red','gold','cream','neonblue','grey','fc']}
+AMERICA_DEFAULT={'white':'navy','athleticheather':'navy','navy':'cream','black':'red'}
 def america_cw(tk, ckey):
     return ('fc_'+ground(ckey)) if tk=='fc' else tk
 
