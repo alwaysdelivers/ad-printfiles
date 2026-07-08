@@ -24,6 +24,7 @@
   "reconciled_prefixes": [
    "AMERICA",
    "CREATURES",
+   "CROWN",
    "THE_STORK"
   ],
   "default_ink_rule": "Default ink = Full Color (fc) where valid. If a prefix cannot use Full Color as default, choose that prefix's default at reconciliation time."
@@ -998,11 +999,19 @@
   },
   "CROWN": {
    "status": "live",
+   "reconciled": true,
+   "reconciled_date": "2026-07-08",
    "product_type": [
     "tee",
     "hoodie"
    ],
-   "handle": "crown-always-delivers-tee",
+   "handles": {
+    "tee": "crown-always-delivers-tee",
+    "hoodie": "crown-always-delivers-hoodie"
+   },
+   "folder": "crown",
+   "naming": "crown",
+   "html_source": "CROWN_full_set_preview.html",
    "options": {
     "Color": [
      "White",
@@ -1017,32 +1026,28 @@
      "XL",
      "2XL",
      "3XL"
-    ],
-    "Style": [
-     "Crown of Thorns"
     ]
    },
+   "ink_capture": "line-item property 'Ink' (single design; ink is NOT a Shopify variant option)",
    "designs": [
     {
      "code": "crown",
      "label": "Crown of Thorns"
     }
    ],
-   "note": "was MISSING from v32 - add",
-   "seo": {},
-   "folder": "crown",
-   "naming": "crown",
    "inks": [
     {
      "token": "split",
-     "label": "Full Color"
+     "label": "Full Color",
+     "note": "gold+red split lockup"
     },
     {
      "token": "mono",
-     "label": "Mono"
+     "label": "Mono",
+     "note": "gold lockup, no red"
     }
    ],
-   "colorway_rule": "file = CROWN_{colorkey}{'_split' if split}  (color-name files, lowercase)",
+   "colorway_rule": "CROWN_{colorkey}{_split if ink==split}_{garment}; colorkey: White->white, Athletic Heather->heather, Navy->navy, Black->black; crown navy+gold on light, grey+gold on dark (baked in file)",
    "ink_validity": {
     "White": [
      "split",
@@ -1060,10 +1065,25 @@
     ]
    },
    "defaults": {
-    "design": "Crown of Thorns",
-    "ink": "split",
-    "color": "White"
-   }
+    "default_ink": "split",
+    "color": "White",
+    "ink_by_color": {
+     "White": "split",
+     "Athletic Heather": "split",
+     "Navy": "mono",
+     "Black": "mono"
+    }
+   },
+   "files": {
+    "tee": 6,
+    "hoodie": 6
+   },
+   "notes": [
+    "Single design (Crown of Thorns). Ink toggle: Full Color (+red split lockup) / Mono (gold lockup).",
+    "Full Color (split) only on light grounds (White, Ath Heather); Navy/Black = Mono only.",
+    "Default = Full Color where valid, else Mono. Labels reuse existing Full Color/Mono vocabulary.",
+    "No Shopify restructure: ink is a line-item property; 24 variants (4 colors x 6 sizes) unchanged."
+   ]
   },
   "SCIENCE": {
    "status": "live",
