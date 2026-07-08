@@ -551,8 +551,6 @@
      "red",
      "black",
      "gold",
-     "white",
-     "grey",
      "karmablue"
     ],
     "Athletic Heather": [
@@ -561,25 +559,18 @@
      "red",
      "black",
      "gold",
-     "white",
-     "grey",
      "karmablue"
     ],
     "Navy": [
      "fc",
-     "navy",
      "red",
-     "black",
      "gold",
      "white",
-     "grey",
-     "karmablue"
+     "grey"
     ],
     "Black": [
      "fc",
-     "navy",
      "red",
-     "black",
      "gold",
      "white",
      "grey",
@@ -590,28 +581,16 @@
     "White": [
      "fc",
      "navy",
-     "red",
-     "black",
-     "gold",
-     "white",
-     "grey",
-     "karmablue"
+     "red"
     ],
     "Athletic Heather": [
      "fc",
      "navy",
-     "red",
-     "black",
-     "gold",
-     "white",
-     "grey",
-     "karmablue"
+     "red"
     ],
     "Navy": [
      "fc",
-     "navy",
      "red",
-     "black",
      "gold",
      "white",
      "grey",
@@ -619,9 +598,7 @@
     ],
     "Black": [
      "fc",
-     "navy",
      "red",
-     "black",
      "gold",
      "white",
      "grey",
@@ -654,12 +631,13 @@
     "No patterns",
     "Ice removed",
     "tee and hoodie share identical style x ink matrix",
-    "Neon Blue is available on all 5 styles (per HTML source of truth). Every style x ink x fabric is selectable."
+    "HTML (AMERICA_set.html) is the source of truth. Only its approved combinations (110) are user-selectable. Neon Blue is available on all 5 styles per HTML."
    ],
    "ui_behavior": {
-    "tile_gating": "None. Style, Ink, and Fabric are all independently selectable; nothing is greyed/struck. 'fc' resolves to fc_light on White/Heather and fc_dark on Navy/Black."
+    "tile_gating": "Style and Fabric tiles are always selectable (never greyed). The Ink options are restricted per (style,fabric) to exactly the HTML-approved set; ink auto-defaults to a valid one on change. Selectable set = HTML-approved set (110)."
    },
-   "all_combinations_selectable": true
+   "all_combinations_selectable": false,
+   "selectable_combinations": 110
   },
   "DAD": {
    "status": "live",
