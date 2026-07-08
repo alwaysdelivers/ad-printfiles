@@ -20,7 +20,10 @@
    "graphic"
   ],
   "ink_name_note": "'karmablue' ink renamed to 'neonblue' (Neon Blue) globally, 2026-07-06",
-  "changelog_2026-07-07": "Reconciled to live: FAITH drop Classic; MOM drop Elegant; KARMA 5 spirals (drop disco); CREATURES drop greyscale Yeti; STORK color-only baby colors; AMERICA inks drop ice/karma add fc; SCIENCE inks black/cream/red (line-item property); added full ink/colorway/validity/defaults/naming per prefix."
+  "changelog_2026-07-07": "Reconciled to live: FAITH drop Classic; MOM drop Elegant; KARMA 5 spirals (drop disco); CREATURES drop greyscale Yeti; STORK color-only baby colors; AMERICA inks drop ice/karma add fc; SCIENCE inks black/cream/red (line-item property); added full ink/colorway/validity/defaults/naming per prefix.",
+  "reconciled_prefixes": [
+   "AMERICA"
+  ]
  },
  "standard": {
   "canvas": {
@@ -445,11 +448,19 @@
   },
   "AMERICA": {
    "status": "live",
+   "reconciled": true,
+   "reconciled_date": "2026-07-07",
    "product_type": [
     "tee",
     "hoodie"
    ],
-   "handle": "america-always-delivers-tee",
+   "handles": {
+    "tee": "america-always-delivers-tee",
+    "hoodie": "america-always-delivers-hoodie"
+   },
+   "folder": "america",
+   "naming": "america",
+   "html_source": "AMERICA_set.html (Drive)",
    "options": {
     "Color": [
      "White",
@@ -473,6 +484,8 @@
      "Watermark"
     ]
    },
+   "variants_per_product": 120,
+   "ink_capture": "line-item property 'Ink' (ink is NOT a Shopify variant option)",
    "designs": [
     {
      "code": "classic",
@@ -495,16 +508,6 @@
      "label": "Watermark"
     }
    ],
-   "note": "old v32 codes usa-03/06/09/17 RETIRED; classic/heritage/star/retro + watermark; both full-color(multi-tone) and single-ink colorway sets exist",
-   "seo": {},
-   "colorway_system": {
-    "single_ink": "5 styles x 8 inks = 40",
-    "full_color": "classic/heritage/star/retro x light+dark = 8 (multi-tone, red accents)",
-    "patriotic_watermark": "4 (2x2 ground x lead color)"
-   },
-   "hires_status": "COMPLETE - 52 files @300dpi in Prefixes/America/",
-   "folder": "america",
-   "naming": "america",
    "inks": [
     {
      "token": "fc",
@@ -535,19 +538,20 @@
      "label": "Heather Grey"
     },
     {
-     "token": "neonblue",
-     "label": "Neon Blue"
+     "token": "karmablue",
+     "label": "Neon Blue",
+     "file_colorway": "neonblue"
     }
    ],
-   "colorway_rule": "fc->fc_{ground}; else literal token",
-   "ink_validity_std": {
+   "colorway_rule": "AMERICA_{style}_{cw}_{garment}; cw: fc->fc_{ground}, karmablue->neonblue, else literal; ground=dark if Navy/Black else light",
+   "ink_validity_standard": {
     "White": [
      "fc",
      "navy",
      "red",
      "black",
      "gold",
-     "neonblue"
+     "karmablue"
     ],
     "Athletic Heather": [
      "fc",
@@ -555,7 +559,7 @@
      "red",
      "black",
      "gold",
-     "neonblue"
+     "karmablue"
     ],
     "Navy": [
      "fc",
@@ -569,7 +573,7 @@
      "red",
      "white",
      "grey",
-     "neonblue",
+     "karmablue",
      "gold"
     ]
    },
@@ -589,7 +593,7 @@
      "red",
      "gold",
      "white",
-     "neonblue",
+     "karmablue",
      "grey"
     ],
     "Black": [
@@ -597,15 +601,37 @@
      "red",
      "gold",
      "white",
-     "neonblue",
+     "karmablue",
      "grey"
     ]
    },
    "defaults": {
-    "design": "Classic",
-    "ink": "fc",
-    "color": "White"
-   }
+    "style": "Classic",
+    "ink_by_color": {
+     "White": "navy",
+     "Athletic Heather": "navy",
+     "Navy": "white",
+     "Black": "red"
+    }
+   },
+   "files": {
+    "tee": 45,
+    "hoodie": 45,
+    "identical_matrix": true
+   },
+   "placement_classic": {
+    "prefix_px": "3000x900",
+    "prefix_in": "10x3",
+    "prefix_top_px": 900,
+    "gap_px": 720,
+    "wordmark_px": "2175x600",
+    "wordmark_in": "7.25x2"
+   },
+   "notes": [
+    "No patterns",
+    "Ice removed",
+    "tee and hoodie share identical style x ink matrix"
+   ]
   },
   "DAD": {
    "status": "live",
