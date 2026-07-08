@@ -550,56 +550,82 @@
      "navy",
      "red",
      "black",
-     "gold"
+     "gold",
+     "white",
+     "grey",
+     "karmablue"
     ],
     "Athletic Heather": [
      "fc",
      "navy",
      "red",
      "black",
-     "gold"
+     "gold",
+     "white",
+     "grey",
+     "karmablue"
     ],
     "Navy": [
      "fc",
+     "navy",
+     "red",
+     "black",
+     "gold",
      "white",
      "grey",
-     "red",
-     "gold"
+     "karmablue"
     ],
     "Black": [
      "fc",
+     "navy",
      "red",
+     "black",
+     "gold",
      "white",
      "grey",
-     "gold"
+     "karmablue"
     ]
    },
    "ink_validity_watermark": {
     "White": [
      "fc",
      "navy",
-     "red"
+     "red",
+     "black",
+     "gold",
+     "white",
+     "grey",
+     "karmablue"
     ],
     "Athletic Heather": [
      "fc",
      "navy",
-     "red"
+     "red",
+     "black",
+     "gold",
+     "white",
+     "grey",
+     "karmablue"
     ],
     "Navy": [
      "fc",
+     "navy",
      "red",
+     "black",
      "gold",
      "white",
-     "karmablue",
-     "grey"
+     "grey",
+     "karmablue"
     ],
     "Black": [
      "fc",
+     "navy",
      "red",
+     "black",
      "gold",
      "white",
-     "karmablue",
-     "grey"
+     "grey",
+     "karmablue"
     ]
    },
    "defaults": {
@@ -628,11 +654,12 @@
     "No patterns",
     "Ice removed",
     "tee and hoodie share identical style x ink matrix",
-    "Neon Blue (karmablue) is watermark-only; standard-style neonblue print files exist but are not offered"
+    "Neon Blue is available on all 5 styles (per HTML source of truth). Every style x ink x fabric is selectable."
    ],
    "ui_behavior": {
-    "tile_gating": "Style and Garment Color tiles are always selectable; the Ink options adjust to the chosen style+color (ink auto-defaults if the current ink is invalid). Tiles are never disabled by ink."
-   }
+    "tile_gating": "None. Style, Ink, and Fabric are all independently selectable; nothing is greyed/struck. 'fc' resolves to fc_light on White/Heather and fc_dark on Navy/Black."
+   },
+   "all_combinations_selectable": true
   },
   "DAD": {
    "status": "live",
