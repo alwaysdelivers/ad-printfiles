@@ -39,6 +39,15 @@ def faithlane_cw(tk, ckey):
     return ground(ckey)                                 # fc -> light/dark
 FAITHLANE_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red'}
 FAITHLANE_VALID={'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['fc','mono','red'],'black':['fc','mono','red']}
+# stork inks (fc/navy/cream/red): navy = light-ground mono file, cream = dark-ground mono file
+STORK_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','cream':'cream','red':'red'}
+STORK_VALID={'white':['fc','navy','red'],'babypink':['fc','navy','red'],'babyblue':['fc','navy','red'],'black':['fc','cream','red']}
+STORK_DEFAULT={'white':'fc','babypink':'fc','babyblue':'fc','black':'fc'}
+def stork_cw(tk, ckey):
+    if tk=='navy': return 'light_mono'
+    if tk=='cream': return 'dark_mono'
+    if tk=='red':  return 'redmono'
+    return ground(ckey)   # fc -> light/dark by ground
 
 # god/dad ink label -> treatment; treatment -> new file colorway
 GD_INK={'fullcolor':'fc','full color':'fc','split':'fc','fc':'fc','navy':'navy','red':'red','black':'black',
@@ -124,14 +133,22 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         else: cw=faithlane_cw(tk, ckey)
         return out('jesus', 'JESUS_%s_%s'%(code,cw))
 
-    if dk in ('mom','faith','stork'):
-        STY={'mom':MOM_STYLES,'faith':FAITH_STYLES,'stork':STORK_STYLES}[dk]
+    if dk in ('mom','faith'):
+        STY={'mom':MOM_STYLES,'faith':FAITH_STYLES}[dk]
         st=norm(print_style); code=STY.get(st)
         if not code: return {'error':'%s invalid Style'%dk.upper(),'title':title,'style':print_style}
         tk=_resolve_ink(ink, FAITHLANE_INK, FAITHLANE_VALID, {'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}, ckey)
         cw=faithlane_cw(tk, ckey)
-        PMAP={'mom':'MOM','faith':'FAITH','stork':'STORK'}
+        PMAP={'mom':'MOM','faith':'FAITH'}
         return out(dk, '%s_%s_%s'%(PMAP[dk],code,cw))
+
+    if dk=='stork':
+        st=norm(print_style); code=STORK_STYLES.get(st)
+        if not code: return {'error':'STORK invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, STORK_INK, STORK_VALID, STORK_DEFAULT, ckey)
+        if not tk: return {'error':'STORK invalid ink','title':title,'ink':ink}
+        cw=stork_cw(tk, ckey)
+        return out('stork', 'STORK_%s_%s'%(code,cw))
 
     if dk in ('god','dad'):
         STY=GOD_STYLES if dk=='god' else DAD_STYLES
