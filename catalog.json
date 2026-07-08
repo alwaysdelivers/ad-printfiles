@@ -1202,12 +1202,12 @@
    "ink_capture": "line-item property 'Ink' (ink is NOT a Shopify variant option)",
    "designs": [
     {
-     "code": "stk-01",
+     "code": "stk-07",
      "label": "Classic",
      "font": "Playfair"
     },
     {
-     "code": "stk-07",
+     "code": "stk-01",
      "label": "Elegant",
      "font": "Great Vibes"
     }
@@ -1274,7 +1274,8 @@
     "HTML's 5 file-colorways (fc light, fc dark, mono navy, mono cream, red) shown as 4 ink pills (Full Color folds light+dark).",
     "Navy ink on light grounds only; Cream ink on dark (Black) only.",
     "Garment colors (White/Baby Pink/Baby Blue/Black) are a layered choice; HTML defines designs+inks+placement only.",
-    "Replaces the OLD color-only baby stork (single design, no Style/Ink) - live product REBUILT to this."
+    "Replaces the OLD color-only baby stork (single design, no Style/Ink) - live product REBUILT to this.",
+    "Code mapping corrected 2026-07-08: Classic=stk-07 (Playfair/serif), Elegant=stk-01 (Great Vibes/cursive) - matches fulfill.py + actual fonts."
    ]
   },
   "CREATURES": {
