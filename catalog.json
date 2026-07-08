@@ -1037,41 +1037,46 @@
    ],
    "inks": [
     {
-     "token": "split",
+     "token": "fc",
      "label": "Full Color",
-     "note": "gold+red split lockup"
+     "note": "navy crown + gold halo + red in lockup"
     },
     {
-     "token": "mono",
-     "label": "Mono",
-     "note": "gold lockup, no red"
+     "token": "navy",
+     "label": "Navy",
+     "note": "navy crown+lockup, gold halo (light grounds)"
+    },
+    {
+     "token": "slate",
+     "label": "Slate",
+     "note": "slate #a8c0c0 crown+lockup, gold halo (dark grounds)"
     }
    ],
-   "colorway_rule": "CROWN_{colorkey}{_split if ink==split}_{garment}; colorkey: White->white, Athletic Heather->heather, Navy->navy, Black->black; crown navy+gold on light, grey+gold on dark (baked in file)",
+   "colorway_rule": "fc -> CROWN_{ck}_split_{garment} (light only); navy -> CROWN_{ck}_{garment} (light); slate -> CROWN_{ck}_{garment} (dark). Gold halo constant in ALL versions.",
    "ink_validity": {
     "White": [
-     "split",
-     "mono"
+     "fc",
+     "navy"
     ],
     "Athletic Heather": [
-     "split",
-     "mono"
+     "fc",
+     "navy"
     ],
     "Navy": [
-     "mono"
+     "slate"
     ],
     "Black": [
-     "mono"
+     "slate"
     ]
    },
    "defaults": {
-    "default_ink": "split",
+    "default_ink": "fc",
     "color": "White",
     "ink_by_color": {
-     "White": "split",
-     "Athletic Heather": "split",
-     "Navy": "mono",
-     "Black": "mono"
+     "White": "fc",
+     "Athletic Heather": "fc",
+     "Navy": "slate",
+     "Black": "slate"
     }
    },
    "files": {
@@ -1079,10 +1084,11 @@
     "hoodie": 6
    },
    "notes": [
-    "Single design (Crown of Thorns). Ink toggle: Full Color (+red split lockup) / Mono (gold lockup).",
-    "Full Color (split) only on light grounds (White, Ath Heather); Navy/Black = Mono only.",
-    "Default = Full Color where valid, else Mono. Labels reuse existing Full Color/Mono vocabulary.",
-    "No Shopify restructure: ink is a line-item property; 24 variants (4 colors x 6 sizes) unchanged."
+    "Single design (Crown of Thorns). 3 inks: Full Color / Navy / Slate.",
+    "Gold halo is CONSTANT in every version - it is not an ink option.",
+    "Navy ink = light grounds only; Slate ink = dark grounds only; Full Color (=+red lockup) = light grounds only.",
+    "Default = Full Color on light, Slate on dark.",
+    "No Shopify restructure: ink is a line-item property; 24 variants unchanged."
    ]
   },
   "SCIENCE": {
