@@ -550,16 +550,14 @@
      "navy",
      "red",
      "black",
-     "gold",
-     "karmablue"
+     "gold"
     ],
     "Athletic Heather": [
      "fc",
      "navy",
      "red",
      "black",
-     "gold",
-     "karmablue"
+     "gold"
     ],
     "Navy": [
      "fc",
@@ -573,7 +571,6 @@
      "red",
      "white",
      "grey",
-     "karmablue",
      "gold"
     ]
    },
@@ -630,8 +627,12 @@
    "notes": [
     "No patterns",
     "Ice removed",
-    "tee and hoodie share identical style x ink matrix"
-   ]
+    "tee and hoodie share identical style x ink matrix",
+    "Neon Blue (karmablue) is watermark-only; standard-style neonblue print files exist but are not offered"
+   ],
+   "ui_behavior": {
+    "tile_gating": "Style and Garment Color tiles are always selectable; the Ink options adjust to the chosen style+color (ink auto-defaults if the current ink is invalid). Tiles are never disabled by ink."
+   }
   },
   "DAD": {
    "status": "live",
