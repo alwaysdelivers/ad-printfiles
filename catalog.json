@@ -25,6 +25,7 @@
    "AMERICA",
    "CREATURES",
    "CROWN",
+   "DAD",
    "THE_STORK"
   ],
   "default_ink_rule": "Default ink = Full Color (fc) where valid. If a prefix cannot use Full Color as default, choose that prefix's default at reconciliation time."
@@ -649,11 +650,19 @@
   },
   "DAD": {
    "status": "live",
+   "reconciled": true,
+   "reconciled_date": "2026-07-08",
    "product_type": [
     "tee",
     "hoodie"
    ],
-   "handle": "dad-always-delivers-tee",
+   "handles": {
+    "tee": "dad-always-delivers-tee",
+    "hoodie": "dad-always-delivers-hoodie"
+   },
+   "folder": "dad",
+   "naming": "dad",
+   "html_source": "DAD_full_set_preview.html",
    "options": {
     "Color": [
      "White",
@@ -675,31 +684,28 @@
      "Retro"
     ]
    },
+   "ink_capture": "line-item property 'Ink' (ink is NOT a Shopify variant option)",
    "designs": [
     {
      "code": "dad-02",
-     "label": "Classic"
+     "label": "Classic",
+     "font": "Pacifico"
     },
     {
      "code": "dad-04",
-     "label": "Varsity"
+     "label": "Varsity",
+     "font": "Rye"
     },
     {
      "code": "dad-disco",
-     "label": "Retro"
+     "label": "Retro",
+     "font": "Monoton"
     }
    ],
-   "seo": {},
-   "folder": "dad",
-   "naming": "two-color",
    "inks": [
     {
      "token": "fc",
      "label": "Full Color"
-    },
-    {
-     "token": "navy",
-     "label": "Navy"
     },
     {
      "token": "red",
@@ -710,52 +716,148 @@
      "label": "Black"
     },
     {
+     "token": "navy",
+     "label": "Navy"
+    },
+    {
      "token": "white",
-     "label": "White"
+     "label": "White",
+     "note": "true white #fafaf8 - NOT brand cream #f0f0d8"
     },
     {
      "token": "grey",
-     "label": "Heather Grey"
+     "label": "Grey"
     },
     {
      "token": "neonblue",
      "label": "Neon Blue"
     }
    ],
-   "colorway_rule": "fc->fc_{ground}; neonblue->neonblue; else literal token",
-   "ink_validity": {
-    "White": [
-     "fc",
-     "navy",
-     "red",
-     "black",
-     "neonblue"
-    ],
-    "Athletic Heather": [
-     "fc",
-     "navy",
-     "red",
-     "black",
-     "white"
-    ],
-    "Navy": [
-     "fc",
-     "white",
-     "grey"
-    ],
-    "Black": [
-     "fc",
-     "red",
-     "white",
-     "grey",
-     "neonblue"
-    ]
+   "colorway_rule": "DAD_{code}_{cw}_{garment}; cw: fc->fc_light/fc_dark by ground, else literal token; ground=dark if Navy/Black else light",
+   "ink_validity_by_style": {
+    "Classic": {
+     "White": [
+      "fc",
+      "red",
+      "black",
+      "navy",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "red",
+      "black",
+      "navy",
+      "neonblue"
+     ],
+     "Navy": [
+      "fc",
+      "red",
+      "black",
+      "white",
+      "grey",
+      "neonblue"
+     ],
+     "Black": [
+      "fc",
+      "red",
+      "navy",
+      "white",
+      "grey",
+      "neonblue"
+     ]
+    },
+    "Varsity": {
+     "White": [
+      "fc",
+      "red",
+      "black",
+      "navy",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "red",
+      "black",
+      "navy",
+      "white",
+      "neonblue"
+     ],
+     "Navy": [
+      "fc",
+      "red",
+      "black",
+      "white",
+      "grey",
+      "neonblue"
+     ],
+     "Black": [
+      "fc",
+      "red",
+      "navy",
+      "white",
+      "grey",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "red",
+      "black",
+      "navy",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "red",
+      "black",
+      "navy",
+      "white",
+      "neonblue"
+     ],
+     "Navy": [
+      "fc",
+      "red",
+      "black",
+      "white",
+      "grey",
+      "neonblue"
+     ],
+     "Black": [
+      "fc",
+      "red",
+      "navy",
+      "white",
+      "grey",
+      "neonblue"
+     ]
+    }
    },
    "defaults": {
-    "design": "Classic",
-    "ink": "fc",
-    "color": "White"
-   }
+    "style": "Classic",
+    "default_ink": "fc",
+    "color": "White",
+    "ink_by_color": {
+     "White": "fc",
+     "Athletic Heather": "fc",
+     "Navy": "fc",
+     "Black": "fc"
+    }
+   },
+   "files": {
+    "tee": 24,
+    "hoodie": 24
+   },
+   "all_combinations_selectable": false,
+   "selectable_combinations": 68,
+   "notes": [
+    "America pattern: Style is a Shopify option; Ink is a line-item property. No restructure needed.",
+    "DAD 'White' ink is TRUE WHITE #fafaf8, not brand cream #f0f0d8 - white->cream rename does NOT apply.",
+    "Validity is STYLE-DEPENDENT: White ink on Athletic Heather is invalid for Classic (thin Pacifico) but valid for Varsity/Retro.",
+    "Inks dropped where they vanish into fabric: black-on-black, navy-on-navy, white-on-white, grey on light grounds.",
+    "68 selectable combos (84 - 16 deleted)."
+   ]
   },
   "MOM": {
    "status": "live",
