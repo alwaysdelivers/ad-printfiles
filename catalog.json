@@ -213,51 +213,168 @@
    "inks": [
     {
      "token": "fc",
-     "label": "Full Color"
+     "label": "Full Color",
+     "note": "navy+red on light grounds; cream+red on dark"
     },
     {
-     "token": "mono",
-     "label": "Mono"
+     "token": "navy",
+     "label": "Navy",
+     "note": "navy #183048 mono, light grounds"
+    },
+    {
+     "token": "cream",
+     "label": "Cream",
+     "note": "cream #f0f0d8 mono, dark grounds (+ heather on Bold/Retro)"
     },
     {
      "token": "red",
-     "label": "Red"
+     "label": "Red",
+     "note": "red #c03018 mono"
     },
     {
      "token": "black",
-     "label": "Black"
+     "label": "Black",
+     "note": "black #000000 mono"
     }
    ],
-   "colorway_rule": "fc->{ground}; mono->{ground}_mono; red->redmono; black->blackmono",
-   "ink_validity": {
-    "White": [
-     "fc",
-     "mono",
-     "red",
-     "black"
-    ],
-    "Athletic Heather": [
-     "fc",
-     "mono",
-     "red",
-     "black"
-    ],
-    "Navy": [
-     "fc",
-     "mono",
-     "black"
-    ],
-    "Black": [
-     "fc",
-     "mono",
-     "red"
+   "colorway_rule": "JESUS_{code}_{cw}_{garment}; cw: fc->{ground}, navy->light_mono, cream->dark_mono, red->redmono, black->blackmono; ground=dark if Navy/Black else light",
+   "defaults": {
+    "style": "Serif",
+    "ink": "fc",
+    "color": "White",
+    "note": "Full Color valid on every style+fabric; default ink is fc everywhere"
+   },
+   "reconciled": true,
+   "reconciled_date": "2026-07-09",
+   "handles": {
+    "tee": "jesus-always-delivers-tee",
+    "hoodie": "jesus-always-delivers-hoodie"
+   },
+   "html_source": "JESUS_full_set_preview.html (Drive 1TTpe_wpw1WuB1LRSxLb25JeWeoS4a0Ye)",
+   "ink_capture": "line-item property 'Ink'",
+   "ink_validity_by_style": {
+    "Serif": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black"
+     ],
+     "Navy": [
+      "fc",
+      "cream",
+      "red",
+      "black"
+     ],
+     "Black": [
+      "fc",
+      "navy",
+      "cream",
+      "red"
+     ]
+    },
+    "Script": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black"
+     ],
+     "Navy": [
+      "fc",
+      "cream",
+      "red",
+      "black"
+     ],
+     "Black": [
+      "fc",
+      "navy",
+      "cream",
+      "red"
+     ]
+    },
+    "Bold": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "cream",
+      "red",
+      "black"
+     ],
+     "Navy": [
+      "fc",
+      "cream",
+      "red",
+      "black"
+     ],
+     "Black": [
+      "fc",
+      "navy",
+      "cream",
+      "red"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "cream",
+      "red",
+      "black"
+     ],
+     "Navy": [
+      "fc",
+      "cream",
+      "red",
+      "black"
+     ],
+     "Black": [
+      "fc",
+      "navy",
+      "cream",
+      "red"
+     ]
+    }
+   },
+   "files": {
+    "count": 48,
+    "pattern": "printfiles/jesus/JESUS_{code}_{colorway}_{garment}.png",
+    "colorways": [
+     "light",
+     "dark",
+     "light_mono",
+     "dark_mono",
+     "blackmono",
+     "redmono"
     ]
    },
-   "defaults": {
-    "design": "Serif",
-    "ink": "fc",
-    "color": "White"
-   }
+   "all_combinations_selectable": false,
+   "selectable_combinations": 66,
+   "notes": "14 of 80 combos removed: Navy-on-Navy, Black-on-Black, Cream-on-White (all styles); Cream-on-AthHeather for Serif+Script only (thin faces). Navy-on-Black and Black-on-Navy intentionally kept."
   },
   "GOD": {
    "status": "live",
@@ -1626,5 +1743,13 @@
    "datenight (datenight-01/02)",
    "chalobeta (cb-01)"
   ]
- }
+ },
+ "reconciled_prefixes": [
+  "AMERICA",
+  "CREATURES",
+  "CROWN",
+  "DAD",
+  "JESUS",
+  "THE_STORK"
+ ]
 }
