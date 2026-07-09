@@ -57,8 +57,9 @@ def gd_cw(tk, ckey):
     return ('fc_'+ground(ckey)) if tk=='fc' else tk     # fc -> fc_light/fc_dark; else literal
 GOD_VALID={'white':['navy','fc','red','black','neonblue'],'athleticheather':['navy','fc','red','black'],'navy':['fc','cream','grey'],'black':['fc','red','cream','grey','neonblue']}
 GOD_DEFAULT={'white':'navy','athleticheather':'navy','navy':'cream','black':'cream'}
-DAD_VALID={'white':['navy','fc','red','black','neonblue'],'athleticheather':['navy','fc','red','black','white'],'navy':['fc','white','grey'],'black':['fc','red','white','grey','neonblue']}
-DAD_DEFAULT={'white':'navy','athleticheather':'navy','navy':'white','black':'white'}
+# DAD validity is STYLE-DEPENDENT (approved matrix 2026-07-08): white ink on heather invalid for Classic only
+DAD_VALID_BY_STYLE={"classic": {"athleticheather": ["fc", "red", "black", "navy", "neonblue"], "black": ["fc", "red", "navy", "white", "grey", "neonblue"], "navy": ["fc", "red", "black", "white", "grey", "neonblue"], "white": ["fc", "red", "black", "navy", "neonblue"]}, "retro": {"athleticheather": ["fc", "red", "black", "navy", "white", "neonblue"], "black": ["fc", "red", "navy", "white", "grey", "neonblue"], "navy": ["fc", "red", "black", "white", "grey", "neonblue"], "white": ["fc", "red", "black", "navy", "neonblue"]}, "varsity": {"athleticheather": ["fc", "red", "black", "navy", "white", "neonblue"], "black": ["fc", "red", "navy", "white", "grey", "neonblue"], "navy": ["fc", "red", "black", "white", "grey", "neonblue"], "white": ["fc", "red", "black", "navy", "neonblue"]}}
+DAD_DEFAULT={'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}   # Full Color valid on every combo
 
 # america inks (single-ink per color) -> file colorway; ice removed, karmablue->neonblue
 AMERICA_INK={'navy':'navy','red':'red','black':'black','gold':'gold','cream':'cream','white':'cream','grey':'grey','heather grey':'grey','heathergrey':'grey','karmablue':'neonblue','karma blue':'neonblue','neonblue':'neonblue','fullcolor':'fc','full color':'fc','fc':'fc'}
@@ -152,10 +153,10 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
 
     if dk in ('god','dad'):
         STY=GOD_STYLES if dk=='god' else DAD_STYLES
-        VAL=GOD_VALID if dk=='god' else DAD_VALID
         DEF=GOD_DEFAULT if dk=='god' else DAD_DEFAULT
         st=norm(print_style); code=STY.get(st)
         if not code: return {'error':'%s invalid Style'%dk.upper(),'title':title,'style':print_style}
+        VAL=GOD_VALID if dk=='god' else DAD_VALID_BY_STYLE.get(st, {})
         tk=_resolve_ink(ink, GD_INK, VAL, DEF, ckey)
         if not tk: return {'error':'%s invalid ink'%dk.upper(),'title':title,'ink':ink}
         cw=gd_cw(tk, ckey)
