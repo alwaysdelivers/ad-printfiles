@@ -65,8 +65,8 @@ GD_INK={'fullcolor':'fc','full color':'fc','split':'fc','fc':'fc','navy':'navy',
         'karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
 def gd_cw(tk, ckey):
     return ('fc_'+ground(ckey)) if tk=='fc' else tk     # fc -> fc_light/fc_dark; else literal
-GOD_VALID={'white':['navy','fc','red','black','neonblue'],'athleticheather':['navy','fc','red','black'],'navy':['fc','cream','grey'],'black':['fc','red','cream','grey','neonblue']}
-GOD_DEFAULT={'white':'navy','athleticheather':'navy','navy':'cream','black':'cream'}
+GOD_VALID_BY_STYLE={"monument":{"white":["fc","navy","red","black","neonblue"],"athleticheather":["fc","navy","red","black","neonblue"],"navy":["fc","red","black","cream","grey","neonblue"],"black":["fc","navy","red","cream","grey","neonblue"]},"bold":{"white":["fc","navy","red","black","neonblue"],"athleticheather":["fc","navy","red","black","cream","neonblue"],"navy":["fc","red","black","cream","grey","neonblue"],"black":["fc","navy","red","cream","grey","neonblue"]},"retro":{"white":["fc","navy","red","black","grey","neonblue"],"athleticheather":["fc","navy","red","black","cream","neonblue"],"navy":["fc","red","black","cream","grey","neonblue"],"black":["fc","navy","red","cream","grey","neonblue"]}}   # style-dependent (matrix 2026-07-09, 69/84)
+GOD_DEFAULT={'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}   # fc valid in all 12 cells
 # DAD validity is STYLE-DEPENDENT (approved matrix 2026-07-08): white ink on heather invalid for Classic only
 DAD_VALID_BY_STYLE={"classic": {"athleticheather": ["fc", "red", "black", "navy", "neonblue"], "black": ["fc", "red", "navy", "white", "grey", "neonblue"], "navy": ["fc", "red", "black", "white", "grey", "neonblue"], "white": ["fc", "red", "black", "navy", "neonblue"]}, "retro": {"athleticheather": ["fc", "red", "black", "navy", "white", "neonblue"], "black": ["fc", "red", "navy", "white", "grey", "neonblue"], "navy": ["fc", "red", "black", "white", "grey", "neonblue"], "white": ["fc", "red", "black", "navy", "neonblue"]}, "varsity": {"athleticheather": ["fc", "red", "black", "navy", "white", "neonblue"], "black": ["fc", "red", "navy", "white", "grey", "neonblue"], "navy": ["fc", "red", "black", "white", "grey", "neonblue"], "white": ["fc", "red", "black", "navy", "neonblue"]}}
 DAD_DEFAULT={'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}   # Full Color valid on every combo
@@ -164,7 +164,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         DEF=GOD_DEFAULT if dk=='god' else DAD_DEFAULT
         st=norm(print_style); code=STY.get(st)
         if not code: return {'error':'%s invalid Style'%dk.upper(),'title':title,'style':print_style}
-        VAL=GOD_VALID if dk=='god' else DAD_VALID_BY_STYLE.get(st, {})
+        VAL=GOD_VALID_BY_STYLE.get(st, {}) if dk=='god' else DAD_VALID_BY_STYLE.get(st, {})
         tk=_resolve_ink(ink, GD_INK, VAL, DEF, ckey)
         if not tk: return {'error':'%s invalid ink'%dk.upper(),'title':title,'ink':ink}
         cw=gd_cw(tk, ckey)
