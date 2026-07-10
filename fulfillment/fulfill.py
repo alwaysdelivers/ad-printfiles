@@ -39,6 +39,16 @@ def faithlane_cw(tk, ckey):
     return ground(ckey)                                 # fc -> light/dark
 FAITHLANE_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red'}
 FAITHLANE_VALID={'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['fc','mono','red'],'black':['fc','mono','red']}
+# jesus inks (fc/navy/cream/red/black) -> file colorway; validity is STYLE-DEPENDENT (approved matrix 2026-07-09, 66/80)
+JESUS_INK={'full color':'fc','fullcolor':'fc','fc':'fc','navy':'navy','cream':'cream','red':'red','black':'black'}
+JESUS_VALID_BY_STYLE={"serif":{"white":["fc","navy","red","black"],"athleticheather":["fc","navy","red","black"],"navy":["fc","cream","red","black"],"black":["fc","navy","cream","red"]},"script":{"white":["fc","navy","red","black"],"athleticheather":["fc","navy","red","black"],"navy":["fc","cream","red","black"],"black":["fc","navy","cream","red"]},"bold":{"white":["fc","navy","red","black"],"athleticheather":["fc","navy","cream","red","black"],"navy":["fc","cream","red","black"],"black":["fc","navy","cream","red"]},"retro":{"white":["fc","navy","red","black"],"athleticheather":["fc","navy","cream","red","black"],"navy":["fc","cream","red","black"],"black":["fc","navy","cream","red"]}}
+JESUS_DEFAULT={'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}   # fc valid in all 16 cells
+def jesus_cw(tk, ckey):
+    if tk=='navy':  return 'light_mono'
+    if tk=='cream': return 'dark_mono'
+    if tk=='red':   return 'redmono'
+    if tk=='black': return 'blackmono'
+    return ground(ckey)   # fc -> light/dark by ground
 # stork inks (fc/navy/cream/red): navy = light-ground mono file, cream = dark-ground mono file
 STORK_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','cream':'cream','red':'red'}
 STORK_VALID={'white':['fc','navy','red'],'babypink':['fc','navy','red'],'babyblue':['fc','navy','red'],'black':['fc','cream','red']}
@@ -127,11 +137,9 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     if dk=='jesus':
         st=norm(print_style); code=JESUS_STYLES.get(st)
         if not code: return {'error':'JESUS invalid Style','title':title,'style':print_style}
-        tk=_resolve_ink(ink, FAITHLANE_INK, FAITHLANE_VALID, {'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}, ckey)
-        # jesus has black-ink option too (blackmono, not on black garment)
-        lab=(ink or '').strip().lower()
-        if lab=='black' and ckey!='black': cw='blackmono'
-        else: cw=faithlane_cw(tk, ckey)
+        jvalid=JESUS_VALID_BY_STYLE.get(st,{})
+        tk=_resolve_ink(ink, JESUS_INK, jvalid, JESUS_DEFAULT, ckey)
+        cw=jesus_cw(tk, ckey)
         return out('jesus', 'JESUS_%s_%s'%(code,cw))
 
     if dk in ('mom','faith'):
