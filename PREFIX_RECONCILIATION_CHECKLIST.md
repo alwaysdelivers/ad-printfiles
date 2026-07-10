@@ -25,7 +25,7 @@ Resolution of conflicts:
 - [ ] 2. Parse the HTML matrix: styles (rows) × colorways (columns); note any `—` / N/A cells.
 - [ ] 3. Read the LIVE product JSON for **both** tee and hoodie: options, variant count, handles.
 - [ ] 4. Enumerate the repo print files for the prefix; build the actual style × colorway matrix for **tee AND hoodie**.
-- [ ] 5. Present **live vs HTML vs catalog** side by side (tee + hoodie) and get approval before writing.
+- [ ] 5. Present **live vs HTML vs catalog** side by side (tee + hoodie) — AS A VISUAL HTML PROOF (numbered matrix of composites) — and get approval before writing.
 - [ ] 6. Confirm the **fabric-color axis** (HTML usually omits it — carry it separately: White/Athletic Heather/Navy/Black, or baby colors).
 - [ ] 7. Flag ink-naming issues (see "White = Cream" below) and get the decision.
 - [ ] 8. Decide the **default ink** (Full Color where valid; otherwise decide for this prefix).
@@ -88,6 +88,7 @@ Resolution of conflicts:
 - **Grids read the catalog live** via the shared `snippets/ad-grid.liquid` upgrader (fetch catalog → composite blank + resolved design → light→dark swatches). Baked `heroes/grid/` JPEGs kept as fallback.
 - **PDP composites live** from the print files; grids now composite the same way → a catalog change dominoes to PDP + home + shop-all.
 - Home grid caps at 8 (frontpage collection) + Shop All; shop-all shows all.
+- **Deep-link reader (`?variant=<id>`) is mandatory on every prefix PDP** — a PDP without it is a defect.
 
 ---
 
@@ -95,5 +96,8 @@ Resolution of conflicts:
 - **Don't over-interpret a single screenshot.** (Neon blue was made watermark-only from one image — the opposite of truth.) Confirm intent against the HTML before acting.
 - **Don't add anything not in the HTML.** (Invented pattern pills; exposed 50 unapproved combos.) Only what the HTML approves.
 - **Offline-pass ≠ live-pass.** Path bugs (dropped `printfiles/`) and CSS/behavior (dropped luminance sort) pass a Python mirror but fail live. Always verify on the live page.
+- **CHECK THE TEMPLATE before editing a section.** Read `templates/product.X.json` → `order` → section `type`. (karma-combined-pdp was edited a full day while karma-combined was live.)
+- **`node --check` is syntax only.** A ReferenceError killed the Crown PDP undetected. Run the runtime harness + BFS.
 - **Ask before every change.** Diagnose + propose first; touch nothing (files, theme, catalog, Drive) until confirmed.
-- **jsDelivr caches** — renames need cache-bust/purge; `raw.githubusercontent` serves current. Shopify asset readback + page cache can be stale — wait and re-fetch.
+- **jsDelivr caches** — renames need cache-bust/purge (`_r2`, `_r3` suffixes for changed content); `raw.githubusercontent` serves current. Shopify asset readback + page cache can be stale — wait and re-fetch.
+- **Deliver visual proofs as an openable HTML file** (full-res composites, numbered when a decision is needed) — never a text table for a visual decision.
