@@ -1,9 +1,9 @@
 {
  "_meta": {
   "schema_version": "2.0",
-  "generated": "2026-07-07",
+  "generated": "2026-07-10",
   "source_of_truth": "This file. Print files, Shopify options, Printful map, and SEO copy are all generated FROM this. Never hand-edit downstream layers.",
-  "reconciled_against": "LIVE Shopify products + ad-printfiles repo + deployed PDP resolvers (2026-07-07)",
+  "reconciled_against": "LIVE Shopify products + ad-printfiles repo + deployed PDP resolvers (2026-07-09)",
   "status_values": [
    "pending",
    "built",
@@ -26,9 +26,12 @@
    "CREATURES",
    "CROWN",
    "DAD",
+   "GOD",
+   "JESUS",
    "THE_STORK"
   ],
-  "default_ink_rule": "Default ink = Full Color (fc) where valid. If a prefix cannot use Full Color as default, choose that prefix's default at reconciliation time."
+  "default_ink_rule": "Default ink = Full Color (fc) where valid. If a prefix cannot use Full Color as default, choose that prefix's default at reconciliation time.",
+  "note": "Authoritative live file is the ad-printfiles repo root (catalog.json); this is mirrored to Drive on every reconciliation. 7 prefixes reconciled/locked as of 2026-07-09."
  },
  "standard": {
   "canvas": {
