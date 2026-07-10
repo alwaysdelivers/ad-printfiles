@@ -20,7 +20,6 @@ def PF(prefix, base, garment):                          # -> printfiles/<prefix>
     return 'printfiles/%s/%s_%s.png'%(prefix, base, garment)
 def ground(ckey): return 'light' if ckey in LIGHT else 'dark'
 
-MOCKUP_MODEL={'tee':"Men's 4",'hoodie':"Men's 4"}
 
 # ---- STYLE / INK RESOLUTION (live product truth; v33) ------------------------
 JESUS_STYLES={'serif':'jes-01','script':'jes-03','bold':'jes-07','retro':'jes-11'}
