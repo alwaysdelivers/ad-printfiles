@@ -72,11 +72,14 @@ Resolution of conflicts:
 
 ## UI standards (locked)
 - **Default ink = Full Color** where valid; else decide per prefix.
-- **Reset / initial load = a COMPLETE valid state** (e.g. Classic / White / Full Color). Never a null garment/ink — a null garment makes the validity lists empty and slashes everything.
+- **Load/Reset = a PREVIEW, not a choice (locked 2026-07-09).** Nothing is chosen; ALL styles/fabrics/inks are enabled; the hero shows the default preview (e.g. Classic / White / Full Color). A default is a preview, not a choice.
+- **Clicking commits that axis only.** Unchosen axes resolve via a single `effTriple()` resolver (best valid style/color/ink honoring chosen axes, preview-match scoring). ALL renders — hero, blank, rings, labels, sizes, cart `Ink` property — read from `effTriple()`. Chosen axes are NEVER silently overwritten; there is NO auto-switch. If a click makes the current mix invalid, the unchosen (preview) axes move.
+- **Enablement rule:** an option is enabled iff SOME assignment of the unchosen axes makes it valid.
+- **Verification is mandatory before deploy:** runtime harness (execute `effTriple`/`inkEnabled` in node with stubbed globals — `node --check` is NOT enough) + exhaustive BFS from reset over every enabled click: 0 invalid renders, ALL approved triples reachable.
 - **Ink pills carry a color dot** (Option A): dot left of label; light inks get a border; Full Color = navy/red split dot; selected dot gets a white ring.
 - **Unavailable combinations = greyed + red diagonal slash** on all three axes (style, ink, fabric), driven by the correct HTML-approved validity. The slash is only right if the data behind it is right.
 - **Swatch order = light → dark by luminance** (White first … Black last). Grid default = lightest color.
-- Style + Fabric tiles stay selectable; ink options adjust; ink auto-defaults if the current one becomes invalid.
+- Style + Fabric tiles stay selectable where reachable; enablement on all three axes follows the rule above (no silent ink auto-switch — superseded 2026-07-09).
 
 ---
 

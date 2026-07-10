@@ -1234,7 +1234,8 @@
     "design": "Black & Blue",
     "ink": null,
     "color": "White"
-   }
+   },
+   "mockups_note": "24 real Printful mockups banked in mockups/karma/ ({garment}_{code}_{Color}.jpg) for marketing use; PDP stays on live composite (2026-07-09)"
   },
   "CROSS": {
    "status": "live",
