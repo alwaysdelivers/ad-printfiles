@@ -86,6 +86,12 @@ def cross_cw(tk, ckey):
 
 CROWN_INK={'full color':'split','fullcolor':'split','split':'split','fc':'split','navy':'mono','slate':'mono','mono':'mono'}
 CROWN_VALID={'white':['split','mono'],'athleticheather':['split','mono'],'navy':['mono'],'black':['mono']}  # mono token = Navy ink (light) or Slate ink (dark); same file
+
+# creature inks (Full Color/Grey/Black) -> file suffix; validity per approved matrix 2026-07-10 (black-on-black struck)
+CRE_INK={'fullcolor':'fc','fc':'fc','grey':'grey','gray':'grey','black':'black'}
+CRE_VALID={'white':['fc','black'],'athleticheather':['fc','black'],'navy':['grey','black'],'black':['grey']}
+CRE_DEFAULT={'white':'fc','athleticheather':'fc','navy':'grey','black':'grey'}
+CRE_SUF={'fc':'whitegarments','grey':'darkgarments','black':'blackink'}
 CROWN_DEFAULT={'white':'split','athleticheather':'split','navy':'mono','black':'mono'}
 CROWN_COLOR={'white':'white','athleticheather':'heather','sportgrey':'heather','navy':'navy','black':'black'}
 
@@ -218,12 +224,14 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
             return out('creatures', base)
         m={'caveman':'CAVEMAN','sasquatch':'SASQUATCH','abominablesnowman':'SNOWMAN','snowman':'SNOWMAN','abominable':'SNOWMAN'}.get(cr)
         if not m: return {'error':'CREATURES unknown design','title':title,'design':print_style}
-        base='%s_%s'%(m, 'whitegarments' if ckey in LIGHT else 'darkgarments')
-        return out('creatures', base)
+        tk=_resolve_ink(ink, CRE_INK, CRE_VALID, CRE_DEFAULT, ckey)
+        if not tk: return {'error':'CREATURES invalid ink','title':title,'ink':ink,'color':color}
+        return out('creatures', '%s_%s'%(m, CRE_SUF[tk]))
     if dk in ('caveman','sasquatch','snowman'):
         m={'caveman':'CAVEMAN','sasquatch':'SASQUATCH','snowman':'SNOWMAN'}[dk]
-        base='%s_%s'%(m,'whitegarments' if ckey in LIGHT else 'darkgarments')
-        return out('creatures', base)
+        tk=_resolve_ink(ink, CRE_INK, CRE_VALID, CRE_DEFAULT, ckey)
+        if not tk: return {'error':'%s invalid ink'%dk.upper(),'title':title,'ink':ink,'color':color}
+        return out('creatures', '%s_%s'%(m, CRE_SUF[tk]))
     if dk=='yeti':
         ice=norm(print_style) in ('ice','iceblue','blue')
         base='YETI_ICE_allgarments' if ice else ('YETI_whitegarments' if ckey in LIGHT else 'YETI_darkgarments')
