@@ -424,7 +424,8 @@
    "inks": [
     {
      "token": "fc",
-     "label": "Full Color"
+     "label": "Full Color",
+     "note": "fc_light/fc_dark by ground"
     },
     {
      "token": "navy",
@@ -440,7 +441,8 @@
     },
     {
      "token": "cream",
-     "label": "Cream"
+     "label": "Cream",
+     "note": "#f0f0d8"
     },
     {
      "token": "grey",
@@ -448,42 +450,144 @@
     },
     {
      "token": "neonblue",
-     "label": "Neon Blue"
+     "label": "Neon Blue",
+     "note": "PDP token karmablue -> file neonblue"
     }
    ],
-   "colorway_rule": "fc->fc_{ground}; neonblue->neonblue; else literal token",
-   "ink_validity": {
-    "White": [
-     "fc",
+   "colorway_rule": "GOD_{code}_{cw}_{garment}; cw: fc->fc_light/fc_dark by ground, else literal; ground=dark if Navy/Black else light",
+   "defaults": {
+    "style": "Monument",
+    "ink": "fc",
+    "color": "White",
+    "note": "Full Color on White (locked 2026-07-09); fc valid in all 12 style x color cells"
+   },
+   "reconciled": true,
+   "reconciled_date": "2026-07-10",
+   "handles": {
+    "tee": "god-always-delivers-tee",
+    "hoodie": "god-always-delivers-hoodie"
+   },
+   "html_source": "GOD_full_set_preview.html (Drive 1fqXkvo1JrppHDHmeokO0Sbz8Ibnsbr_b)",
+   "variants_per_product": 72,
+   "ink_capture": "line-item property 'Ink'",
+   "ink_validity_by_style": {
+    "Monument": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "neonblue"
+     ],
+     "Navy": [
+      "fc",
+      "red",
+      "black",
+      "cream",
+      "grey",
+      "neonblue"
+     ],
+     "Black": [
+      "fc",
+      "navy",
+      "red",
+      "cream",
+      "grey",
+      "neonblue"
+     ]
+    },
+    "Bold": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "cream",
+      "neonblue"
+     ],
+     "Navy": [
+      "fc",
+      "red",
+      "black",
+      "cream",
+      "grey",
+      "neonblue"
+     ],
+     "Black": [
+      "fc",
+      "navy",
+      "red",
+      "cream",
+      "grey",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "grey",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "cream",
+      "neonblue"
+     ],
+     "Navy": [
+      "fc",
+      "red",
+      "black",
+      "cream",
+      "grey",
+      "neonblue"
+     ],
+     "Black": [
+      "fc",
+      "navy",
+      "red",
+      "cream",
+      "grey",
+      "neonblue"
+     ]
+    }
+   },
+   "files": {
+    "count": 48,
+    "pattern": "printfiles/god/GOD_{code}_{colorway}_{garment}.png",
+    "colorways": [
+     "fc_light",
+     "fc_dark",
      "navy",
-     "red",
+     "cream",
      "black",
-     "neonblue"
-    ],
-    "Athletic Heather": [
-     "fc",
-     "navy",
      "red",
-     "black"
-    ],
-    "Navy": [
-     "fc",
-     "cream",
-     "grey"
-    ],
-    "Black": [
-     "fc",
-     "red",
-     "cream",
      "grey",
      "neonblue"
     ]
    },
-   "defaults": {
-    "design": "Monument",
-    "ink": "fc",
-    "color": "White"
-   }
+   "all_combinations_selectable": false,
+   "selectable_combinations": 69,
+   "notes": "15 of 84 deleted (matrix 2026-07-09): navy-on-Navy, black-on-Black, cream-on-White all styles; cream-on-AthHeather Monument only; grey-on-White Monument+Bold; grey-on-AthHeather Monument+Bold+Retro except Retro keeps grey-on-White. Navy-on-Black/Black-on-Navy kept."
   },
   "FAITH": {
    "status": "live",
@@ -1749,6 +1853,7 @@
   "CREATURES",
   "CROWN",
   "DAD",
+  "GOD",
   "JESUS",
   "THE_STORK"
  ]
