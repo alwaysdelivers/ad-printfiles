@@ -23,7 +23,7 @@ def ground(ckey): return 'light' if ckey in LIGHT else 'dark'
 
 # ---- STYLE / INK RESOLUTION (live product truth; v33) ------------------------
 JESUS_STYLES={'serif':'jes-01','script':'jes-03','bold':'jes-07','retro':'jes-11'}
-MOM_STYLES={'grace':'mom-01','bold':'mom-03','retro':'mom-disco'}          # elegant dropped (v33)
+MOM_STYLES={'grace':'mom-01','elegant':'mom-01','bold':'mom-03','retro':'mom-disco'}  # elegant: no art exists, routed to Grace as placeholder (2026-07-10) pending variant cleanup
 DAD_STYLES={'classic':'dad-02','varsity':'dad-04','retro':'dad-disco'}
 GOD_STYLES={'monument':'god-01','bold':'god-03','retro':'god-09'}
 FAITH_STYLES={'elegant':'faith-02','bold':'faith-04','strong':'faith-04'}  # classic dropped; 'strong' = legacy alias for Bold (renamed 2026-07-10)
