@@ -1213,6 +1213,13 @@
    ],
    "handle": "karma-always-delivers-tee",
    "options": {
+    "Style": [
+     "Black & Blue",
+     "Blue & Teal",
+     "Blue & Cream",
+     "Red & White",
+     "Slate & White"
+    ],
     "Color": [
      "White",
      "Athletic Heather",
@@ -1224,37 +1231,52 @@
      "M",
      "L",
      "XL",
-     "2XL",
-     "3XL"
-    ],
-    "Style": [
-     "Black & Blue",
-     "Blue & Teal",
-     "Blue & Cream",
-     "Red & White",
-     "Slate & White"
+     "2XL"
     ]
    },
    "designs": [
     {
      "code": "blackblue_neon",
-     "label": "Black & Blue"
+     "label": "Black & Blue",
+     "valid_colors": [
+      "White",
+      "Athletic Heather",
+      "Navy",
+      "Black"
+     ]
     },
     {
      "code": "blueteal_teal",
-     "label": "Blue & Teal"
+     "label": "Blue & Teal",
+     "valid_colors": [
+      "White",
+      "Navy",
+      "Black"
+     ]
     },
     {
      "code": "bluewhite_blue",
-     "label": "Blue & Cream"
+     "label": "Blue & Cream",
+     "valid_colors": [
+      "Navy",
+      "Black"
+     ]
     },
     {
      "code": "redwhite_red",
-     "label": "Red & White"
+     "label": "Red & White",
+     "valid_colors": [
+      "Navy",
+      "Black"
+     ]
     },
     {
      "code": "slatewhite_slate",
-     "label": "Slate & White"
+     "label": "Slate & White",
+     "valid_colors": [
+      "Navy",
+      "Black"
+     ]
     }
    ],
    "seo": {},
@@ -1269,7 +1291,18 @@
     "ink": null,
     "color": "White"
    },
-   "mockups_note": "24 real Printful mockups banked in mockups/karma/ ({garment}_{code}_{Color}.jpg) for marketing use; PDP stays on live composite (2026-07-09)"
+   "mockups_note": "24 real Printful mockups banked in mockups/karma/ ({garment}_{code}_{Color}.jpg) for marketing use; PDP stays on live composite (2026-07-09)",
+   "reconciled": true,
+   "reconciled_date": "2026-07-10",
+   "handles": {
+    "tee": "karma-always-delivers-tee",
+    "hoodie": "karma-always-delivers-hoodie"
+   },
+   "html_source": "KARMA_full_set_preview.html",
+   "variants_per_product": 65,
+   "ink_capture": "none - fixed two-color spiral per design, no ink axis",
+   "ui_behavior": "chosen-axes model (2026-07-10 rewrite): Reset = preview, all enabled; clicking commits that axis only; reconcile() resolves the unchosen axis; no silent auto-switch of a chosen axis. Standard thumb/swatch anatomy + .dis/off slash states added.",
+   "notes": "Reconciled 2026-07-10: (1) CRITICAL - fixed a live ReferenceError (undefined CDN var in renderDesigns()) that broke sync() on every page load, silently killing color swatches/price/sizes/Add to Cart store-wide for this product; likely broken since launch, unrelated to today's other work. (2) Restored the missing Black & Blue x Navy variant (10 total, both products) - truth doc says \"all garments\", live was missing it; inventoryPolicy CONTINUE applied. (3) Fixed stale/garbled defaultDesign value (\"Blue/Teal . Blue\", matched no real design) to \"Black & Blue\". (4) Rewrote the interaction model from legacy silent-auto-switch to the standard chosen-axes model; BFS-verified 25 states -> exactly 13 approved design x color combos, 0 invalid. (5) Standardized design-thumb and color-swatch disabled/slash visuals; added Reset button (previously absent)."
   },
   "CROSS": {
    "status": "live",
@@ -2016,6 +2049,7 @@
   "THE_STORK",
   "CROSS",
   "FAITH",
-  "MOM"
+  "MOM",
+  "KARMA"
  ]
 }
