@@ -1280,22 +1280,31 @@
    "inks": [
     {
      "token": "fc",
-     "label": "Full Color"
+     "label": "Full Color",
+     "dot": "linear-gradient(135deg,#1e3a5f 0 50%,#a8201a 50% 100%)",
+     "file_colorway": "fc_{ground}"
     },
     {
      "token": "mono",
-     "label": "Mono"
-    },
-    {
-     "token": "red",
-     "label": "Red"
+     "label": "Mono",
+     "dot": "#1e3a5f",
+     "file_colorway": "mono"
     },
     {
      "token": "grey",
-     "label": "Heather Grey"
+     "label": "Heather Grey",
+     "dot": "#b9c0cb (border #a7aeb8)",
+     "file_colorway": "grey"
+    },
+    {
+     "token": "red",
+     "label": "Red",
+     "dot": "#d23b2e",
+     "file_colorway": "red",
+     "note": "files are bright-red #d23b2e (dark-palette red), not #c03018"
     }
    ],
-   "colorway_rule": "fc->fc_{ground}; else literal token",
+   "colorway_rule": "fc -> fc_light/fc_dark by ground; mono/grey/red literal",
    "ink_validity": {
     "White": [
      "fc",
@@ -1319,10 +1328,71 @@
     ]
    },
    "defaults": {
-    "design": "Jesus Cross",
-    "ink": "fc",
-    "color": "White"
-   }
+    "style": "Jesus Cross",
+    "ink_by_fabric": {
+     "White": "fc",
+     "Athletic Heather": "fc",
+     "Navy": "red",
+     "Black": "fc"
+    },
+    "the_cross_black_default": "red"
+   },
+   "reconciled": true,
+   "reconciled_date": "2026-07-10",
+   "handles": {
+    "tee": "cross-always-delivers-tee",
+    "hoodie": "cross-always-delivers-hoodie"
+   },
+   "html_source": "CROSS_all_colorways_2026-07-10.html",
+   "variants_per_product": 48,
+   "ink_capture": "line-item property Ink",
+   "ink_validity_per_style": {
+    "Jesus Cross": {
+     "White": [
+      "fc",
+      "mono",
+      "red"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "mono",
+      "red"
+     ],
+     "Navy": [
+      "grey",
+      "red"
+     ],
+     "Black": [
+      "fc",
+      "mono",
+      "grey",
+      "red"
+     ]
+    },
+    "The Cross": {
+     "White": [
+      "fc",
+      "mono",
+      "red"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "mono",
+      "red"
+     ],
+     "Navy": [
+      "grey",
+      "red"
+     ],
+     "Black": [
+      "mono",
+      "grey",
+      "red"
+     ]
+    }
+   },
+   "ui_behavior": "effTriple standard (reset = preview, chosen axes never overwritten); standard pill anatomy 999px + ink dots (2026-07-10); per-style validity via _vset(st,c)",
+   "notes": "Reconciliation 2026-07-10: The Cross x Black loses Full Color (cell 20 struck). Confirmed exclusions: fc x Navy, mono x Navy, grey x White (both styles), grey x AthHeather. All 20 print files + web + zoom exist."
   },
   "CROWN": {
    "status": "live",
@@ -1909,6 +1979,7 @@
   "DAD",
   "GOD",
   "JESUS",
-  "THE_STORK"
+  "THE_STORK",
+  "CROSS"
  ]
 }
