@@ -1,5 +1,5 @@
 # ALWAYS DELIVERS — STANDING INSTRUCTIONS
-_Effective 2026-07-10 (v3 — creatures ink row + black art shipped). This is the complete, forward-only rule set._
+_Effective 2026-07-10 (v3.1 — black×Navy struck; ice×Navy corrected; true-placement mockups live). This is the complete, forward-only rule set._
 
 ---
 
@@ -86,10 +86,13 @@ button.dis{opacity:.4;cursor:not-allowed;border-color:#c2c8d0;color:#c2c8d0;
     committed axes never change under the user; ↺ Reset clears all commitments.
   Creature presentation order: A→Z (Abominable Snowman · Caveman · Sasquatch · Yeti);
   default stays Caveman.
-  Ink validity (approved matrix, black-on-black struck):
+  Ink validity (approved matrix; black-on-black struck at review, black-on-Navy struck
+  2026-07-10 after live mockups proved it illegible):
   - White: Full Color, Black       - Athletic Heather: Full Color, Black
-  - Navy: Grey, Black              - Black: Grey only
-  - Ice-Blue / Greyscale: all four grounds (they select the Yeti drawing).
+  - Navy: Grey only                - Black: Grey only
+  - Greyscale: all four grounds; Ice-Blue: White, Ath. Heather, Black (NO Navy — the
+    Yeti Ice-Blue × Navy variant does not exist; catalog source of truth).
+  Both select the Yeti drawing.
   Ink is a line-item cart property (key `Ink`, values Full Color / Grey / Black /
   Ice-Blue / Greyscale). fulfill.py routes it via `_resolve_ink` with CRE_INK /
   CRE_VALID / CRE_DEFAULT / CRE_SUF (fc→whitegarments, grey→darkgarments,
@@ -100,8 +103,14 @@ button.dis{opacity:.4;cursor:not-allowed;border-color:#c2c8d0;color:#c2c8d0;
   placement bit-identical to the shipped art, never re-rendered. Black = core-set
   `#1a1a1a`. Files (repo): printfiles/creatures/{CAVEMAN|SASQUATCH|SNOWMAN}_blackink_
   {tee|hoodie}.png + matching web (450×600 / 600×600) and zoom (1600×2133 / 1600×1600)
-  mirrors. Recorded in CREATURES_full_set_preview_2026-07-10.html (Drive source of
+  mirrors. Recorded in CREATURES_full_set_preview_2026-07-10_r2.html (Drive source of
   truth, Black ink column added).
+- **Mockup placement standard: TRUE FULFILLMENT PLACEMENT.** All product-gallery
+  mockups are generated with the production print file filling the exact Printful
+  print area (tee 12×16″, hoodie 14×14″) — the mockup shows exactly what ships.
+  The pre-2026-07-10 creature mockups overstated the art ~9.6% and sat ~1.3″ low;
+  all 50 were regenerated and swapped 2026-07-10. Apply this standard to every
+  future mockup run.
 
 ### PILL HEX TABLE — exact values
 
