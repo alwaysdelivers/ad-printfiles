@@ -32,12 +32,13 @@ Resolution of conflicts:
 - [ ] 9. Write the catalog entry; **validate every combination resolves to a real file** (offline).
 - [ ] 10. Deploy PDP validity/gating = exactly the HTML-approved set; **verify live** (not just offline).
 - [ ] 11. Verify home + shop-all cards (catalog-driven `ad-grid` upgrader handles these once the catalog entry is right).
-- [ ] 12. Mark `reconciled: true` in catalog; push; mirror to Drive.
+- [ ] 12. Confirm the prefix has a non-empty `groups` array in catalog.json; run `python3 tools/validate_groups.py catalog.json` (must pass, exit 0).
+- [ ] 13. Mark `reconciled: true` in catalog; push; mirror to Drive.
 
 ---
 
 ## Data model (schema per prefix in catalog.json)
-`status`, `reconciled`, `product_type`, `handles{tee,hoodie}`, `folder`, `naming`, `html_source`,
+`status`, `reconciled`, `groups[]` (≥1 valid group key — MANDATORY), `product_type`, `handles{tee,hoodie}`, `folder`, `naming`, `html_source`,
 `options{Color,Size,Style}`, `variants_per_product`, `ink_capture`, `designs[{code,label}]`,
 `inks[{token,label,file_colorway?}]`, `colorway_rule`, `ink_validity*` (per fabric), `defaults`,
 `files{tee,hoodie}`, `notes`, `ui_behavior`, `selectable_combinations`.
