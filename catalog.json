@@ -1577,7 +1577,7 @@
      "2XL",
      "3XL"
     ],
-    "Style": [
+    "Design": [
      "Physics",
      "Geometry",
      "Chemistry",
@@ -1608,38 +1608,94 @@
    "naming": "science",
    "inks": [
     {
-     "token": "black",
-     "label": "Black"
+     "token": "navy",
+     "label": "Navy",
+     "dot": "#1e3a5f",
+     "grounds": [
+      "White",
+      "Athletic Heather"
+     ]
     },
     {
-     "token": "cream",
-     "label": "Cream"
+     "token": "black",
+     "label": "Black",
+     "dot": "#1a1a1a",
+     "grounds": [
+      "White",
+      "Athletic Heather"
+     ]
     },
     {
      "token": "red",
-     "label": "Red"
+     "label": "Red",
+     "dot": "#a8201a",
+     "grounds": [
+      "White",
+      "Athletic Heather",
+      "Navy",
+      "Black"
+     ],
+     "note": "called Oxblood in the truth doc"
+    },
+    {
+     "token": "cream",
+     "label": "Cream",
+     "dot": "#f0f0d8 (border #cfcaae)",
+     "grounds": [
+      "Navy",
+      "Black"
+     ]
+    },
+    {
+     "token": "sleet",
+     "label": "Sleet",
+     "dot": "#b9c0cb",
+     "grounds": [
+      "Navy",
+      "Black"
+     ]
+    },
+    {
+     "token": "neonblue",
+     "label": "Neon Blue",
+     "dot": "#2f8fe2",
+     "grounds": [
+      "White",
+      "Athletic Heather",
+      "Navy",
+      "Black"
+     ],
+     "note": "added 2026-07-10, not in original truth doc; alpha re-ink of Navy master"
     }
    ],
-   "colorway_rule": "file = SCIENCE_{design}_{token}  (token used directly; ink chosen via line-item property)",
+   "colorway_rule": "SCIENCE_{design}_{ink_token}",
    "ink_validity": {
     "White": [
+     "navy",
      "black",
-     "red"
+     "red",
+     "neonblue"
     ],
     "Athletic Heather": [
+     "navy",
      "black",
-     "red"
+     "red",
+     "neonblue"
     ],
     "Navy": [
      "cream",
-     "red"
+     "sleet",
+     "red",
+     "neonblue"
     ],
     "Black": [
      "cream",
-     "red"
+     "sleet",
+     "red",
+     "neonblue"
     ]
    },
-   "ink_capture": "line-item property 'Ink' (product has no ink variant option)",
+   "ink_capture": "line-item property Ink",
    "extra_files": {
     "unused_inks": [
      "navy",
@@ -1649,10 +1705,20 @@
    },
    "defaults": {
     "design": "Physics",
-    "ink": "black",
-    "color": "White"
+    "color": "White",
+    "ink": "navy"
    },
-   "shop_all_per_design": true
+   "shop_all_per_design": true,
+   "reconciled": true,
+   "reconciled_date": "2026-07-10",
+   "handles": {
+    "tee": "science-always-delivers-tee",
+    "hoodie": "science-always-delivers-hoodie"
+   },
+   "html_source": "SCIENCE_full_set_preview.html",
+   "variants_per_product": 96,
+   "ui_behavior": "chosen-axes model (2026-07-10 rewrite): Reset = preview all enabled; clicking commits that axis; reconcileInk() resolves the unchosen axis; standard pill anatomy 999px + ink dots.",
+   "notes": "Reconciled 2026-07-10: (1) Live ink set didn't match truth doc - live offered Black+Red on light, Cream+Red on dark; truth doc wants Navy+Oxblood(red) on light, Cream+Sleet on dark. Aligned to truth doc exactly (option 1): Navy/Black light-only, Cream/Sleet dark-only, Red universal - per Ati's strikes on the 20-cell matrix. (2) Added a 6th ink, Neon Blue #2f8fe2, universal (all 4 fabrics) - built as alpha re-ink of the Navy master (bit-identical letterforms, verified) across all 4 designs, tee+hoodie, 24 files total (masters+web+zoom), all MD5-verified against raw GitHub. (3) fulfill.py's SCI_INK/validity/default table rewritten to match (previously defaulted ink-less orders to 'black' on light grounds - now 'navy', matching the truth doc). (4) Rewrote interaction model to chosen-axes standard; BFS-verified 29 states -> exactly 16 approved color x ink combos, 0 invalid. (5) Added Reset button (previously absent). (6) Standardized ink pills to 999px anatomy with dots. (7) Removed dead renderSub()/kar-subrow code (guarded by a length check always false for Science, never rendered)."
   },
   "THE_STORK": {
    "status": "live",
@@ -2050,6 +2116,7 @@
   "CROSS",
   "FAITH",
   "MOM",
-  "KARMA"
+  "KARMA",
+  "SCIENCE"
  ]
 }
