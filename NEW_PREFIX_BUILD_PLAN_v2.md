@@ -122,7 +122,14 @@ State and get approval on EVERY item below. Do not assume any of these — ask.
 
 **0g. Pricing** — Standard tier. Grand Opening 20% active: `price` = 20%-off number; `compare_at_price` = higher MAP. Fixed `.99` table in Step 4.
 
-**STOP — approve full definition (0a–0g) before any asset work.**
+**0h. Group membership (MANDATORY — no prefix ships without it).**
+- Every prefix MUST belong to at least one group in the `catalog.json` `groups` registry. This is the browse/discovery axis (Family, Faith, States, Cities, Science, Spiritual, Music, Pets, Holidays, Humor, etc.).
+- A prefix may belong to MANY groups (many-to-many). Set `catalog.json → prefixes → <NAME> → groups: [...]` with one or more existing group keys.
+- If the prefix needs a NEW group that does not yet exist, add it to the `groups` registry first (`{label, order, status:"hidden"}`), then reference it. New groups start `hidden` until enough members exist to surface.
+- Group assignment is Ati's call — propose the mapping, do not decide it.
+- **Enforcement:** run `python3 tools/validate_groups.py catalog.json` — it MUST pass (exit 0) before the prefix is considered done. It fails on any prefix lacking a valid, non-empty `groups` array. Empty groups (placeholders) are allowed.
+
+**STOP — approve full definition (0a–0h) before any asset work.**
 
 ---
 
@@ -444,7 +451,8 @@ Combined product? Add to `FG_HYBRID` map + handle to `unless` skip-list.
 - [ ] Ink × garment × style audit: all valid combos have mockups; invalid combos slash/grey on PDP
 - [ ] fulfill.py: every valid combo routes to existing print file; py_compile passed; valid-map matches PDP
 - [ ] Home: 8 tiles; combined product in FG_HYBRID
-- [ ] Shop All: card added; `node --check` passed; `ad_prefix_count` bumped
+- [ ] Shop All: card added; `node --check` passed; `ad_prefix_count` bumped; card carries `groups` array matching the prefix's catalog entry
+- [ ] Group membership: prefix has non-empty `groups` in catalog.json; `python3 tools/validate_groups.py catalog.json` passes (exit 0)
 - [ ] Every push verified by reading back via API (not storefront)
 
 ---
