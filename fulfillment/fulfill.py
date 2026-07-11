@@ -26,7 +26,7 @@ JESUS_STYLES={'serif':'jes-01','script':'jes-03','bold':'jes-07','retro':'jes-11
 MOM_STYLES={'grace':'mom-01','bold':'mom-03','retro':'mom-disco'}          # elegant dropped (v33)
 DAD_STYLES={'classic':'dad-02','varsity':'dad-04','retro':'dad-disco'}
 GOD_STYLES={'monument':'god-01','bold':'god-03','retro':'god-09'}
-FAITH_STYLES={'elegant':'faith-02','bold':'faith-04'}                      # classic dropped, strong->bold (v33)
+FAITH_STYLES={'elegant':'faith-02','bold':'faith-04','strong':'faith-04'}  # classic dropped; 'strong' = legacy alias for Bold (renamed 2026-07-10)
 STORK_STYLES={'classic':'stk-07','elegant':'stk-01'}                        # 2 styles (v33)
 AMERICA_STYLES={'classic','heritage','star','retro','watermark'}
 CROSS_STYLES={'jesuscross':'cross-04','thecross':'cross-08'}
