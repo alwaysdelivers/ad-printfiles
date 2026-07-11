@@ -616,7 +616,7 @@
     ],
     "Style": [
      "Elegant",
-     "Strong"
+     "Bold"
     ]
    },
    "designs": [
@@ -626,7 +626,7 @@
     },
     {
      "code": "faith-04",
-     "label": "Strong"
+     "label": "Bold"
     }
    ],
    "seo": {},
@@ -635,18 +635,25 @@
    "inks": [
     {
      "token": "fc",
-     "label": "Full Color"
+     "label": "Full Color",
+     "dot": "linear-gradient(135deg,#1e3a5f 0 50%,#a8201a 50% 100%)",
+     "file_colorway": "{ground}"
     },
     {
      "token": "mono",
-     "label": "Mono"
+     "label": "Mono",
+     "dot": "split #1e3a5f/#f5f1e9 (border #cfcaae)",
+     "file_colorway": "{ground}_mono",
+     "note": "navy on light, cream #f5f1e9 on dark; cream differs from MOM #f0f0d8 \u2014 open housekeeping"
     },
     {
      "token": "red",
-     "label": "Red"
+     "label": "Red",
+     "dot": "#a8201a",
+     "file_colorway": "redmono"
     }
    ],
-   "colorway_rule": "fc->{ground}; mono->{ground}_mono; red->redmono",
+   "colorway_rule": "faith-lane: fc->{ground}, mono->{ground}_mono, red->redmono",
    "ink_validity": {
     "White": [
      "fc",
@@ -670,10 +677,20 @@
     ]
    },
    "defaults": {
-    "design": "Elegant",
-    "ink": "fc",
-    "color": "White"
-   }
+    "style": "Elegant",
+    "ink": "fc"
+   },
+   "reconciled": true,
+   "reconciled_date": "2026-07-10",
+   "handles": {
+    "tee": "faith-always-delivers-tee",
+    "hoodie": "faith-always-delivers-hoodie"
+   },
+   "html_source": "1RpEbXzOgFnjXoRh0pvauH8MIPjdgoy-_ (FAITH hi-res set)",
+   "variants_per_product": 48,
+   "ink_capture": "line-item property Ink",
+   "ui_behavior": "effTriple standard; standard pill anatomy 999px + ink dots (2026-07-10)",
+   "notes": "Reconciled 2026-07-10: Classic variants deleted (24/product, no faith-01 art existed), Strong renamed Bold front+back; fulfill keeps strong alias for in-flight orders. All 24 ink x fabric cells blessed."
   },
   "AMERICA": {
    "status": "live",
@@ -1980,6 +1997,7 @@
   "GOD",
   "JESUS",
   "THE_STORK",
-  "CROSS"
+  "CROSS",
+  "FAITH"
  ]
 }
