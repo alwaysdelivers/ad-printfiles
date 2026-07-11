@@ -1110,7 +1110,7 @@
    "options": {
     "Color": [
      "White",
-     "Athletic Heather",
+     "AthHeather",
      "Navy",
      "Black"
     ],
@@ -1148,25 +1148,32 @@
    "inks": [
     {
      "token": "fc",
-     "label": "Full Color"
+     "label": "Full Color",
+     "dot": "linear-gradient(135deg,#1e3a5f 0 50%,#a8201a 50% 100%)",
+     "file_colorway": "{ground}"
     },
     {
      "token": "mono",
-     "label": "Mono"
+     "label": "Mono",
+     "dot": "split #1e3a5f/#f0f0d8 (border #cfcaae)",
+     "file_colorway": "{ground}_mono",
+     "note": "cream #f0f0d8 \u2014 on the locked standard (unlike FAITH #f5f1e9)"
     },
     {
      "token": "red",
-     "label": "Red"
+     "label": "Red",
+     "dot": "#a8201a",
+     "file_colorway": "redmono"
     }
    ],
-   "colorway_rule": "fc->{ground}; mono->{ground}_mono; red->redmono",
+   "colorway_rule": "faith-lane: fc->{ground}, mono->{ground}_mono, red->redmono",
    "ink_validity": {
     "White": [
      "fc",
      "mono",
      "red"
     ],
-    "Athletic Heather": [
+    "AthHeather": [
      "fc",
      "mono",
      "red"
@@ -1183,10 +1190,20 @@
     ]
    },
    "defaults": {
-    "design": "Grace",
-    "ink": "fc",
-    "color": "White"
-   }
+    "style": "Grace",
+    "ink": "fc"
+   },
+   "reconciled": true,
+   "reconciled_date": "2026-07-10",
+   "handles": {
+    "tee": "mom-always-delivers-tee",
+    "hoodie": "mom-always-delivers-hoodie"
+   },
+   "html_source": "MOM_full_set_preview.html",
+   "variants_per_product": 72,
+   "ink_capture": "line-item property Ink",
+   "ui_behavior": "legacy per-color state model (pre-effTriple); standard pill anatomy 999px + ink dots (2026-07-10); getValidForColor null-color bug fixed (same defect class as FAITH renderStyle)",
+   "notes": "Reconciled 2026-07-10: Elegant variants deleted (24/product, no mom-02/Elegant art ever existed); fulfill.py kept a Grace-art alias for elegant for any in-flight legacy orders. All 15 ink x style cells (uniform validity, no restrictions) confirmed live. Architecture note: MOM does not use the effTriple 3-axis resolver standard (JESUS/GOD-era model) \u2014 flagged for a future pass if the store standardizes further."
   },
   "KARMA": {
    "status": "live",
@@ -1998,6 +2015,7 @@
   "JESUS",
   "THE_STORK",
   "CROSS",
-  "FAITH"
+  "FAITH",
+  "MOM"
  ]
 }
