@@ -1994,54 +1994,192 @@
    }
   },
   "GRANDMA": {
-   "status": "pending",
+   "status": "live",
+   "reconciled": true,
+   "reconciled_date": "2026-07-10",
    "product_type": [
     "tee",
     "hoodie"
    ],
-   "handle": null,
+   "handle": "grandma-always-delivers-tee",
+   "handles": {
+    "tee": "grandma-always-delivers-tee",
+    "hoodie": "grandma-always-delivers-hoodie"
+   },
+   "folder": "grandma",
+   "naming": "grandma",
+   "hero_design": "Grace",
    "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
     "Style": [
      "Grace",
      "Elegant",
-     "Dancing",
      "Retro"
     ]
    },
+   "variants_per_product": 72,
+   "ink_capture": "line-item property Ink",
    "designs": [
     {
-     "code": "gma-01",
+     "code": "grace",
      "label": "Grace",
      "font": "Great Vibes",
-     "treatment": "script",
-     "status": "built"
+     "prefix_height_in": 3.99
     },
     {
-     "code": "gma-02",
+     "code": "elegant",
      "label": "Elegant",
-     "font": "Cormorant",
-     "treatment": "script",
-     "status": "pending"
+     "font": "Cormorant Garamond italic",
+     "prefix_height_in": 3.0,
+     "note": "locked to match FAITH's own Elegant height; natural render was 2.20in, too short next to siblings"
     },
     {
-     "code": "gma-04",
-     "label": "Dancing",
-     "font": "Dancing Script",
-     "treatment": "script",
-     "status": "pending"
-    },
-    {
-     "code": "gma-disco",
+     "code": "retro",
      "label": "Retro",
      "font": "Monoton",
-     "treatment": "retro",
-     "status": "pending",
-     "note": "retro height 3.5in confirmed"
+     "prefix_height_in": 4.0,
+     "note": "non-uniform stretch from natural 1.41in, matching MOM's own Retro/Monoton precedent exactly"
     }
    ],
-   "colorways": "TBD",
-   "note": "roadmap - not published",
-   "seo": {}
+   "inks": [
+    {
+     "token": "navy",
+     "label": "Navy",
+     "dot": "#1e3a5f",
+     "grounds": [
+      "White",
+      "Athletic Heather"
+     ]
+    },
+    {
+     "token": "split",
+     "label": "Full Color",
+     "dot": "linear-gradient(135deg,#1e3a5f 0 50%,#a8201a 50% 100%)",
+     "grounds": [
+      "White",
+      "Athletic Heather"
+     ]
+    },
+    {
+     "token": "black",
+     "label": "Black",
+     "dot": "#1a1a1a",
+     "grounds": [
+      "White",
+      "Athletic Heather"
+     ]
+    },
+    {
+     "token": "white",
+     "label": "White",
+     "dot": "#ffffff (border #cfcaae)",
+     "grounds": [
+      "Navy",
+      "Black"
+     ],
+     "note": "sole dark-ground neutral; Cream and Heather Grey struck at cull"
+    },
+    {
+     "token": "red",
+     "label": "Red",
+     "dot": "#a8201a",
+     "grounds": [
+      "White",
+      "Athletic Heather",
+      "Navy",
+      "Black"
+     ]
+    },
+    {
+     "token": "gold",
+     "label": "Gold",
+     "dot": "#c08a2e",
+     "grounds": [
+      "White",
+      "Athletic Heather",
+      "Navy",
+      "Black"
+     ]
+    },
+    {
+     "token": "karmablue",
+     "label": "Neon Blue",
+     "dot": "#2f8fe2",
+     "grounds": [
+      "White",
+      "Athletic Heather",
+      "Navy",
+      "Black"
+     ]
+    }
+   ],
+   "colorway_rule": "GRANDMA_{style}_{ink}_{garment}.png - literal ink token, not ground-derived (ink IS the ground-appropriate choice already)",
+   "ink_validity": {
+    "White": [
+     "navy",
+     "split",
+     "black",
+     "red",
+     "gold",
+     "karmablue"
+    ],
+    "Athletic Heather": [
+     "navy",
+     "split",
+     "black",
+     "red",
+     "gold",
+     "karmablue"
+    ],
+    "Navy": [
+     "white",
+     "red",
+     "gold",
+     "karmablue"
+    ],
+    "Black": [
+     "white",
+     "red",
+     "gold",
+     "karmablue"
+    ]
+   },
+   "defaults": {
+    "style": "Grace",
+    "color": "White",
+    "ink": "split"
+   },
+   "ui_behavior": "chosen-axes model (cloned from Science's 2026-07-10 build): Reset = preview all enabled; clicking commits that axis; reconcileInk() resolves the unchosen axis; standard pill anatomy 999px + ink dots.",
+   "placement_math": {
+    "prefix_top_in": 3.0,
+    "gap_in": 2.4,
+    "wordmark_in": [
+     7.25,
+     2.0
+    ],
+    "canvas_tee": [
+     3600,
+     4800
+    ],
+    "canvas_hoodie": [
+     4200,
+     4200
+    ]
+   },
+   "notes": "New prefix built 2026-07-10 via NEW_PREFIX_BUILD_PLAN_v2.md Steps 0-9, gated approval at each step. Replaced a stale pre-existing stub (status:pending, handle:null, a since-dropped 'Dancing' 4th style, and an unverified 'retro height 3.5in' note - actual measured/locked height is 4.00in, matching MOM's own live Monoton file exactly, confirmed by direct pixel measurement). Elegant locked to 3.00in (matches FAITH's own Elegant/Cormorant height) after its natural render came out too short next to its siblings. Ink palette culled from the full standard pool down to 6 light-ground + 4 dark-ground tokens (White chosen as the sole dark-ground neutral over Cream/Heather Grey). All 42 production masters + 84 mirrors (web+zoom) built, audited (transparent corners, correct canvas size, exactly 2.40in gap, true fill color clean) and pushed; two real gaps caught before calling steps done: web/zoom mirrors were initially missed (12/126 pushed, 114 backfilled) and 30/42 production masters were initially missed (fulfillment dry-run caught it, all 120 routing states now verified 200 on raw GitHub). fulfill.py routing added (Style x Color x Ink, additive, 120-state dry-run clean). PDP built from today's most-refined three-axis chosen-model template (Science), BFS-verified 0 invalid states. ad-grid.liquid given a new 'grandma' naming case (additive) so Shop All's live composite resolves correctly. Home page grid NOT added - already at its 8-item cap, swap-or-bump is Ati's call."
   },
   "TEXAS": {
    "status": "pending",
@@ -2117,6 +2255,7 @@
   "FAITH",
   "MOM",
   "KARMA",
-  "SCIENCE"
+  "SCIENCE",
+  "GRANDMA"
  ]
 }
