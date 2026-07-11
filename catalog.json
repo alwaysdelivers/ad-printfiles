@@ -147,6 +147,88 @@
    "hires_convention": "hires/<prefix>/<PREFIX>_<style>_<colorway|ground>.png"
   }
  },
+ "groups": {
+  "family": {
+   "label": "Family",
+   "order": 1,
+   "status": "hidden"
+  },
+  "faith": {
+   "label": "Faith",
+   "order": 2,
+   "status": "hidden"
+  },
+  "spiritual": {
+   "label": "Spiritual",
+   "order": 3,
+   "status": "hidden"
+  },
+  "science": {
+   "label": "Science",
+   "order": 4,
+   "status": "hidden"
+  },
+  "music": {
+   "label": "Music",
+   "order": 5,
+   "status": "hidden"
+  },
+  "states": {
+   "label": "States",
+   "order": 6,
+   "status": "hidden"
+  },
+  "cities": {
+   "label": "Cities",
+   "order": 7,
+   "status": "hidden"
+  },
+  "patriotic": {
+   "label": "Patriotic",
+   "order": 8,
+   "status": "hidden"
+  },
+  "pets": {
+   "label": "Pets & Creatures",
+   "order": 9,
+   "status": "hidden"
+  },
+  "holidays": {
+   "label": "Holidays",
+   "order": 10,
+   "status": "hidden"
+  },
+  "sports_teams": {
+   "label": "Sports Teams",
+   "order": 11,
+   "status": "hidden"
+  },
+  "humor": {
+   "label": "Humor",
+   "order": 12,
+   "status": "hidden"
+  },
+  "military": {
+   "label": "Military",
+   "order": 13,
+   "status": "hidden"
+  },
+  "novelty": {
+   "label": "Novelty",
+   "order": 14,
+   "status": "hidden"
+  },
+  "food": {
+   "label": "Food & Drink",
+   "order": 15,
+   "status": "hidden"
+  },
+  "ethnic": {
+   "label": "Ethnic",
+   "order": 16,
+   "status": "hidden"
+  }
+ },
  "seo_framework": {
   "title": "{PREFIX} Always Delivers \u2014 {product_type}",
   "meta_description": "{PREFIX} Always Delivers {product_type}. {hook}. Premium {blank} in {n} styles and 4 colors. Designed & printed in the USA.",
@@ -377,7 +459,10 @@
    },
    "all_combinations_selectable": false,
    "selectable_combinations": 66,
-   "notes": "14 of 80 combos removed: Navy-on-Navy, Black-on-Black, Cream-on-White (all styles); Cream-on-AthHeather for Serif+Script only (thin faces). Navy-on-Black and Black-on-Navy intentionally kept."
+   "notes": "14 of 80 combos removed: Navy-on-Navy, Black-on-Black, Cream-on-White (all styles); Cream-on-AthHeather for Serif+Script only (thin faces). Navy-on-Black and Black-on-Navy intentionally kept.",
+   "groups": [
+    "faith"
+   ]
   },
   "GOD": {
    "status": "live",
@@ -590,7 +675,10 @@
    },
    "all_combinations_selectable": false,
    "selectable_combinations": 69,
-   "notes": "15 of 84 deleted (matrix 2026-07-09): navy-on-Navy, black-on-Black, cream-on-White all styles; cream-on-AthHeather Monument only; grey-on-White Monument+Bold; grey-on-AthHeather Monument+Bold+Retro except Retro keeps grey-on-White. Navy-on-Black/Black-on-Navy kept."
+   "notes": "15 of 84 deleted (matrix 2026-07-09): navy-on-Navy, black-on-Black, cream-on-White all styles; cream-on-AthHeather Monument only; grey-on-White Monument+Bold; grey-on-AthHeather Monument+Bold+Retro except Retro keeps grey-on-White. Navy-on-Black/Black-on-Navy kept.",
+   "groups": [
+    "faith"
+   ]
   },
   "FAITH": {
    "status": "live",
@@ -690,7 +778,10 @@
    "variants_per_product": 48,
    "ink_capture": "line-item property Ink",
    "ui_behavior": "effTriple standard; standard pill anatomy 999px + ink dots (2026-07-10)",
-   "notes": "Reconciled 2026-07-10: Classic variants deleted (24/product, no faith-01 art existed), Strong renamed Bold front+back; fulfill keeps strong alias for in-flight orders. All 24 ink x fabric cells blessed."
+   "notes": "Reconciled 2026-07-10: Classic variants deleted (24/product, no faith-01 art existed), Strong renamed Bold front+back; fulfill keeps strong alias for in-flight orders. All 24 ink x fabric cells blessed.",
+   "groups": [
+    "faith"
+   ]
   },
   "AMERICA": {
    "status": "live",
@@ -887,7 +978,10 @@
     "tile_gating": "Style and Fabric tiles are always selectable (never greyed). The Ink options are restricted per (style,fabric) to exactly the HTML-approved set; ink auto-defaults to a valid one on change. Selectable set = HTML-approved set (110)."
    },
    "all_combinations_selectable": false,
-   "selectable_combinations": 110
+   "selectable_combinations": 110,
+   "groups": [
+    "patriotic"
+   ]
   },
   "DAD": {
    "status": "live",
@@ -1098,6 +1192,9 @@
     "Validity is STYLE-DEPENDENT: White ink on Athletic Heather is invalid for Classic (thin Pacifico) but valid for Varsity/Retro.",
     "Inks dropped where they vanish into fabric: black-on-black, navy-on-navy, white-on-white, grey on light grounds.",
     "68 selectable combos (84 - 16 deleted)."
+   ],
+   "groups": [
+    "family"
    ]
   },
   "MOM": {
@@ -1203,7 +1300,10 @@
    "variants_per_product": 72,
    "ink_capture": "line-item property Ink",
    "ui_behavior": "legacy per-color state model (pre-effTriple); standard pill anatomy 999px + ink dots (2026-07-10); getValidForColor null-color bug fixed (same defect class as FAITH renderStyle)",
-   "notes": "Reconciled 2026-07-10: Elegant variants deleted (24/product, no mom-02/Elegant art ever existed); fulfill.py kept a Grace-art alias for elegant for any in-flight legacy orders. All 15 ink x style cells (uniform validity, no restrictions) confirmed live. Architecture note: MOM does not use the effTriple 3-axis resolver standard (JESUS/GOD-era model) \u2014 flagged for a future pass if the store standardizes further."
+   "notes": "Reconciled 2026-07-10: Elegant variants deleted (24/product, no mom-02/Elegant art ever existed); fulfill.py kept a Grace-art alias for elegant for any in-flight legacy orders. All 15 ink x style cells (uniform validity, no restrictions) confirmed live. Architecture note: MOM does not use the effTriple 3-axis resolver standard (JESUS/GOD-era model) \u2014 flagged for a future pass if the store standardizes further.",
+   "groups": [
+    "family"
+   ]
   },
   "KARMA": {
    "status": "live",
@@ -1302,7 +1402,10 @@
    "variants_per_product": 65,
    "ink_capture": "none - fixed two-color spiral per design, no ink axis",
    "ui_behavior": "chosen-axes model (2026-07-10 rewrite): Reset = preview, all enabled; clicking commits that axis only; reconcile() resolves the unchosen axis; no silent auto-switch of a chosen axis. Standard thumb/swatch anatomy + .dis/off slash states added.",
-   "notes": "Reconciled 2026-07-10: (1) CRITICAL - fixed a live ReferenceError (undefined CDN var in renderDesigns()) that broke sync() on every page load, silently killing color swatches/price/sizes/Add to Cart store-wide for this product; likely broken since launch, unrelated to today's other work. (2) Restored the missing Black & Blue x Navy variant (10 total, both products) - truth doc says \"all garments\", live was missing it; inventoryPolicy CONTINUE applied. (3) Fixed stale/garbled defaultDesign value (\"Blue/Teal . Blue\", matched no real design) to \"Black & Blue\". (4) Rewrote the interaction model from legacy silent-auto-switch to the standard chosen-axes model; BFS-verified 25 states -> exactly 13 approved design x color combos, 0 invalid. (5) Standardized design-thumb and color-swatch disabled/slash visuals; added Reset button (previously absent)."
+   "notes": "Reconciled 2026-07-10: (1) CRITICAL - fixed a live ReferenceError (undefined CDN var in renderDesigns()) that broke sync() on every page load, silently killing color swatches/price/sizes/Add to Cart store-wide for this product; likely broken since launch, unrelated to today's other work. (2) Restored the missing Black & Blue x Navy variant (10 total, both products) - truth doc says \"all garments\", live was missing it; inventoryPolicy CONTINUE applied. (3) Fixed stale/garbled defaultDesign value (\"Blue/Teal . Blue\", matched no real design) to \"Black & Blue\". (4) Rewrote the interaction model from legacy silent-auto-switch to the standard chosen-axes model; BFS-verified 25 states -> exactly 13 approved design x color combos, 0 invalid. (5) Standardized design-thumb and color-swatch disabled/slash visuals; added Reset button (previously absent).",
+   "groups": [
+    "spiritual"
+   ]
   },
   "CROSS": {
    "status": "live",
@@ -1459,7 +1562,10 @@
     }
    },
    "ui_behavior": "effTriple standard (reset = preview, chosen axes never overwritten); standard pill anatomy 999px + ink dots (2026-07-10); per-style validity via _vset(st,c)",
-   "notes": "Reconciliation 2026-07-10: The Cross x Black loses Full Color (cell 20 struck). Confirmed exclusions: fc x Navy, mono x Navy, grey x White (both styles), grey x AthHeather. All 20 print files + web + zoom exist."
+   "notes": "Reconciliation 2026-07-10: The Cross x Black loses Full Color (cell 20 struck). Confirmed exclusions: fc x Navy, mono x Navy, grey x White (both styles), grey x AthHeather. All 20 print files + web + zoom exist.",
+   "groups": [
+    "faith"
+   ]
   },
   "CROWN": {
    "status": "live",
@@ -1553,6 +1659,9 @@
     "Navy ink = light grounds only; Slate ink = dark grounds only; Full Color (=+red lockup) = light grounds only.",
     "Default = Full Color on light, Slate on dark.",
     "No Shopify restructure: ink is a line-item property; 24 variants unchanged."
+   ],
+   "groups": [
+    "faith"
    ]
   },
   "SCIENCE": {
@@ -1718,7 +1827,10 @@
    "html_source": "SCIENCE_full_set_preview.html",
    "variants_per_product": 96,
    "ui_behavior": "chosen-axes model (2026-07-10 rewrite): Reset = preview all enabled; clicking commits that axis; reconcileInk() resolves the unchosen axis; standard pill anatomy 999px + ink dots.",
-   "notes": "Reconciled 2026-07-10: (1) Live ink set didn't match truth doc - live offered Black+Red on light, Cream+Red on dark; truth doc wants Navy+Oxblood(red) on light, Cream+Sleet on dark. Aligned to truth doc exactly (option 1): Navy/Black light-only, Cream/Sleet dark-only, Red universal - per Ati's strikes on the 20-cell matrix. (2) Added a 6th ink, Neon Blue #2f8fe2, universal (all 4 fabrics) - built as alpha re-ink of the Navy master (bit-identical letterforms, verified) across all 4 designs, tee+hoodie, 24 files total (masters+web+zoom), all MD5-verified against raw GitHub. (3) fulfill.py's SCI_INK/validity/default table rewritten to match (previously defaulted ink-less orders to 'black' on light grounds - now 'navy', matching the truth doc). (4) Rewrote interaction model to chosen-axes standard; BFS-verified 29 states -> exactly 16 approved color x ink combos, 0 invalid. (5) Added Reset button (previously absent). (6) Standardized ink pills to 999px anatomy with dots. (7) Removed dead renderSub()/kar-subrow code (guarded by a length check always false for Science, never rendered)."
+   "notes": "Reconciled 2026-07-10: (1) Live ink set didn't match truth doc - live offered Black+Red on light, Cream+Red on dark; truth doc wants Navy+Oxblood(red) on light, Cream+Sleet on dark. Aligned to truth doc exactly (option 1): Navy/Black light-only, Cream/Sleet dark-only, Red universal - per Ati's strikes on the 20-cell matrix. (2) Added a 6th ink, Neon Blue #2f8fe2, universal (all 4 fabrics) - built as alpha re-ink of the Navy master (bit-identical letterforms, verified) across all 4 designs, tee+hoodie, 24 files total (masters+web+zoom), all MD5-verified against raw GitHub. (3) fulfill.py's SCI_INK/validity/default table rewritten to match (previously defaulted ink-less orders to 'black' on light grounds - now 'navy', matching the truth doc). (4) Rewrote interaction model to chosen-axes standard; BFS-verified 29 states -> exactly 16 approved color x ink combos, 0 invalid. (5) Added Reset button (previously absent). (6) Standardized ink pills to 999px anatomy with dots. (7) Removed dead renderSub()/kar-subrow code (guarded by a length check always false for Science, never rendered).",
+   "groups": [
+    "science"
+   ]
   },
   "THE_STORK": {
    "status": "live",
@@ -1832,6 +1944,9 @@
     "Garment colors (White/Baby Pink/Baby Blue/Black) are a layered choice; HTML defines designs+inks+placement only.",
     "Replaces the OLD color-only baby stork (single design, no Style/Ink) - live product REBUILT to this.",
     "Code mapping corrected 2026-07-08: Classic=stk-07 (Playfair/serif), Elegant=stk-01 (Great Vibes/cursive) - matches fulfill.py + actual fonts."
+   ],
+   "groups": [
+    "family"
    ]
   },
   "CREATURES": {
@@ -1991,7 +2106,11 @@
      ]
     },
     "fulfillment": "fulfill.py _resolve_ink + CRE_INK/CRE_VALID/CRE_DEFAULT/CRE_SUF; property absent = legacy ground routing"
-   }
+   },
+   "groups": [
+    "pets",
+    "humor"
+   ]
   },
   "GRANDMA": {
    "status": "live",
@@ -2179,7 +2298,10 @@
      4200
     ]
    },
-   "notes": "New prefix built 2026-07-10 via NEW_PREFIX_BUILD_PLAN_v2.md Steps 0-9, gated approval at each step. Replaced a stale pre-existing stub (status:pending, handle:null, a since-dropped 'Dancing' 4th style, and an unverified 'retro height 3.5in' note - actual measured/locked height is 4.00in, matching MOM's own live Monoton file exactly, confirmed by direct pixel measurement). Elegant locked to 3.00in (matches FAITH's own Elegant/Cormorant height) after its natural render came out too short next to its siblings. Ink palette culled from the full standard pool down to 6 light-ground + 4 dark-ground tokens (White chosen as the sole dark-ground neutral over Cream/Heather Grey). All 42 production masters + 84 mirrors (web+zoom) built, audited (transparent corners, correct canvas size, exactly 2.40in gap, true fill color clean) and pushed; two real gaps caught before calling steps done: web/zoom mirrors were initially missed (12/126 pushed, 114 backfilled) and 30/42 production masters were initially missed (fulfillment dry-run caught it, all 120 routing states now verified 200 on raw GitHub). fulfill.py routing added (Style x Color x Ink, additive, 120-state dry-run clean). PDP built from today's most-refined three-axis chosen-model template (Science), BFS-verified 0 invalid states. ad-grid.liquid given a new 'grandma' naming case (additive) so Shop All's live composite resolves correctly. Home page grid NOT added - already at its 8-item cap, swap-or-bump is Ati's call."
+   "notes": "New prefix built 2026-07-10 via NEW_PREFIX_BUILD_PLAN_v2.md Steps 0-9, gated approval at each step. Replaced a stale pre-existing stub (status:pending, handle:null, a since-dropped 'Dancing' 4th style, and an unverified 'retro height 3.5in' note - actual measured/locked height is 4.00in, matching MOM's own live Monoton file exactly, confirmed by direct pixel measurement). Elegant locked to 3.00in (matches FAITH's own Elegant/Cormorant height) after its natural render came out too short next to its siblings. Ink palette culled from the full standard pool down to 6 light-ground + 4 dark-ground tokens (White chosen as the sole dark-ground neutral over Cream/Heather Grey). All 42 production masters + 84 mirrors (web+zoom) built, audited (transparent corners, correct canvas size, exactly 2.40in gap, true fill color clean) and pushed; two real gaps caught before calling steps done: web/zoom mirrors were initially missed (12/126 pushed, 114 backfilled) and 30/42 production masters were initially missed (fulfillment dry-run caught it, all 120 routing states now verified 200 on raw GitHub). fulfill.py routing added (Style x Color x Ink, additive, 120-state dry-run clean). PDP built from today's most-refined three-axis chosen-model template (Science), BFS-verified 0 invalid states. ad-grid.liquid given a new 'grandma' naming case (additive) so Shop All's live composite resolves correctly. Home page grid NOT added - already at its 8-item cap, swap-or-bump is Ati's call.",
+   "groups": [
+    "family"
+   ]
   },
   "TEXAS": {
    "status": "pending",
@@ -2189,7 +2311,10 @@
      "status": "pending"
     }
    ],
-   "seo": {}
+   "seo": {},
+   "groups": [
+    "states"
+   ]
   },
   "MIAMI": {
    "status": "pending",
@@ -2203,7 +2328,10 @@
      "status": "pending"
     }
    ],
-   "seo": {}
+   "seo": {},
+   "groups": [
+    "cities"
+   ]
   },
   "VEGAS": {
    "status": "pending",
@@ -2217,7 +2345,10 @@
      "status": "pending"
     }
    ],
-   "seo": {}
+   "seo": {},
+   "groups": [
+    "cities"
+   ]
   },
   "COUNTRY": {
    "status": "pending",
@@ -2227,7 +2358,10 @@
      "status": "pending"
     }
    ],
-   "seo": {}
+   "seo": {},
+   "groups": [
+    "music"
+   ]
   }
  },
  "_not_yet_in_catalog": {
