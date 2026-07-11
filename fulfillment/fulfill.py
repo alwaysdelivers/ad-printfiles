@@ -88,7 +88,7 @@ CROWN_VALID={'white':['split','mono'],'athleticheather':['split','mono'],'navy':
 
 # creature inks (Full Color/Grey/Black) -> file suffix; validity per approved matrix 2026-07-10 (black-on-black struck)
 CRE_INK={'fullcolor':'fc','fc':'fc','grey':'grey','gray':'grey','black':'black'}
-CRE_VALID={'white':['fc','black'],'athleticheather':['fc','black'],'navy':['grey','black'],'black':['grey']}
+CRE_VALID={'white':['fc','black'],'athleticheather':['fc','black'],'navy':['grey'],'black':['grey']}
 CRE_DEFAULT={'white':'fc','athleticheather':'fc','navy':'grey','black':'grey'}
 CRE_SUF={'fc':'whitegarments','grey':'darkgarments','black':'blackink'}
 CROWN_DEFAULT={'white':'split','athleticheather':'split','navy':'mono','black':'mono'}
