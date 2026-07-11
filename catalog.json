@@ -1634,7 +1634,7 @@
   "CREATURES": {
    "status": "live",
    "reconciled": true,
-   "reconciled_date": "2026-07-08",
+   "reconciled_date": "2026-07-10",
    "product_type": [
     "tee",
     "hoodie"
@@ -1645,7 +1645,7 @@
    },
    "folder": "creatures",
    "naming": "creatures",
-   "html_source": "CREATURES_full_set_preview.html",
+   "html_source": "CREATURES_full_set_preview_2026-07-10_r2.html",
    "options": {
     "Color": [
      "White",
@@ -1687,41 +1687,7 @@
      "color_axis": true
     }
    ],
-   "yeti_colors": [
-    {
-     "token": "ice",
-     "label": "Ice-Blue",
-     "dot": "#7fc4e0",
-     "file": "YETI_ICE_allgarments",
-     "shopify_design": "Yeti Ice-Blue"
-    },
-    {
-     "token": "grey",
-     "label": "Greyscale",
-     "dot": "#9aa3ad",
-     "file_rule": "YETI_{whitegarments|darkgarments} by ground",
-     "shopify_design": "Yeti"
-    }
-   ],
-   "yeti_color_validity": {
-    "White": [
-     "ice",
-     "grey"
-    ],
-    "Athletic Heather": [
-     "ice",
-     "grey"
-    ],
-    "Navy": [
-     "grey"
-    ],
-    "Black": [
-     "ice",
-     "grey"
-    ]
-   },
-   "yeti_default_color": "ice",
-   "colorway_rule": "CAVEMAN/SASQUATCH/SNOWMAN -> {whitegarments|darkgarments} by ground; Yeti color axis: ice->YETI_ICE_allgarments, grey->YETI_{whitegarments|darkgarments}",
+   "colorway_rule": "ink-driven: fc->whitegarments, grey->darkgarments, black->blackink; Yeti by design (ice: YETI_ICE_allgarments; greyscale: YETI_ by ground)",
    "no_ink_axis": true,
    "capture": "Yeti color axis maps to the two existing Shopify Design variants (Ice-Blue=Yeti Ice-Blue variant, Greyscale=Yeti variant) \u2014 the pill selects the variant; no product change",
    "defaults": {
@@ -1738,7 +1704,91 @@
     "Home + shop-all show the blue (Ice-Blue) yeti."
    ],
    "hero_design": "Yeti Ice-Blue",
-   "shop_all_per_design": true
+   "shop_all_per_design": true,
+   "ink_axis": {
+    "model": "unified single Ink row, all five pills always visible; chosen-axes filtering (committed creature/ink/garment filters the other axes; uncommitted axes auto-correct; Reset clears commitments)",
+    "cart_property": "Ink",
+    "group_order": [
+     "Abominable Snowman",
+     "Caveman",
+     "Sasquatch",
+     "Yeti"
+    ],
+    "default": {
+     "creature": "Caveman",
+     "ink": "Full Color",
+     "color": "White"
+    },
+    "inks": [
+     {
+      "token": "fc",
+      "label": "Full Color",
+      "dot": "linear-gradient(135deg,#1e3a5f 0 50%,#a8201a 50% 100%)",
+      "file_suffix": "whitegarments",
+      "grounds": [
+       "White",
+       "Athletic Heather"
+      ]
+     },
+     {
+      "token": "grey",
+      "label": "Grey",
+      "dot": "#9aa3ad",
+      "file_suffix": "darkgarments",
+      "grounds": [
+       "Navy",
+       "Black"
+      ]
+     },
+     {
+      "token": "black",
+      "label": "Black",
+      "dot": "#1a1a1a",
+      "file_suffix": "blackink",
+      "grounds": [
+       "White",
+       "Athletic Heather"
+      ],
+      "note": "Navy dropped 2026-07-10 (illegible); black-on-black never existed"
+     },
+     {
+      "token": "ice",
+      "label": "Ice-Blue",
+      "dot": "#7fc4e0",
+      "file": "YETI_ICE_allgarments",
+      "grounds": [
+       "White",
+       "Athletic Heather",
+       "Black"
+      ],
+      "selects_design": "Yeti Ice-Blue"
+     },
+     {
+      "token": "ygrey",
+      "label": "Greyscale",
+      "dot": "#9aa3ad",
+      "file_rule": "YETI_{whitegarments|darkgarments} by ground",
+      "grounds": [
+       "White",
+       "Athletic Heather",
+       "Navy",
+       "Black"
+      ],
+      "selects_design": "Yeti"
+     }
+    ],
+    "applies_to": {
+     "fc_grey_black": [
+      "Caveman",
+      "Sasquatch",
+      "Abominable Snowman"
+     ],
+     "ice_ygrey": [
+      "Yeti drawing"
+     ]
+    },
+    "fulfillment": "fulfill.py _resolve_ink + CRE_INK/CRE_VALID/CRE_DEFAULT/CRE_SUF; property absent = legacy ground routing"
+   }
   },
   "GRANDMA": {
    "status": "pending",
