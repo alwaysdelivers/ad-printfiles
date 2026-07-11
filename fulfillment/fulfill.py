@@ -70,6 +70,11 @@ GOD_DEFAULT={'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}   # f
 DAD_VALID_BY_STYLE={"classic": {"athleticheather": ["fc", "red", "black", "navy", "neonblue"], "black": ["fc", "red", "navy", "white", "grey", "neonblue"], "navy": ["fc", "red", "black", "white", "grey", "neonblue"], "white": ["fc", "red", "black", "navy", "neonblue"]}, "retro": {"athleticheather": ["fc", "red", "black", "navy", "white", "neonblue"], "black": ["fc", "red", "navy", "white", "grey", "neonblue"], "navy": ["fc", "red", "black", "white", "grey", "neonblue"], "white": ["fc", "red", "black", "navy", "neonblue"]}, "varsity": {"athleticheather": ["fc", "red", "black", "navy", "white", "neonblue"], "black": ["fc", "red", "navy", "white", "grey", "neonblue"], "navy": ["fc", "red", "black", "white", "grey", "neonblue"], "white": ["fc", "red", "black", "navy", "neonblue"]}}
 DAD_DEFAULT={'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}   # Full Color valid on every combo
 
+GRANDMA_STYLES={'grace':'grace','elegant':'elegant','retro':'retro'}
+GRANDMA_INK={'navy':'navy','full color':'split','fullcolor':'split','black':'black','white':'white','red':'red','gold':'gold','neon blue':'karmablue','neonblue':'karmablue'}
+GRANDMA_VALID={'white':['navy','split','black','red','gold','karmablue'],'athleticheather':['navy','split','black','red','gold','karmablue'],'navy':['white','red','gold','karmablue'],'black':['white','red','gold','karmablue']}
+GRANDMA_DEFAULT={'white':'split','athleticheather':'split','navy':'white','black':'white'}
+
 # america inks (single-ink per color) -> file colorway; ice removed, karmablue->neonblue
 AMERICA_INK={'navy':'navy','red':'red','black':'black','gold':'gold','cream':'cream','white':'cream','grey':'grey','heather grey':'grey','heathergrey':'grey','karmablue':'neonblue','karma blue':'neonblue','neonblue':'neonblue','fullcolor':'fc','full color':'fc','fc':'fc'}
 AMERICA_VALID={'white':['navy','red','black','gold','neonblue','fc'],'athleticheather':['navy','red','black','gold','neonblue','fc'],'navy':['cream','grey','red','gold','fc'],'black':['red','gold','cream','neonblue','grey','fc']}
@@ -119,6 +124,7 @@ def design_of(title):
     if 'dad' in t: return 'dad'
     if 'god' in t: return 'god'
     if 'america' in t: return 'america'
+    if 'grandma' in t: return 'grandma'
     return None
 
 def _resolve_ink(label, table, valid, default, ckey):
@@ -176,6 +182,13 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         if not tk: return {'error':'%s invalid ink'%dk.upper(),'title':title,'ink':ink}
         cw=gd_cw(tk, ckey)
         return out(dk, '%s_%s_%s'%(dk.upper(),code,cw))
+
+    if dk=='grandma':
+        st=norm(print_style); code=GRANDMA_STYLES.get(st)
+        if not code: return {'error':'GRANDMA invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, GRANDMA_INK, GRANDMA_VALID, GRANDMA_DEFAULT, ckey)
+        if not tk: return {'error':'GRANDMA invalid ink','title':title,'ink':ink}
+        return out('grandma', 'GRANDMA_%s_%s'%(code,tk))
 
     if dk=='america':
         st=norm(print_style)
