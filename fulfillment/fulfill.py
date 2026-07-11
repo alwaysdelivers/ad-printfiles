@@ -78,8 +78,10 @@ def america_cw(tk, ckey):
     return ('fc_'+ground(ckey)) if tk=='fc' else tk
 
 CROSS_INK={'full color':'fc','fullcolor':'fc','fc':'fc','mono':'mono','red':'red','full red':'red','heather grey':'grey','grey':'grey'}
-CROSS_VALID={'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['grey','red'],'black':['fc','mono','grey','red']}
+CROSS_VALID={'cross-04':{'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['grey','red'],'black':['fc','mono','grey','red']},
+             'cross-08':{'white':['fc','mono','red'],'athleticheather':['fc','mono','red'],'navy':['grey','red'],'black':['mono','grey','red']}}  # per-style (2026-07-10: The Cross x Black loses fc)
 CROSS_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'fc'}
+CROSS_DEFAULT_08={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}  # The Cross: Black default red (fc invalid)
 def cross_cw(tk, ckey):
     return ('fc_'+ground(ckey)) if tk=='fc' else tk     # fc_light/fc_dark; mono/grey/red literal
 
@@ -186,7 +188,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     if dk=='cross':
         st=norm(print_style); code=CROSS_STYLES.get(st)
         if not code: return {'error':'CROSS invalid Style','title':title,'style':print_style}
-        tk=_resolve_ink(ink, CROSS_INK, CROSS_VALID, CROSS_DEFAULT, ckey)
+        tk=_resolve_ink(ink, CROSS_INK, CROSS_VALID[code], CROSS_DEFAULT_08 if code=='cross-08' else CROSS_DEFAULT, ckey)
         cw=cross_cw(tk, ckey)
         return out('cross', 'CROSS_%s_%s'%(code,cw))
 
