@@ -730,9 +730,9 @@
     {
      "token": "mono",
      "label": "Mono",
-     "dot": "split #1e3a5f/#f5f1e9 (border #cfcaae)",
+     "dot": "split #1e3a5f/#f0f0d8 (border #cfcaae)",
      "file_colorway": "{ground}_mono",
-     "note": "navy on light, cream #f5f1e9 on dark; cream differs from MOM #f0f0d8 \u2014 open housekeeping"
+     "note": "navy on light, cream #f0f0d8 on dark (re-inked to brand standard 2026-07-12; was #f5f1e9; dark_mono web files served as _r2)"
     },
     {
      "token": "red",
@@ -778,7 +778,7 @@
    "variants_per_product": 48,
    "ink_capture": "line-item property Ink",
    "ui_behavior": "effTriple standard; standard pill anatomy 999px + ink dots (2026-07-10)",
-   "notes": "Reconciled 2026-07-10: Classic variants deleted (24/product, no faith-01 art existed), Strong renamed Bold front+back; fulfill keeps strong alias for in-flight orders. All 24 ink x fabric cells blessed.",
+   "notes": "Reconciled 2026-07-10: Classic variants deleted (24/product, no faith-01 art existed), Strong renamed Bold front+back; fulfill keeps strong alias for in-flight orders. All 24 ink x fabric cells blessed. CREAM FIX 2026-07-12: dark_mono masters re-inked #f5f1e9->#f0f0d8 (alpha bit-identical; ~50 ghost red AA specks from the retired split-lockup era cleaned); web mirrors pushed as _r2, PDP dark_mono routing + mono dot updated.",
    "groups": [
     "faith"
    ]
