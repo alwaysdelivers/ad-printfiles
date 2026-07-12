@@ -2,7 +2,7 @@ import requests, json, re
 RAW='https://raw.githubusercontent.com/alwaysdelivers/ad-printfiles/main/'
 catalog=json.load(open('/home/claude/_catalog.json'))   # {'71':{'col|size':id}, '146':{...}}
 norm=lambda s: re.sub(r'[^a-z0-9]','',(s or '').lower())
-COLOR_ALIAS={'athheather':'athleticheather'}            # shopify token -> printful (normalized)
+COLOR_ALIAS={}                                          # shopify token -> printful (normalized); athheather retired 2026-07 (MOM standardized to 'Athletic Heather')
 HOODIE_ALIAS={'athleticheather':'sportgrey'}            # Gildan 18500 grey name differs from Bella 3001
 LIGHT={'white','sand','ash','tan','athleticheather','natural','sportgrey','silver','babyblue','babypink','softcream','carolinablue','lightblue','heathercarolinablue'}
 SLATEC={'silver','ash','softcream','sand'}
