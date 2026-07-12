@@ -236,7 +236,8 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     if dk=='creatures':
         cr=norm(print_style)
         if cr in ('yeti','yetiiceblue','yetiice','iceblue'):
-            base='YETI_ICE_allgarments' if cr!='yeti' else ('YETI_whitegarments' if ckey in LIGHT else 'YETI_darkgarments')
+            ice=(cr!='yeti') or (norm(ink or '') in ('ice','iceblue','blue'))
+            base='YETI_ICE_allgarments' if ice else ('YETI_whitegarments' if ckey in LIGHT else 'YETI_darkgarments')
             return out('creatures', base)
         m={'caveman':'CAVEMAN','sasquatch':'SASQUATCH','abominablesnowman':'SNOWMAN','snowman':'SNOWMAN','abominable':'SNOWMAN'}.get(cr)
         if not m: return {'error':'CREATURES unknown design','title':title,'design':print_style}
@@ -249,7 +250,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         if not tk: return {'error':'%s invalid ink'%dk.upper(),'title':title,'ink':ink,'color':color}
         return out('creatures', '%s_%s'%(m, CRE_SUF[tk]))
     if dk=='yeti':
-        ice=norm(print_style) in ('ice','iceblue','blue')
+        ice=norm(print_style) in ('ice','iceblue','blue') or norm(ink or '') in ('ice','iceblue','blue')
         base='YETI_ICE_allgarments' if ice else ('YETI_whitegarments' if ckey in LIGHT else 'YETI_darkgarments')
         return out('creatures', base)
 
