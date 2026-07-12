@@ -48,7 +48,7 @@ Resolution of conflicts:
 ---
 
 ## Naming / ink conventions (check every prefix)
-- **"White" ink is almost always brand Cream `#f0f0d8`** (the on-dark light standard), NOT pure white.
+- **"White" ink is almost always brand Cream `#f5f1e8`** (the on-dark light standard), NOT pure white.
   If so, rename `white`→`cream` in LOCKSTEP: print files, PDP token+label+dot, catalog validity,
   `fulfill.py`, and the HTML column.
 - **Token ≠ filename ≠ label** can all differ (e.g. token `karmablue` → file `neonblue` → label "Neon Blue"). Capture all three.
