@@ -65,8 +65,8 @@ button.dis{opacity:.4;cursor:not-allowed;border-color:#c2c8d0;color:#c2c8d0;
   - FAITH: split dot `linear-gradient(135deg,#1e3a5f 0 50%,#f5f1e9 50% 100%)` — its
     Mono ink is genuinely ground-adaptive (navy on light, cream on dark; sampled
     dark-ground value `#f5f1e9`).
-  - MOM: split dot `linear-gradient(135deg,#1e3a5f 0 50%,#f0f0d8 50% 100%)` — also
-    ground-adaptive, but its sampled dark-ground cream (`#f0f0d8`) is a DIFFERENT value
+  - MOM: split dot `linear-gradient(135deg,#1e3a5f 0 50%,#f5f1e8 50% 100%)` — also
+    ground-adaptive, but its sampled dark-ground cream (`#f5f1e8`) is a DIFFERENT value
     than FAITH's (`#f5f1e9`). Pre-existing mismatch between the two prefixes' actual
     print files — NOT resolved by this decision, left open as a separate housekeeping
     item outside the pill rollout (flag for Ati if/when worth fixing at the source).
@@ -123,7 +123,7 @@ button.dis{opacity:.4;cursor:not-allowed;border-color:#c2c8d0;color:#c2c8d0;
 | Red | `#c0301c` |
 | Black | `#1a1a1a` |
 | Gold | `#c08a2e` |
-| Cream | `#f0f0d8` · `border:1px solid #cfcaae` |
+| Cream | `#f5f1e8` · `border:1px solid #cfcaae` |
 | Heather Grey | `#b9c0cb` · `border:1px solid #a7aeb8` |
 | Neon Blue | `#2f7ff0` |
 
@@ -132,7 +132,7 @@ button.dis{opacity:.4;cursor:not-allowed;border-color:#c2c8d0;color:#c2c8d0;
 | pill | dot hex |
 |---|---|
 | Mono (FAITH) | split — `linear-gradient(135deg,#1e3a5f 0 50%,#f5f1e9 50% 100%)` |
-| Mono (MOM) | split — `linear-gradient(135deg,#1e3a5f 0 50%,#f0f0d8 50% 100%)` |
+| Mono (MOM) | split — `linear-gradient(135deg,#1e3a5f 0 50%,#f5f1e8 50% 100%)` |
 | Mono (CROSS) | solid — `#1e3a5f` |
 | White (DAD) | `#fafaf8` · `border:1px solid #cfcfcf` |
 | Slate (CROWN) | `#a8c0c0` · `border:1px solid #8fa3a3` |
