@@ -72,6 +72,9 @@ Resolution of conflicts:
 ---
 
 ## UI standards (locked)
+
+- **Sloth zoom (2026-07-12):** stage click clones the live composite into `#<pfx>-zoombox` at `min(940px,94vw,94vh)` on a WHITE lightbox; click-anywhere/Escape closes. Never reference `printfiles/zoom/` (deleted) or drag-zoom-wrapper.
+- **Null-color guard (2026-07-12, america/stork all-slash bug):** any validity lookup keyed by the COMMITTED `color` must handle `color=null` (post-Reset preview state). Availability checks with an ink committed must test across `color?[color]:_colors()` (any-color semantics), and chip/valid-list rendering must key off `color||effColor()`. `getValid()` must start with `if(!color)return TREATS;`. Regression: Reset → style tile → ink pill must never slash all tiles.
 - **Default ink = Full Color** where valid; else decide per prefix.
 - **Load/Reset = a PREVIEW, not a choice (locked 2026-07-09).** Nothing is chosen; ALL styles/fabrics/inks are enabled; the hero shows the default preview (e.g. Classic / White / Full Color). A default is a preview, not a choice.
 - **Clicking commits that axis only.** Unchosen axes resolve via a single `effTriple()` resolver (best valid style/color/ink honoring chosen axes, preview-match scoring). ALL renders — hero, blank, rings, labels, sizes, cart `Ink` property — read from `effTriple()`. Chosen axes are NEVER silently overwritten; there is NO auto-switch. If a click makes the current mix invalid, the unchosen (preview) axes move.

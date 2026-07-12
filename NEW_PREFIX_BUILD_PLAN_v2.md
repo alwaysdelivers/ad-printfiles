@@ -289,6 +289,15 @@ Header: X-Shopify-Access-Token: {token}   ← token saved at /tmp/_shoptoken
 
 ## STEP 5 — Custom PDP section
 
+### ZOOM — Sloth pattern (LOCKED, 2026-07-12)
+Every PDP uses the Sloth zoom — no exceptions, all 13 live PDPs converted 2026-07-12:
+- Whole stage clickable: `#<pfx>-stage` gets `cursor:zoom-in` and `el('<pfx>-stage').addEventListener('click',zOpen)` (never bind the hero img alone).
+- `zOpen` CLONES the live composite stage (blank+art) into `<div id="<pfx>-zoombox">` inside `#<pfx>-zoom`, sized `min(940px,94vw,94vh)`, square aspect, id stripped from the clone.
+- Lightbox background is WHITE `#ffffff` (never black/dark rgba).
+- Close: click ANYWHERE (overlay binding is plain `zClose`, no `e.target===this` guard), the × button, or Escape.
+- `#<pfx>-zoombox{border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.25);overflow:hidden}`.
+- NEVER fetch a separate zoom image: `printfiles/zoom/` was DELETED 2026-07-12; no `drag-zoom-wrapper`, no hi-res swap, no `.<pfx>-zoom img` sizing rule.
+
 Clone closest existing section. Re-namespace to `{ns}-` prefix.
 
 Layout: Garment toggle → main Ghost image → Style row → Ink row → Color swatches → Size → price pill → Add to cart → `{% render 'ad-pdp-footer' %}`.
