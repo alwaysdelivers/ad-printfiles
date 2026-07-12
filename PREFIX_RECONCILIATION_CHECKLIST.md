@@ -93,6 +93,27 @@ Resolution of conflicts:
 
 ---
 
+## MANDATORY AUDIT GATE (run before declaring ANY prefix build/edit done)
+
+After building, editing, or reconciling ANY prefix, run the consistency auditor:
+
+```
+python3 tools/audit_prefixes.py
+```
+
+It must exit 0 ("ALL PREFIXES CONSISTENT"). The auditor checks, for every prefix:
+- **Source type**: grid images are baked heroes (`heroes/grid/*.webp`), NOT raw printfiles
+- **Home parity**: home cards match the canonical `ad-items` (image identity)
+- **Shop-All parity**: shop-all cards match canonical (image identity), none missing
+- **Files exist**: every referenced hero file actually exists in the repo
+
+This gate exists because of GRANDMA drift: a prefix's grid card pointed at raw print
+files instead of baked mockups, and the home/shop-all copies diverged from ad-items
+without anyone noticing. There are three copies of grid image URLs (ad-items snippet,
+home section, shop-all section); they are maintained separately and CAN drift. The
+auditor is the guardrail. Do not skip it. If it reports DRIFT/MISSING/RAW, fix before
+shipping.
+
 ## Failure modes to guard against (hard-won)
 - **Don't over-interpret a single screenshot.** (Neon blue was made watermark-only from one image — the opposite of truth.) Confirm intent against the HTML before acting.
 - **Don't add anything not in the HTML.** (Invented pattern pills; exposed 50 unapproved combos.) Only what the HTML approves.
