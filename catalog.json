@@ -230,7 +230,7 @@
   }
  },
  "seo_framework": {
-  "title": "{PREFIX} Always Delivers \u2014 {product_type}",
+  "title": "{PREFIX} Always Delivers — {product_type}",
   "meta_description": "{PREFIX} Always Delivers {product_type}. {hook}. Premium {blank} in {n} styles and 4 colors. Designed & printed in the USA.",
   "body_html_structure": [
    "hook line",
@@ -732,7 +732,7 @@
      "label": "Mono",
      "dot": "split #1e3a5f/#f5f1e9 (border #cfcaae)",
      "file_colorway": "{ground}_mono",
-     "note": "navy on light, cream #f5f1e9 on dark; cream differs from MOM #f0f0d8 \u2014 open housekeeping"
+     "note": "navy on light, cream #f5f1e9 on dark; cream differs from MOM #f0f0d8 — open housekeeping"
     },
     {
      "token": "red",
@@ -952,7 +952,7 @@
      "Navy": "fc",
      "Black": "fc"
     },
-    "note": "Default ink is Full Color (fc) on every fabric \u2014 matches the live PDP reset/initial state. fc is valid on all styles+fabrics."
+    "note": "Default ink is Full Color (fc) on every fabric — matches the live PDP reset/initial state. fc is valid on all styles+fabrics."
    },
    "files": {
     "tee": 45,
@@ -972,7 +972,7 @@
     "Ice removed",
     "tee and hoodie share identical style x ink matrix",
     "HTML (AMERICA_set.html) is the source of truth. Only its approved combinations (110) are user-selectable. Neon Blue is available on all 5 styles per HTML.",
-    "Ink 'white' renamed to 'cream' (files, token, label) \u2014 the ink is brand cream #f0f0d8, not pure white."
+    "Ink 'white' renamed to 'cream' (files, token, label) — the ink is brand cream #f0f0d8, not pure white."
    ],
    "ui_behavior": {
     "tile_gating": "Style and Fabric tiles are always selectable (never greyed). The Ink options are restricted per (style,fabric) to exactly the HTML-approved set; ink auto-defaults to a valid one on change. Selectable set = HTML-approved set (110)."
@@ -1254,7 +1254,7 @@
      "label": "Mono",
      "dot": "split #1e3a5f/#f0f0d8 (border #cfcaae)",
      "file_colorway": "{ground}_mono",
-     "note": "cream #f0f0d8 \u2014 on the locked standard (unlike FAITH #f5f1e9)"
+     "note": "cream #f0f0d8 — on the locked standard (unlike FAITH #f5f1e9)"
     },
     {
      "token": "red",
@@ -1300,7 +1300,7 @@
    "variants_per_product": 72,
    "ink_capture": "line-item property Ink",
    "ui_behavior": "legacy per-color state model (pre-effTriple); standard pill anatomy 999px + ink dots (2026-07-10); getValidForColor null-color bug fixed (same defect class as FAITH renderStyle)",
-   "notes": "Reconciled 2026-07-10: Elegant variants deleted (24/product, no mom-02/Elegant art ever existed); fulfill.py kept a Grace-art alias for elegant for any in-flight legacy orders. All 15 ink x style cells (uniform validity, no restrictions) confirmed live. Architecture note: MOM does not use the effTriple 3-axis resolver standard (JESUS/GOD-era model) \u2014 flagged for a future pass if the store standardizes further.",
+   "notes": "Reconciled 2026-07-10: Elegant variants deleted (24/product, no mom-02/Elegant art ever existed); fulfill.py kept a Grace-art alias for elegant for any in-flight legacy orders. All 15 ink x style cells (uniform validity, no restrictions) confirmed live. Architecture note: MOM does not use the effTriple 3-axis resolver standard (JESUS/GOD-era model) — flagged for a future pass if the store standardizes further.",
    "groups": [
     "family"
    ]
@@ -1952,7 +1952,7 @@
   "CREATURES": {
    "status": "live",
    "reconciled": true,
-   "reconciled_date": "2026-07-10",
+   "reconciled_date": "2026-07-12",
    "product_type": [
     "tee",
     "hoodie"
@@ -1963,7 +1963,7 @@
    },
    "folder": "creatures",
    "naming": "creatures",
-   "html_source": "CREATURES_full_set_preview_2026-07-10_r2.html",
+   "html_source": "CREATURES_7.25_set.html",
    "options": {
     "Color": [
      "White",
@@ -1981,9 +1981,9 @@
     ],
     "Design": [
      "Caveman",
+     "Yeti",
      "Sasquatch",
-     "Abominable Snowman",
-     "Yeti Ice-Blue"
+     "Abominable Snowman"
     ]
    },
    "designs": [
@@ -1992,36 +1992,35 @@
      "label": "Caveman"
     },
     {
+     "code": "YETI",
+     "label": "Yeti"
+    },
+    {
      "code": "SASQUATCH",
      "label": "Sasquatch"
     },
     {
      "code": "SNOWMAN",
      "label": "Abominable Snowman"
-    },
-    {
-     "code": "YETI_ICE",
-     "label": "Yeti Ice-Blue",
-     "color_axis": true
     }
    ],
-   "colorway_rule": "ink-driven: fc->whitegarments, grey->darkgarments, black->blackink; Yeti by design (ice: YETI_ICE_allgarments; greyscale: YETI_ by ground)",
+   "colorway_rule": "ink-driven: fc->whitegarments, grey->darkgarments, black->blackink; Yeti by INK (ice: YETI_ICE_allgarments; ygrey: YETI_ by ground)",
    "no_ink_axis": true,
-   "capture": "Yeti color axis maps to the two existing Shopify Design variants (Ice-Blue=Yeti Ice-Blue variant, Greyscale=Yeti variant) \u2014 the pill selects the variant; no product change",
+   "capture": "Yeti is ONE Design variant; Ice-Blue/Greyscale are Ink line-item properties like other creatures' inks. Consolidated 2026-07-12: 'Yeti Ice-Blue' Design variants deleted from both products.",
    "defaults": {
     "design": "Caveman",
     "color": "White"
    },
    "files": {
-    "tee": 9,
-    "hoodie": 9
+    "tee": 12,
+    "hoodie": 12
    },
    "notes": [
-    "Greyscale Yeti is NOT a menu version; it is the Greyscale color of the Yeti Ice-Blue version (like America ink).",
-    "Ice-Blue not offered on Navy; Yeti defaults to Greyscale on Navy.",
-    "Home + shop-all show the blue (Ice-Blue) yeti."
+    "Yeti = ONE design; Ice-Blue and Greyscale are INKS (consolidated 2026-07-12 per CREATURES_7.25_set.html: Ice is an ink column).",
+    "Ice-Blue not offered on Navy; Greyscale resolves whitegarments/darkgarments by ground.",
+    "Home + shop-all show the Ice-Blue yeti (card deep-link points at a Yeti variant; ink preselect via PDP default)."
    ],
-   "hero_design": "Yeti Ice-Blue",
+   "hero_design": "Yeti",
    "shop_all_per_design": true,
    "ink_axis": {
     "model": "unified single Ink row, all five pills always visible; chosen-axes filtering (committed creature/ink/garment filters the other axes; uncommitted axes auto-correct; Reset clears commitments)",
@@ -2079,7 +2078,7 @@
        "Athletic Heather",
        "Black"
       ],
-      "selects_design": "Yeti Ice-Blue"
+      "design": "Yeti"
      },
      {
       "token": "ygrey",
@@ -2092,7 +2091,7 @@
        "Navy",
        "Black"
       ],
-      "selects_design": "Yeti"
+      "design": "Yeti"
      }
     ],
     "applies_to": {
@@ -2110,7 +2109,8 @@
    "groups": [
     "pets",
     "humor"
-   ]
+   ],
+   "hero_ink": "ice"
   },
   "GRANDMA": {
    "status": "live",
