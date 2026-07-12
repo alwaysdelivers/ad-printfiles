@@ -147,7 +147,7 @@ Convention (LOCKED): `printfiles/{design}/{code}_{treatment}.png`
 - **Crop to content bounding box.** Aspect ratio drives Printful placement. No fixed canvas.
 
 ### Lockup color
-Single color per treatment. General: navy `#1e3a5f` on light grounds, cream `#f5f1e8` on dark grounds; red treatment = all-red `#a8201a`. Faith lane: navy `#183048` / cream `#f0f0d8` — resolve from master sheet.
+Single color per treatment. General: navy `#1e3a5f` on light grounds, cream `#f5f1e8` on dark grounds; red treatment = all-red `#a8201a`. Faith lane: navy `#183048` / cream `#f5f1e8` — resolve from master sheet.
 
 ### Rendering pipeline (LOCKED)
 - Install Patua One before any cairosvg render (`cp PatuaOne.ttf ~/.fonts/ && fc-cache -fv ~/.fonts`).
