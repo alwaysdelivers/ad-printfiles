@@ -100,6 +100,66 @@ VEGAS_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
 def vegas_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
 
+# newyork inks (single-ink per color, fc valid on light grounds only) -> file colorway - identical to TEXAS/MIAMI/VEGAS
+NEWYORK_STYLES={'western':'western','classic':'classic','retro':'retro'}
+NEWYORK_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
+           'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
+NEWYORK_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
+             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+NEWYORK_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
+def newyork_cw(tk, ckey):
+    return 'fc_light' if tk=='fc' else tk
+
+# losangeles inks (single-ink per color, fc valid on light grounds only) -> file colorway - identical to TEXAS/MIAMI/VEGAS
+LOSANGELES_STYLES={'western':'western','classic':'classic','retro':'retro'}
+LOSANGELES_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
+           'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
+LOSANGELES_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
+             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+LOSANGELES_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
+def losangeles_cw(tk, ckey):
+    return 'fc_light' if tk=='fc' else tk
+
+# chicago inks (single-ink per color, fc valid on light grounds only) -> file colorway - identical to TEXAS/MIAMI/VEGAS
+CHICAGO_STYLES={'western':'western','classic':'classic','retro':'retro'}
+CHICAGO_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
+           'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
+CHICAGO_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
+             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+CHICAGO_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
+def chicago_cw(tk, ckey):
+    return 'fc_light' if tk=='fc' else tk
+
+# denver inks (single-ink per color, fc valid on light grounds only) -> file colorway - identical to TEXAS/MIAMI/VEGAS
+DENVER_STYLES={'western':'western','classic':'classic','retro':'retro'}
+DENVER_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
+           'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
+DENVER_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
+             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+DENVER_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
+def denver_cw(tk, ckey):
+    return 'fc_light' if tk=='fc' else tk
+
+# boston inks (single-ink per color, fc valid on light grounds only) -> file colorway - identical to TEXAS/MIAMI/VEGAS
+BOSTON_STYLES={'western':'western','classic':'classic','retro':'retro'}
+BOSTON_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
+           'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
+BOSTON_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
+             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+BOSTON_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
+def boston_cw(tk, ckey):
+    return 'fc_light' if tk=='fc' else tk
+
+# seattle inks (single-ink per color, fc valid on light grounds only) -> file colorway - identical to TEXAS/MIAMI/VEGAS
+SEATTLE_STYLES={'western':'western','classic':'classic','retro':'retro'}
+SEATTLE_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
+           'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
+SEATTLE_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
+             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+SEATTLE_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
+def seattle_cw(tk, ckey):
+    return 'fc_light' if tk=='fc' else tk
+
 GRANDMA_STYLES={'grace':'grace','elegant':'elegant','retro':'retro'}
 GRANDMA_INK={'navy':'navy','full color':'split','fullcolor':'split','black':'black','white':'white','red':'red','gold':'gold','neon blue':'karmablue','neonblue':'karmablue'}
 GRANDMA_VALID={'white':['navy','split','black','red','gold','karmablue'],'athleticheather':['navy','split','black','red','gold','karmablue'],'navy':['white','red','gold','karmablue'],'black':['white','red','gold','karmablue']}
@@ -158,6 +218,12 @@ def design_of(title):
     if 'texas' in t: return 'texas'
     if 'miami' in t: return 'miami'
     if 'vegas' in t: return 'vegas'
+    if 'newyork' in t: return 'newyork'
+    if 'losangeles' in t: return 'losangeles'
+    if 'chicago' in t: return 'chicago'
+    if 'denver' in t: return 'denver'
+    if 'boston' in t: return 'boston'
+    if 'seattle' in t: return 'seattle'
     return None
 
 def _resolve_ink(label, table, valid, default, ckey):
@@ -241,6 +307,54 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         cw=vegas_cw(tk, ckey)
         suf='_r2' if code=='classic' else ''
         return out('vegas', 'VEGAS_%s_%s%s'%(code,cw,suf))
+
+    if dk=='newyork':
+        st=norm(print_style); code=NEWYORK_STYLES.get(st)
+        if not code: return {'error':'NEWYORK invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, NEWYORK_INK, NEWYORK_VALID, NEWYORK_DEFAULT, ckey)
+        if not tk: return {'error':'NEWYORK invalid ink','title':title,'ink':ink}
+        cw=newyork_cw(tk, ckey)
+        return out('newyork', 'NEWYORK_%s_%s'%(code,cw))
+
+    if dk=='losangeles':
+        st=norm(print_style); code=LOSANGELES_STYLES.get(st)
+        if not code: return {'error':'LOSANGELES invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, LOSANGELES_INK, LOSANGELES_VALID, LOSANGELES_DEFAULT, ckey)
+        if not tk: return {'error':'LOSANGELES invalid ink','title':title,'ink':ink}
+        cw=losangeles_cw(tk, ckey)
+        return out('losangeles', 'LOSANGELES_%s_%s'%(code,cw))
+
+    if dk=='chicago':
+        st=norm(print_style); code=CHICAGO_STYLES.get(st)
+        if not code: return {'error':'CHICAGO invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, CHICAGO_INK, CHICAGO_VALID, CHICAGO_DEFAULT, ckey)
+        if not tk: return {'error':'CHICAGO invalid ink','title':title,'ink':ink}
+        cw=chicago_cw(tk, ckey)
+        return out('chicago', 'CHICAGO_%s_%s'%(code,cw))
+
+    if dk=='denver':
+        st=norm(print_style); code=DENVER_STYLES.get(st)
+        if not code: return {'error':'DENVER invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, DENVER_INK, DENVER_VALID, DENVER_DEFAULT, ckey)
+        if not tk: return {'error':'DENVER invalid ink','title':title,'ink':ink}
+        cw=denver_cw(tk, ckey)
+        return out('denver', 'DENVER_%s_%s'%(code,cw))
+
+    if dk=='boston':
+        st=norm(print_style); code=BOSTON_STYLES.get(st)
+        if not code: return {'error':'BOSTON invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, BOSTON_INK, BOSTON_VALID, BOSTON_DEFAULT, ckey)
+        if not tk: return {'error':'BOSTON invalid ink','title':title,'ink':ink}
+        cw=boston_cw(tk, ckey)
+        return out('boston', 'BOSTON_%s_%s'%(code,cw))
+
+    if dk=='seattle':
+        st=norm(print_style); code=SEATTLE_STYLES.get(st)
+        if not code: return {'error':'SEATTLE invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, SEATTLE_INK, SEATTLE_VALID, SEATTLE_DEFAULT, ckey)
+        if not tk: return {'error':'SEATTLE invalid ink','title':title,'ink':ink}
+        cw=seattle_cw(tk, ckey)
+        return out('seattle', 'SEATTLE_%s_%s'%(code,cw))
 
     if dk=='grandma':
         st=norm(print_style); code=GRANDMA_STYLES.get(st)
