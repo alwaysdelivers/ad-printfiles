@@ -167,6 +167,16 @@
 
 ---
 
-## Standing rule across all 14
+## 15. Find-replace template cloning (multi-word names)
+
+**Action:** When cloning a section/file via blanket string replacement (e.g. `TEXAS` → `NEW YORK`), never use a display-name replacement value that contains characters unsafe for file paths or URLs (spaces, punctuation) without separately verifying where that replacement landed. A single blanket replace will just as happily corrupt a filename-construction string as it fixes a title string.
+
+**Expected outcome:** After cloning, every internal filename/URL-construction reference uses the safe, no-space code form (e.g. `NEWYORK_`), while every user-facing display string uses the correct display form (e.g. "NEW YORK").
+
+**Validation:** After the replace, grep the output for `{DISPLAY_NAME_WITH_SPACE}_` (the display name immediately followed by an underscore) — this pattern almost never belongs in real display text and is the signature of a corrupted filename/URL. If found, fix surgically (the corrupted occurrence only) without touching the correct display-text occurrences. Do this check for every multi-word name, every time — single-word names can't produce this bug, which is exactly why it went undetected for New York and Los Angeles while Chicago/Denver/Boston/Seattle were fine.
+
+---
+
+## Standing rule across all 15
 
 Every validation result gets shown, not just claimed. "Confirmed" without the actual comparison output shown is not confirmation.
