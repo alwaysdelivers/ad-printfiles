@@ -4830,6 +4830,183 @@
       "groups": [
         "humor"
       ]
+    },
+    "TACO": {
+      "status": "live",
+      "product_type": [
+        "tee",
+        "hoodie"
+      ],
+      "handle": "taco-always-delivers-tee",
+      "options": {
+        "Color": [
+          "White",
+          "Athletic Heather",
+          "Navy",
+          "Black"
+        ],
+        "Size": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "2XL",
+          "3XL"
+        ],
+        "Style": [
+          "Fiesta",
+          "Retro"
+        ]
+      },
+      "designs": [
+        {
+          "code": "fiesta",
+          "label": "Fiesta",
+          "font": "Playfair Display Black (static instance extracted from variable font)"
+        },
+        {
+          "code": "retro",
+          "label": "Retro",
+          "font": "Monoton (overshoot-corrected)"
+        }
+      ],
+      "seo": {},
+      "folder": "taco",
+      "naming": "single-ink-per-token (fc valid on light grounds only, never split light/dark) - only 2 styles",
+      "inks": [
+        {
+          "token": "fc",
+          "label": "Full Color",
+          "note": "fc_light only; never valid on Navy/Black"
+        },
+        {
+          "token": "navy",
+          "label": "Navy"
+        },
+        {
+          "token": "red",
+          "label": "Red"
+        },
+        {
+          "token": "black",
+          "label": "Black"
+        },
+        {
+          "token": "gold",
+          "label": "Gold"
+        },
+        {
+          "token": "white",
+          "label": "White",
+          "note": "dark-ground ink; never valid on White/Athletic Heather"
+        },
+        {
+          "token": "neonblue",
+          "label": "Neon Blue",
+          "note": "PDP token karmablue -> file neonblue"
+        }
+      ],
+      "colorway_rule": "TACO_{style}_{cw}_{garment}; cw: fc->fc_light (only, never fc_dark); karmablue->neonblue; else literal",
+      "defaults": {
+        "style": "Fiesta",
+        "ink": "fc",
+        "color": "White",
+        "note": "fc not valid on dark grounds, Navy/Black default to Red"
+      },
+      "reconciled": true,
+      "reconciled_date": "2026-07-14",
+      "handles": {
+        "tee": "taco-always-delivers-tee",
+        "hoodie": "taco-always-delivers-hoodie"
+      },
+      "html_source": "N/A - built via NEW_PREFIX_BUILD_PLAN_v2.md pipeline. Supersedes the old master-sheet-v32 planning note ('Bangers + Sancreek') - Ati chose Monoton + Playfair Display instead (display names Retro + Fiesta). Playfair Display is a variable font; extracted a static Black (800) instance via fonttools before installing, same fix as Dancing Script for DATENIGHT.",
+      "variants_per_product": 48,
+      "ink_capture": "line-item property 'Ink'",
+      "ink_validity_by_style": {
+        "Fiesta": {
+          "White": [
+            "fc",
+            "navy",
+            "red",
+            "black",
+            "gold",
+            "neonblue"
+          ],
+          "Athletic Heather": [
+            "fc",
+            "navy",
+            "red",
+            "black",
+            "gold",
+            "neonblue"
+          ],
+          "Navy": [
+            "red",
+            "gold",
+            "black",
+            "white",
+            "neonblue"
+          ],
+          "Black": [
+            "navy",
+            "red",
+            "gold",
+            "white",
+            "neonblue"
+          ]
+        },
+        "Retro": {
+          "White": [
+            "fc",
+            "navy",
+            "red",
+            "black",
+            "gold",
+            "neonblue"
+          ],
+          "Athletic Heather": [
+            "fc",
+            "navy",
+            "red",
+            "black",
+            "gold",
+            "neonblue"
+          ],
+          "Navy": [
+            "red",
+            "gold",
+            "black",
+            "white",
+            "neonblue"
+          ],
+          "Black": [
+            "navy",
+            "red",
+            "gold",
+            "white",
+            "neonblue"
+          ]
+        }
+      },
+      "files": {
+        "count": 28,
+        "pattern": "printfiles/taco/TACO_{style}_{colorway}_{garment}.png",
+        "colorways": [
+          "fc_light",
+          "navy",
+          "red",
+          "black",
+          "gold",
+          "white",
+          "neonblue"
+        ]
+      },
+      "all_combinations_selectable": false,
+      "selectable_combinations": 44,
+      "notes": "Food/fun-lane prefix. Only 2 styles (Fiesta=Playfair Display Black, Retro=Monoton), no Western. Folder/file prefix is TACO (not TACOTUESDAY) - matches the pushed filenames exactly.",
+      "groups": [
+        "humor"
+      ]
     }
   },
   "_not_yet_in_catalog": {
