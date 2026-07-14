@@ -4826,9 +4826,9 @@
       },
       "all_combinations_selectable": false,
       "selectable_combinations": 44,
-      "notes": "Romance/couples-lane prefix. Only 2 styles (Romantic=Dancing Script, Retro=Monoton) - no third/Western style, a deliberate departure from the standard 3-style set since Western doesn't fit thematically. OPEN QUESTION flagged to Ati: no existing catalog group (cities/faith/family/humor/patriotic/pets/science/spiritual/sports_teams/states) is a strong fit for a romance/couples theme - defaulted to 'family' as the closest available option, but this may warrant its own new group.",
+      "notes": "Romance/couples-lane prefix. Only 2 styles (Romantic=Dancing Script, Retro=Monoton) - no third/Western style, a deliberate departure from the standard 3-style set since Western doesn't fit thematically. Group set to 'humor' per Ati's explicit instruction (2026-07-14).",
       "groups": [
-        "family"
+        "humor"
       ]
     }
   },
