@@ -230,7 +230,8 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         tk=_resolve_ink(ink, MIAMI_INK, MIAMI_VALID, MIAMI_DEFAULT, ckey)
         if not tk: return {'error':'MIAMI invalid ink','title':title,'ink':ink}
         cw=miami_cw(tk, ckey)
-        return out('miami', 'MIAMI_%s_%s'%(code,cw))
+        suf='_r2' if code=='classic' else ''
+        return out('miami', 'MIAMI_%s_%s%s'%(code,cw,suf))
 
     if dk=='vegas':
         st=norm(print_style); code=VEGAS_STYLES.get(st)
@@ -238,7 +239,8 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         tk=_resolve_ink(ink, VEGAS_INK, VEGAS_VALID, VEGAS_DEFAULT, ckey)
         if not tk: return {'error':'VEGAS invalid ink','title':title,'ink':ink}
         cw=vegas_cw(tk, ckey)
-        return out('vegas', 'VEGAS_%s_%s'%(code,cw))
+        suf='_r2' if code=='classic' else ''
+        return out('vegas', 'VEGAS_%s_%s%s'%(code,cw,suf))
 
     if dk=='grandma':
         st=norm(print_style); code=GRANDMA_STYLES.get(st)
