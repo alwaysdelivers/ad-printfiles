@@ -90,6 +90,16 @@ MIAMI_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
 def miami_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
 
+# vegas inks (single-ink per color, fc valid on light grounds only) -> file colorway - identical to TEXAS/MIAMI
+VEGAS_STYLES={'western':'western','classic':'classic','retro':'retro'}
+VEGAS_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
+           'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
+VEGAS_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
+             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+VEGAS_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
+def vegas_cw(tk, ckey):
+    return 'fc_light' if tk=='fc' else tk
+
 GRANDMA_STYLES={'grace':'grace','elegant':'elegant','retro':'retro'}
 GRANDMA_INK={'navy':'navy','full color':'split','fullcolor':'split','black':'black','white':'white','red':'red','gold':'gold','neon blue':'karmablue','neonblue':'karmablue'}
 GRANDMA_VALID={'white':['navy','split','black','red','gold','karmablue'],'athleticheather':['navy','split','black','red','gold','karmablue'],'navy':['white','red','gold','karmablue'],'black':['white','red','gold','karmablue']}
@@ -147,6 +157,7 @@ def design_of(title):
     if 'grandma' in t: return 'grandma'
     if 'texas' in t: return 'texas'
     if 'miami' in t: return 'miami'
+    if 'vegas' in t: return 'vegas'
     return None
 
 def _resolve_ink(label, table, valid, default, ckey):
@@ -220,6 +231,14 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         if not tk: return {'error':'MIAMI invalid ink','title':title,'ink':ink}
         cw=miami_cw(tk, ckey)
         return out('miami', 'MIAMI_%s_%s'%(code,cw))
+
+    if dk=='vegas':
+        st=norm(print_style); code=VEGAS_STYLES.get(st)
+        if not code: return {'error':'VEGAS invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, VEGAS_INK, VEGAS_VALID, VEGAS_DEFAULT, ckey)
+        if not tk: return {'error':'VEGAS invalid ink','title':title,'ink':ink}
+        cw=vegas_cw(tk, ckey)
+        return out('vegas', 'VEGAS_%s_%s'%(code,cw))
 
     if dk=='grandma':
         st=norm(print_style); code=GRANDMA_STYLES.get(st)
