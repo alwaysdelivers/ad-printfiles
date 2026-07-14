@@ -2519,18 +2519,213 @@
       ]
     },
     "MIAMI": {
-      "status": "pending",
+      "status": "live",
+      "product_type": [
+        "tee",
+        "hoodie"
+      ],
+      "handle": "miami-always-delivers-tee",
+      "options": {
+        "Color": [
+          "White",
+          "Athletic Heather",
+          "Navy",
+          "Black"
+        ],
+        "Size": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "2XL",
+          "3XL"
+        ],
+        "Style": [
+          "Western",
+          "Classic",
+          "Retro"
+        ]
+      },
       "designs": [
         {
-          "code": "miami-01",
-          "status": "pending"
+          "code": "western",
+          "label": "Western"
         },
         {
-          "code": "miami-02",
-          "status": "pending"
+          "code": "classic",
+          "label": "Classic"
+        },
+        {
+          "code": "retro",
+          "label": "Retro"
         }
       ],
       "seo": {},
+      "folder": "miami",
+      "naming": "single-ink-per-token (fc valid on light grounds only, never split light/dark) - identical structure to TEXAS",
+      "inks": [
+        {
+          "token": "fc",
+          "label": "Full Color",
+          "note": "fc_light only; never valid on Navy/Black"
+        },
+        {
+          "token": "navy",
+          "label": "Navy"
+        },
+        {
+          "token": "red",
+          "label": "Red"
+        },
+        {
+          "token": "black",
+          "label": "Black"
+        },
+        {
+          "token": "gold",
+          "label": "Gold"
+        },
+        {
+          "token": "white",
+          "label": "White",
+          "note": "dark-ground ink; never valid on White/Athletic Heather"
+        },
+        {
+          "token": "neonblue",
+          "label": "Neon Blue",
+          "note": "PDP token karmablue -> file neonblue"
+        }
+      ],
+      "colorway_rule": "MIAMI_{style}_{cw}_{garment}; cw: fc->fc_light (only, never fc_dark); karmablue->neonblue; else literal",
+      "defaults": {
+        "style": "Western",
+        "ink": "fc",
+        "color": "White",
+        "note": "Identical ink/validity structure to TEXAS; fc not valid on dark grounds, Navy/Black default to Red"
+      },
+      "reconciled": true,
+      "reconciled_date": "2026-07-14",
+      "handles": {
+        "tee": "miami-always-delivers-tee",
+        "hoodie": "miami-always-delivers-hoodie"
+      },
+      "html_source": "N/A - built via NEW_PREFIX_BUILD_PLAN_v2.md pipeline, cloned exactly from TEXAS's ink/fabric/validity setup (2026-07-14). Original single-style (Retro-only) product was created earlier same day by a separate process; Western/Classic were added afterward and the product restructured from Color x Size to Color x Size x Style via productSet with explicit product id.",
+      "variants_per_product": 72,
+      "ink_capture": "line-item property 'Ink'",
+      "ink_validity_by_style": {
+        "Western": {
+          "White": [
+            "fc",
+            "navy",
+            "red",
+            "black",
+            "gold",
+            "neonblue"
+          ],
+          "Athletic Heather": [
+            "fc",
+            "navy",
+            "red",
+            "black",
+            "gold",
+            "neonblue"
+          ],
+          "Navy": [
+            "red",
+            "gold",
+            "black",
+            "white",
+            "neonblue"
+          ],
+          "Black": [
+            "navy",
+            "red",
+            "gold",
+            "white",
+            "neonblue"
+          ]
+        },
+        "Classic": {
+          "White": [
+            "fc",
+            "navy",
+            "red",
+            "black",
+            "gold",
+            "neonblue"
+          ],
+          "Athletic Heather": [
+            "fc",
+            "navy",
+            "red",
+            "black",
+            "gold",
+            "neonblue"
+          ],
+          "Navy": [
+            "red",
+            "gold",
+            "black",
+            "white",
+            "neonblue"
+          ],
+          "Black": [
+            "navy",
+            "red",
+            "gold",
+            "white",
+            "neonblue"
+          ]
+        },
+        "Retro": {
+          "White": [
+            "fc",
+            "navy",
+            "red",
+            "black",
+            "gold",
+            "neonblue"
+          ],
+          "Athletic Heather": [
+            "fc",
+            "navy",
+            "red",
+            "black",
+            "gold",
+            "neonblue"
+          ],
+          "Navy": [
+            "red",
+            "gold",
+            "black",
+            "white",
+            "neonblue"
+          ],
+          "Black": [
+            "navy",
+            "red",
+            "gold",
+            "white",
+            "neonblue"
+          ]
+        }
+      },
+      "files": {
+        "count": 42,
+        "pattern": "printfiles/miami/MIAMI_{style}_{colorway}_{garment}.png",
+        "colorways": [
+          "fc_light",
+          "navy",
+          "red",
+          "black",
+          "gold",
+          "white",
+          "neonblue"
+        ]
+      },
+      "all_combinations_selectable": false,
+      "selectable_combinations": 66,
+      "notes": "Direct clone of TEXAS's ink/fabric/validity setup (Western=Rye, Classic=Cinzel+EST.1845 secondary line, Retro=Monoton overshoot-corrected), same 7-ink palette, same validity matrix, identical across all 3 styles. City-lane prefix (not state). Placement math verified against TEXAS's locked reference: prefix top-anchor 900px, gap 720px (+-1px rounding), wordmark 2172x598px fixed - all confirmed via direct pixel measurement, not assumed.",
       "groups": [
         "cities"
       ]
