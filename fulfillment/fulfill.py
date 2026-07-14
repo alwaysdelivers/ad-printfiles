@@ -190,6 +190,16 @@ DATENIGHT_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red
 def datenight_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
 
+# taco inks (single-ink per color, fc valid on light grounds only) -> file colorway - only 2 styles (Fiesta/Retro, no Western)
+TACO_STYLES={'fiesta':'fiesta','retro':'retro'}
+TACO_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
+           'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
+TACO_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
+             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+TACO_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
+def taco_cw(tk, ckey):
+    return 'fc_light' if tk=='fc' else tk
+
 GRANDMA_STYLES={'grace':'grace','elegant':'elegant','retro':'retro'}
 GRANDMA_INK={'navy':'navy','full color':'split','fullcolor':'split','black':'black','white':'white','red':'red','gold':'gold','neon blue':'karmablue','neonblue':'karmablue'}
 GRANDMA_VALID={'white':['navy','split','black','red','gold','karmablue'],'athleticheather':['navy','split','black','red','gold','karmablue'],'navy':['white','red','gold','karmablue'],'black':['white','red','gold','karmablue']}
@@ -257,6 +267,7 @@ def design_of(title):
     if 'grandpa' in t: return 'grandpa'
     if 'gameday' in t: return 'gameday'
     if 'datenight' in t: return 'datenight'
+    if 'taco' in t: return 'taco'
     return None
 
 def _resolve_ink(label, table, valid, default, ckey):
@@ -412,6 +423,14 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         if not tk: return {'error':'DATENIGHT invalid ink','title':title,'ink':ink}
         cw=datenight_cw(tk, ckey)
         return out('datenight', 'DATENIGHT_%s_%s'%(code,cw))
+
+    if dk=='taco':
+        st=norm(print_style); code=TACO_STYLES.get(st)
+        if not code: return {'error':'TACO invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, TACO_INK, TACO_VALID, TACO_DEFAULT, ckey)
+        if not tk: return {'error':'TACO invalid ink','title':title,'ink':ink}
+        cw=taco_cw(tk, ckey)
+        return out('taco', 'TACO_%s_%s'%(code,cw))
 
     if dk=='grandma':
         st=norm(print_style); code=GRANDMA_STYLES.get(st)
