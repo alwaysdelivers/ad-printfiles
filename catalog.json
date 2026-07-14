@@ -202,7 +202,7 @@
     "sports_teams": {
       "label": "Sports Teams",
       "order": 11,
-      "status": "hidden"
+      "status": "visible"
     },
     "humor": {
       "label": "Humor",
