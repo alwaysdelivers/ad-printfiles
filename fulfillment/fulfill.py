@@ -80,6 +80,16 @@ TEXAS_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}  
 def texas_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk     # fc always fc_light (never valid on dark); else literal
 
+# miami inks (single-ink per color, fc valid on light grounds only) -> file colorway - identical to TEXAS
+MIAMI_STYLES={'western':'western','classic':'classic','retro':'retro'}
+MIAMI_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
+           'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
+MIAMI_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
+             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}   # identical across all 3 styles (2026-07-14, cloned from TEXAS)
+MIAMI_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
+def miami_cw(tk, ckey):
+    return 'fc_light' if tk=='fc' else tk
+
 GRANDMA_STYLES={'grace':'grace','elegant':'elegant','retro':'retro'}
 GRANDMA_INK={'navy':'navy','full color':'split','fullcolor':'split','black':'black','white':'white','red':'red','gold':'gold','neon blue':'karmablue','neonblue':'karmablue'}
 GRANDMA_VALID={'white':['navy','split','black','red','gold','karmablue'],'athleticheather':['navy','split','black','red','gold','karmablue'],'navy':['white','red','gold','karmablue'],'black':['white','red','gold','karmablue']}
@@ -136,6 +146,7 @@ def design_of(title):
     if 'america' in t: return 'america'
     if 'grandma' in t: return 'grandma'
     if 'texas' in t: return 'texas'
+    if 'miami' in t: return 'miami'
     return None
 
 def _resolve_ink(label, table, valid, default, ckey):
@@ -201,6 +212,14 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         if not tk: return {'error':'TEXAS invalid ink','title':title,'ink':ink}
         cw=texas_cw(tk, ckey)
         return out('texas', 'TEXAS_%s_%s'%(code,cw))
+
+    if dk=='miami':
+        st=norm(print_style); code=MIAMI_STYLES.get(st)
+        if not code: return {'error':'MIAMI invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, MIAMI_INK, MIAMI_VALID, MIAMI_DEFAULT, ckey)
+        if not tk: return {'error':'MIAMI invalid ink','title':title,'ink':ink}
+        cw=miami_cw(tk, ckey)
+        return out('miami', 'MIAMI_%s_%s'%(code,cw))
 
     if dk=='grandma':
         st=norm(print_style); code=GRANDMA_STYLES.get(st)
