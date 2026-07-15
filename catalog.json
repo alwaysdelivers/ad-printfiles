@@ -5780,6 +5780,130 @@
    "groups": [
     "humor"
    ]
+  },
+  "GEORGIA": {
+   "handle": "georgia-always-delivers-tee",
+   "handles": {
+    "tee": "georgia-always-delivers-tee",
+    "hoodie": "georgia-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "ATL",
+     "SAV"
+    ]
+   },
+   "variants_per_product": 144,
+   "designs": [
+    {
+     "code": "western",
+     "label": "Western",
+     "font": "Rye"
+    },
+    {
+     "code": "classic",
+     "label": "Classic",
+     "font": "Cinzel 400",
+     "est_line": "EST. 1788 (statehood Jan 2 1788, verified)"
+    },
+    {
+     "code": "retro",
+     "label": "Retro",
+     "font": "Monoton"
+    },
+    {
+     "code": "flag",
+     "label": "Flag",
+     "note": "existing GEORGIAFLAG files, unchanged"
+    },
+    {
+     "code": "atl",
+     "label": "ATL",
+     "kind": "airport"
+    },
+    {
+     "code": "sav",
+     "label": "SAV",
+     "kind": "airport"
+    }
+   ],
+   "file_rules": {
+    "fonts": "printfiles/georgia/GEORGIA_{style}_{cw}_{garment}.png",
+    "flag": "printfiles/states/GEORGIAFLAG_{ground}_{garment}(_r2 hoodie).png",
+    "airports": "printfiles/stateairport/STATEAIRPORT_ga-{code}_{token}_{garment}.png (no _r2)"
+   },
+   "geometry": "prefix fit 3000x900 top y900; classic EST line +90/+720; others +720; GA ghost rule B 3000x1463",
+   "ink_validity_by_style": {
+    "Flag": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "fc"
+     ],
+     "Black": [
+      "fc"
+     ]
+    },
+    "ATL": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "neonblue"
+     ]
+    },
+    "SAV": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "neonblue"
+     ]
+    }
+   },
+   "updated": "2026-07-15 wave 0 pilot (full parity pattern)"
   }
  },
  "_not_yet_in_catalog": {
