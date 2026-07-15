@@ -1,14 +1,15 @@
 # State Line — Build Protocol
 
-**Status:** LOCKED. Read in full before any state work.
-**Last verified:** 2026-07-15 (every value below measured from live files/API, not assumed).
+**Status:** LOCKED. Single source of truth for the State line. Read in full before any state work.
+**Last verified:** 2026-07-15 — every value below measured from live files/API, not assumed.
 
-Credentials are NOT in this repo — it is public. See `AD_CREDENTIALS_<date>.txt` in Drive.
-`/tmp` is wiped between sessions; re-mint the Shopify token every session and on any 401.
+Supersedes `STATEANDAIRPORT_BUILD_PROTOCOL.md` (retired 2026-07-15; §6 absorbs it).
+Absorbs `PREFIX_VALIDATION_PROTOCOL.md` for state work (§8). `AD_STANDING_INSTRUCTIONS.md` still governs
+working style. `NEW_PREFIX_BUILD_PLAN_v2.md` governs prefix (non-state) products.
 
 ---
 
-## 1. OPEN DEFECTS — live and customer-facing. Fix before new work.
+## 1. OPEN DEFECTS — live, customer-facing. Fix before new work.
 
 Caused by the Option-2 merge (city products → state products). Products are correct; theme wiring is not.
 
@@ -16,37 +17,57 @@ Caused by the Option-2 merge (city products → state products). Products are co
 
 | State | Defect | Fix |
 |---|---|---|
-| florida, nevada, california, illinois, colorado, massachusetts, washington | `templateSuffix` points to `templates/product.{state}.json` → **404**. PDP falls back to Shopify's default template: **no style picker at all**. | Create each template; point it at the state's existing section — which still has its OLD city name: `miami-combined`, `vegas-combined`, `losangeles-combined`, `chicago-combined`, `denver-combined`, `boston-combined`, `seattle-combined`. |
+| florida, nevada, california, illinois, colorado, massachusetts, washington | `templateSuffix` points at `templates/product.{state}.json` → **404**. PDP falls back to Shopify's default template: **no style picker at all**. | Create each template, pointing at the state's existing section — which still carries its OLD city name: `miami-combined`, `vegas-combined`, `losangeles-combined`, `chicago-combined`, `denver-combined`, `boston-combined`, `seattle-combined`. |
 | newyork | Template exists, but `newyork-combined.liquid` has `styleOrder: [Western, Classic, Retro]` — no `Flag`. 96 variants exist; the Flag ones are unreachable in UI. | Add `Flag` to `styleOrder` + Flag branch in `treatUrl()` + `FLAG_VALID`. |
 | all 8 above | Same missing-`Flag` wiring as newyork. | Same. |
 
 **B. Shop All: 7 dead links.** Cards still point at `miami-`, `vegas-`, `losangeles-`, `chicago-`,
-`denver-`, `boston-`, `seattle-always-delivers-tee` — all now **404** (renamed to their state handles).
-Repoint to the state handle and rename the card label, or replace with the state card.
+`denver-`, `boston-`, `seattle-always-delivers-tee` — all **404** since the rename.
 
-`texas-combined.liquid` is the **reference implementation** — correct and complete. Copy from it.
+`sections/texas-combined.liquid` is the **reference implementation** — correct and complete. Copy from it.
 
 ---
 
-## 2. Current state (verified 2026-07-15)
+## 2. Session setup
 
-**Print files — all 50 states, live and CDN-verified:**
-- `printfiles/states/{CODE}_{light|dark}_{tee|hoodie}.png` — 200 files
-- `printfiles/web/states/{CODE}_{light|dark}_{tee|hoodie}.png` — 200 files
-- `heroes/grid/{folder}_{tee|hood}_{white|heather|navy|black}.webp` — 400 files
-- `{CODE}` = `{STATE}FLAG` (e.g. `ALABAMAFLAG`). `{folder}` = `{state}flag` (e.g. `alabamaflag`).
+`/tmp` is wiped between sessions. Credentials live in Drive (`AD_CREDENTIALS_<date>.txt`) — **never in this
+repo; it is public** and GitHub secret-scanning auto-revokes exposed PATs. Paste the setup block from that
+file to restore `/tmp/_ghpat`, `/tmp/_shop_client_id`, `/tmp/_shoptoken`, `/tmp/_printful_key`, then mint.
 
-**HOODIE FILES ARE `_r2`.** See §4. Tee files have no suffix.
+- **Shopify:** `/tmp/_shoptoken` is the CLIENT SECRET (`shpss_`), not usable as an API token. Mint the
+  `shpat_` token via `client_credentials` → `/tmp/_shoptoken_live`. **It expires mid-session — on any 401,
+  re-mint.** Shop `rudjph-mx.myshopify.com` · API `2025-07` · Theme (Horizon, LIVE) `153615171752` ·
+  Publication `gid://shopify/Publication/198208127144` · Categories: tee `aa-1-13-8`, hoodie `aa-1-13-13`.
+- **GitHub:** repo `alwaysdelivers/ad-printfiles` (**public**).
+- **Printful:** store `18259192`, header `X-PF-Store-Id: 18259192`. Key scope is limited — `/store` returns
+  403 (needs `stores_list/read`, not granted); **this is not a broken key**. Verified working 2026-07-15:
+  `/stores`, `/orders`, `/mockup-generator`.
+
+Verify each credential works before relying on it. Don't assume a 403 means dead.
+
+---
+
+## 3. Current state (verified 2026-07-15)
+
+**Print files — all 50 states, live, CDN-verified:**
+```
+printfiles/states/{CODE}_{light|dark}_{tee|hoodie}.png          200 files
+printfiles/web/states/{CODE}_{light|dark}_{tee|hoodie}.png      200 files
+heroes/grid/{folder}_{tee|hood}_{white|heather|navy|black}.webp 400 files
+```
+`{CODE}` = `{STATE}FLAG` (e.g. `ALABAMAFLAG`) · `{folder}` = `{state}flag` (e.g. `alabamaflag`).
+**All hoodie files carry `_r2`** (a centering fix — see §7). Tee files have no suffix.
 
 **Products — 100 live, published, heroes set:**
-- 41 plain states: handle `{state}-always-delivers-{tee|hoodie}`, **Color × Size only** (24 variants), `templateSuffix: state`, shared section `state-flag-combined.liquid`. **These are correct and done.**
-- 9 merged states: `Color × Size × Style` (96 variants; texas 192). See §1 — theme wiring broken on 8.
+- **41 plain states** — handle `{state}-always-delivers-{tee|hoodie}`, **Color × Size only** (24 variants),
+  `templateSuffix: state`, shared section `state-flag-combined.liquid`. **Correct and done.**
+- **9 merged states** — `Color × Size × Style` (96 variants; texas 192). See §1: 8 are broken.
 
-**Texas — complete, 8 styles, 192 variants:** Western, Classic, Retro, Flag, AUS, DFW, HOU, SAT.
+**Texas — complete. 8 styles / 192 variants:** Western, Classic, Retro, Flag, AUS, DFW, HOU, SAT.
 
 ---
 
-## 3. Placement math — LOCKED
+## 4. Flag design — LOCKED geometry
 
 Never estimate. Measure from the generated file every time.
 
@@ -59,87 +80,57 @@ Never estimate. Measure from the generated file every time.
 | Name box max | 3000×600px (10.00″×2.00″) | same |
 | Gap name→wordmark | 720px / 2.40″ | same |
 | Wordmark | 2172×598px (7.24″×2.00″) | same |
-| Worst-case ends at | 13.45″ of 16″ (84%) | 13.45″ of 14″ (96%) |
+| Worst case ends at | 13.45″ of 16″ (84%) | 13.45″ of 14″ (96%) |
 
-- Flag: real colors, scaled to fixed 3.00″ height (width varies by flag aspect — expected, not a bug), **8px white border** (~0.027″).
-- Name: Cinzel. Fit to **both** max-width AND max-height, whichever is more restrictive (`scale = min(w/nw, h/nh)`). Width-only overflows long names (Connecticut); height-only oversizes short names (Iowa/Ohio) and pushes past the hoodie limit.
-- Wordmark: standard Patua One lockup, **flows from the measured name bottom + 720px** — never a fixed absolute Y.
-- Ink: navy `#1e3a5f` on White/Athletic Heather; white on Navy/Black. Auto-switched by garment. **No ink picker.**
+- **Flag** — real colors, scaled to a fixed 3.00″ height. Width varies by flag aspect ratio (Ohio's
+  swallowtail vs Colorado's rectangle) — **expected, not a bug**. **8px white border** (~0.027″) so it
+  reads on dark fabric.
+- **Name** — Cinzel. Fit to **both** max-width AND max-height, whichever binds:
+  `scale = min(max_w/natural_w, max_h/natural_h)`. Width-only overflows long names (Connecticut);
+  height-only oversizes short names (Iowa/Ohio) and pushes past the hoodie limit.
+- **Wordmark** — standard Patua One lockup, positioned from the **measured name bottom + 720px**.
+  Never a fixed absolute Y — name height varies.
+- **Ink** — navy `#1e3a5f` on White/Athletic Heather; white on Navy/Black. Auto-switched by garment
+  ground. **No ink picker for Flag.**
 
----
-
-## 4. Hard-won rules — violate these and it breaks
-
-**Transparency.** Print files must be RGBA with genuine transparency. Assert before pushing:
-`assert not (np.array(img.split()[3])==255).all()`
-An opaque background prints as a visible box on the garment. It also silently breaks trim-to-content
-(chips come out at the wrong scale), because the "content" bbox becomes the whole canvas.
-
-**Per-garment centering.** Center against the **actual garment canvas width** (`cw`), never a hardcoded
-3600. Rendering at tee width and pasting onto the 4200px hoodie offsets everything 300px left.
-Verify: content center must be within ~1px of `cw/2`.
-
-**jsDelivr never re-serves a changed file.** The cache is permanent per filename; `?v=` does nothing;
-purge does nothing (MD5-proven). To ship a correction, push a **new filename** (`_r2`, `_r3`) and update
-every reference. This is why all hoodie state files are `_r2` — a centering fix.
-
-**Verify on `raw.githubusercontent.com` or the Contents API — never trust a `raw` 404.**
-`raw` lags after a push. The Contents API is authoritative. A "sha wasn't supplied" error on PUT means
-the file already exists (i.e. success), not a failure.
-
-**Shopify:**
-- `productSet` needs an explicit `id` to UPDATE; without it → "handle in use".
-- `productCreateMedia` → poll → `productReorderMedia(position 0)`. **Poll for `READY` *or* `FAILED`.**
-  A bad source URL yields `FAILED`, and reordering a failed media silently no-ops — the old hero stays.
-  Always check the URL 200s first, and verify `featuredImage` after.
-- Token expires mid-session. On 401, re-mint.
-
-**Multi-word names.** A blanket `replace('TEXAS','NEW YORK')` corrupts filename construction as happily
-as it fixes titles. After cloning a section, grep for `{DISPLAY NAME}_` (name + underscore) — that
-pattern is the signature of a broken URL. Single-word names can't produce this; that's why it hit
-New York and LA but not Chicago.
-
-**Large batches time out.** Make every push script resumable (skip files already 200 on raw), and expect
-to re-run it 2–3 times.
+**Flag source:** `https://en.wikipedia.org/wiki/Special:FilePath/Flag_of_{State}.svg` → cairosvg
+`--output-width 2400`. Underscores for multi-word (`New_Hampshire`). **Rate-limited — sleep 1.5s between
+fetches** or you get HTML error pages saved as `.svg`. Always verify: `file X.svg` must say "SVG".
 
 ---
 
-## 5. Build a new state
+## 5. Style architecture
 
-1. **Read this doc + `PREFIX_VALIDATION_PROTOCOL.md`.** Check §1 for open defects first.
-2. **Check what exists** — product, section, template, catalog entry. Never assume clean slate.
-3. **Flag source:** `https://en.wikipedia.org/wiki/Special:FilePath/Flag_of_{State}.svg`
-   → cairosvg at `--output-width 2400`. Underscores for multi-word (`New_Hampshire`).
-   Rate-limited: sleep 1.5s between fetches or you get HTML error pages instead of SVGs.
-4. **Pre-flight the name fit** for all states before generating anything (§3).
-5. **Generate** print + web + grid heroes. Assert transparency and centering (§4).
-6. **Push** with a resumable script. CDN-gate every file (must 200) before referencing it.
-7. **Product:** `productSet`. Plain state = Color × Size, `templateSuffix: state`.
-   With City/Airport styles = add Style axis, own section + **own template** (§1's bug).
-8. **Verify live** — fetch `/products/{handle}.js` and confirm styles/variants; fetch the PDP HTML and
-   confirm the section actually rendered.
+One flat `Style` axis. **Display names only — never a raw font name** as an option value (expensive to
+change once variants exist).
 
----
+| Style | Scope | Font | Ink |
+|---|---|---|---|
+| Flag | all 50 | — | none (auto light/dark) |
+| Western / Classic / Retro | the 8 city-states | Rye / Cinzel / Monoton | full 7-ink palette |
+| AUS / DFW / HOU / SAT | Texas only | Monoton | restricted (§6) |
 
-## 6. Style architecture
+**7-ink palette** (Western/Classic/Retro): `fc`, `navy`, `red`, `black`, `gold`, `white`, `karmablue`.
+File token maps: `fc`→`fc_light`, `karmablue`→`neonblue`, else literal.
+Validity: White/Ath.Heather → `fc,navy,red,black,gold,karmablue` · Navy → `red,gold,black,white,karmablue`
+· Black → `navy,red,gold,white,karmablue`. Defaults: light→`fc`, dark→`red`.
 
-One flat `Style` axis. Display names only — never a raw font name.
+**Ink validity is style-dependent.** `_vset(style, color)` dispatches per style. `getDefault()` **must**
+validate its default against the current style's valid set — otherwise it returns an ink that style can't
+use. (This was a real latent bug; fixed in `texas-combined.liquid`.)
 
-- **Flag** — all 50 states. No ink choice; ground auto-switches.
-- **Western / Classic / Retro** — the 8 city-states (Rye / Cinzel / Monoton). Full 7-ink palette.
-- **AUS / DFW / HOU / SAT** — Texas only. Restricted inks (§7).
-
-Ink validity is **style-dependent**. `_vset(style, color)` dispatches per style; `getDefault()` must
-validate its default against the current style's valid set or it returns an invalid ink.
-
-Adding a style = product option + `styleOrder` + `_vset` branch + `treatUrl()` branch + chip.
+Adding a style = product option + `styleOrder` + `_vset` branch + `treatUrl()` branch + chip. All five.
 
 ---
 
-## 7. State & Airport (Texas reference)
+## 6. State & Airport (absorbed from the retired doc)
 
-Files: `printfiles/{web/}stateairport/STATEAIRPORT_tx-{code}_{token}_{garment}_r2.png`
-Codes: aus, dfw, hou, sat. Tokens: `fc_light`, `redstate_white`, `neonstate_white`, `goldstate_white`.
+```
+printfiles/{web/}stateairport/STATEAIRPORT_tx-{code}_{token}_{garment}_r2.png
+```
+Codes: `aus`, `dfw`, `hou`, `sat`. Tokens: `fc_light`, `redstate_white`, `neonstate_white`, `goldstate_white`.
+
+**Ink & fabric — LOCKED**
 
 | Ink | Fabric | State opacity | Wordmark | Code opacity |
 |---|---|---|---|---|
@@ -147,28 +138,129 @@ Codes: aus, dfw, hou, sat. Tokens: `fc_light`, `redstate_white`, `neonstate_whit
 | Full Color | Dark | **REJECTED — never use** | | |
 | Red / Neon / Gold state + white code | **Dark only** | 75% | 75% | 100% |
 
-The airport code is **never** faded. Full Color on Dark was tested and rejected — don't re-propose.
+The airport code is **never** faded — 100% on every fabric. Full Color on Dark was tested and explicitly
+rejected; don't re-propose. Single-ink standalone treatments (navy/red/black/gold/white/neon alone) are
+**removed** from State & Airport — only Full Color and the two-tone combos exist.
 
-**Harmony-scale:** state code at 10.00″ wide; `target = state_dims × 2/3`;
-`scale = sqrt(x_scale × y_scale)` — uniform only, never distort letterforms. Code centered on the state.
+**Harmony-scale sizing:** state code rendered at 10.00″ wide (3000px); `target = state_dims × 2/3`;
+`scale = sqrt(x_scale × y_scale)` (geometric mean) — **uniform only, never distort letterforms**. Airport
+code centered on the state code, in front.
 
-**Overshoot correction is mandatory per new code** (Monoton). Verified: DFW none; HOU O-symmetric +
-U-bottom; SAT S-symmetric. `monoton_correct.solve_width_corrected()` handles it — it also has a
-whitespace fix for two-word prefixes.
+**Overshoot correction — mandatory per new code** (Monoton over-renders curves). Verified: DFW none ·
+HOU O-symmetric + U-bottom-only · SAT S-symmetric · AUS none. `monoton_correct.solve_width_corrected()`
+applies it automatically and also handles the whitespace fix for two-word prefixes. Log the decision per
+code; don't assume a letter behaves the same in a different word.
 
-**Verify opacity math** — sample a faded pixel, compare to `bg×(1−o) + fg×o`, must match within ~2.
+**Lockup** — the standard `_ALWAYS DELIVERS` (Patua One), recolored to the ink; two-tone matches the
+state color at the state's opacity. Never a bespoke lockup.
 
 ---
 
-## 8. Remaining work
+## 7. Hard-won rules — violating these breaks production
 
-1. **Fix §1** (16 broken products).
-2. **Shop All** (`sections/shop-all.liquid` — NOT the orphaned `ad-all-prefixes.liquid`):
-   remove 7 stale city cards (miami/vegas/losangeles/chicago/denver/boston/seattle — those handles are
-   gone), add 50 state cards, alphabetical ("The X" sorts under X). The hoodie toggle already
-   special-cases state cards for `_r2` — don't break it.
-3. **`snippets/ad-items.liquid`** — 50 states absent. Home-page count reads from it.
+**Transparency.** Print files are RGBA with genuine transparency. Assert before pushing:
+```python
+assert not (np.array(img.split()[3]) == 255).all()
+```
+An opaque background prints as a **visible box** on the garment. It also silently breaks trim-to-content
+(the "content" bbox becomes the whole canvas), so chips come out at the wrong scale.
+**Reference:** a correct Texas airport chip is 216×218.
+
+**Per-garment centering.** Center against the **actual garment canvas width** (`cw`), never a hardcoded
+3600. Rendering at tee width and pasting onto the 4200px hoodie offsets everything 300px left (43px at web
+scale). Verify: content center within ~1px of `cw/2`.
+
+**Alpha compositing.** Always `Image.alpha_composite()`. **Never** `.paste(src, box, mask)` for
+partial-opacity content — it blends against the destination's hidden `(0,0,0)` and silently washes out
+colors. `.paste()` is safe only for fully-opaque content.
+Verify any opacity render: sample a faded pixel, compare to `bg×(1−o) + fg×o`, must match within ~2.
+
+**jsDelivr never re-serves a changed file.** Cache is permanent per filename. `?v=` does nothing. Purge
+does nothing (MD5-proven). To ship a correction, push a **new filename** (`_r2`, `_r3`) and update every
+reference. This is why all hoodie state files are `_r2`.
+
+**Verification sources.** `raw.githubusercontent.com` **lags after a push** — a 404 there is not proof of
+absence. The Contents API is authoritative. A `"sha wasn't supplied"` error on PUT means the file already
+exists (success), not failure. CDN-gate every file (must 200) before referencing it anywhere.
+
+**Shopify.**
+- `productSet` needs an explicit `id` to UPDATE; without it → "handle in use".
+- Hero: `productCreateMedia` → poll → `productReorderMedia(newPosition:'0')`.
+  **Poll for `READY` *or* `FAILED`.** A bad source URL yields `FAILED`, and reordering failed media
+  **silently no-ops** — the old hero stays and nothing errors. Check the URL 200s first; verify
+  `featuredImage` after. (This bit once: the script used the handle-stripped name `alabama_hood_white_r2`
+  instead of the real filename `alabamaflag_hood_white_r2`; all 41 silently failed.)
+- `productSet synchronous:false` for >100 variants; poll `productSetOperation`.
+- Theme asset PUT → wait 3s → read back and assert **byte-identity**. REST readback can serve stale
+  content for seconds.
+- Trace the live chain before editing any theme file: page/product template JSON → section `type` →
+  `sections/{type}.liquid`. Shop All lives in `sections/shop-all.liquid` — **not** the orphaned
+  `ad-all-prefixes.liquid`.
+
+**Multi-word names.** A blanket `replace('TEXAS','NEW YORK')` corrupts filename construction as happily as
+it fixes titles. After cloning a section, grep for `{DISPLAY NAME}_` (name + underscore) — that pattern is
+the signature of a broken URL. Single-word names can't produce it; that's why it hit New York and LA but
+not Chicago.
+
+**Ordered lists.** Never assume position. Extract the full list, apply the real sort, assert the result.
+"The X" sorts under X.
+
+**Batches time out.** Every push script must be **resumable** (skip files already 200 on raw). Expect to
+re-run 2–3 times. Sleep 0.25–0.4s between pushes; fetch SHA before PUT on an existing file.
+
+**Printful placement.** Product 71 `front` = 12×16″ (1800×2400@150dpi); product 146 `front` = 14×14″
+(2100×2100). **Never `front_large`** (15×18″ — wrong). Mockups: Ghost only (`option_groups:["Ghost"]`),
+~1 task/min — submit one, sleep 65s. Verify the Printful placement box inches == the print file canvas
+inches before submitting.
+
+**EST. dates.** Never copy another prefix's year. Search and confirm the real founding year, and state the
+source in the same response as the generation.
+
+---
+
+## 8. Validation — non-negotiable
+
+**Every number is computed from measured data.** Show the raw measurement, the formula, and the result.
+Never carry a value forward unverified from another state. Never report placement math from a preview
+crop — always from the real canvas.
+
+**Every claim is shown, not asserted.** "Verified" without the actual output is not verification.
+
+**Check before you build.** Product, section, template, catalog entry, existing files. Never assume a
+clean slate — several states already had partial/stale artifacts.
+
+**Never eyeball.** If the tool won't render a preview, verify by measurement (bbox, pixel sample, MD5),
+not by assuming.
+
+**Ask before state changes.** Investigation verbs ("fix", "clean up", "look into") mean investigate,
+report, stop. Finding the answer is the finish line.
+
+---
+
+## 9. Build a new state
+
+1. Read §1 (open defects) and this doc. Set up credentials (§2).
+2. **Check what already exists** — product, section, template, catalog, files.
+3. **Pre-flight name fit** for the state (§4) *before* generating anything.
+4. **Source the flag** (§4). Verify it's really an SVG.
+5. **Generate** print + web + grid heroes. **Assert transparency and centering** (§7).
+6. **Push** with a resumable script. **CDN-gate** every file.
+7. **Product** via `productSet`. Plain state = Color × Size, `templateSuffix: state` (shared section, no
+   new template needed). With City/Airport styles = Style axis + own section + **own template** (§1's bug).
+8. **Publish**, set hero (`productCreateMedia` → poll READY/FAILED → reorder), verify `featuredImage`.
+9. **Verify live** — `/products/{handle}.js` for styles/variants, and fetch the PDP HTML to confirm the
+   section actually rendered.
+10. Wire the downstream: Shop All, `ad-items.liquid`, `catalog.json`, `fulfill.py` (§10).
+
+---
+
+## 10. Remaining work
+
+1. **Fix §1** — 16 broken PDPs + 7 dead Shop All links. Mechanical; copy `texas-combined.liquid`.
+2. **Shop All** (`sections/shop-all.liquid`) — repoint/remove the 7 stale city cards, add 50 state cards,
+   alphabetical. The hoodie toggle already special-cases state cards for `_r2` — don't break it.
+3. **`snippets/ad-items.liquid`** — 50 states absent. The home-page count reads from it.
 4. **`catalog.json`** — 50 state entries; update the 9 merged.
-5. **`fulfillment/fulfill.py`** — routing for 41 renamed handles + 9 merged + airport codes.
-   Dry-run every combination against `raw` before pushing.
-6. Optional: City/Airport styles for the other 41 states (none exist today).
+5. **`fulfillment/fulfill.py`** — routing for 41 renamed handles + 9 merged + 4 airport codes.
+   **Dry-run every valid combination against raw before pushing.**
+6. Optional/future: City and Airport styles for the other 41 states (none exist today).
