@@ -4001,7 +4001,9 @@
      "Western",
      "Classic",
      "Retro",
-     "Flag"
+     "Flag",
+     "MDW",
+     "ORD"
     ]
    },
    "designs": [
@@ -4073,7 +4075,7 @@
     "hoodie": "illinois-always-delivers-hoodie"
    },
    "html_source": "N/A - built via NEW_PREFIX_BUILD_PLAN_v2.md pipeline, cloned exactly from TEXAS/MIAMI/VEGAS ink/fabric setup (2026-07-14). EST. 1833 verified via web search before use, per PREFIX_VALIDATION_PROTOCOL.md item 14.",
-   "variants_per_product": 96,
+   "variants_per_product": 144,
    "ink_capture": "line-item property 'Ink'",
    "ink_validity_by_style": {
     "Western": {
@@ -4185,6 +4187,42 @@
      "Black": [
       "fc"
      ]
+    },
+    "MDW": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "neonblue"
+     ]
+    },
+    "ORD": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "neonblue"
+     ]
     }
    },
    "files": {
@@ -4211,7 +4249,42 @@
     "renamed": "2026-07 Option-2 merge",
     "note": "Standard styles keep CHICAGO print files; Flag uses printfiles/states/ILLINOISFLAG_*"
    },
-   "updated": "2026-07-15 (state merge reflected; Flag added; routing fixed)"
+   "updated": "2026-07-15 (IL airports pilot: MDW/ORD, rule B geometry)",
+   "airport": {
+    "codes": [
+     "ord",
+     "mdw"
+    ],
+    "ghost": "IL",
+    "file_rule": "printfiles/stateairport/STATEAIRPORT_il-{code}_{token}_{garment}.png (no _r2)",
+    "geometry": "rule B fit-to-box: state scale=min(3000/w,1701/h) \u2014 IL height-binds 1823x1701",
+    "tokens": [
+     {
+      "token": "fc_light",
+      "label": "Full Color",
+      "fabric": "White/Athletic Heather only"
+     },
+     {
+      "token": "redstate_white",
+      "label": "Red",
+      "fabric": "Navy/Black only"
+     },
+     {
+      "token": "goldstate_white",
+      "label": "Gold",
+      "fabric": "Navy/Black only"
+     },
+     {
+      "token": "neonstate_white",
+      "label": "Neon Blue",
+      "fabric": "Navy/Black only"
+     }
+    ],
+    "defaults": {
+     "light": "fc_light",
+     "dark": "redstate_white"
+    }
+   }
   },
   "DENVER": {
    "status": "live",
