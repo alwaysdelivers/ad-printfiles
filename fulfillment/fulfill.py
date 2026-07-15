@@ -121,6 +121,28 @@ NEWYORK_AIRPORT_VALID={'white':['fc_light'],'athleticheather':['fc_light'],
     'navy':['redstate_white','goldstate_white','neonstate_white'],'black':['redstate_white','goldstate_white','neonstate_white']}
 NEWYORK_AIRPORT_DEFAULT={'white':'fc_light','athleticheather':'fc_light','navy':'redstate_white','black':'redstate_white'}
 
+# state Flag routing (2026-07-15): every merged state's Flag style + all plain-state products.
+# Files: printfiles/states/{STATE}FLAG_{light|dark}_{garment}.png — hoodies carry _r2 (CDN fix).
+STATE_FLAG_OF={'miami':'FLORIDAFLAG','vegas':'NEVADAFLAG','losangeles':'CALIFORNIAFLAG','chicago':'ILLINOISFLAG',
+               'denver':'COLORADOFLAG','boston':'MASSACHUSETTSFLAG','seattle':'WASHINGTONFLAG','texas':'TEXASFLAG'}
+TEXAS_AIRPORTS={'aus','dfw','hou','sat'}
+TEXAS_AIRPORT_INK=NEWYORK_AIRPORT_INK          # same tokens/validity per STATE_BUILD_PROTOCOL §6
+TEXAS_AIRPORT_VALID=NEWYORK_AIRPORT_VALID
+TEXAS_AIRPORT_DEFAULT=NEWYORK_AIRPORT_DEFAULT
+
+# 41 plain-state flag products (2026-07-15). Titles like 'Alabama Always Delivers — Tee'.
+# Matched LONGEST-FIRST ('west virginia' before 'virginia', 'arkansas' before 'kansas').
+# Excludes the 9 merged states (texas + newyork + 7 renamed, handled above).
+PLAIN_STATES=['west virginia','south carolina','south dakota','north carolina','north dakota',
+ 'new hampshire','new jersey','new mexico','rhode island','pennsylvania','mississippi','connecticut',
+ 'louisiana','minnesota','wisconsin','tennessee','arkansas','delaware','kentucky','maryland','michigan',
+ 'missouri','nebraska','oklahoma','virginia','alabama','arizona','georgia','indiana','montana','vermont',
+ 'wyoming','alaska','hawaii','kansas','oregon','idaho','maine','iowa','ohio','utah']
+def plain_state_of(t):
+    for s in PLAIN_STATES:
+        if s in t: return s.replace(' ','')
+    return None
+
 # losangeles inks (single-ink per color, fc valid on light grounds only) -> file colorway - identical to TEXAS/MIAMI/VEGAS
 LOSANGELES_STYLES={'western':'western','classic':'classic','retro':'retro'}
 LOSANGELES_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
@@ -277,14 +299,16 @@ def design_of(title):
     if 'america' in t: return 'america'
     if 'grandma' in t: return 'grandma'
     if 'texas' in t: return 'texas'
-    if 'miami' in t: return 'miami'
-    if 'vegas' in t: return 'vegas'
+    if 'miami' in t or 'florida' in t: return 'miami'          # product renamed Florida (Option-2 merge); files stay city-named
+    if 'vegas' in t or 'nevada' in t: return 'vegas'
     if 'newyork' in t or 'new york' in t: return 'newyork'   # title has a space (live: 'New York Always Delivers — Tee'); bare 'newyork' never matched (bug found 2026-07-15)
-    if 'losangeles' in t: return 'losangeles'
-    if 'chicago' in t: return 'chicago'
-    if 'denver' in t: return 'denver'
-    if 'boston' in t: return 'boston'
-    if 'seattle' in t: return 'seattle'
+    if 'losangeles' in t or 'los angeles' in t or 'california' in t: return 'losangeles'
+    if 'chicago' in t or 'illinois' in t: return 'chicago'
+    if 'denver' in t or 'colorado' in t: return 'denver'
+    if 'boston' in t or 'massachusetts' in t: return 'boston'
+    if 'seattle' in t or 'washington' in t: return 'seattle'
+    _ps=plain_state_of(t)
+    if _ps: return 'stateflag:'+_ps
     if 'grandpa' in t: return 'grandpa'
     if 'gameday' in t: return 'gameday'
     if 'datenight' in t: return 'datenight'
@@ -349,30 +373,73 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return out(dk, '%s_%s_%s'%(dk.upper(),code,cw))
 
     if dk=='texas':
-        st=norm(print_style); code=TEXAS_STYLES.get(st)
+        st=norm(print_style)
+        if st=='flag':
+            fbase='%s_%s'%(STATE_FLAG_OF['texas'],ground(ckey))
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        if st in TEXAS_AIRPORTS:
+            tk=_resolve_ink(ink, TEXAS_AIRPORT_INK, TEXAS_AIRPORT_VALID, TEXAS_AIRPORT_DEFAULT, ckey)
+            if not tk: return {'error':'TEXAS airport invalid ink','title':title,'ink':ink}
+            fpath='printfiles/stateairport/STATEAIRPORT_tx-%s_%s_%s_r2.png'%(st,tk,garment)
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        code=TEXAS_STYLES.get(st)
         if not code: return {'error':'TEXAS invalid Style','title':title,'style':print_style}
         tk=_resolve_ink(ink, TEXAS_INK, TEXAS_VALID, TEXAS_DEFAULT, ckey)
         if not tk: return {'error':'TEXAS invalid ink','title':title,'ink':ink}
         cw=texas_cw(tk, ckey)
         return out('texas', 'TEXAS_%s_%s'%(code,cw))
 
+    if dk and dk.startswith('stateflag:'):
+        scode=dk.split(':',1)[1].upper()+'FLAG'
+        fpath='printfiles/states/%s_%s_%s%s.png'%(scode,ground(ckey),garment,'_r2' if garment=='hoodie' else '')
+        return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+
     if dk=='miami':
-        st=norm(print_style); code=MIAMI_STYLES.get(st)
+        st=norm(print_style)
+        if st=='flag':
+            fbase='%s_%s'%(STATE_FLAG_OF['miami'],ground(ckey))
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        code=MIAMI_STYLES.get(st)
         if not code: return {'error':'MIAMI invalid Style','title':title,'style':print_style}
         tk=_resolve_ink(ink, MIAMI_INK, MIAMI_VALID, MIAMI_DEFAULT, ckey)
         if not tk: return {'error':'MIAMI invalid ink','title':title,'ink':ink}
         cw=miami_cw(tk, ckey)
-        suf='_r2' if code=='classic' else ''
-        return out('miami', 'MIAMI_%s_%s%s'%(code,cw,suf))
+        if code=='classic':   # classic files re-pushed as _r2 (suffix after garment; placement bug fixed 2026-07-15)
+            fpath='printfiles/miami/MIAMI_%s_%s_%s_r2.png'%(code,cw,garment)
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        return out('miami', 'MIAMI_%s_%s'%(code,cw))
 
     if dk=='vegas':
-        st=norm(print_style); code=VEGAS_STYLES.get(st)
+        st=norm(print_style)
+        if st=='flag':
+            fbase='%s_%s'%(STATE_FLAG_OF['vegas'],ground(ckey))
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        code=VEGAS_STYLES.get(st)
         if not code: return {'error':'VEGAS invalid Style','title':title,'style':print_style}
         tk=_resolve_ink(ink, VEGAS_INK, VEGAS_VALID, VEGAS_DEFAULT, ckey)
         if not tk: return {'error':'VEGAS invalid ink','title':title,'ink':ink}
         cw=vegas_cw(tk, ckey)
-        suf='_r2' if code=='classic' else ''
-        return out('vegas', 'VEGAS_%s_%s%s'%(code,cw,suf))
+        if code=='classic':   # classic files re-pushed as _r2 (suffix after garment; placement bug fixed 2026-07-15)
+            fpath='printfiles/vegas/VEGAS_%s_%s_%s_r2.png'%(code,cw,garment)
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        return out('vegas', 'VEGAS_%s_%s'%(code,cw))
 
     if dk=='newyork':
         st=norm(print_style)
@@ -394,7 +461,14 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return out('newyork', 'NEWYORK_%s_%s'%(code,cw))
 
     if dk=='losangeles':
-        st=norm(print_style); code=LOSANGELES_STYLES.get(st)
+        st=norm(print_style)
+        if st=='flag':
+            fbase='%s_%s'%(STATE_FLAG_OF['losangeles'],ground(ckey))
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        code=LOSANGELES_STYLES.get(st)
         if not code: return {'error':'LOSANGELES invalid Style','title':title,'style':print_style}
         tk=_resolve_ink(ink, LOSANGELES_INK, LOSANGELES_VALID, LOSANGELES_DEFAULT, ckey)
         if not tk: return {'error':'LOSANGELES invalid ink','title':title,'ink':ink}
@@ -402,7 +476,14 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return out('losangeles', 'LOSANGELES_%s_%s'%(code,cw))
 
     if dk=='chicago':
-        st=norm(print_style); code=CHICAGO_STYLES.get(st)
+        st=norm(print_style)
+        if st=='flag':
+            fbase='%s_%s'%(STATE_FLAG_OF['chicago'],ground(ckey))
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        code=CHICAGO_STYLES.get(st)
         if not code: return {'error':'CHICAGO invalid Style','title':title,'style':print_style}
         tk=_resolve_ink(ink, CHICAGO_INK, CHICAGO_VALID, CHICAGO_DEFAULT, ckey)
         if not tk: return {'error':'CHICAGO invalid ink','title':title,'ink':ink}
@@ -410,7 +491,14 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return out('chicago', 'CHICAGO_%s_%s'%(code,cw))
 
     if dk=='denver':
-        st=norm(print_style); code=DENVER_STYLES.get(st)
+        st=norm(print_style)
+        if st=='flag':
+            fbase='%s_%s'%(STATE_FLAG_OF['denver'],ground(ckey))
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        code=DENVER_STYLES.get(st)
         if not code: return {'error':'DENVER invalid Style','title':title,'style':print_style}
         tk=_resolve_ink(ink, DENVER_INK, DENVER_VALID, DENVER_DEFAULT, ckey)
         if not tk: return {'error':'DENVER invalid ink','title':title,'ink':ink}
@@ -418,7 +506,14 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return out('denver', 'DENVER_%s_%s'%(code,cw))
 
     if dk=='boston':
-        st=norm(print_style); code=BOSTON_STYLES.get(st)
+        st=norm(print_style)
+        if st=='flag':
+            fbase='%s_%s'%(STATE_FLAG_OF['boston'],ground(ckey))
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        code=BOSTON_STYLES.get(st)
         if not code: return {'error':'BOSTON invalid Style','title':title,'style':print_style}
         tk=_resolve_ink(ink, BOSTON_INK, BOSTON_VALID, BOSTON_DEFAULT, ckey)
         if not tk: return {'error':'BOSTON invalid ink','title':title,'ink':ink}
@@ -426,7 +521,14 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return out('boston', 'BOSTON_%s_%s'%(code,cw))
 
     if dk=='seattle':
-        st=norm(print_style); code=SEATTLE_STYLES.get(st)
+        st=norm(print_style)
+        if st=='flag':
+            fbase='%s_%s'%(STATE_FLAG_OF['seattle'],ground(ckey))
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        code=SEATTLE_STYLES.get(st)
         if not code: return {'error':'SEATTLE invalid Style','title':title,'style':print_style}
         tk=_resolve_ink(ink, SEATTLE_INK, SEATTLE_VALID, SEATTLE_DEFAULT, ckey)
         if not tk: return {'error':'SEATTLE invalid ink','title':title,'ink':ink}
