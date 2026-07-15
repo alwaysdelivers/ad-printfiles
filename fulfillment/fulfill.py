@@ -130,6 +130,10 @@ TEXAS_AIRPORT_INK=NEWYORK_AIRPORT_INK          # same tokens/validity per STATE_
 TEXAS_AIRPORT_VALID=NEWYORK_AIRPORT_VALID
 TEXAS_AIRPORT_DEFAULT=NEWYORK_AIRPORT_DEFAULT
 CHICAGO_AIRPORTS={'ord','mdw'}   # Illinois pilot 2026-07-15; files STATEAIRPORT_il-<code> (no _r2)
+GEORGIA_STYLES={'western':'western','classic':'classic','retro':'retro'}
+GEORGIA_AIRPORTS={'atl','sav'}   # wave 0 2026-07-15; files STATEAIRPORT_ga-<code> (no _r2)
+def georgia_cw(tk, ckey):
+    return 'fc_light' if tk=='fc' else tk
 
 # 41 plain-state flag products (2026-07-15). Titles like 'Alabama Always Delivers — Tee'.
 # Matched LONGEST-FIRST ('west virginia' before 'virginia', 'arkansas' before 'kansas').
@@ -137,7 +141,7 @@ CHICAGO_AIRPORTS={'ord','mdw'}   # Illinois pilot 2026-07-15; files STATEAIRPORT
 PLAIN_STATES=['west virginia','south carolina','south dakota','north carolina','north dakota',
  'new hampshire','new jersey','new mexico','rhode island','pennsylvania','mississippi','connecticut',
  'louisiana','minnesota','wisconsin','tennessee','arkansas','delaware','kentucky','maryland','michigan',
- 'missouri','nebraska','oklahoma','virginia','alabama','arizona','georgia','indiana','montana','vermont',
+ 'missouri','nebraska','oklahoma','virginia','alabama','arizona','indiana','montana','vermont',
  'wyoming','alaska','hawaii','kansas','oregon','idaho','maine','iowa','ohio','utah']
 def plain_state_of(t):
     for s in PLAIN_STATES:
@@ -308,6 +312,7 @@ def design_of(title):
     if 'denver' in t or 'colorado' in t: return 'denver'
     if 'boston' in t or 'massachusetts' in t: return 'boston'
     if 'seattle' in t or 'washington' in t: return 'seattle'
+    if 'georgia' in t: return 'georgia'
     _ps=plain_state_of(t)
     if _ps: return 'stateflag:'+_ps
     if 'grandpa' in t: return 'grandpa'
@@ -394,6 +399,26 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         if not tk: return {'error':'TEXAS invalid ink','title':title,'ink':ink}
         cw=texas_cw(tk, ckey)
         return out('texas', 'TEXAS_%s_%s'%(code,cw))
+
+    if dk=='georgia':
+        st=norm(print_style)
+        if st=='flag':
+            fpath='printfiles/states/GEORGIAFLAG_%s_%s%s.png'%(ground(ckey),garment,'_r2' if garment=='hoodie' else '')
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        if st in GEORGIA_AIRPORTS:
+            tk=_resolve_ink(ink, NEWYORK_AIRPORT_INK, NEWYORK_AIRPORT_VALID, NEWYORK_AIRPORT_DEFAULT, ckey)
+            if not tk: return {'error':'GEORGIA airport invalid ink','title':title,'ink':ink}
+            fpath='printfiles/stateairport/STATEAIRPORT_ga-%s_%s_%s.png'%(st,tk,garment)
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        code=GEORGIA_STYLES.get(st)
+        if not code: return {'error':'GEORGIA invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, NEWYORK_INK, NEWYORK_VALID, NEWYORK_DEFAULT, ckey)
+        if not tk: return {'error':'GEORGIA invalid ink','title':title,'ink':ink}
+        return out('georgia', 'GEORGIA_%s_%s'%(code, georgia_cw(tk, ckey)))
 
     if dk and dk.startswith('stateflag:'):
         scode=dk.split(':',1)[1].upper()+'FLAG'
