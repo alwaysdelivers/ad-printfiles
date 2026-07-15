@@ -129,6 +129,7 @@ TEXAS_AIRPORTS={'aus','dfw','hou','sat'}
 TEXAS_AIRPORT_INK=NEWYORK_AIRPORT_INK          # same tokens/validity per STATE_BUILD_PROTOCOL §6
 TEXAS_AIRPORT_VALID=NEWYORK_AIRPORT_VALID
 TEXAS_AIRPORT_DEFAULT=NEWYORK_AIRPORT_DEFAULT
+CHICAGO_AIRPORTS={'ord','mdw'}   # Illinois pilot 2026-07-15; files STATEAIRPORT_il-<code> (no _r2)
 
 # 41 plain-state flag products (2026-07-15). Titles like 'Alabama Always Delivers — Tee'.
 # Matched LONGEST-FIRST ('west virginia' before 'virginia', 'arkansas' before 'kansas').
@@ -477,6 +478,13 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
 
     if dk=='chicago':
         st=norm(print_style)
+        if st in CHICAGO_AIRPORTS:
+            tk=_resolve_ink(ink, NEWYORK_AIRPORT_INK, NEWYORK_AIRPORT_VALID, NEWYORK_AIRPORT_DEFAULT, ckey)
+            if not tk: return {'error':'CHICAGO airport invalid ink','title':title,'ink':ink}
+            fpath='printfiles/stateairport/STATEAIRPORT_il-%s_%s_%s.png'%(st,tk,garment)
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['chicago'],ground(ckey))
             fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
