@@ -60,7 +60,7 @@ heroes/grid/{folder}_{tee|hood}_{white|heather|navy|black}.webp 400 files
 
 **Products — 100 live, published, heroes set:**
 - **41 plain states** — handle `{state}-always-delivers-{tee|hoodie}`, **Color × Size only** (24 variants),
-  `templateSuffix: state`, shared section `state-flag-combined.liquid`. **Correct and done.**
+  `templateSuffix: state`, shared section `state-flag-combined.liquid`. **Live and correct as flag-only; full-parity build (fonts + airports + hierarchical PDP) planned in waves — see locked list + decisions above.**
 - **9 merged states** — `Color × Size × Style` (96 variants; texas 192). See §1: 8 are broken.
 
 **Texas — complete. 8 styles / 192 variants:** Western, Classic, Retro, Flag, AUS, DFW, HOU, SAT.
@@ -142,7 +142,11 @@ The airport code is **never** faded — 100% on every fabric. Full Color on Dark
 rejected; don't re-propose. Single-ink standalone treatments (navy/red/black/gold/white/neon alone) are
 **removed** from State & Airport — only Full Color and the two-tone combos exist.
 
-**Harmony-scale sizing:** state code rendered at 10.00″ wide (3000px); `target = state_dims × 2/3`;
+**Ghost sizing — RULE B (2026-07-15, supersedes "10.00″ wide"):** the state ghost code fits a
+**3000×1701px box (10.00″×5.67″)**: `scale = min(3000/w, 1701/h)`. Wide ghosts (TX, NY) width-bind —
+pixel-identical to the old rule; narrow ghosts (IL, HI, RI…) height-bind, which pins the wordmark at
+y3321 (TX-identical rhythm). The old width-only rule CLIPPED the lockup off both canvases for IL —
+never use it. **Harmony-scale sizing:** `target = state_dims × 2/3`;
 `scale = sqrt(x_scale × y_scale)` (geometric mean) — **uniform only, never distort letterforms**. Airport
 code centered on the state code, in front.
 
@@ -153,6 +157,22 @@ code; don't assume a letter behaves the same in a different word.
 
 **Lockup** — the standard `_ALWAYS DELIVERS` (Patua One), recolored to the ink; two-tone matches the
 state color at the state's opacity. Never a bespoke lockup.
+
+**Built so far (2026-07-15):** NY (ALB/BUF/JFK/LGA/ROC/SYR) and IL pilot (ORD/MDW, rule B) live
+end-to-end. New files carry NO `_r2` (only tx- files do, legacy CDN fix).
+**Locked airport list:** 94 code instances / 48 jurisdictions — canonical file
+`state_airport_list_FINAL_2026-07-15.json` (Drive + outputs). Dual listings are SEPARATE designs:
+CVG under both KY and OH; DCA under both VA and DC. Delaware: no airport style (state product only).
+**Naming (final):** FULL state name in all three font styles and under every flag, D.C. included
+("WASHINGTON D.C."). No abbreviations anywhere.
+**PDP architecture (locked):** Name is a line-item PROPERTY (like Ink) — zero variant growth. UI:
+large state pill + smaller alphabetical city pills; default = state view (state fonts + Flag + all
+state airports); selecting a city filters to that city's fonts + its airport(s) (airport travels
+with the city). Deep-link via `?name=`.
+**Doc correction:** the overshoot log's "AUS: none" is contradicted by the shipped file — U and S ARE
+height-normalized in AUS. Per-glyph ink→[cap-top…baseline] normalization is the actual rule; the
+layout engine derives glyph centers from font metrics (advances + glyph bboxes), validated against
+the tx-aus reference (gaps 80/115, block 2623×863).
 
 ---
 
@@ -165,6 +185,11 @@ assert not (np.array(img.split()[3]) == 255).all()
 An opaque background prints as a **visible box** on the garment. It also silently breaks trim-to-content
 (the "content" bbox becomes the whole canvas), so chips come out at the wrong scale.
 **Reference:** a correct Texas airport chip is 216×218.
+
+**Envelope asserts (2026-07-15, mandatory).** `Image.alpha_composite` silently clips content pasted past
+the canvas edge — bbox/centering asserts will NOT catch it. Before composing: assert
+`wm_top + lockup_h <= canvas_h`. After composing: assert measured content bottom == expected wordmark
+bottom (±2px). The IL pilot shipped nothing only because a human caught it — the asserts must.
 
 **Per-garment centering.** Center against the **actual garment canvas width** (`cw`), never a hardcoded
 3600. Rendering at tee width and pasting onto the 4200px hoodie offsets everything 300px left (43px at web
