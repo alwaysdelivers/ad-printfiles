@@ -109,6 +109,17 @@ NEWYORK_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athletiche
 NEWYORK_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
 def newyork_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
+# newyork Flag + airport styles (2026-07-15). Flag: no ink, auto light/dark by ground; hoodie files carry _r2.
+# Airports (ALB/BUF/JFK/LGA/ROC/SYR): tokens per STATE_BUILD_PROTOCOL §6 — fc_light White/AthHeather only;
+# red/gold/neon(state)+white(code) dark only. Files: printfiles/stateairport/STATEAIRPORT_ny-<code>_<token>_<garment>.png
+NEWYORK_AIRPORTS={'alb','buf','jfk','lga','roc','syr'}
+NEWYORK_AIRPORT_INK={'fullcolor':'fc_light','full color':'fc_light','fc':'fc_light',
+    'red':'redstate_white',
+    'gold':'goldstate_white',
+    'karmablue':'neonstate_white','karma blue':'neonstate_white','neon blue':'neonstate_white','neonblue':'neonstate_white'}
+NEWYORK_AIRPORT_VALID={'white':['fc_light'],'athleticheather':['fc_light'],
+    'navy':['redstate_white','goldstate_white','neonstate_white'],'black':['redstate_white','goldstate_white','neonstate_white']}
+NEWYORK_AIRPORT_DEFAULT={'white':'fc_light','athleticheather':'fc_light','navy':'redstate_white','black':'redstate_white'}
 
 # losangeles inks (single-ink per color, fc valid on light grounds only) -> file colorway - identical to TEXAS/MIAMI/VEGAS
 LOSANGELES_STYLES={'western':'western','classic':'classic','retro':'retro'}
@@ -268,7 +279,7 @@ def design_of(title):
     if 'texas' in t: return 'texas'
     if 'miami' in t: return 'miami'
     if 'vegas' in t: return 'vegas'
-    if 'newyork' in t: return 'newyork'
+    if 'newyork' in t or 'new york' in t: return 'newyork'   # title has a space (live: 'New York Always Delivers — Tee'); bare 'newyork' never matched (bug found 2026-07-15)
     if 'losangeles' in t: return 'losangeles'
     if 'chicago' in t: return 'chicago'
     if 'denver' in t: return 'denver'
@@ -364,7 +375,18 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         return out('vegas', 'VEGAS_%s_%s%s'%(code,cw,suf))
 
     if dk=='newyork':
-        st=norm(print_style); code=NEWYORK_STYLES.get(st)
+        st=norm(print_style)
+        if st=='flag':
+            base='NEWYORKFLAG_%s'%ground(ckey)
+            fpath='printfiles/states/%s_%s%s.png'%(base,garment,'_r2' if garment=='hoodie' else '')
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        if st in NEWYORK_AIRPORTS:
+            tk=_resolve_ink(ink, NEWYORK_AIRPORT_INK, NEWYORK_AIRPORT_VALID, NEWYORK_AIRPORT_DEFAULT, ckey)
+            if not tk: return {'error':'NEWYORK airport invalid ink','title':title,'ink':ink}
+            return out('stateairport', 'STATEAIRPORT_ny-%s_%s'%(st,tk))
+        code=NEWYORK_STYLES.get(st)
         if not code: return {'error':'NEWYORK invalid Style','title':title,'style':print_style}
         tk=_resolve_ink(ink, NEWYORK_INK, NEWYORK_VALID, NEWYORK_DEFAULT, ckey)
         if not tk: return {'error':'NEWYORK invalid ink','title':title,'ink':ink}
