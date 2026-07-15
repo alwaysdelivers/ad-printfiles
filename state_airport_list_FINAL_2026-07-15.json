@@ -1,0 +1,361 @@
+{
+ "Alabama": {
+  "ghost": "AL",
+  "codes": [
+   "BHM",
+   "HSV"
+  ]
+ },
+ "Alaska": {
+  "ghost": "AK",
+  "codes": [
+   "ANC",
+   "FAI"
+  ]
+ },
+ "Arizona": {
+  "ghost": "AZ",
+  "codes": [
+   "PHX",
+   "TUS"
+  ]
+ },
+ "Arkansas": {
+  "ghost": "AR",
+  "codes": [
+   "LIT",
+   "XNA"
+  ]
+ },
+ "California": {
+  "ghost": "CA",
+  "codes": [
+   "LAX",
+   "SFO",
+   "SAN",
+   "SJC",
+   "SMF",
+   "SNA"
+  ]
+ },
+ "Colorado": {
+  "ghost": "CO",
+  "codes": [
+   "DEN",
+   "COS"
+  ]
+ },
+ "Connecticut": {
+  "ghost": "CT",
+  "codes": [
+   "BDL"
+  ]
+ },
+ "Florida": {
+  "ghost": "FL",
+  "codes": [
+   "MIA",
+   "MCO",
+   "FLL",
+   "TPA",
+   "JAX",
+   "PBI"
+  ]
+ },
+ "Georgia": {
+  "ghost": "GA",
+  "codes": [
+   "ATL",
+   "SAV"
+  ]
+ },
+ "Hawaii": {
+  "ghost": "HI",
+  "codes": [
+   "HNL",
+   "OGG",
+   "KOA",
+   "LIH"
+  ]
+ },
+ "Idaho": {
+  "ghost": "ID",
+  "codes": [
+   "BOI"
+  ]
+ },
+ "Illinois": {
+  "ghost": "IL",
+  "codes": [
+   "ORD",
+   "MDW"
+  ]
+ },
+ "Indiana": {
+  "ghost": "IN",
+  "codes": [
+   "IND"
+  ]
+ },
+ "Iowa": {
+  "ghost": "IA",
+  "codes": [
+   "DSM"
+  ]
+ },
+ "Kansas": {
+  "ghost": "KS",
+  "codes": [
+   "ICT"
+  ]
+ },
+ "Kentucky": {
+  "ghost": "KY",
+  "codes": [
+   "SDF",
+   "CVG",
+   "LEX"
+  ]
+ },
+ "Louisiana": {
+  "ghost": "LA",
+  "codes": [
+   "MSY",
+   "BTR"
+  ]
+ },
+ "Maine": {
+  "ghost": "ME",
+  "codes": [
+   "PWM",
+   "BGR"
+  ]
+ },
+ "Maryland": {
+  "ghost": "MD",
+  "codes": [
+   "BWI"
+  ]
+ },
+ "Massachusetts": {
+  "ghost": "MA",
+  "codes": [
+   "BOS"
+  ]
+ },
+ "Michigan": {
+  "ghost": "MI",
+  "codes": [
+   "DTW",
+   "GRR"
+  ]
+ },
+ "Minnesota": {
+  "ghost": "MN",
+  "codes": [
+   "MSP"
+  ]
+ },
+ "Mississippi": {
+  "ghost": "MS",
+  "codes": [
+   "JAN",
+   "GPT"
+  ]
+ },
+ "Missouri": {
+  "ghost": "MO",
+  "codes": [
+   "STL",
+   "MCI"
+  ]
+ },
+ "Montana": {
+  "ghost": "MT",
+  "codes": [
+   "BZN",
+   "BIL",
+   "MSO"
+  ]
+ },
+ "Nebraska": {
+  "ghost": "NE",
+  "codes": [
+   "OMA"
+  ]
+ },
+ "Nevada": {
+  "ghost": "NV",
+  "codes": [
+   "LAS",
+   "RNO"
+  ]
+ },
+ "New Hampshire": {
+  "ghost": "NH",
+  "codes": [
+   "MHT"
+  ]
+ },
+ "New Jersey": {
+  "ghost": "NJ",
+  "codes": [
+   "EWR"
+  ]
+ },
+ "New Mexico": {
+  "ghost": "NM",
+  "codes": [
+   "ABQ"
+  ]
+ },
+ "North Carolina": {
+  "ghost": "NC",
+  "codes": [
+   "CLT",
+   "RDU"
+  ]
+ },
+ "North Dakota": {
+  "ghost": "ND",
+  "codes": [
+   "FAR",
+   "BIS"
+  ]
+ },
+ "Ohio": {
+  "ghost": "OH",
+  "codes": [
+   "CLE",
+   "CMH",
+   "DAY",
+   "CVG"
+  ]
+ },
+ "Oklahoma": {
+  "ghost": "OK",
+  "codes": [
+   "OKC",
+   "TUL"
+  ]
+ },
+ "Oregon": {
+  "ghost": "OR",
+  "codes": [
+   "PDX"
+  ]
+ },
+ "Pennsylvania": {
+  "ghost": "PA",
+  "codes": [
+   "PHL",
+   "PIT"
+  ]
+ },
+ "Rhode Island": {
+  "ghost": "RI",
+  "codes": [
+   "PVD"
+  ]
+ },
+ "South Carolina": {
+  "ghost": "SC",
+  "codes": [
+   "CHS",
+   "MYR",
+   "GSP"
+  ]
+ },
+ "South Dakota": {
+  "ghost": "SD",
+  "codes": [
+   "FSD",
+   "RAP"
+  ]
+ },
+ "Tennessee": {
+  "ghost": "TN",
+  "codes": [
+   "BNA",
+   "MEM"
+  ]
+ },
+ "Utah": {
+  "ghost": "UT",
+  "codes": [
+   "SLC"
+  ]
+ },
+ "Vermont": {
+  "ghost": "VT",
+  "codes": [
+   "BTV"
+  ]
+ },
+ "Virginia": {
+  "ghost": "VA",
+  "codes": [
+   "IAD",
+   "DCA",
+   "RIC",
+   "ORF"
+  ]
+ },
+ "Washington": {
+  "ghost": "WA",
+  "codes": [
+   "SEA",
+   "GEG"
+  ]
+ },
+ "West Virginia": {
+  "ghost": "WV",
+  "codes": [
+   "CRW"
+  ]
+ },
+ "Wisconsin": {
+  "ghost": "WI",
+  "codes": [
+   "MKE",
+   "MSN"
+  ]
+ },
+ "Wyoming": {
+  "ghost": "WY",
+  "codes": [
+   "JAC"
+  ]
+ },
+ "D.C.": {
+  "ghost": "DC",
+  "codes": [
+   "DCA"
+  ],
+  "display_name": "Washington, D.C.",
+  "handle_base": "washingtondc-always-delivers",
+  "flag_name_text": "WASHINGTON D.C.",
+  "flag_source": "Flag_of_the_District_of_Columbia.svg",
+  "note": "net-new full state build (flag files, heroes, product, card, ad-items, catalog, fulfill) + DCA airport style"
+ },
+ "_meta": {
+  "locked": "2026-07-15",
+  "total_code_instances": 94,
+  "decisions": "CVG both KY+OH; IAD/DCA under VA; DE airports skipped (state kept); CRW kept; DC added",
+  "trims": "CA -OAK -ONT; FL -RSW; NJ -ACY"
+ },
+ "_naming_decisions": {
+  "locked": "2026-07-15 (final)",
+  "styled_fonts": "FULL state name in Western/Classic/Retro for ALL states",
+  "flag_names": "FULL name under the flag for ALL states AND D.C. \u2014 no abbreviations anywhere",
+  "dc_flag_name_text": "WASHINGTON D.C. (full, per original lock; \"D. C.\" abbreviation rescinded)"
+ },
+ "_pdp_architecture": {
+  "locked": "2026-07-15",
+  "model": "Option A - Name as line-item property (like Ink), zero variant growth",
+  "ui": "large state pill + smaller city pills beneath, alphabetical; default = state",
+  "filtering": "state view = state fonts + Flag + ALL state airports; city view = city fonts + that city airport(s) - airport travels with the city",
+  "fonts_user_facing": "Western / Classic / Retro (labels constant, art re-renders per selected name)",
+  "deep_link": "?name= param via the mandatory deep-link reader"
+ }
+}
