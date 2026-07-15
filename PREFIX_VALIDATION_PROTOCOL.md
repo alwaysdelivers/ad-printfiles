@@ -177,6 +177,18 @@
 
 ---
 
-## Standing rule across all 15
+## 16. Chip/thumbnail generation requires genuine source transparency
+
+**Action:** Before generating a style chip (or any thumbnail built via trim-to-content-bounding-box), verify the source print file has genuine transparency (alpha channel actually varies, not flat 255 everywhere). Trim-to-content works by finding the bounding box of non-transparent pixels — if the source's background was baked in as opaque (a real bug that happened with the first State & Airport TX/AUS build), the "content" bounding box becomes the entire canvas, and the resulting chip shows the design tiny and off-scale relative to chips built from correctly-transparent sources.
+
+**Expected outcome:** Every style chip for a given product crops to the same tight bounding box around its actual design content, so all chips in a style row render at consistent, comparable scale — never one noticeably smaller/more zoomed-out than its siblings.
+
+**Validation:** Before generating any chip, spot check the source file: `alpha = np.array(img.split()[3]); assert not (alpha==255).all()`. If this assertion would fail, the source has the opaque-background bug and must be fixed at the source (regenerate the print file with genuine transparency) before making a chip from it — do not just crop harder or guess a manual bounding box as a workaround. After generating a batch of chips for the same product, compare their pixel dimensions (e.g. all should share the same width and a similar height band) — a chip that's a noticeable outlier in scale versus its siblings is the signature of this bug, not a legitimate design difference.
+
+**Reference standard:** DFW's chip crop (216×218 for the Texas Airport family) is the correctly-scaled reference — any sibling chip for the same product/family should match this scale when built from a correctly-transparent source.
+
+---
+
+## Standing rule across all 16
 
 Every validation result gets shown, not just claimed. "Confirmed" without the actual comparison output shown is not confirmation.
