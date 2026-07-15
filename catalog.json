@@ -2331,7 +2331,12 @@
     "Style": [
      "Western",
      "Classic",
-     "Retro"
+     "Retro",
+     "Flag",
+     "AUS",
+     "DFW",
+     "HOU",
+     "SAT"
     ]
    },
    "designs": [
@@ -2346,6 +2351,30 @@
     {
      "code": "retro",
      "label": "Retro"
+    },
+    {
+     "code": "flag",
+     "label": "Flag"
+    },
+    {
+     "code": "aus",
+     "label": "AUS",
+     "kind": "airport"
+    },
+    {
+     "code": "dfw",
+     "label": "DFW",
+     "kind": "airport"
+    },
+    {
+     "code": "hou",
+     "label": "HOU",
+     "kind": "airport"
+    },
+    {
+     "code": "sat",
+     "label": "SAT",
+     "kind": "airport"
     }
    ],
    "seo": {},
@@ -2398,7 +2427,7 @@
     "hoodie": "texas-always-delivers-hoodie"
    },
    "html_source": "N/A - built via NEW_PREFIX_BUILD_PLAN_v2.md pipeline directly, not the Drive-HTML-first reconciliation process used by JESUS/GOD/FAITH/etc.",
-   "variants_per_product": 72,
+   "variants_per_product": 192,
    "ink_capture": "line-item property 'Ink'",
    "ink_validity_by_style": {
     "Western": {
@@ -2496,6 +2525,92 @@
       "white",
       "neonblue"
      ]
+    },
+    "Flag": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "fc"
+     ],
+     "Black": [
+      "fc"
+     ]
+    },
+    "AUS": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "neonblue"
+     ]
+    },
+    "DFW": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "neonblue"
+     ]
+    },
+    "HOU": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "neonblue"
+     ]
+    },
+    "SAT": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "neonblue"
+     ]
     }
    },
    "files": {
@@ -2516,7 +2631,43 @@
    "notes": "Standalone TEXAS prefix (Western/Classic/Retro), built 2026-07-14. Watermark style was REMOVED from this prefix and split into the standalone State & Airport product line (see STATEANDAIRPORT_BUILD_PROTOCOL.md) - do not confuse the two. Ink validity identical across all 3 styles (unlike GOD/AMERICA which vary by style). Live PDP hero uses lightweight composite (small transparent web print file over shared blank garment image), not per-color-baked mockups - garment color is independent of the print design file. Shop All grid hero images (heroes/grid/texas_*) are baked composites using Western style, default ink per color (fc for light, red for dark).",
    "groups": [
     "states"
-   ]
+   ],
+   "airport": {
+    "codes": [
+     "aus",
+     "dfw",
+     "hou",
+     "sat"
+    ],
+    "file_rule": "printfiles/stateairport/STATEAIRPORT_tx-{code}_{token}_{garment}_r2.png (files carry _r2)",
+    "tokens": [
+     {
+      "token": "fc_light",
+      "label": "Full Color",
+      "fabric": "White/Athletic Heather only"
+     },
+     {
+      "token": "redstate_white",
+      "label": "Red",
+      "fabric": "Navy/Black only"
+     },
+     {
+      "token": "goldstate_white",
+      "label": "Gold",
+      "fabric": "Navy/Black only"
+     },
+     {
+      "token": "neonstate_white",
+      "label": "Neon Blue",
+      "fabric": "Navy/Black only"
+     }
+    ],
+    "defaults": {
+     "light": "fc_light",
+     "dark": "redstate_white"
+    }
+   },
+   "updated": "2026-07-15 (Flag + airports reflected; routing wired)"
   },
   "MIAMI": {
    "status": "live",
@@ -2524,7 +2675,7 @@
     "tee",
     "hoodie"
    ],
-   "handle": "miami-always-delivers-tee",
+   "handle": "florida-always-delivers-tee",
    "options": {
     "Color": [
      "White",
@@ -2543,7 +2694,8 @@
     "Style": [
      "Western",
      "Classic",
-     "Retro"
+     "Retro",
+     "Flag"
     ]
    },
    "designs": [
@@ -2558,6 +2710,11 @@
     {
      "code": "retro",
      "label": "Retro"
+    },
+    {
+     "code": "flag",
+     "label": "Flag",
+     "note": "no ink; auto light/dark; hoodie files _r2"
     }
    ],
    "seo": {},
@@ -2606,11 +2763,11 @@
    "reconciled": true,
    "reconciled_date": "2026-07-14",
    "handles": {
-    "tee": "miami-always-delivers-tee",
-    "hoodie": "miami-always-delivers-hoodie"
+    "tee": "florida-always-delivers-tee",
+    "hoodie": "florida-always-delivers-hoodie"
    },
    "html_source": "N/A - built via NEW_PREFIX_BUILD_PLAN_v2.md pipeline, cloned exactly from TEXAS's ink/fabric/validity setup (2026-07-14). Original single-style (Retro-only) product was created earlier same day by a separate process; Western/Classic were added afterward and the product restructured from Color x Size to Color x Size x Style via productSet with explicit product id.",
-   "variants_per_product": 72,
+   "variants_per_product": 96,
    "ink_capture": "line-item property 'Ink'",
    "ink_validity_by_style": {
     "Western": {
@@ -2708,6 +2865,20 @@
       "white",
       "neonblue"
      ]
+    },
+    "Flag": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "fc"
+     ],
+     "Black": [
+      "fc"
+     ]
     }
    },
    "files": {
@@ -2728,7 +2899,13 @@
    "notes": "Direct clone of TEXAS's ink/fabric/validity setup (Western=Rye, Classic=Cinzel+EST.1845 secondary line, Retro=Monoton overshoot-corrected), same 7-ink palette, same validity matrix, identical across all 3 styles. City-lane prefix (not state). Placement math verified against TEXAS's locked reference: prefix top-anchor 900px, gap 720px (+-1px rounding), wordmark 2172x598px fixed - all confirmed via direct pixel measurement, not assumed.",
    "groups": [
     "cities"
-   ]
+   ],
+   "state_merge": {
+    "live_title": "Florida Always Delivers",
+    "renamed": "2026-07 Option-2 merge",
+    "note": "Standard styles keep MIAMI print files; Flag uses printfiles/states/FLORIDAFLAG_*"
+   },
+   "updated": "2026-07-15 (state merge reflected; Flag added; routing fixed)"
   },
   "VEGAS": {
    "status": "live",
@@ -2736,7 +2913,7 @@
     "tee",
     "hoodie"
    ],
-   "handle": "vegas-always-delivers-tee",
+   "handle": "nevada-always-delivers-tee",
    "options": {
     "Color": [
      "White",
@@ -2755,7 +2932,8 @@
     "Style": [
      "Western",
      "Classic",
-     "Retro"
+     "Retro",
+     "Flag"
     ]
    },
    "designs": [
@@ -2770,6 +2948,11 @@
     {
      "code": "retro",
      "label": "Retro"
+    },
+    {
+     "code": "flag",
+     "label": "Flag",
+     "note": "no ink; auto light/dark; hoodie files _r2"
     }
    ],
    "seo": {},
@@ -2818,11 +3001,11 @@
    "reconciled": true,
    "reconciled_date": "2026-07-14",
    "handles": {
-    "tee": "vegas-always-delivers-tee",
-    "hoodie": "vegas-always-delivers-hoodie"
+    "tee": "nevada-always-delivers-tee",
+    "hoodie": "nevada-always-delivers-hoodie"
    },
    "html_source": "N/A - built via NEW_PREFIX_BUILD_PLAN_v2.md pipeline, cloned exactly from TEXAS/MIAMI's ink/fabric/validity setup (2026-07-14).",
-   "variants_per_product": 72,
+   "variants_per_product": 96,
    "ink_capture": "line-item property 'Ink'",
    "ink_validity_by_style": {
     "Western": {
@@ -2920,6 +3103,20 @@
       "white",
       "neonblue"
      ]
+    },
+    "Flag": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "fc"
+     ],
+     "Black": [
+      "fc"
+     ]
     }
    },
    "files": {
@@ -2940,7 +3137,13 @@
    "notes": "Direct clone of TEXAS/MIAMI's ink/fabric/validity setup (Western=Rye, Classic=Cinzel+EST.1845 secondary line, Retro=Monoton overshoot-corrected), same 7-ink palette, same validity matrix, identical across all 3 styles. City-lane prefix. Built clean from scratch (unlike MIAMI, no pre-existing partial product). Placement math measured and validated against TEXAS/MIAMI's locked reference before push: prefix top-anchor 900px, gap 720px (+-1px rounding), wordmark 2172x598px fixed.",
    "groups": [
     "cities"
-   ]
+   ],
+   "state_merge": {
+    "live_title": "Nevada Always Delivers",
+    "renamed": "2026-07 Option-2 merge",
+    "note": "Standard styles keep VEGAS print files; Flag uses printfiles/states/NEVADAFLAG_*"
+   },
+   "updated": "2026-07-15 (state merge reflected; Flag added; routing fixed)"
   },
   "COUNTRY": {
    "status": "live",
@@ -3540,7 +3743,7 @@
     "tee",
     "hoodie"
    ],
-   "handle": "losangeles-always-delivers-tee",
+   "handle": "california-always-delivers-tee",
    "options": {
     "Color": [
      "White",
@@ -3559,7 +3762,8 @@
     "Style": [
      "Western",
      "Classic",
-     "Retro"
+     "Retro",
+     "Flag"
     ]
    },
    "designs": [
@@ -3574,6 +3778,11 @@
     {
      "code": "retro",
      "label": "Retro"
+    },
+    {
+     "code": "flag",
+     "label": "Flag",
+     "note": "no ink; auto light/dark; hoodie files _r2"
     }
    ],
    "seo": {},
@@ -3622,11 +3831,11 @@
    "reconciled": true,
    "reconciled_date": "2026-07-14",
    "handles": {
-    "tee": "losangeles-always-delivers-tee",
-    "hoodie": "losangeles-always-delivers-hoodie"
+    "tee": "california-always-delivers-tee",
+    "hoodie": "california-always-delivers-hoodie"
    },
    "html_source": "N/A - built via NEW_PREFIX_BUILD_PLAN_v2.md pipeline, cloned exactly from TEXAS/MIAMI/VEGAS ink/fabric setup (2026-07-14). EST. 1781 verified via web search before use, per PREFIX_VALIDATION_PROTOCOL.md item 14.",
-   "variants_per_product": 72,
+   "variants_per_product": 96,
    "ink_capture": "line-item property 'Ink'",
    "ink_validity_by_style": {
     "Western": {
@@ -3724,6 +3933,20 @@
       "white",
       "neonblue"
      ]
+    },
+    "Flag": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "fc"
+     ],
+     "Black": [
+      "fc"
+     ]
     }
    },
    "files": {
@@ -3744,7 +3967,13 @@
    "notes": "Direct clone of TEXAS/MIAMI/VEGAS ink/fabric/validity setup (Western=Rye, Classic=Cinzel+EST.1781 secondary line, Retro=Monoton overshoot-corrected), same 7-ink palette, same validity matrix, identical across all 3 styles. City-lane prefix. EST. 1781 verified via web search (city founding year) before use. Placement math measured and validated against locked reference before push.",
    "groups": [
     "cities"
-   ]
+   ],
+   "state_merge": {
+    "live_title": "California Always Delivers",
+    "renamed": "2026-07 Option-2 merge",
+    "note": "Standard styles keep LOSANGELES print files; Flag uses printfiles/states/CALIFORNIAFLAG_*"
+   },
+   "updated": "2026-07-15 (state merge reflected; Flag added; routing fixed)"
   },
   "CHICAGO": {
    "status": "live",
@@ -3752,7 +3981,7 @@
     "tee",
     "hoodie"
    ],
-   "handle": "chicago-always-delivers-tee",
+   "handle": "illinois-always-delivers-tee",
    "options": {
     "Color": [
      "White",
@@ -3771,7 +4000,8 @@
     "Style": [
      "Western",
      "Classic",
-     "Retro"
+     "Retro",
+     "Flag"
     ]
    },
    "designs": [
@@ -3786,6 +4016,11 @@
     {
      "code": "retro",
      "label": "Retro"
+    },
+    {
+     "code": "flag",
+     "label": "Flag",
+     "note": "no ink; auto light/dark; hoodie files _r2"
     }
    ],
    "seo": {},
@@ -3834,11 +4069,11 @@
    "reconciled": true,
    "reconciled_date": "2026-07-14",
    "handles": {
-    "tee": "chicago-always-delivers-tee",
-    "hoodie": "chicago-always-delivers-hoodie"
+    "tee": "illinois-always-delivers-tee",
+    "hoodie": "illinois-always-delivers-hoodie"
    },
    "html_source": "N/A - built via NEW_PREFIX_BUILD_PLAN_v2.md pipeline, cloned exactly from TEXAS/MIAMI/VEGAS ink/fabric setup (2026-07-14). EST. 1833 verified via web search before use, per PREFIX_VALIDATION_PROTOCOL.md item 14.",
-   "variants_per_product": 72,
+   "variants_per_product": 96,
    "ink_capture": "line-item property 'Ink'",
    "ink_validity_by_style": {
     "Western": {
@@ -3936,6 +4171,20 @@
       "white",
       "neonblue"
      ]
+    },
+    "Flag": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "fc"
+     ],
+     "Black": [
+      "fc"
+     ]
     }
    },
    "files": {
@@ -3956,7 +4205,13 @@
    "notes": "Direct clone of TEXAS/MIAMI/VEGAS ink/fabric/validity setup (Western=Rye, Classic=Cinzel+EST.1833 secondary line, Retro=Monoton overshoot-corrected), same 7-ink palette, same validity matrix, identical across all 3 styles. City-lane prefix. EST. 1833 verified via web search (city founding year) before use. Placement math measured and validated against locked reference before push.",
    "groups": [
     "cities"
-   ]
+   ],
+   "state_merge": {
+    "live_title": "Illinois Always Delivers",
+    "renamed": "2026-07 Option-2 merge",
+    "note": "Standard styles keep CHICAGO print files; Flag uses printfiles/states/ILLINOISFLAG_*"
+   },
+   "updated": "2026-07-15 (state merge reflected; Flag added; routing fixed)"
   },
   "DENVER": {
    "status": "live",
@@ -3964,7 +4219,7 @@
     "tee",
     "hoodie"
    ],
-   "handle": "denver-always-delivers-tee",
+   "handle": "colorado-always-delivers-tee",
    "options": {
     "Color": [
      "White",
@@ -3983,7 +4238,8 @@
     "Style": [
      "Western",
      "Classic",
-     "Retro"
+     "Retro",
+     "Flag"
     ]
    },
    "designs": [
@@ -3998,6 +4254,11 @@
     {
      "code": "retro",
      "label": "Retro"
+    },
+    {
+     "code": "flag",
+     "label": "Flag",
+     "note": "no ink; auto light/dark; hoodie files _r2"
     }
    ],
    "seo": {},
@@ -4046,11 +4307,11 @@
    "reconciled": true,
    "reconciled_date": "2026-07-14",
    "handles": {
-    "tee": "denver-always-delivers-tee",
-    "hoodie": "denver-always-delivers-hoodie"
+    "tee": "colorado-always-delivers-tee",
+    "hoodie": "colorado-always-delivers-hoodie"
    },
    "html_source": "N/A - built via NEW_PREFIX_BUILD_PLAN_v2.md pipeline, cloned exactly from TEXAS/MIAMI/VEGAS ink/fabric setup (2026-07-14). EST. 1858 verified via web search before use, per PREFIX_VALIDATION_PROTOCOL.md item 14.",
-   "variants_per_product": 72,
+   "variants_per_product": 96,
    "ink_capture": "line-item property 'Ink'",
    "ink_validity_by_style": {
     "Western": {
@@ -4148,6 +4409,20 @@
       "white",
       "neonblue"
      ]
+    },
+    "Flag": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "fc"
+     ],
+     "Black": [
+      "fc"
+     ]
     }
    },
    "files": {
@@ -4168,7 +4443,13 @@
    "notes": "Direct clone of TEXAS/MIAMI/VEGAS ink/fabric/validity setup (Western=Rye, Classic=Cinzel+EST.1858 secondary line, Retro=Monoton overshoot-corrected), same 7-ink palette, same validity matrix, identical across all 3 styles. City-lane prefix. EST. 1858 verified via web search (city founding year) before use. Placement math measured and validated against locked reference before push.",
    "groups": [
     "cities"
-   ]
+   ],
+   "state_merge": {
+    "live_title": "Colorado Always Delivers",
+    "renamed": "2026-07 Option-2 merge",
+    "note": "Standard styles keep DENVER print files; Flag uses printfiles/states/COLORADOFLAG_*"
+   },
+   "updated": "2026-07-15 (state merge reflected; Flag added; routing fixed)"
   },
   "BOSTON": {
    "status": "live",
@@ -4176,7 +4457,7 @@
     "tee",
     "hoodie"
    ],
-   "handle": "boston-always-delivers-tee",
+   "handle": "massachusetts-always-delivers-tee",
    "options": {
     "Color": [
      "White",
@@ -4195,7 +4476,8 @@
     "Style": [
      "Western",
      "Classic",
-     "Retro"
+     "Retro",
+     "Flag"
     ]
    },
    "designs": [
@@ -4210,6 +4492,11 @@
     {
      "code": "retro",
      "label": "Retro"
+    },
+    {
+     "code": "flag",
+     "label": "Flag",
+     "note": "no ink; auto light/dark; hoodie files _r2"
     }
    ],
    "seo": {},
@@ -4258,11 +4545,11 @@
    "reconciled": true,
    "reconciled_date": "2026-07-14",
    "handles": {
-    "tee": "boston-always-delivers-tee",
-    "hoodie": "boston-always-delivers-hoodie"
+    "tee": "massachusetts-always-delivers-tee",
+    "hoodie": "massachusetts-always-delivers-hoodie"
    },
    "html_source": "N/A - built via NEW_PREFIX_BUILD_PLAN_v2.md pipeline, cloned exactly from TEXAS/MIAMI/VEGAS ink/fabric setup (2026-07-14). EST. 1630 verified via web search before use, per PREFIX_VALIDATION_PROTOCOL.md item 14.",
-   "variants_per_product": 72,
+   "variants_per_product": 96,
    "ink_capture": "line-item property 'Ink'",
    "ink_validity_by_style": {
     "Western": {
@@ -4360,6 +4647,20 @@
       "white",
       "neonblue"
      ]
+    },
+    "Flag": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "fc"
+     ],
+     "Black": [
+      "fc"
+     ]
     }
    },
    "files": {
@@ -4380,7 +4681,13 @@
    "notes": "Direct clone of TEXAS/MIAMI/VEGAS ink/fabric/validity setup (Western=Rye, Classic=Cinzel+EST.1630 secondary line, Retro=Monoton overshoot-corrected), same 7-ink palette, same validity matrix, identical across all 3 styles. City-lane prefix. EST. 1630 verified via web search (city founding year) before use. Placement math measured and validated against locked reference before push.",
    "groups": [
     "cities"
-   ]
+   ],
+   "state_merge": {
+    "live_title": "Massachusetts Always Delivers",
+    "renamed": "2026-07 Option-2 merge",
+    "note": "Standard styles keep BOSTON print files; Flag uses printfiles/states/MASSACHUSETTSFLAG_*"
+   },
+   "updated": "2026-07-15 (state merge reflected; Flag added; routing fixed)"
   },
   "SEATTLE": {
    "status": "live",
@@ -4388,7 +4695,7 @@
     "tee",
     "hoodie"
    ],
-   "handle": "seattle-always-delivers-tee",
+   "handle": "washington-always-delivers-tee",
    "options": {
     "Color": [
      "White",
@@ -4407,7 +4714,8 @@
     "Style": [
      "Western",
      "Classic",
-     "Retro"
+     "Retro",
+     "Flag"
     ]
    },
    "designs": [
@@ -4422,6 +4730,11 @@
     {
      "code": "retro",
      "label": "Retro"
+    },
+    {
+     "code": "flag",
+     "label": "Flag",
+     "note": "no ink; auto light/dark; hoodie files _r2"
     }
    ],
    "seo": {},
@@ -4470,11 +4783,11 @@
    "reconciled": true,
    "reconciled_date": "2026-07-14",
    "handles": {
-    "tee": "seattle-always-delivers-tee",
-    "hoodie": "seattle-always-delivers-hoodie"
+    "tee": "washington-always-delivers-tee",
+    "hoodie": "washington-always-delivers-hoodie"
    },
    "html_source": "N/A - built via NEW_PREFIX_BUILD_PLAN_v2.md pipeline, cloned exactly from TEXAS/MIAMI/VEGAS ink/fabric setup (2026-07-14). EST. 1851 verified via web search before use, per PREFIX_VALIDATION_PROTOCOL.md item 14.",
-   "variants_per_product": 72,
+   "variants_per_product": 96,
    "ink_capture": "line-item property 'Ink'",
    "ink_validity_by_style": {
     "Western": {
@@ -4572,6 +4885,20 @@
       "white",
       "neonblue"
      ]
+    },
+    "Flag": {
+     "White": [
+      "fc"
+     ],
+     "Athletic Heather": [
+      "fc"
+     ],
+     "Navy": [
+      "fc"
+     ],
+     "Black": [
+      "fc"
+     ]
     }
    },
    "files": {
@@ -4592,7 +4919,13 @@
    "notes": "Direct clone of TEXAS/MIAMI/VEGAS ink/fabric/validity setup (Western=Rye, Classic=Cinzel+EST.1851 secondary line, Retro=Monoton overshoot-corrected), same 7-ink palette, same validity matrix, identical across all 3 styles. City-lane prefix. EST. 1851 verified via web search (city founding year) before use. Placement math measured and validated against locked reference before push.",
    "groups": [
     "cities"
-   ]
+   ],
+   "state_merge": {
+    "live_title": "Washington Always Delivers",
+    "renamed": "2026-07 Option-2 merge",
+    "note": "Standard styles keep SEATTLE print files; Flag uses printfiles/states/WASHINGTONFLAG_*"
+   },
+   "updated": "2026-07-15 (state merge reflected; Flag added; routing fixed)"
   },
   "GRANDPA": {
    "status": "live",
@@ -5403,5 +5736,13 @@
   "KARMA",
   "SCIENCE",
   "GRANDMA"
- ]
+ ],
+ "plain_states": {
+  "count": 41,
+  "options": "Color x Size (24 variants)",
+  "design": "state flag only",
+  "file_rule": "printfiles/states/{STATE}FLAG_{light|dark}_{garment}(_r2 hoodie).png",
+  "routing": "fulfill.py PLAIN_STATES longest-first title match",
+  "added": "2026-07-15"
+ }
 }
