@@ -135,7 +135,7 @@ GEORGIA_AIRPORTS={'atl','sav'}   # wave 0 2026-07-15; files STATEAIRPORT_ga-<cod
 def georgia_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
 
-# 41 plain-state flag products (2026-07-15). Titles like 'Alabama Always Delivers — Tee'.
+# 41 plain-state flag products (2026-07-15). Elastic flag wave 2026-07-15: all flag files renamed (_r2 tee/_r3 hoodie). Titles like 'Alabama Always Delivers — Tee'.
 # Matched LONGEST-FIRST ('west virginia' before 'virginia', 'arkansas' before 'kansas').
 # Excludes the 9 merged states (texas + newyork + 7 renamed, handled above).
 PLAIN_STATES=['west virginia','south carolina','south dakota','north carolina','north dakota',
@@ -382,7 +382,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         st=norm(print_style)
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['texas'],ground(ckey))
-            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r3' if garment=='hoodie' else '_r2')
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
@@ -403,7 +403,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
     if dk=='georgia':
         st=norm(print_style)
         if st=='flag':
-            fpath='printfiles/states/GEORGIAFLAG_%s_%s%s.png'%(ground(ckey),garment,'_r2' if garment=='hoodie' else '')
+            fpath='printfiles/states/GEORGIAFLAG_%s_%s%s.png'%(ground(ckey),garment,'_r3' if garment=='hoodie' else '_r2')
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
@@ -422,7 +422,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
 
     if dk and dk.startswith('stateflag:'):
         scode=dk.split(':',1)[1].upper()+'FLAG'
-        fpath='printfiles/states/%s_%s_%s%s.png'%(scode,ground(ckey),garment,'_r2' if garment=='hoodie' else '')
+        fpath='printfiles/states/%s_%s_%s%s.png'%(scode,ground(ckey),garment,'_r3' if garment=='hoodie' else '_r2')
         return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                 'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
                 '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
@@ -431,7 +431,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         st=norm(print_style)
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['miami'],ground(ckey))
-            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r3' if garment=='hoodie' else '_r2')
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
@@ -451,7 +451,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         st=norm(print_style)
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['vegas'],ground(ckey))
-            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r3' if garment=='hoodie' else '_r2')
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
@@ -471,7 +471,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         st=norm(print_style)
         if st=='flag':
             base='NEWYORKFLAG_%s'%ground(ckey)
-            fpath='printfiles/states/%s_%s%s.png'%(base,garment,'_r2' if garment=='hoodie' else '')
+            fpath='printfiles/states/%s_%s%s.png'%(base,garment,'_r3' if garment=='hoodie' else '_r2')
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
@@ -490,7 +490,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         st=norm(print_style)
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['losangeles'],ground(ckey))
-            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r3' if garment=='hoodie' else '_r2')
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
@@ -512,7 +512,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
                     '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['chicago'],ground(ckey))
-            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r3' if garment=='hoodie' else '_r2')
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
@@ -527,7 +527,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         st=norm(print_style)
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['denver'],ground(ckey))
-            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r3' if garment=='hoodie' else '_r2')
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
@@ -542,7 +542,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         st=norm(print_style)
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['boston'],ground(ckey))
-            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r3' if garment=='hoodie' else '_r2')
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
@@ -557,7 +557,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         st=norm(print_style)
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['seattle'],ground(ckey))
-            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r2' if garment=='hoodie' else '')
+            fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r3' if garment=='hoodie' else '_r2')
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
