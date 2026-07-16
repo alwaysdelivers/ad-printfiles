@@ -132,6 +132,12 @@ TEXAS_AIRPORT_DEFAULT=NEWYORK_AIRPORT_DEFAULT
 CHICAGO_AIRPORTS={'ord','mdw'}   # Illinois pilot 2026-07-15; files STATEAIRPORT_il-<code> (no _r2)
 GEORGIA_STYLES={'western':'western','classic':'classic','retro':'retro'}
 GEORGIA_AIRPORTS={'atl','sav'}   # wave 0 2026-07-15; files STATEAIRPORT_ga-<code> (no _r2)
+FULL_PARITY={  # wave 1 2026-07-16: table-driven full-parity states
+ 'alabama':('ALABAMA','al',{'bhm','hsv'}),'alaska':('ALASKA','ak',{'anc','fai'}),
+ 'arizona':('ARIZONA','az',{'phx','tus'}),'arkansas':('ARKANSAS','ar',{'lit','xna'}),
+ 'connecticut':('CONNECTICUT','ct',{'bdl'}),'delaware':('DELAWARE','de',set()),
+ 'hawaii':('HAWAII','hi',{'hnl','ogg','koa','lih'}),'idaho':('IDAHO','id',{'boi'}),
+ 'indiana':('INDIANA','in',{'ind'}),'iowa':('IOWA','ia',{'dsm'})}
 EMBLEM_FLAG_STATES={'ALABAMAFLAG','ILLINOISFLAG','MASSACHUSETTSFLAG','RHODEISLANDFLAG'}  # emblem-direct ALL grounds; files _r3 tee/_r4 hoodie
 def _flagsuf(code_or_base, garment):
     code=code_or_base.split('_')[0]
@@ -145,10 +151,10 @@ def georgia_cw(tk, ckey):
 # Matched LONGEST-FIRST ('west virginia' before 'virginia', 'arkansas' before 'kansas').
 # Excludes the 9 merged states (texas + newyork + 7 renamed, handled above).
 PLAIN_STATES=['west virginia','south carolina','south dakota','north carolina','north dakota',
- 'new hampshire','new jersey','new mexico','rhode island','pennsylvania','mississippi','connecticut',
- 'louisiana','minnesota','wisconsin','tennessee','arkansas','delaware','kentucky','maryland','michigan',
- 'missouri','nebraska','oklahoma','virginia','alabama','arizona','indiana','montana','vermont',
- 'wyoming','alaska','hawaii','kansas','oregon','idaho','maine','iowa','ohio','utah']
+ 'new hampshire','new jersey','new mexico','rhode island','pennsylvania','mississippi',
+ 'louisiana','minnesota','wisconsin','tennessee','kentucky','maryland','michigan',
+ 'missouri','nebraska','oklahoma','virginia','montana','vermont',
+ 'wyoming','kansas','oregon','maine','ohio','utah']
 def plain_state_of(t):
     for s in PLAIN_STATES:
         if s in t: return s.replace(' ','')
@@ -319,6 +325,8 @@ def design_of(title):
     if 'boston' in t or 'massachusetts' in t: return 'boston'
     if 'seattle' in t or 'washington' in t: return 'seattle'
     if 'georgia' in t: return 'georgia'
+    for _fp in sorted(FULL_PARITY,key=len,reverse=True):
+        if _fp in t: return 'fullparity:'+_fp
     _ps=plain_state_of(t)
     if _ps: return 'stateflag:'+_ps
     if 'grandpa' in t: return 'grandpa'
@@ -405,6 +413,28 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
         if not tk: return {'error':'TEXAS invalid ink','title':title,'ink':ink}
         cw=texas_cw(tk, ckey)
         return out('texas', 'TEXAS_%s_%s'%(code,cw))
+
+    if dk and dk.startswith('fullparity:'):
+        slug=dk.split(':',1)[1]
+        NAME,gh,codes=FULL_PARITY[slug]
+        st=norm(print_style)
+        if st=='flag':
+            fpath='printfiles/states/%sFLAG_%s_%s%s.png'%(NAME,ground(ckey),garment,_flagsuf(NAME+'FLAG',garment))
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        if st in codes:
+            tk=_resolve_ink(ink, NEWYORK_AIRPORT_INK, NEWYORK_AIRPORT_VALID, NEWYORK_AIRPORT_DEFAULT, ckey)
+            if not tk: return {'error':'%s airport invalid ink'%NAME,'title':title,'ink':ink}
+            fpath='printfiles/stateairport/STATEAIRPORT_%s-%s_%s_%s.png'%(gh,st,tk,garment)
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
+        code=GEORGIA_STYLES.get(st)
+        if not code: return {'error':'%s invalid Style'%NAME,'title':title,'style':print_style}
+        tk=_resolve_ink(ink, NEWYORK_INK, NEWYORK_VALID, NEWYORK_DEFAULT, ckey)
+        if not tk: return {'error':'%s invalid ink'%NAME,'title':title,'ink':ink}
+        return out(slug, '%s_%s_%s'%(NAME, code, georgia_cw(tk, ckey)))
 
     if dk=='georgia':
         st=norm(print_style)
