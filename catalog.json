@@ -5938,8 +5938,19 @@
   "count": 41,
   "options": "Color x Size (24 variants)",
   "design": "state flag only",
-  "file_rule": "printfiles/states/{STATE}FLAG_{light|dark}_{garment}(_r2 hoodie).png",
+  "file_rule": "printfiles/states/{STATE}FLAG_{light|dark}_tee_r2.png / _hoodie_r3.png",
   "routing": "fulfill.py PLAIN_STATES longest-first title match",
   "added": "2026-07-15"
+ },
+ "flag_files": {
+  "rule": "elastic 2026-07-15: flag_h = 1530px - name_h (floor: prior size; ceiling 13.50in hoodie; width<=3000px)",
+  "filenames": "{STATE}FLAG_{ground}_tee_r2.png / _hoodie_r3.png (UNIFORM all 50 states)",
+  "dark_emblem_direct": [
+   "ALABAMA",
+   "ILLINOIS",
+   "MASSACHUSETTS",
+   "RHODEISLAND"
+  ],
+  "notes": "emblem-direct: field removed, white name line, Illinois in-art lettering stripped; 9 floor states content-unchanged but renamed"
  }
 }
