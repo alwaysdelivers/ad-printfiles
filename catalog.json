@@ -5974,6 +5974,18 @@
    "MASSACHUSETTS",
    "RHODEISLAND"
   ],
-  "notes": "emblem-direct: field removed, white name line, Illinois in-art lettering stripped; 9 floor states content-unchanged but renamed"
+  "notes": "emblem-direct: field removed, white name line, Illinois in-art lettering stripped; 9 floor states content-unchanged but renamed",
+  "emblem_direct_all_grounds": {
+   "states": [
+    "ALABAMA",
+    "ILLINOIS",
+    "MASSACHUSETTS",
+    "RHODEISLAND"
+   ],
+   "since": "2026-07-15 evening",
+   "filenames": "_r3 tee / _r4 hoodie BOTH grounds (dark = rename-copied)",
+   "heroes": "heroes/grid/{state}flag2_* (uniform _r2/_r3)",
+   "chips": "boston_flag_r3, chicago_flag_r3"
+  }
  }
 }
