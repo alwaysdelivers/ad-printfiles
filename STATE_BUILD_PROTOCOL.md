@@ -176,6 +176,14 @@ FLAG: FLAG_H = 1530 − NAME_H, floored at its prior size (never shrink), width 
 growth, every regenerated design ends at exactly 13.49″. FILENAMES (CDN rule): ALL 50 states now
 uniform `{STATE}FLAG_{ground}_tee_r2.png` / `_hoodie_r3.png` — the 9 floor states (AK HI ID IA KS ME
 OH TX UT) are content-identical to prior files but renamed for uniformity.
+**EMBLEM-DIRECT — AMENDED 2026-07-15 (evening): applies to ALL grounds, not dark only.** The four
+white-field states (ALABAMA, ILLINOIS, MASSACHUSETTS, RHODE ISLAND) use emblem-direct on light AND
+dark. Their flag files carry `_r3` tee / `_r4` hoodie on BOTH grounds (dark = content-identical
+rename-copies); every other state stays `_r2`/`_r3`. Suffix resolution: `_flagsuf()` in fulfill.py,
+`EMB[CFG.code]` in the shared section, hardcoded `_r4/_r3` in chicago/boston sections. Their grid
+heroes live in `{state}flag2_*` folders (uniform `_r2`/`_r3`); chips `boston_flag_r3`,
+`chicago_flag_r3`. Original locked text follows for dark-treatment mechanics (field flood-removal,
+white name on dark, Illinois in-art lettering stripped):
 **DARK-GROUND EMBLEM-DIRECT — LOCKED 2026-07-15.** White-field flags (ALABAMA, ILLINOIS,
 MASSACHUSETTS, RHODE ISLAND) render on dark garments with the field flood-removed and the emblem
 printed directly at full elastic size; the state name line renders WHITE; Illinois's in-artwork
