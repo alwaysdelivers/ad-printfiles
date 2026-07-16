@@ -137,7 +137,12 @@ FULL_PARITY={  # wave 1 2026-07-16: table-driven full-parity states
  'arizona':('ARIZONA','az',{'phx','tus'}),'arkansas':('ARKANSAS','ar',{'lit','xna'}),
  'connecticut':('CONNECTICUT','ct',{'bdl'}),'delaware':('DELAWARE','de',set()),
  'hawaii':('HAWAII','hi',{'hnl','ogg','koa','lih'}),'idaho':('IDAHO','id',{'boi'}),
- 'indiana':('INDIANA','in',{'ind'}),'iowa':('IOWA','ia',{'dsm'})}
+ 'indiana':('INDIANA','in',{'ind'}),'iowa':('IOWA','ia',{'dsm'}),
+ 'kansas':('KANSAS','ks',{'ict'}),'kentucky':('KENTUCKY','ky',{'sdf','cvg','lex'}),
+ 'louisiana':('LOUISIANA','la',{'msy','btr'}),'maine':('MAINE','me',{'pwm','bgr'}),
+ 'maryland':('MARYLAND','md',{'bwi'}),'michigan':('MICHIGAN','mi',{'dtw','grr'}),
+ 'minnesota':('MINNESOTA','mn',{'msp'}),'mississippi':('MISSISSIPPI','ms',{'jan','gpt'}),
+ 'missouri':('MISSOURI','mo',{'stl','mci'}),'montana':('MONTANA','mt',{'bzn','bil','mso'})}
 EMBLEM_FLAG_STATES={'ALABAMAFLAG','ILLINOISFLAG','MASSACHUSETTSFLAG','RHODEISLANDFLAG'}  # emblem-direct ALL grounds; files _r3 tee/_r4 hoodie
 def _flagsuf(code_or_base, garment):
     code=code_or_base.split('_')[0]
@@ -151,10 +156,10 @@ def georgia_cw(tk, ckey):
 # Matched LONGEST-FIRST ('west virginia' before 'virginia', 'arkansas' before 'kansas').
 # Excludes the 9 merged states (texas + newyork + 7 renamed, handled above).
 PLAIN_STATES=['west virginia','south carolina','south dakota','north carolina','north dakota',
- 'new hampshire','new jersey','new mexico','rhode island','pennsylvania','mississippi',
- 'louisiana','minnesota','wisconsin','tennessee','kentucky','maryland','michigan',
- 'missouri','nebraska','oklahoma','virginia','montana','vermont',
- 'wyoming','kansas','oregon','maine','ohio','utah']
+ 'new hampshire','new jersey','new mexico','rhode island','pennsylvania',
+ 'wisconsin','tennessee',
+ 'nebraska','oklahoma','virginia','vermont',
+ 'wyoming','oregon','ohio','utah']
 def plain_state_of(t):
     for s in PLAIN_STATES:
         if s in t: return s.replace(' ','')
