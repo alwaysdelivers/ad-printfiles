@@ -327,7 +327,7 @@ def _resolve_ink(label, table, valid, default, ckey):
     if not tk or tk not in valid.get(ckey,[]): tk=default.get(ckey)
     return tk
 
-def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
+def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,name=None):
     garment='hoodie' if 'hoodie' in title.lower() else 'tee'
     pid=146 if garment=='hoodie' else 71
     dk=design_of(title)
@@ -540,6 +540,13 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
 
     if dk=='boston':
         st=norm(print_style)
+        if st=='bos':   # MA wave 0b: BOS airport
+            tk=_resolve_ink(ink, NEWYORK_AIRPORT_INK, NEWYORK_AIRPORT_VALID, NEWYORK_AIRPORT_DEFAULT, ckey)
+            if not tk: return {'error':'MASSACHUSETTS airport invalid ink','title':title,'ink':ink}
+            fpath='printfiles/stateairport/STATEAIRPORT_ma-bos_%s_%s.png'%(tk,garment)
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['boston'],ground(ckey))
             fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,'_r3' if garment=='hoodie' else '_r2')
@@ -551,6 +558,8 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None):
         tk=_resolve_ink(ink, BOSTON_INK, BOSTON_VALID, BOSTON_DEFAULT, ckey)
         if not tk: return {'error':'BOSTON invalid ink','title':title,'ink':ink}
         cw=boston_cw(tk, ckey)
+        if (name or '').strip().lower()=='massachusetts':   # MA wave 0b: Name line-item property routes state-name art
+            return out('massachusetts', 'MASSACHUSETTS_%s_%s'%(code,cw))
         return out('boston', 'BOSTON_%s_%s'%(code,cw))
 
     if dk=='seattle':
