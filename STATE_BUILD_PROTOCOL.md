@@ -169,6 +169,20 @@ CVG under both KY and OH; DCA under both VA and DC. Delaware: no airport style (
 large state pill + smaller alphabetical city pills; default = state view (state fonts + Flag + all
 state airports); selecting a city filters to that city's fonts + its airport(s) (airport travels
 with the city). Deep-link via `?name=`.
+**ELASTIC FLAG RULE — LOCKED 2026-07-15 (supersedes fixed 3.00″ flag height).** Two independent
+containers sharing a budget. Stack: 750px top + FLAG + 450 + NAME + 720 + WORDMARK(600), hoodie
+ends-at ceiling 13.50″ (4050px) → FLAG_H + NAME_H ≤ 1530px. NAME: fit 3000×600 (unchanged).
+FLAG: FLAG_H = 1530 − NAME_H, floored at its prior size (never shrink), width ≤ 3000. Result: ×1.00–1.30
+growth, every regenerated design ends at exactly 13.49″. FILENAMES (CDN rule): ALL 50 states now
+uniform `{STATE}FLAG_{ground}_tee_r2.png` / `_hoodie_r3.png` — the 9 floor states (AK HI ID IA KS ME
+OH TX UT) are content-identical to prior files but renamed for uniformity.
+**DARK-GROUND EMBLEM-DIRECT — LOCKED 2026-07-15.** White-field flags (ALABAMA, ILLINOIS,
+MASSACHUSETTS, RHODE ISLAND) render on dark garments with the field flood-removed and the emblem
+printed directly at full elastic size; the state name line renders WHITE; Illinois's in-artwork
+"ILLINOIS" lettering is stripped (bottom band of the emblem). All other flags ship authentic on dark.
+Light grounds always authentic. Chips for merged states renamed: cities `{city}_flag_r2.webp`,
+newyork/texas `_flag_r3.webp`, georgia `_flag_r2.webp`.
+
 **Doc correction:** the overshoot log's "AUS: none" is contradicted by the shipped file — U and S ARE
 height-normalized in AUS. Per-glyph ink→[cap-top…baseline] normalization is the actual rule; the
 layout engine derives glyph centers from font metrics (advances + glyph bboxes), validated against
