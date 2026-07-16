@@ -5927,6 +5927,382 @@
     }
    },
    "updated": "2026-07-15 wave 0 pilot (full parity pattern)"
+  },
+  "ALABAMA": {
+   "handles": {
+    "tee": "alabama-always-delivers-tee",
+    "hoodie": "alabama-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "BHM",
+     "HSV"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1819 (verified Congress.gov CRS R47747 / Britannica, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/alabama/ALABAMA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-16 wave 1"
+  },
+  "ALASKA": {
+   "handles": {
+    "tee": "alaska-always-delivers-tee",
+    "hoodie": "alaska-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "ANC",
+     "FAI"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1959 (verified Congress.gov CRS R47747 / Britannica, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/alaska/ALASKA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-16 wave 1"
+  },
+  "ARIZONA": {
+   "handles": {
+    "tee": "arizona-always-delivers-tee",
+    "hoodie": "arizona-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "PHX",
+     "TUS"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1912 (verified Congress.gov CRS R47747 / Britannica, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/arizona/ARIZONA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-16 wave 1"
+  },
+  "ARKANSAS": {
+   "handles": {
+    "tee": "arkansas-always-delivers-tee",
+    "hoodie": "arkansas-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "LIT",
+     "XNA"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1836 (verified Congress.gov CRS R47747 / Britannica, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/arkansas/ARKANSAS_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-16 wave 1"
+  },
+  "CONNECTICUT": {
+   "handles": {
+    "tee": "connecticut-always-delivers-tee",
+    "hoodie": "connecticut-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "BDL"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1788 (verified Congress.gov CRS R47747 / Britannica, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/connecticut/CONNECTICUT_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-16 wave 1"
+  },
+  "DELAWARE": {
+   "handles": {
+    "tee": "delaware-always-delivers-tee",
+    "hoodie": "delaware-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag"
+    ]
+   },
+   "variants_per_product": 96,
+   "est_line": "EST. 1787 (verified Congress.gov CRS R47747 / Britannica, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/delaware/DELAWARE_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-16 wave 1"
+  },
+  "HAWAII": {
+   "handles": {
+    "tee": "hawaii-always-delivers-tee",
+    "hoodie": "hawaii-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "HNL",
+     "OGG",
+     "KOA",
+     "LIH"
+    ]
+   },
+   "variants_per_product": 192,
+   "est_line": "EST. 1959 (verified Congress.gov CRS R47747 / Britannica, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/hawaii/HAWAII_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-16 wave 1"
+  },
+  "IDAHO": {
+   "handles": {
+    "tee": "idaho-always-delivers-tee",
+    "hoodie": "idaho-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "BOI"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1890 (verified Congress.gov CRS R47747 / Britannica, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/idaho/IDAHO_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-16 wave 1"
+  },
+  "INDIANA": {
+   "handles": {
+    "tee": "indiana-always-delivers-tee",
+    "hoodie": "indiana-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "IND"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1816 (verified Congress.gov CRS R47747 / Britannica, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/indiana/INDIANA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-16 wave 1"
+  },
+  "IOWA": {
+   "handles": {
+    "tee": "iowa-always-delivers-tee",
+    "hoodie": "iowa-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "DSM"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1846 (verified Congress.gov CRS R47747 / Britannica, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/iowa/IOWA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-16 wave 1"
   }
  },
  "_not_yet_in_catalog": {
