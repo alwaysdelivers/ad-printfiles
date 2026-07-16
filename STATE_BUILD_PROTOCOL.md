@@ -9,6 +9,102 @@ working style. `NEW_PREFIX_BUILD_PLAN_v2.md` governs prefix (non-state) products
 
 ---
 
+## §0 — SESSION BOOTSTRAP (do this first, every session)
+
+**Credentials live in Google Drive** — the AlwaysDelivers folder (ID `1-KrOVyOdjAAQeHj7zhaGPLmQBQ6z3Cd-`,
+under ajain@smallshiptravel.com). Open the credentials file there and save each value to its standard
+local path before any API work:
+
+1. **GitHub PAT** → save to `/tmp/_ghpat`. Used as `Authorization: token <PAT>` on api.github.com
+   (repo `alwaysdelivers/ad-printfiles`).
+2. **Shopify client ID + client secret** → save ID to `/tmp/_shop_client_id`, secret to `/tmp/_shoptoken`.
+   Mint the Admin token (client_credentials grant) and save it to `/tmp/_shoptoken_live`:
+   `POST https://rudjph-mx.myshopify.com/admin/oauth/access_token` with
+   `{client_id, client_secret, grant_type:"client_credentials"}` → `access_token`.
+   Test with GraphQL `{shop{name}}`; re-mint on any 401. Theme ID: `153615171752`.
+3. **Printful API key** → save to `/tmp/_printful_key` (store 18259192). Only needed for mockups/orders.
+
+Also fetch fonts to `/tmp` before generating: `Rye-Regular.ttf`, `Cinzel.ttf` (variable — call
+`set_variation_by_axes([400])`), `Monoton-Regular.ttf` (in repo `fonts/`), and the sprite sources:
+Chicago classic tee print files (wordmark sprites, one per ink) and the eight `ref_aus*` airport
+lockup references. Extract sprites verbatim — never re-render a lockup.
+
+---
+
+## §0.5 — WAVE RUNBOOK (full-parity state build, the proven 10-state chain)
+
+Run per wave (≈10 states, alphabetical). Waves 1–2 (Alabama→Montana) shipped with this exact chain:
+zero push failures, zero routing failures. Every step gates before the next.
+
+**STEP 1 — Verify inputs (never trust memory).**
+a. Airports + ghost per state: read `state_airport_list_FINAL_2026-07-15.json` (repo root). It is LOCKED.
+   Delaware has none. CVG appears under BOTH Kentucky (`ky-cvg`) and Ohio (`oh-cvg`) — separate designs.
+b. EST year = statehood year, verified by web search against ≥2 authoritative sources
+   (Congress.gov CRS R47747, Britannica, state archives). Record the sources in the catalog entry.
+
+**STEP 2 — Generate (all local, assert everything).**
+Per state: 3 fonts × 7 inks × 2 garments print + web, Classic carries `EST. {year}` (Cinzel 400,
+ink-height 135, +90 below name, +720 to wordmark; western/retro name +720 direct). Name fits 3000×900
+top y900. Airports: ghost under RULE B `scale=min(3000/w, 1701/h)`, code block ⅔ harmony, verbatim
+lockup sprites. **Web tier: save PNG *and* WebP (q90) twins — sections request `.webp`.**
+Chips: `{slug}_{western|classic|retro}.webp` (name band), `{slug}_flag.webp` (flag+name bands; use the
+`_r3` emblem file for AL/IL/MA/RI), `{slug}_{code}.webp` (airport fc render). Hard asserts on every
+file: horizontal center ±1.5px, measured bottom = wordmark bottom ±2px (alpha_composite clips
+silently), no overflow.
+
+**STEP 3 — Push (resumable pattern, refined).**
+One git-tree scan (`git/trees/main?recursive=1`) to list what exists — **never per-file HEAD checks for
+resume** (a 1,700-file HEAD scan eats the whole run). Push only missing; sleep 0.12–0.25s; internal
+deadline ~300s inside an outer timeout; expect 6–8 runs for ~1,700 files. `raw.githubusercontent.com`
+lags 30–60s under commit volume — the tree/Contents API is authoritative; re-check raw once after a
+pause instead of panicking.
+
+**STEP 4 — Products.** Per state, per garment: `productSet` (synchronous:false) with Color×Size×Style
+where Style = Western, Classic, Retro, Flag + that state's airport codes; copy price/compareAtPrice
+per size from the existing variants; poll the operation to COMPLETE; then `productUpdate`
+templateSuffix = `{slug}`.
+
+**STEP 5 — Sections + templates.** Clone `sections/georgia-combined.liquid` (it carries Tier-1 preload
+`adWarm`/decode-swap, Tier-2 `.webp` URLs, and the breadcrumb). Transforms, in order: handles;
+styleOrder; airport branch condition (`style==='XXX'||…`); `_vset` airport dispatch; `STATEAIRPORT_ga-`
+→ `STATEAIRPORT_{gh}-`; `printfiles/web/georgia/GEORGIA_` → `/{slug}/{NAME}_`; `GEORGIAFLAG_` →
+`{NAME}FLAG_`; **flagSuf stays `_r3/_r2` EXCEPT emblem states (AL/IL/MA/RI) which use `_r4/_r3`**;
+chipSuf `''`; chip path; display strings; residual georgia/GEORGIA/Georgia. Guards before PUT: no
+leftover source-state tokens, no `NAME _` filename corruption, `node --check` on the script block,
+byte-identical readback. Template `product.{slug}.json` → `{slug}-combined` (Shopify normalizes the
+JSON, so verify by parsing the readback, not byte equality).
+
+**STEP 6 — Fulfillment.** Add one row per state to the `FULL_PARITY` table in `fulfill.py`
+(`slug: (NAME, ghost, {codes})`), remove the state from `PLAIN_STATES`, done — the table-driven handler
+does the rest (fonts via NEWYORK ink tables, Flag via `_flagsuf()`, airports via NEWYORK_AIRPORT
+tables). The dispatch loop is longest-first, which is what keeps arkansas/kansas and (Wave 4)
+virginia/west-virginia safe. **Dry-run every combo** (styles × valid inks × colors × garments ×
+airports ≈ 1,700/wave) expecting 0 failures, plus cross-family regressions (one prior full-parity
+state, one still-plain state, one emblem flag, one dual airport), then gate every routed file against
+the git tree.
+
+**STEP 7 — Records.** Push fulfill.py + catalog entries (options, variants, est_line with sources,
+file rules, `FULL_PARITY table handler`).
+
+**STEP 8 — Rendered-page sanity (MANDATORY, the Unknown-bug lesson).** For every touched PDP: fetch the
+live page and confirm the real styleOrder renders (not just a code-marker grep), and HEAD one
+section-built hero `.webp` per state → 200. A byte-identical section PUT with a broken lookup still
+ships a dead page — only a rendered check catches it.
+
+**STEP 9 — Complete-picture board.** One HTML: every state, all styles, light AND dark rows, airports,
+EST tag — Ati reviews the wave from a single page. Dark renders on dark ground, always.
+
+**Remaining after Wave 2:** Wave 3 = Nebraska→Oklahoma (8, incl. `oh-cvg`); Wave 4 = Oregon→Wyoming
+(12, incl. emblem RI + the virginia/west-virginia trap); Wave 5 = hierarchical picker retrofit for the
+9 merged states (`boston-combined` is the template: Name pills, name-aware treatUrl/chips, Name
+line-item property — poller extracts it, boston handler routes it); Wave 6 = Washington D.C. from
+scratch.
+
+---
+
+
+---
+
 ## 1. OPEN DEFECTS — live, customer-facing. Fix before new work.
 
 Caused by the Option-2 merge (city products → state products). Products are correct; theme wiring is not.
