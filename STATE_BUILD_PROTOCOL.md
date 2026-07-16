@@ -169,6 +169,12 @@ CVG under both KY and OH; DCA under both VA and DC. Delaware: no airport style (
 large state pill + smaller alphabetical city pills; default = state view (state fonts + Flag + all
 state airports); selecting a city filters to that city's fonts + its airport(s) (airport travels
 with the city). Deep-link via `?name=`.
+**WEB TIER = WEBP (Tier 2, 2026-07-16).** All state-line web display files also exist as WebP
+(quality 90, alpha) at the same basename with `.webp`; all 11 combined sections request `.webp`.
+PNGs remain in place (print files always PNG). NEW BUILDS: push BOTH web PNG and web WebP for any
+new web-tier file; sections reference `.webp`. Perf stack: Tier 1 (adWarm full-matrix preload +
+decode-then-swap `__pend` guard, all 11 sections) + Tier 2 (webp) + baked blanks.
+
 **ELASTIC FLAG RULE — LOCKED 2026-07-15 (supersedes fixed 3.00″ flag height).** Two independent
 containers sharing a budget. Stack: 750px top + FLAG + 450 + NAME + 720 + WORDMARK(600), hoodie
 ends-at ceiling 13.50″ (4050px) → FLAG_H + NAME_H ≤ 1530px. NAME: fit 3000×600 (unchanged).
