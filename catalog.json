@@ -4550,7 +4550,8 @@
      "Western",
      "Classic",
      "Retro",
-     "Flag"
+     "Flag",
+     "BOS"
     ]
    },
    "designs": [
@@ -4622,7 +4623,7 @@
     "hoodie": "massachusetts-always-delivers-hoodie"
    },
    "html_source": "N/A - built via NEW_PREFIX_BUILD_PLAN_v2.md pipeline, cloned exactly from TEXAS/MIAMI/VEGAS ink/fabric setup (2026-07-14). EST. 1630 verified via web search before use, per PREFIX_VALIDATION_PROTOCOL.md item 14.",
-   "variants_per_product": 96,
+   "variants_per_product": 120,
    "ink_capture": "line-item property 'Ink'",
    "ink_validity_by_style": {
     "Western": {
@@ -4760,7 +4761,29 @@
     "renamed": "2026-07 Option-2 merge",
     "note": "Standard styles keep BOSTON print files; Flag uses printfiles/states/MASSACHUSETTSFLAG_*"
    },
-   "updated": "2026-07-15 (state merge reflected; Flag added; routing fixed)"
+   "updated": "2026-07-15 wave 0b: hierarchical picker pilot (first Name-property product)",
+   "name_property": {
+    "values": [
+     "MASSACHUSETTS",
+     "BOSTON"
+    ],
+    "default": "MASSACHUSETTS",
+    "mechanism": "line-item property (like Ink); poller extracts, fulfill routes MASSACHUSETTS_* vs BOSTON_* files",
+    "ui": "hierarchical picker: state pill + BOSTON city pill; BOSTON view hides Flag; BOS visible in both; deep-link ?name=",
+    "file_folders": {
+     "MASSACHUSETTS": "printfiles/massachusetts/",
+     "BOSTON": "printfiles/boston/"
+    }
+   },
+   "airport": {
+    "codes": [
+     "bos"
+    ],
+    "ghost": "MA",
+    "file_rule": "printfiles/stateairport/STATEAIRPORT_ma-bos_{token}_{garment}.png (no _r2)",
+    "geometry": "rule B: MA ghost 3000x1351 width-bind"
+   },
+   "est_line": "MASSACHUSETTS classic: EST. 1788 (statehood Feb 6 1788, verified); BOSTON classic keeps its city year"
   },
   "SEATTLE": {
    "status": "live",
