@@ -6303,6 +6303,385 @@
    },
    "fulfillment": "FULL_PARITY table handler (fulfill.py)",
    "updated": "2026-07-16 wave 1"
+  },
+  "KANSAS": {
+   "handles": {
+    "tee": "kansas-always-delivers-tee",
+    "hoodie": "kansas-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "ICT"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1861 (verified CRS/Britannica/state archives, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/kansas/KANSAS_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler",
+   "updated": "2026-07-16 wave 2"
+  },
+  "KENTUCKY": {
+   "handles": {
+    "tee": "kentucky-always-delivers-tee",
+    "hoodie": "kentucky-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "SDF",
+     "CVG",
+     "LEX"
+    ]
+   },
+   "variants_per_product": 168,
+   "est_line": "EST. 1792 (verified CRS/Britannica/state archives, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/kentucky/KENTUCKY_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler",
+   "updated": "2026-07-16 wave 2"
+  },
+  "LOUISIANA": {
+   "handles": {
+    "tee": "louisiana-always-delivers-tee",
+    "hoodie": "louisiana-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "MSY",
+     "BTR"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1812 (verified CRS/Britannica/state archives, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/louisiana/LOUISIANA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler",
+   "updated": "2026-07-16 wave 2"
+  },
+  "MAINE": {
+   "handles": {
+    "tee": "maine-always-delivers-tee",
+    "hoodie": "maine-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "PWM",
+     "BGR"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1820 (verified CRS/Britannica/state archives, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/maine/MAINE_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler",
+   "updated": "2026-07-16 wave 2"
+  },
+  "MARYLAND": {
+   "handles": {
+    "tee": "maryland-always-delivers-tee",
+    "hoodie": "maryland-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "BWI"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1788 (verified CRS/Britannica/state archives, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/maryland/MARYLAND_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler",
+   "updated": "2026-07-16 wave 2"
+  },
+  "MICHIGAN": {
+   "handles": {
+    "tee": "michigan-always-delivers-tee",
+    "hoodie": "michigan-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "DTW",
+     "GRR"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1837 (verified CRS/Britannica/state archives, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/michigan/MICHIGAN_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler",
+   "updated": "2026-07-16 wave 2"
+  },
+  "MINNESOTA": {
+   "handles": {
+    "tee": "minnesota-always-delivers-tee",
+    "hoodie": "minnesota-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "MSP"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1858 (verified CRS/Britannica/state archives, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/minnesota/MINNESOTA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler",
+   "updated": "2026-07-16 wave 2"
+  },
+  "MISSISSIPPI": {
+   "handles": {
+    "tee": "mississippi-always-delivers-tee",
+    "hoodie": "mississippi-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "JAN",
+     "GPT"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1817 (verified CRS/Britannica/state archives, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/mississippi/MISSISSIPPI_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler",
+   "updated": "2026-07-16 wave 2"
+  },
+  "MISSOURI": {
+   "handles": {
+    "tee": "missouri-always-delivers-tee",
+    "hoodie": "missouri-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "STL",
+     "MCI"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1821 (verified CRS/Britannica/state archives, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/missouri/MISSOURI_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler",
+   "updated": "2026-07-16 wave 2"
+  },
+  "MONTANA": {
+   "handles": {
+    "tee": "montana-always-delivers-tee",
+    "hoodie": "montana-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "BZN",
+     "BIL",
+     "MSO"
+    ]
+   },
+   "variants_per_product": 168,
+   "est_line": "EST. 1889 (verified CRS/Britannica/state archives, 2026-07-16)",
+   "file_rules": {
+    "fonts": "printfiles/montana/MONTANA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "fulfillment": "FULL_PARITY table handler",
+   "updated": "2026-07-16 wave 2"
   }
  },
  "_not_yet_in_catalog": {
