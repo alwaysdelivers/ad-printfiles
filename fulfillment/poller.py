@@ -110,8 +110,10 @@ def build_items(node):
         color, size, pstyle = line_opts(li)
         ink = next((a["value"] for a in (li.get("customAttributes") or [])
                     if (a.get("key") or "").strip().lower() == "ink"), None)
+        name = next((a["value"] for a in (li.get("customAttributes") or [])
+                    if (a.get("key") or "").strip().lower() == "name"), None)
         price = (li.get("originalUnitPriceSet") or {}).get("shopMoney", {}).get("amount")
-        item = fulfill.line_to_item(li["title"], color, size, li["quantity"], price, pstyle, ink)
+        item = fulfill.line_to_item(li["title"], color, size, li["quantity"], price, pstyle, ink, name)
         if item.get("error"):
             errors.append(f"{li['title']} / {color} / {size}: {item['error']}")
         else:
