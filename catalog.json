@@ -9228,6 +9228,139 @@
    },
    "fulfillment": "FULL_PARITY table handler (fulfill.py)",
    "updated": "2026-07-17 wave 4"
+  },
+  "WASHINGTONDC": {
+   "handles": {
+    "tee": "washingtondc-always-delivers-tee",
+    "hoodie": "washingtondc-always-delivers-hoodie"
+   },
+   "display_name": "Washington, D.C.",
+   "art_text": "WASHINGTON D.C.",
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "DCA"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1790 (Residence Act signed 16 Jul 1790, establishing the District; verified Library of Congress guides.loc.gov/residence-act / Wikipedia Outline of Washington, D.C., 2026-07-17). Alternatives considered and rejected: 1791 (City of Washington founded), 1801 (Organic Act), 1802 (city incorporated).",
+   "file_rules": {
+    "fonts": "printfiles/washingtondc/WASHINGTONDC_{style}_{cw}_{garment}.png (+web png/webp)",
+    "flag": "printfiles/states/WASHINGTONDCFLAG_{ground}_{garment}{_r3 tee|_r4 hoodie}.png \u2014 EMBLEM-DIRECT both grounds",
+    "airports": "printfiles/stateairport/STATEAIRPORT_dc-dca_{token}_{garment}.png"
+   },
+   "note": "NET-NEW build (wave 6) \u2014 no prior product. FILE prefix is WASHINGTONDC, NOT derived from art text ('WASHINGTON D.C.'.replace(' ','') yields periods). EMBLEM-DIRECT: 5th member of EMBLEM_FLAG_STATES \u2014 white field flood-removed, red device direct on BOTH grounds (Ati decision 2026-07-17; Alabama precedent; verified 14.7% fill, light==dark). DISPATCH: design_of() needs the D.C. guard BEFORE the 'washington'->seattle line \u2014 the title contains 'washington' and would otherwise route to the Washington-state/Seattle handler. Regression-tested. DCA is a DUAL: dc-dca here, va-dca under VIRGINIA \u2014 MD5-verified distinct.",
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 6"
   }
  },
  "_not_yet_in_catalog": {
