@@ -145,7 +145,8 @@ FULL_PARITY={  # wave 1 2026-07-16: table-driven full-parity states
  'missouri':('MISSOURI','mo',{'stl','mci'}),'montana':('MONTANA','mt',{'bzn','bil','mso'}),
  'nebraska':('NEBRASKA','ne',{'oma'}),'newhampshire':('NEWHAMPSHIRE','nh',{'mht'}),  # wave3 run1 2026-07-17
  'newjersey':('NEWJERSEY','nj',{'ewr'}),'newmexico':('NEWMEXICO','nm',{'abq'}),  # wave3 run2 2026-07-17
- 'northcarolina':('NORTHCAROLINA','nc',{'clt','rdu'}),'northdakota':('NORTHDAKOTA','nd',{'far','bis'})}  # wave3 run3 2026-07-17
+ 'northcarolina':('NORTHCAROLINA','nc',{'clt','rdu'}),'northdakota':('NORTHDAKOTA','nd',{'far','bis'}),  # wave3 run3 2026-07-17
+ 'ohio':('OHIO','oh',{'cle','cmh','day','cvg'}),'oklahoma':('OKLAHOMA','ok',{'okc','tul'})}  # wave3 run4 2026-07-17 (oh-cvg distinct from ky-cvg)
 EMBLEM_FLAG_STATES={'ALABAMAFLAG','ILLINOISFLAG','MASSACHUSETTSFLAG','RHODEISLANDFLAG'}  # emblem-direct ALL grounds; files _r3 tee/_r4 hoodie
 def _flagsuf(code_or_base, garment):
     code=code_or_base.split('_')[0]
@@ -161,8 +162,8 @@ def georgia_cw(tk, ckey):
 PLAIN_STATES=['west virginia','south carolina','south dakota',
  'rhode island','pennsylvania',
  'wisconsin','tennessee',
- 'oklahoma','virginia','vermont',
- 'wyoming','oregon','ohio','utah']
+ 'virginia','vermont',
+ 'wyoming','oregon','utah']
 def plain_state_of(t):
     for s in PLAIN_STATES:
         if s in t: return s.replace(' ','')
