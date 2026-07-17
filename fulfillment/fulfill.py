@@ -144,7 +144,8 @@ FULL_PARITY={  # wave 1 2026-07-16: table-driven full-parity states
  'minnesota':('MINNESOTA','mn',{'msp'}),'mississippi':('MISSISSIPPI','ms',{'jan','gpt'}),
  'missouri':('MISSOURI','mo',{'stl','mci'}),'montana':('MONTANA','mt',{'bzn','bil','mso'}),
  'nebraska':('NEBRASKA','ne',{'oma'}),'newhampshire':('NEWHAMPSHIRE','nh',{'mht'}),  # wave3 run1 2026-07-17
- 'newjersey':('NEWJERSEY','nj',{'ewr'}),'newmexico':('NEWMEXICO','nm',{'abq'})}  # wave3 run2 2026-07-17
+ 'newjersey':('NEWJERSEY','nj',{'ewr'}),'newmexico':('NEWMEXICO','nm',{'abq'}),  # wave3 run2 2026-07-17
+ 'northcarolina':('NORTHCAROLINA','nc',{'clt','rdu'}),'northdakota':('NORTHDAKOTA','nd',{'far','bis'})}  # wave3 run3 2026-07-17
 EMBLEM_FLAG_STATES={'ALABAMAFLAG','ILLINOISFLAG','MASSACHUSETTSFLAG','RHODEISLANDFLAG'}  # emblem-direct ALL grounds; files _r3 tee/_r4 hoodie
 def _flagsuf(code_or_base, garment):
     code=code_or_base.split('_')[0]
@@ -157,7 +158,7 @@ def georgia_cw(tk, ckey):
 # 41 plain-state flag products (2026-07-15). Elastic flag wave 2026-07-15: all flag files renamed (_r2 tee/_r3 hoodie). Titles like 'Alabama Always Delivers — Tee'.
 # Matched LONGEST-FIRST ('west virginia' before 'virginia', 'arkansas' before 'kansas').
 # Excludes the 9 merged states (texas + newyork + 7 renamed, handled above).
-PLAIN_STATES=['west virginia','south carolina','south dakota','north carolina','north dakota',
+PLAIN_STATES=['west virginia','south carolina','south dakota',
  'rhode island','pennsylvania',
  'wisconsin','tennessee',
  'oklahoma','virginia','vermont',
