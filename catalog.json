@@ -6886,6 +6886,264 @@
    },
    "fulfillment": "FULL_PARITY table handler (fulfill.py)",
    "updated": "2026-07-17 wave 3 run 1"
+  },
+  "NEWJERSEY": {
+   "handles": {
+    "tee": "newjersey-always-delivers-tee",
+    "hoodie": "newjersey-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "EWR"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1787 (ratified 18 Dec 1787, 3rd state; verified NJ Dept of State Archives nj.gov / Wikipedia List of years in New Jersey, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/newjersey/NEWJERSEY_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 3 run 2"
+  },
+  "NEWMEXICO": {
+   "handles": {
+    "tee": "newmexico-always-delivers-tee",
+    "hoodie": "newmexico-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "ABQ"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1912 (admitted 6 Jan 1912, 47th state; verified National Archives archives.gov / Library of Congress guides.loc.gov, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/newmexico/NEWMEXICO_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 3 run 2"
   }
  },
  "_not_yet_in_catalog": {
@@ -6917,13 +7175,13 @@
   "GRANDMA"
  ],
  "plain_states": {
-  "count": 18,
+  "count": 16,
   "options": "Color x Size (24 variants)",
   "design": "state flag only",
   "file_rule": "printfiles/states/{STATE}FLAG_{light|dark}_tee_r2.png / _hoodie_r3.png",
   "routing": "fulfill.py PLAIN_STATES longest-first title match",
   "added": "2026-07-15",
-  "updated": "2026-07-17 wave 3 run 1 (nebraska, new hampshire promoted to full parity)"
+  "updated": "2026-07-17 wave 3 run 2 (new jersey, new mexico promoted to full parity)"
  },
  "flag_files": {
   "rule": "elastic 2026-07-15: flag_h = 1530px - name_h (floor: prior size; ceiling 13.50in hoodie; width<=3000px)",
