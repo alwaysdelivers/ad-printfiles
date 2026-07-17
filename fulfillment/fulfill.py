@@ -142,7 +142,8 @@ FULL_PARITY={  # wave 1 2026-07-16: table-driven full-parity states
  'louisiana':('LOUISIANA','la',{'msy','btr'}),'maine':('MAINE','me',{'pwm','bgr'}),
  'maryland':('MARYLAND','md',{'bwi'}),'michigan':('MICHIGAN','mi',{'dtw','grr'}),
  'minnesota':('MINNESOTA','mn',{'msp'}),'mississippi':('MISSISSIPPI','ms',{'jan','gpt'}),
- 'missouri':('MISSOURI','mo',{'stl','mci'}),'montana':('MONTANA','mt',{'bzn','bil','mso'})}
+ 'missouri':('MISSOURI','mo',{'stl','mci'}),'montana':('MONTANA','mt',{'bzn','bil','mso'}),
+ 'nebraska':('NEBRASKA','ne',{'oma'}),'newhampshire':('NEWHAMPSHIRE','nh',{'mht'})}  # wave3 run1 2026-07-17
 EMBLEM_FLAG_STATES={'ALABAMAFLAG','ILLINOISFLAG','MASSACHUSETTSFLAG','RHODEISLANDFLAG'}  # emblem-direct ALL grounds; files _r3 tee/_r4 hoodie
 def _flagsuf(code_or_base, garment):
     code=code_or_base.split('_')[0]
@@ -156,9 +157,9 @@ def georgia_cw(tk, ckey):
 # Matched LONGEST-FIRST ('west virginia' before 'virginia', 'arkansas' before 'kansas').
 # Excludes the 9 merged states (texas + newyork + 7 renamed, handled above).
 PLAIN_STATES=['west virginia','south carolina','south dakota','north carolina','north dakota',
- 'new hampshire','new jersey','new mexico','rhode island','pennsylvania',
+ 'new jersey','new mexico','rhode island','pennsylvania',
  'wisconsin','tennessee',
- 'nebraska','oklahoma','virginia','vermont',
+ 'oklahoma','virginia','vermont',
  'wyoming','oregon','ohio','utah']
 def plain_state_of(t):
     for s in PLAIN_STATES:
@@ -330,8 +331,9 @@ def design_of(title):
     if 'boston' in t or 'massachusetts' in t: return 'boston'
     if 'seattle' in t or 'washington' in t: return 'seattle'
     if 'georgia' in t: return 'georgia'
+    _tns=t.replace(' ','')   # two-word states: slug 'newhampshire' never matches title 'new hampshire' (cf. newyork L326)
     for _fp in sorted(FULL_PARITY,key=len,reverse=True):
-        if _fp in t: return 'fullparity:'+_fp
+        if _fp in t or _fp in _tns: return 'fullparity:'+_fp
     _ps=plain_state_of(t)
     if _ps: return 'stateflag:'+_ps
     if 'grandpa' in t: return 'grandpa'
