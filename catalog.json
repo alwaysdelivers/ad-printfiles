@@ -7404,6 +7404,269 @@
    },
    "fulfillment": "FULL_PARITY table handler (fulfill.py)",
    "updated": "2026-07-17 wave 3 run 3"
+  },
+  "OHIO": {
+   "handles": {
+    "tee": "ohio-always-delivers-tee",
+    "hoodie": "ohio-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "CLE",
+     "CMH",
+     "DAY",
+     "CVG"
+    ]
+   },
+   "variants_per_product": 192,
+   "est_line": "EST. 1803 (effective 1 Mar 1803; verified US House history.house.gov / Ohio History Connection, 2026-07-17). Note: Congress never ratified Ohio's constitution in 1803; Eisenhower signed retroactive admission in 1953, backdated to 1 Mar 1803. Year 1803 is universal.",
+   "file_rules": {
+    "fonts": "printfiles/ohio/OHIO_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "note": "CVG is a DUAL listing: oh-cvg here and ky-cvg under KENTUCKY are separate designs (different ghost). MD5-verified distinct 2026-07-17.",
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 3 run 4"
+  },
+  "OKLAHOMA": {
+   "handles": {
+    "tee": "oklahoma-always-delivers-tee",
+    "hoodie": "oklahoma-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "OKC",
+     "TUL"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1907 (admitted 16 Nov 1907, 46th state, Presidential Proclamation 780; verified Oklahoma Digital Prairie digitalprairieok.net / EBSCO, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/oklahoma/OKLAHOMA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 3 run 4"
   }
  },
  "_not_yet_in_catalog": {
@@ -7435,13 +7698,13 @@
   "GRANDMA"
  ],
  "plain_states": {
-  "count": 14,
+  "count": 12,
   "options": "Color x Size (24 variants)",
   "design": "state flag only",
   "file_rule": "printfiles/states/{STATE}FLAG_{light|dark}_tee_r2.png / _hoodie_r3.png",
   "routing": "fulfill.py PLAIN_STATES longest-first title match",
   "added": "2026-07-15",
-  "updated": "2026-07-17 wave 3 run 3 (north carolina, north dakota promoted to full parity)"
+  "updated": "2026-07-17 wave 3 run 4 (ohio, oklahoma promoted) \u2014 WAVE 3 COMPLETE; 12 plain states remain for wave 4"
  },
  "flag_files": {
   "rule": "elastic 2026-07-15: flag_h = 1530px - name_h (floor: prior size; ceiling 13.50in hoodie; width<=3000px)",
