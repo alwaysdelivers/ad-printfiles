@@ -153,8 +153,9 @@ FULL_PARITY={  # wave 1 2026-07-16: table-driven full-parity states
  'tennessee':('TENNESSEE','tn',{'bna','mem'}),'utah':('UTAH','ut',{'slc'}),
  'vermont':('VERMONT','vt',{'btv'}),'virginia':('VIRGINIA','va',{'iad','dca','ric','orf'}),
  'westvirginia':('WESTVIRGINIA','wv',{'crw'}),  # longest-first keeps this ahead of 'virginia'
- 'wisconsin':('WISCONSIN','wi',{'mke','msn'}),'wyoming':('WYOMING','wy',{'jac'})}  # wave4 2026-07-17 — ALL 50 STATES FULL PARITY
-EMBLEM_FLAG_STATES={'ALABAMAFLAG','ILLINOISFLAG','MASSACHUSETTSFLAG','RHODEISLANDFLAG'}  # emblem-direct ALL grounds; files _r3 tee/_r4 hoodie
+ 'wisconsin':('WISCONSIN','wi',{'mke','msn'}),'wyoming':('WYOMING','wy',{'jac'}),  # wave4 2026-07-17 — ALL 50 STATES FULL PARITY
+ 'washingtondc':('WASHINGTONDC','dc',{'dca'})}  # wave6 2026-07-17 — D.C. (dc-dca distinct from va-dca)
+EMBLEM_FLAG_STATES={'ALABAMAFLAG','ILLINOISFLAG','MASSACHUSETTSFLAG','RHODEISLANDFLAG','WASHINGTONDCFLAG'}  # emblem-direct ALL grounds; files _r3 tee/_r4 hoodie
 def _flagsuf(code_or_base, garment):
     code=code_or_base.split('_')[0]
     if code in EMBLEM_FLAG_STATES:
@@ -335,6 +336,7 @@ def design_of(title):
     if 'chicago' in t or 'illinois' in t: return 'chicago'
     if 'denver' in t or 'colorado' in t: return 'denver'
     if 'boston' in t or 'massachusetts' in t: return 'boston'
+    if 'd.c.' in t or 'washington dc' in t or 'washingtondc' in t: return 'fullparity:washingtondc'  # MUST precede the 'washington'->seattle line: title 'Washington, D.C. ...' contains 'washington'
     if 'seattle' in t or 'washington' in t: return 'seattle'
     if 'georgia' in t: return 'georgia'
     _tns=t.replace(' ','')   # two-word states: slug 'newhampshire' never matches title 'new hampshire' (cf. newyork L326)
