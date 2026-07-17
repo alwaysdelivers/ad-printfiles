@@ -143,7 +143,8 @@ FULL_PARITY={  # wave 1 2026-07-16: table-driven full-parity states
  'maryland':('MARYLAND','md',{'bwi'}),'michigan':('MICHIGAN','mi',{'dtw','grr'}),
  'minnesota':('MINNESOTA','mn',{'msp'}),'mississippi':('MISSISSIPPI','ms',{'jan','gpt'}),
  'missouri':('MISSOURI','mo',{'stl','mci'}),'montana':('MONTANA','mt',{'bzn','bil','mso'}),
- 'nebraska':('NEBRASKA','ne',{'oma'}),'newhampshire':('NEWHAMPSHIRE','nh',{'mht'})}  # wave3 run1 2026-07-17
+ 'nebraska':('NEBRASKA','ne',{'oma'}),'newhampshire':('NEWHAMPSHIRE','nh',{'mht'}),  # wave3 run1 2026-07-17
+ 'newjersey':('NEWJERSEY','nj',{'ewr'}),'newmexico':('NEWMEXICO','nm',{'abq'})}  # wave3 run2 2026-07-17
 EMBLEM_FLAG_STATES={'ALABAMAFLAG','ILLINOISFLAG','MASSACHUSETTSFLAG','RHODEISLANDFLAG'}  # emblem-direct ALL grounds; files _r3 tee/_r4 hoodie
 def _flagsuf(code_or_base, garment):
     code=code_or_base.split('_')[0]
@@ -157,7 +158,7 @@ def georgia_cw(tk, ckey):
 # Matched LONGEST-FIRST ('west virginia' before 'virginia', 'arkansas' before 'kansas').
 # Excludes the 9 merged states (texas + newyork + 7 renamed, handled above).
 PLAIN_STATES=['west virginia','south carolina','south dakota','north carolina','north dakota',
- 'new jersey','new mexico','rhode island','pennsylvania',
+ 'rhode island','pennsylvania',
  'wisconsin','tennessee',
  'oklahoma','virginia','vermont',
  'wyoming','oregon','ohio','utah']
