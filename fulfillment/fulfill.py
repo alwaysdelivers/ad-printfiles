@@ -75,7 +75,7 @@ TEXAS_STYLES={'western':'western','classic':'classic','retro':'retro'}
 TEXAS_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
            'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
 TEXAS_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
-             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}   # identical across all 3 styles (2026-07-14)
+             'navy':['red','gold','white','neonblue'],'black':['red','gold','white','neonblue']}   # identical across all 3 styles (2026-07-14)
 TEXAS_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}   # fc never valid on dark grounds for this prefix
 def texas_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk     # fc always fc_light (never valid on dark); else literal
@@ -85,7 +85,7 @@ MIAMI_STYLES={'western':'western','classic':'classic','retro':'retro'}
 MIAMI_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
            'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
 MIAMI_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
-             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}   # identical across all 3 styles (2026-07-14, cloned from TEXAS)
+             'navy':['red','gold','white','neonblue'],'black':['red','gold','white','neonblue']}   # identical across all 3 styles (2026-07-14, cloned from TEXAS)
 MIAMI_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
 def miami_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
@@ -95,7 +95,7 @@ VEGAS_STYLES={'western':'western','classic':'classic','retro':'retro'}
 VEGAS_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
            'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
 VEGAS_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
-             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+             'navy':['red','gold','white','neonblue'],'black':['red','gold','white','neonblue']}
 VEGAS_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
 def vegas_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
@@ -105,7 +105,7 @@ NEWYORK_STYLES={'western':'western','classic':'classic','retro':'retro'}
 NEWYORK_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
            'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
 NEWYORK_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
-             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+             'navy':['red','gold','white','neonblue'],'black':['red','gold','white','neonblue']}
 NEWYORK_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
 def newyork_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
@@ -170,7 +170,7 @@ LOSANGELES_STYLES={'western':'western','classic':'classic','retro':'retro'}
 LOSANGELES_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
            'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
 LOSANGELES_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
-             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+             'navy':['red','gold','white','neonblue'],'black':['red','gold','white','neonblue']}
 LOSANGELES_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
 def losangeles_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
@@ -180,7 +180,7 @@ CHICAGO_STYLES={'western':'western','classic':'classic','retro':'retro'}
 CHICAGO_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
            'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
 CHICAGO_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
-             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+             'navy':['red','gold','white','neonblue'],'black':['red','gold','white','neonblue']}
 CHICAGO_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
 def chicago_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
@@ -190,7 +190,7 @@ DENVER_STYLES={'western':'western','classic':'classic','retro':'retro'}
 DENVER_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
            'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
 DENVER_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
-             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+             'navy':['red','gold','white','neonblue'],'black':['red','gold','white','neonblue']}
 DENVER_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
 def denver_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
@@ -200,7 +200,7 @@ BOSTON_STYLES={'western':'western','classic':'classic','retro':'retro'}
 BOSTON_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
            'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
 BOSTON_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
-             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+             'navy':['red','gold','white','neonblue'],'black':['red','gold','white','neonblue']}
 BOSTON_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
 def boston_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
@@ -210,7 +210,7 @@ SEATTLE_STYLES={'western':'western','classic':'classic','retro':'retro'}
 SEATTLE_INK={'fullcolor':'fc','full color':'fc','fc':'fc','navy':'navy','red':'red','black':'black','gold':'gold',
            'white':'white','karmablue':'neonblue','karma blue':'neonblue','neon blue':'neonblue','neonblue':'neonblue'}
 SEATTLE_VALID={'white':['fc','navy','red','black','gold','neonblue'],'athleticheather':['fc','navy','red','black','gold','neonblue'],
-             'navy':['red','gold','black','white','neonblue'],'black':['navy','red','gold','white','neonblue']}
+             'navy':['red','gold','white','neonblue'],'black':['red','gold','white','neonblue']}
 SEATTLE_DEFAULT={'white':'fc','athleticheather':'fc','navy':'red','black':'red'}
 def seattle_cw(tk, ckey):
     return 'fc_light' if tk=='fc' else tk
