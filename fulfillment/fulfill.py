@@ -146,7 +146,14 @@ FULL_PARITY={  # wave 1 2026-07-16: table-driven full-parity states
  'nebraska':('NEBRASKA','ne',{'oma'}),'newhampshire':('NEWHAMPSHIRE','nh',{'mht'}),  # wave3 run1 2026-07-17
  'newjersey':('NEWJERSEY','nj',{'ewr'}),'newmexico':('NEWMEXICO','nm',{'abq'}),  # wave3 run2 2026-07-17
  'northcarolina':('NORTHCAROLINA','nc',{'clt','rdu'}),'northdakota':('NORTHDAKOTA','nd',{'far','bis'}),  # wave3 run3 2026-07-17
- 'ohio':('OHIO','oh',{'cle','cmh','day','cvg'}),'oklahoma':('OKLAHOMA','ok',{'okc','tul'})}  # wave3 run4 2026-07-17 (oh-cvg distinct from ky-cvg)
+ 'ohio':('OHIO','oh',{'cle','cmh','day','cvg'}),'oklahoma':('OKLAHOMA','ok',{'okc','tul'}),  # wave3 run4 2026-07-17 (oh-cvg distinct from ky-cvg)
+ 'oregon':('OREGON','or',{'pdx'}),'pennsylvania':('PENNSYLVANIA','pa',{'phl','pit'}),
+ 'rhodeisland':('RHODEISLAND','ri',{'pvd'}),  # emblem flag: _flagsuf() handles _r3/_r4
+ 'southcarolina':('SOUTHCAROLINA','sc',{'chs','myr','gsp'}),'southdakota':('SOUTHDAKOTA','sd',{'fsd','rap'}),
+ 'tennessee':('TENNESSEE','tn',{'bna','mem'}),'utah':('UTAH','ut',{'slc'}),
+ 'vermont':('VERMONT','vt',{'btv'}),'virginia':('VIRGINIA','va',{'iad','dca','ric','orf'}),
+ 'westvirginia':('WESTVIRGINIA','wv',{'crw'}),  # longest-first keeps this ahead of 'virginia'
+ 'wisconsin':('WISCONSIN','wi',{'mke','msn'}),'wyoming':('WYOMING','wy',{'jac'})}  # wave4 2026-07-17 — ALL 50 STATES FULL PARITY
 EMBLEM_FLAG_STATES={'ALABAMAFLAG','ILLINOISFLAG','MASSACHUSETTSFLAG','RHODEISLANDFLAG'}  # emblem-direct ALL grounds; files _r3 tee/_r4 hoodie
 def _flagsuf(code_or_base, garment):
     code=code_or_base.split('_')[0]
@@ -159,11 +166,7 @@ def georgia_cw(tk, ckey):
 # 41 plain-state flag products (2026-07-15). Elastic flag wave 2026-07-15: all flag files renamed (_r2 tee/_r3 hoodie). Titles like 'Alabama Always Delivers — Tee'.
 # Matched LONGEST-FIRST ('west virginia' before 'virginia', 'arkansas' before 'kansas').
 # Excludes the 9 merged states (texas + newyork + 7 renamed, handled above).
-PLAIN_STATES=['west virginia','south carolina','south dakota',
- 'rhode island','pennsylvania',
- 'wisconsin','tennessee',
- 'virginia','vermont',
- 'wyoming','oregon','utah']
+PLAIN_STATES=[]  # wave4 2026-07-17: emptied — every state is now full parity (see FULL_PARITY)
 def plain_state_of(t):
     for s in PLAIN_STATES:
         if s in t: return s.replace(' ','')
