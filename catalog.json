@@ -7667,6 +7667,1567 @@
    },
    "fulfillment": "FULL_PARITY table handler (fulfill.py)",
    "updated": "2026-07-17 wave 3 run 4"
+  },
+  "OREGON": {
+   "handles": {
+    "tee": "oregon-always-delivers-tee",
+    "hoodie": "oregon-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "PDX"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1859 (admitted 14 Feb 1859; verified CRS R47747 (Congress.gov, Table 1) + Britannica, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/oregon/OREGON_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 4"
+  },
+  "PENNSYLVANIA": {
+   "handles": {
+    "tee": "pennsylvania-always-delivers-tee",
+    "hoodie": "pennsylvania-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "PHL",
+     "PIT"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1787 (ratified 12 Dec 1787, 2nd state; verified CRS R47747 (Congress.gov, Table 1) + Britannica, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/pennsylvania/PENNSYLVANIA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 4"
+  },
+  "RHODEISLAND": {
+   "handles": {
+    "tee": "rhodeisland-always-delivers-tee",
+    "hoodie": "rhodeisland-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "PVD"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1790 (ratified 29 May 1790, 13th and last of the original 13; verified CRS R47747 (Congress.gov, Table 1) + Britannica, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/rhodeisland/RHODEISLAND_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "note": "EMBLEM-DIRECT state: flag files carry _r3 tee / _r4 hoodie on BOTH grounds. fulfill.py EMBLEM_FLAG_STATES + section flagSuf handle it. CDN-verified 2026-07-17.",
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 4"
+  },
+  "SOUTHCAROLINA": {
+   "handles": {
+    "tee": "southcarolina-always-delivers-tee",
+    "hoodie": "southcarolina-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "CHS",
+     "MYR",
+     "GSP"
+    ]
+   },
+   "variants_per_product": 168,
+   "est_line": "EST. 1788 (ratified 23 May 1788, 8th state; verified CRS R47747 (Congress.gov, Table 1) + Britannica, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/southcarolina/SOUTHCAROLINA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 4"
+  },
+  "SOUTHDAKOTA": {
+   "handles": {
+    "tee": "southdakota-always-delivers-tee",
+    "hoodie": "southdakota-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "FSD",
+     "RAP"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1889 (admitted 2 Nov 1889; verified CRS R47747 (Congress.gov, Table 1) + Britannica, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/southdakota/SOUTHDAKOTA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "note": "Harrison obscured the ND/SD signing order; SD conventionally 40th by alphabetical position.",
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 4"
+  },
+  "TENNESSEE": {
+   "handles": {
+    "tee": "tennessee-always-delivers-tee",
+    "hoodie": "tennessee-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "BNA",
+     "MEM"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1796 (admitted 1 Jun 1796; verified CRS R47747 (Congress.gov, Table 1) + Britannica, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/tennessee/TENNESSEE_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 4"
+  },
+  "UTAH": {
+   "handles": {
+    "tee": "utah-always-delivers-tee",
+    "hoodie": "utah-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "SLC"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1896 (admitted 4 Jan 1896; verified CRS R47747 (Congress.gov, Table 1) + Britannica, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/utah/UTAH_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 4"
+  },
+  "VERMONT": {
+   "handles": {
+    "tee": "vermont-always-delivers-tee",
+    "hoodie": "vermont-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "BTV"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1791 (admitted 4 Mar 1791, first state beyond the original 13; verified CRS R47747 (Congress.gov, Table 1) + Britannica, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/vermont/VERMONT_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 4"
+  },
+  "VIRGINIA": {
+   "handles": {
+    "tee": "virginia-always-delivers-tee",
+    "hoodie": "virginia-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "IAD",
+     "DCA",
+     "RIC",
+     "ORF"
+    ]
+   },
+   "variants_per_product": 192,
+   "est_line": "EST. 1788 (ratified 25 Jun 1788, 10th state; verified CRS R47747 (Congress.gov, Table 1) + Britannica, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/virginia/VIRGINIA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "note": "DCA is a DUAL listing: va-dca here; dca also belongs to Washington D.C. (wave 6) as a separate design.",
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 4"
+  },
+  "WESTVIRGINIA": {
+   "handles": {
+    "tee": "westvirginia-always-delivers-tee",
+    "hoodie": "westvirginia-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "CRW"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1863 (admitted 20 Jun 1863; verified CRS R47747 (Congress.gov, Table 1) + Britannica, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/westvirginia/WESTVIRGINIA_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "note": "Dispatch: 'westvirginia' must sort before 'virginia' (longest-first) \u2014 regression-tested.",
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 4"
+  },
+  "WISCONSIN": {
+   "handles": {
+    "tee": "wisconsin-always-delivers-tee",
+    "hoodie": "wisconsin-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "MKE",
+     "MSN"
+    ]
+   },
+   "variants_per_product": 144,
+   "est_line": "EST. 1848 (admitted 29 May 1848; verified CRS R47747 (Congress.gov, Table 1) + Britannica, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/wisconsin/WISCONSIN_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 4"
+  },
+  "WYOMING": {
+   "handles": {
+    "tee": "wyoming-always-delivers-tee",
+    "hoodie": "wyoming-always-delivers-hoodie"
+   },
+   "options": {
+    "Color": [
+     "White",
+     "Athletic Heather",
+     "Navy",
+     "Black"
+    ],
+    "Size": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "2XL",
+     "3XL"
+    ],
+    "Style": [
+     "Western",
+     "Classic",
+     "Retro",
+     "Flag",
+     "JAC"
+    ]
+   },
+   "variants_per_product": 120,
+   "est_line": "EST. 1890 (admitted 10 Jul 1890; verified CRS R47747 (Congress.gov, Table 1) + Britannica, 2026-07-17)",
+   "file_rules": {
+    "fonts": "printfiles/wyoming/WYOMING_{style}_{cw}_{garment}.png (+web png/webp)",
+    "airports": "printfiles/stateairport/STATEAIRPORT_{gh}-{code}_{token}_{garment}.png"
+   },
+   "ink_validity_by_style": {
+    "Western": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Classic": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    },
+    "Retro": {
+     "White": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Athletic Heather": [
+      "fc",
+      "navy",
+      "red",
+      "black",
+      "gold",
+      "neonblue"
+     ],
+     "Navy": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ],
+     "Black": [
+      "red",
+      "gold",
+      "white",
+      "neonblue"
+     ]
+    }
+   },
+   "fulfillment": "FULL_PARITY table handler (fulfill.py)",
+   "updated": "2026-07-17 wave 4"
   }
  },
  "_not_yet_in_catalog": {
@@ -7698,13 +9259,8 @@
   "GRANDMA"
  ],
  "plain_states": {
-  "count": 12,
-  "options": "Color x Size (24 variants)",
-  "design": "state flag only",
-  "file_rule": "printfiles/states/{STATE}FLAG_{light|dark}_tee_r2.png / _hoodie_r3.png",
-  "routing": "fulfill.py PLAIN_STATES longest-first title match",
-  "added": "2026-07-15",
-  "updated": "2026-07-17 wave 3 run 4 (ohio, oklahoma promoted) \u2014 WAVE 3 COMPLETE; 12 plain states remain for wave 4"
+  "count": 0,
+  "status": "RETIRED 2026-07-17 \u2014 wave 4 completed; every state is full parity (fonts + flag + airports). PLAIN_STATES=[] in fulfill.py."
  },
  "flag_files": {
   "rule": "elastic 2026-07-15: flag_h = 1530px - name_h (floor: prior size; ceiling 13.50in hoodie; width<=3000px)",
