@@ -328,6 +328,8 @@ def design_of(title):
     if 'god' in t: return 'god'
     if 'america' in t: return 'america'
     if 'grandma' in t: return 'grandma'
+    if 'game day' in t or 'gameday' in t: return 'gameday'
+    if 'date night' in t or 'datenight' in t: return 'datenight'
     if 'texas' in t: return 'texas'
     if 'miami' in t or 'florida' in t: return 'miami'          # product renamed Florida (Option-2 merge); files stay city-named
     if 'vegas' in t or 'nevada' in t: return 'vegas'
@@ -409,6 +411,12 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
 
     if dk=='texas':
         st=norm(print_style)
+        if not st:   # flag product (no Style option) -> flag file
+            _fb='TEXASFLAG_%s'%ground(ckey)
+            _fp='printfiles/states/%s_%s%s.png'%(_fb,garment,_flagsuf(_fb,garment))
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['texas'],ground(ckey))
             fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,_flagsuf(fbase,garment))
@@ -480,6 +488,12 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
 
     if dk=='miami':
         st=norm(print_style)
+        if not st:   # flag product (no Style option) -> flag file
+            _fb='FLORIDAFLAG_%s'%ground(ckey)
+            _fp='printfiles/states/%s_%s%s.png'%(_fb,garment,_flagsuf(_fb,garment))
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['miami'],ground(ckey))
             fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,_flagsuf(fbase,garment))
@@ -500,6 +514,12 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
 
     if dk=='vegas':
         st=norm(print_style)
+        if not st:   # flag product (no Style option) -> flag file
+            _fb='NEVADAFLAG_%s'%ground(ckey)
+            _fp='printfiles/states/%s_%s%s.png'%(_fb,garment,_flagsuf(_fb,garment))
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['vegas'],ground(ckey))
             fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,_flagsuf(fbase,garment))
@@ -520,6 +540,12 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
 
     if dk=='newyork':
         st=norm(print_style)
+        if not st:   # flag product (no Style option) -> flag file
+            _fb='NEWYORKFLAG_%s'%ground(ckey)
+            _fp='printfiles/states/%s_%s%s.png'%(_fb,garment,_flagsuf(_fb,garment))
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
         if st=='flag':
             base='NEWYORKFLAG_%s'%ground(ckey)
             fpath='printfiles/states/%s_%s%s.png'%(base,garment,_flagsuf(base,garment))
@@ -539,6 +565,12 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
 
     if dk=='losangeles':
         st=norm(print_style)
+        if not st:   # flag product (no Style option) -> flag file
+            _fb='CALIFORNIAFLAG_%s'%ground(ckey)
+            _fp='printfiles/states/%s_%s%s.png'%(_fb,garment,_flagsuf(_fb,garment))
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['losangeles'],ground(ckey))
             fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,_flagsuf(fbase,garment))
@@ -554,6 +586,12 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
 
     if dk=='chicago':
         st=norm(print_style)
+        if not st:   # flag product (no Style option) -> flag file
+            _fb='ILLINOISFLAG_%s'%ground(ckey)
+            _fp='printfiles/states/%s_%s%s.png'%(_fb,garment,_flagsuf(_fb,garment))
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
         if st in CHICAGO_AIRPORTS:
             tk=_resolve_ink(ink, NEWYORK_AIRPORT_INK, NEWYORK_AIRPORT_VALID, NEWYORK_AIRPORT_DEFAULT, ckey)
             if not tk: return {'error':'CHICAGO airport invalid ink','title':title,'ink':ink}
@@ -576,6 +614,12 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
 
     if dk=='denver':
         st=norm(print_style)
+        if not st:   # flag product (no Style option) -> flag file
+            _fb='COLORADOFLAG_%s'%ground(ckey)
+            _fp='printfiles/states/%s_%s%s.png'%(_fb,garment,_flagsuf(_fb,garment))
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['denver'],ground(ckey))
             fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,_flagsuf(fbase,garment))
@@ -591,6 +635,12 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
 
     if dk=='boston':
         st=norm(print_style)
+        if not st:   # flag product (no Style option) -> flag file
+            _fb='MASSACHUSETTSFLAG_%s'%ground(ckey)
+            _fp='printfiles/states/%s_%s%s.png'%(_fb,garment,_flagsuf(_fb,garment))
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
         if st=='bos':   # MA wave 0b: BOS airport
             tk=_resolve_ink(ink, NEWYORK_AIRPORT_INK, NEWYORK_AIRPORT_VALID, NEWYORK_AIRPORT_DEFAULT, ckey)
             if not tk: return {'error':'MASSACHUSETTS airport invalid ink','title':title,'ink':ink}
@@ -615,6 +665,12 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
 
     if dk=='seattle':
         st=norm(print_style)
+        if not st:   # flag product (no Style option) -> flag file
+            _fb='WASHINGTONFLAG_%s'%ground(ckey)
+            _fp='printfiles/states/%s_%s%s.png'%(_fb,garment,_flagsuf(_fb,garment))
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['seattle'],ground(ckey))
             fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,_flagsuf(fbase,garment))
@@ -683,6 +739,22 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
         cw=america_cw(tk, ckey)
         return out('america', 'AMERICA_%s_%s'%(st,cw))
 
+    if dk=='gameday':
+        st=norm(print_style); code=GAMEDAY_STYLES.get(st)
+        if not code: return {'error':'GAMEDAY invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, GAMEDAY_INK, GAMEDAY_VALID, GAMEDAY_DEFAULT, ckey)
+        if not tk: return {'error':'GAMEDAY invalid ink','title':title,'ink':ink}
+        cw=gameday_cw(tk, ckey)
+        return out('gameday', 'GAMEDAY_%s_%s'%(code,cw))
+
+    if dk=='datenight':
+        st=norm(print_style); code=DATENIGHT_STYLES.get(st)
+        if not code: return {'error':'DATENIGHT invalid Style','title':title,'style':print_style}
+        tk=_resolve_ink(ink, DATENIGHT_INK, DATENIGHT_VALID, DATENIGHT_DEFAULT, ckey)
+        if not tk: return {'error':'DATENIGHT invalid ink','title':title,'ink':ink}
+        cw=datenight_cw(tk, ckey)
+        return out('datenight', 'DATENIGHT_%s_%s'%(code,cw))
+
     if dk=='cross':
         st=norm(print_style); code=CROSS_STYLES.get(st)
         if not code: return {'error':'CROSS invalid Style','title':title,'style':print_style}
@@ -740,3 +812,4 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
         return out('creatures', base)
 
     return {'error':'unknown design','title':title}
+
