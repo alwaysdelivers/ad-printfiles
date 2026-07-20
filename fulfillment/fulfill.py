@@ -354,8 +354,13 @@ def design_of(title):
     return None
 
 def _resolve_ink(label, table, valid, default, ckey):
+    # No ink specified -> use the color's default (normal PDP path).
+    if not (label or '').strip():
+        return default.get(ckey)
+    # Ink specified -> map it; it MUST be valid for this color.
     tk=table.get((label or '').strip().lower()) or table.get(norm(label))
-    if not tk or tk not in valid.get(ckey,[]): tk=default.get(ckey)
+    if not tk or tk not in valid.get(ckey,[]):
+        return None   # specified ink is invalid -> reject (caller flags order). NEVER silently substitute.
     return tk
 
 def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,name=None):
@@ -378,6 +383,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
         if not code: return {'error':'JESUS invalid Style','title':title,'style':print_style}
         jvalid=JESUS_VALID_BY_STYLE.get(st,{})
         tk=_resolve_ink(ink, JESUS_INK, jvalid, JESUS_DEFAULT, ckey)
+        if not tk: return {'error':'JESUS invalid ink','title':title,'ink':ink,'color':color,'style':print_style}
         cw=jesus_cw(tk, ckey)
         return out('jesus', 'JESUS_%s_%s'%(code,cw))
 
@@ -386,6 +392,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
         st=norm(print_style); code=STY.get(st)
         if not code: return {'error':'%s invalid Style'%dk.upper(),'title':title,'style':print_style}
         tk=_resolve_ink(ink, FAITHLANE_INK, FAITHLANE_VALID, {'white':'fc','athleticheather':'fc','navy':'fc','black':'fc'}, ckey)
+        if not tk: return {'error':'%s invalid ink'%dk.upper(),'title':title,'ink':ink,'color':color,'style':print_style}
         cw=faithlane_cw(tk, ckey)
         PMAP={'mom':'MOM','faith':'FAITH'}
         return out(dk, '%s_%s_%s'%(PMAP[dk],code,cw))
@@ -759,6 +766,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
         st=norm(print_style); code=CROSS_STYLES.get(st)
         if not code: return {'error':'CROSS invalid Style','title':title,'style':print_style}
         tk=_resolve_ink(ink, CROSS_INK, CROSS_VALID[code], CROSS_DEFAULT_08 if code=='cross-08' else CROSS_DEFAULT, ckey)
+        if not tk: return {'error':'CROSS invalid ink','title':title,'ink':ink,'color':color,'style':print_style}
         cw=cross_cw(tk, ckey)
         return out('cross', 'CROSS_%s_%s'%(code,cw))
 
@@ -766,6 +774,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
         cc=CROWN_COLOR.get(ckey)
         if not cc: return {'error':'CROWN unknown color','title':title,'color':color}
         tk=_resolve_ink(ink, CROWN_INK, CROWN_VALID, CROWN_DEFAULT, ckey)
+        if not tk: return {'error':'CROWN invalid ink','title':title,'ink':ink,'color':color}
         base=('CROWN_%s_split'%cc) if tk=='split' else ('CROWN_%s'%cc)
         return out('crown', base)
 
