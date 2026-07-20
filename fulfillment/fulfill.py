@@ -796,6 +796,7 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
                    'navy':['cream','sleet','red','neonblue'],'black':['cream','sleet','red','neonblue']}
         SCI_DEFAULT={'white':'navy','athleticheather':'navy','navy':'cream','black':'cream'}
         ink_cw=_resolve_ink(ink, SCI_INK, SCI_VALID, SCI_DEFAULT, ckey)
+        if not ink_cw: return {'error':'SCIENCE invalid ink','title':title,'ink':ink,'color':color,'design':print_style}
         return out('science', 'SCIENCE_%s_%s'%(design,ink_cw))
 
     # ---- creatures (combined) + standalone creature routes --------------------
