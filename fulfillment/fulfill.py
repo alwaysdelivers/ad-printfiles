@@ -130,7 +130,11 @@ TEXAS_AIRPORT_INK=NEWYORK_AIRPORT_INK          # same tokens/validity per STATE_
 TEXAS_AIRPORT_VALID=NEWYORK_AIRPORT_VALID
 TEXAS_AIRPORT_DEFAULT=NEWYORK_AIRPORT_DEFAULT
 CHICAGO_AIRPORTS={'ord','mdw'}
-CALIFORNIA_AIRPORTS={'lax','sfo','san','sjc','smf','sna'}   # wave5 CA airports 2026-07-20; files STATEAIRPORT_ca-<code> (no _r2)   # Illinois pilot 2026-07-15; files STATEAIRPORT_il-<code> (no _r2)
+CALIFORNIA_AIRPORTS={'lax','sfo','san','sjc','smf','sna'}
+COLORADO_AIRPORTS={'den','cos'}
+FLORIDA_AIRPORTS={'mia','mco','fll','tpa','jax','pbi'}
+NEVADA_AIRPORTS={'las','rno'}
+WASHINGTON_AIRPORTS={'sea','geg'}   # wave5 CA airports 2026-07-20; files STATEAIRPORT_ca-<code> (no _r2)   # Illinois pilot 2026-07-15; files STATEAIRPORT_il-<code> (no _r2)
 GEORGIA_STYLES={'western':'western','classic':'classic','retro':'retro'}
 GEORGIA_AIRPORTS={'atl','sav'}   # wave 0 2026-07-15; files STATEAIRPORT_ga-<code> (no _r2)
 FULL_PARITY={  # wave 1 2026-07-16: table-driven full-parity states
@@ -502,6 +506,13 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
+        if st in FLORIDA_AIRPORTS:
+            tk=_resolve_ink(ink, NEWYORK_AIRPORT_INK, NEWYORK_AIRPORT_VALID, NEWYORK_AIRPORT_DEFAULT, ckey)
+            if not tk: return {'error':'MIAMI airport invalid ink','title':title,'ink':ink}
+            fpath='printfiles/stateairport/STATEAIRPORT_fl-%s_%s_%s.png'%(st,tk,garment)
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['miami'],ground(ckey))
             fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,_flagsuf(fbase,garment))
@@ -528,6 +539,13 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
+        if st in NEVADA_AIRPORTS:
+            tk=_resolve_ink(ink, NEWYORK_AIRPORT_INK, NEWYORK_AIRPORT_VALID, NEWYORK_AIRPORT_DEFAULT, ckey)
+            if not tk: return {'error':'VEGAS airport invalid ink','title':title,'ink':ink}
+            fpath='printfiles/stateairport/STATEAIRPORT_nv-%s_%s_%s.png'%(st,tk,garment)
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['vegas'],ground(ckey))
             fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,_flagsuf(fbase,garment))
@@ -635,6 +653,13 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
+        if st in COLORADO_AIRPORTS:
+            tk=_resolve_ink(ink, NEWYORK_AIRPORT_INK, NEWYORK_AIRPORT_VALID, NEWYORK_AIRPORT_DEFAULT, ckey)
+            if not tk: return {'error':'DENVER airport invalid ink','title':title,'ink':ink}
+            fpath='printfiles/stateairport/STATEAIRPORT_co-%s_%s_%s.png'%(st,tk,garment)
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['denver'],ground(ckey))
             fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,_flagsuf(fbase,garment))
@@ -686,6 +711,13 @@ def line_to_item(title,color,size,qty=1,retail=None,print_style=None,ink=None,na
             return {'variant_id':cv,'quantity':qty,'retail_price':retail,
                     'files':[{'type':'front','url':RAW+_fp,'position':fullbleed(garment)}],
                     '_design':dk,'_garment':garment,'_file':_fp,'_flags':['flag-product']}
+        if st in WASHINGTON_AIRPORTS:
+            tk=_resolve_ink(ink, NEWYORK_AIRPORT_INK, NEWYORK_AIRPORT_VALID, NEWYORK_AIRPORT_DEFAULT, ckey)
+            if not tk: return {'error':'SEATTLE airport invalid ink','title':title,'ink':ink}
+            fpath='printfiles/stateairport/STATEAIRPORT_wa-%s_%s_%s.png'%(st,tk,garment)
+            return {'variant_id':cv,'quantity':qty,'retail_price':retail,
+                    'files':[{'type':'front','url':RAW+fpath,'position':fullbleed(garment)}],
+                    '_design':dk,'_garment':garment,'_file':fpath,'_flags':[]}
         if st=='flag':
             fbase='%s_%s'%(STATE_FLAG_OF['seattle'],ground(ckey))
             fpath='printfiles/states/%s_%s%s.png'%(fbase,garment,_flagsuf(fbase,garment))
