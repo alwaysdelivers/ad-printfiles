@@ -65,3 +65,8 @@ Extract lockups first via extract_lockup2.py (per token x garment).
 - neonstate_white: state @75% neon, code white @100%
 - goldstate_white: state @75% gold, code white @100%
 (For dark tokens, extract exact hexes from an existing dark-token file before building.)
+
+## FIX 2026-07-20: code scaling
+Codes are rendered at a FIXED font size (1025), NOT fit-to-box, then baseline-anchored
+(bottom at y=2164). Fit-to-box wrongly shrank narrow codes. Fixed size reproduces DFW
+exactly (w=2730 h=828) and keeps all codes at consistent letter height. See gen_core.py.
