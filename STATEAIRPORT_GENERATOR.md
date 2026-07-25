@@ -70,3 +70,15 @@ Extract lockups first via extract_lockup2.py (per token x garment).
 Codes are rendered at a FIXED font size (1025), NOT fit-to-box, then baseline-anchored
 (bottom at y=2164). Fit-to-box wrongly shrank narrow codes. Fixed size reproduces DFW
 exactly (w=2730 h=828) and keeps all codes at consistent letter height. See gen_core.py.
+
+## CORRECTION 2026-07-23 — geometry per STATE_BUILD_PROTOCOL (authoritative)
+The rules below are from STATE_BUILD_PROTOCOL.md (§STEP 2 + airport section) — READ IT, do not re-derive.
+- Canvas: TEE 3600x4800 ; HOODIE 4200x4200 (SQUARE). Design horizontally centered on canvas center.
+- Ghost: RULE B  scale = min(3000/w, 1701/h)  (box 3000x1701). Wide ghosts width-bind; narrow (IL/FL/HI/RI) height-bind at 1701, which pins the wordmark rhythm.
+- Ghost top at y=900.
+- Code: HARMONY scale. target = ghost_dims * 2/3 ; scale = sqrt(x_scale * y_scale) (geometric mean, uniform, never distort). Height for the scale uses CAP height (Monoton overshoot correction — curves over-render; measure against 'H' cap height, not the ink bbox). Code centered on the state code (cy = 900 + ghost_h/2), in front.
+- Lockup: verbatim sprite (2172x598 ink), tee left x706 / hoodie x1006, top y~3314. Never re-render.
+- Web twins: TEE 450x600 ; HOODIE 600x600. PNG + WebP(q90).
+- Chips: {city}_{code}.webp 216x218, full design incl wordmark, from fc tee.
+- Tokens: fc_light (ghost #c03018@50%, code navy #1e3a5f) ; redstate_white / neonstate_white / goldstate_white (ghost @75%, code white).
+Validated: reproduces DFW 2731 (size1025), PHX 2434, LGA 2439, JFK 2171, ORD 2107 vs shipped files.
